@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ukrainian Poetry"
+  short_description: "Write and refine Ukrainian poetry"
+  default_prompt: "Use $ukrainian-poetry to write a natural Ukrainian poem from this topic."

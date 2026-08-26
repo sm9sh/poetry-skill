@@ -1,0 +1,80 @@
+{
+  "suite": "Tier 1: Feature Coverage - Fixed Poetic Forms",
+  "category": "fixed_forms",
+  "tests": [
+    {
+      "id": "TC_T1_FIX_01_Petrarchan_Sonnet",
+      "name": "Classical Petrarchan Sonnet (14 Lines, ABBA ABBA CDE CDE)",
+      "feature": "F4",
+      "expected_meter": "iamb",
+      "mode": "neoclassical",
+      "input_brief": "Класичний петрарківський сонет про осіннє місто.",
+      "poem": "Замовкло місто у густій імлі,\nОстанній промінь на бруківці тане,\nХолодний вечір у вікно загляне,\nІ тіні розійдуться по землі.\n\nПливуть у небі темні кораблі,\nТривога стихне, серце не зів'яне,\nКоли світанок золотий настане\nНа цій високій і старій чолі.\n\nПроллється світло крізь туман і дим,\nОсяє дахи і холодні брами,\nІ вітер знову стане молодим,\n\nРозвіє смуток поміж яворами,\nІ простір диханням озветься тим,\nЩо поєднає ранок з небесами.",
+      "assertions": {
+        "min_lines": 14,
+        "max_lines": 14,
+        "expected_meter": "iamb",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_FIX_02_Shakespearean_Sonnet",
+      "name": "Shakespearean Sonnet (14 Lines, ABAB CDCD EFEF GG)",
+      "feature": "F4",
+      "expected_meter": "iamb",
+      "mode": "neoclassical",
+      "input_brief": "Шекспірівський сонет про невпинний плин часу.",
+      "poem": "Годинник міряє безмовний час,\nСпливають хвилини у густу пітьму,\nНіхто не стримає цей вічний рух,\nЩо відчиняє двері до зими.\n\nЗів'яло листя на крутім схилі,\nЗгасає пломінь у нічнім вогні,\nАле не згасне пам'ять на землі,\nЩо залишає слід у тишині.\n\nМинає день, мов спалах блискавиці,\nЗникають тіні на старій стіні,\nТа світло правди оживе в зіниці,\nДаруючи спокій душі мені.\n\nХай час летить, немов стрімка вода —\nЖиве любов, спокійна й молода.",
+      "assertions": {
+        "min_lines": 14,
+        "max_lines": 14,
+        "expected_meter": "iamb",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_FIX_03_Rondo",
+      "name": "Classical Rondo with Recurring Refrain",
+      "feature": "F4",
+      "expected_meter": "iamb",
+      "mode": "lyrical",
+      "input_brief": "Рондо з рефреном про вечірню тишу.",
+      "poem": "Вечірня тиша огортає дім,\nВщухає вітер поміж темних віт,\nІ гасне світло у вікні старім,\nДе кожен погляд залишає слід.\n\nВже сонце перейшло за небозвід,\nІ дим розтанув у тумані цім.\nВечірня тиша огортає дім,\nВщухає вітер поміж темних віт.\n\nНіхто не порушить цей спокійний світ,\nДе зорі креслять лінію на нім,\nІ день прийде у сяйві золотім.\nВечірня тиша огортає дім.",
+      "assertions": {
+        "min_lines": 12,
+        "max_lines": 15,
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_FIX_04_Triolet",
+      "name": "8-Line Triolet with Strict Metric Refrains (ABaAabAB)",
+      "feature": "F4",
+      "expected_meter": "iamb",
+      "mode": "intimate",
+      "input_brief": "Тріолет про першу весняну краплю.",
+      "poem": "Впала крапля на долоню,\nПробудився тихий сад.\nВ яблуневому полоні\nВпала крапля на долоню.\nВітер гладить ніжну скроню,\nПовернувся спів назад.\nВпала крапля на долоню,\nПробудився тихий сад.",
+      "assertions": {
+        "min_lines": 8,
+        "max_lines": 8,
+        "expected_meter": "iamb",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_FIX_05_Terza_Rima",
+      "name": "Terza Rima (Dantean Triple Interlocking Rhyme ABA BCB CDC D)",
+      "feature": "F4",
+      "expected_meter": "iamb",
+      "mode": "reflective",
+      "input_brief": "Терцини про шлях крізь осінній ліс.",
+      "poem": "Стежина в'ється поміж жовтих трав,\nІ тихий шелест під ногами тане,\nЯ тут колись світанок зустрічав.\n\nТепер туман на пагорби настане,\nІ вітер лист опустить до води,\nДе світлий промінь більше не загляне.\n\nЛише глибокі на землі сліди\nНагадують про день, що вже згасає,\nВедучи погляд у нічні світи,\n\nДе пізня зірка у пітьмі палає.",
+      "assertions": {
+        "min_lines": 10,
+        "max_lines": 12,
+        "expected_meter": "iamb",
+        "no_surzhyk": true
+      }
+    }
+  ]
+}

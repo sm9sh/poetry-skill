@@ -1,0 +1,82 @@
+{
+  "suite": "Tier 1: Feature Coverage - Authentic Ukrainian Poetic Registers",
+  "category": "registers",
+  "tests": [
+    {
+      "id": "TC_T1_REG_01_Urban",
+      "name": "Urban/Metro Register (No Kitsch, Concrete City Realia)",
+      "feature": "F8",
+      "mode": "urban",
+      "input_brief": "Сучасний урбаністичний вірш про ранкову каву, ескалатор і сирі бетонні переходи.",
+      "poem": "Тягучий запах кави у пластику,\nСкляні двері метро ковтають людей,\nНа мокрому бетоні зникає пластика\nНічних розмов і невисловлених ідей.\nЕскалатор несе нас униз, де гуде метал,\nІ хтось перевіряє пошту на ходу,\nМісто будує свій новий щоденний портал,\nХоваючи втому в ранковому холоду.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_02_Intimate",
+      "name": "Intimate/Chamber Register (Sensory Tactility, No Pathos)",
+      "feature": "F8",
+      "mode": "intimate",
+      "input_brief": "Інтимний вірш про спільне мовчання на кухні вдосвіта.",
+      "poem": "Чайник тихенько свистить на плиті,\nТвоя долоня торкається краю столу,\nМи залишаємось у цій простоті,\nНе вимовляючи слів без потреби довкола.\nСвітло повільно заповнює шибку вікна,\nДрібний туман опускається в двір,\nІ тиша стає настільки ясна,\nЩо гасить у серці тривогу й докір.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_03_Neoclassical",
+      "name": "Neoclassical Register (Formal Poise, Architectural Clarity)",
+      "feature": "F8",
+      "mode": "neoclassical",
+      "input_brief": "Неокласичний вірш про гармонію кам'яних колон і часу.",
+      "poem": "Суворий мармур береже спокій,\nКолони ділять простір на квартали,\nДе вітер древній і туман легкий\nЛягають на величні п'єдестали.\nТут форма підкоряє плин речей,\nКарбує ритм у непорушнім тілі,\nІ мудрість непогашених очей\nЗоріє на холодному граніті.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_04_Cossack_Baroque",
+      "name": "Cossack Baroque Register (Skovorodian Diction, Sacred & Earthly Duality)",
+      "feature": "F8",
+      "mode": "baroque",
+      "input_brief": "Бароковий вірш у стилі українського XVII-XVIII століття про тлінність і совість.",
+      "poem": "Світ сей оманний мов ріка пливе,\nБагатство згине, слава розпадеться,\nЛиш серце чисте праведно живе,\nКоли до світла вічного озветься.\nНе прагни золота, ні пишних шат,\nБо всяк земний уділ є попіл в'ялий,\nА совість чесна — то безцінний клад,\nЩо виведе крізь бурі й темні скали.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_05_Authentic_Folk",
+      "name": "Authentic Folk/Carpathian Register (Organic Diction, Zero Sharovarshchyna)",
+      "feature": "F8",
+      "mode": "folk",
+      "input_brief": "Автентичний карпатський фольклорний вірш без естрадних кліше.",
+      "poem": "Шумить вода у темній яворині,\nСмереки мовчки слухають вітри,\nВівчар вогонь запалює в долині,\nІ дим встає до синьої гори.\nБринить дзвінок на полонинськім схилі,\nЗбирають коси роси на траві,\nІ ніч пливе у тихім вододілі,\nДе оживають прадавні сліди живі.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_06_Children",
+      "name": "Children/Playful Register (Bright Trochee, No Didactic Condescension)",
+      "feature": "F8",
+      "mode": "children",
+      "input_brief": "Веселий дитячий віршик про кота і жовтий чобіток.",
+      "poem": "Кіт надів рудий ковпак,\nСтрибнув лапкою у мак,\nПотім бачить чобіток —\nЗаховався під дубок!\nХлюп у теплую водичку,\nЗамочив пухнасту щічку,\nМуркнув тихо: «Няв-няв-няв,\nЯ калюжку подолав!»",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "suite": "Tier 1: Feature Coverage - Non-Syllabo-Tonic Versification",
+  "category": "non_syllabo_tonic",
+  "tests": [
+    {
+      "id": "TC_T1_NST_01_Dolnik_3Stress",
+      "name": "3-Stress Dolnik with Variable Inter-Ictic Intervals",
+      "feature": "F2",
+      "expected_meter": "dolnik",
+      "mode": "urban",
+      "input_brief": "Дольник 3-наголошений про нічні вогні мосту.",
+      "poem": "Міст прогина́ється під ва́жким авто́,\nХоло́дний ві́тер рі́же рука́в,\nСьо́годні на на́бережній нема́є ніко́го,\nХто б пе́ршим у те́мряву ступа́в.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "dolnik",
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_NST_02_Dolnik_4Stress",
+      "name": "4-Stress Dolnik for Modern Rock Recitation",
+      "feature": "F2",
+      "expected_meter": "dolnik",
+      "mode": "urban",
+      "input_brief": "Дольник 4-наголошений для рокової речитативної пісні.",
+      "poem": "Стари́й трамва́й викреса́є і́скри з холодни́х ре́йок,\nМи ї́демо крізь ди́м і мовча́ння ву́лиць,\nНіхто́ не пита́є, чому́ ми забу́ли на́зви зупи́нок,\nЛише́ ліхтарі́ уві сні́ до віко́н пригорну́лись.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "dolnik",
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_NST_03_Taktovik",
+      "name": "Taktovik Verse with Broad Accentual Intervals",
+      "feature": "F2",
+      "expected_meter": "dolnik",
+      "mode": "folk",
+      "input_brief": "Тактовик про гул карпатських потоків.",
+      "poem": "Гре́готи ко́тять камі́ння у те́мну уще́лину,\nШуми́ть Черемо́ш бі́лою пі́ною на поро́гах,\nСмере́ки стоя́ть мо́вчки над стрімки́ми кру́чами,\nІ тума́н заляга́є на бески́дських доро́гах.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "dolnik",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_NST_04_Kolomyika_14Syllable",
+      "name": "Authentic 14-Syllable Kolomyika Verse (4+4+6 with Caesura)",
+      "feature": "F2",
+      "expected_meter": "kolomyika",
+      "mode": "folk",
+      "input_brief": "Автентична коломийка 14-складова (4+4+6).",
+      "poem": "Ой поїхав / коломийка / попід темні гори,\nТам смереки / розмовляють / та й про наші болі.\nВітер віє / воду пиє / у синьому яру,\nНе розлучить / нас ніколи / чорна темна хмара.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "kolomyika",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T1_NST_05_Blank_Verse",
+      "name": "Strict Syllabo-Tonic Blank Verse (Білий вірш - Unrhymed 5-Foot Iamb)",
+      "feature": "F3",
+      "expected_meter": "iamb",
+      "mode": "neoclassical",
+      "input_brief": "Білий вірш 5-стопним ямбом без рими про пам'ять каменю.",
+      "poem": "Важки́й грані́т трима́є па́м'ять лі́т,\nВін ба́чив рі́ки, що текли́ у ніч,\nІ по́піл во́гнищ на крути́х схила́х,\nДе пе́рший про́мінь зупиня́в ходу́.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "iamb",
+        "no_surzhyk": true,
+        "is_blank_verse": true
+      }
+    }
+  ]
+}

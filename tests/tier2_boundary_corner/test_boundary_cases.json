@@ -1,0 +1,116 @@
+{
+  "suite": "Tier 2: Boundary & Corner Cases",
+  "category": "boundary_stress",
+  "tests": [
+    {
+      "id": "TC_T2_01_Taboo_6Words_Ban",
+      "name": "Intense Emotional Poem with Strict 6-Word Taboo Ban",
+      "feature": "F7",
+      "mode": "intimate",
+      "banned_words": ["душа", "серце", "доля", "вічність", "життя", "кохання"],
+      "input_brief": "Напиши глибокий ліричний вірш про близькість двох людей, не вживаючи слів: душа, серце, доля, вічність, життя, кохання.",
+      "poem": "Твоя долоня на моєму плечі,\nЗа вікнами поволі гасне день,\nВщухають кроки стомлених людей,\nІ світло тане у нічній свічі.\nМи залишаємось у цій імлі,\nДе кожен подих має власний зміст,\nІ дощ змиває попелястий міст,\nЄднаючи нас тихо на землі.",
+      "assertions": {
+        "min_lines": 8,
+        "banned_words": ["душа", "серце", "доля", "вічність", "життя", "кохання"],
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T2_02_Strict_Dactyl_Ternary",
+      "name": "Strict 3-Foot Dactyl Across 3 Stanzas with Alternating Clausula",
+      "feature": "F1",
+      "expected_meter": "dactyl",
+      "mode": "reflective",
+      "input_brief": "3 строфи чистого 3-стопного дактиля про зимовий вечір.",
+      "poem": "Стелить зима нам завію,\nВітер гуляє в полях.\nХолодом вечір засію,\nСніг опадає на шлях.\n\nСріблом виблискує крига,\nСпить під заметами гай.\nВ тиші гортається книга,\nСяє засніжений край.\n\nЗірка згоряє у тиші,\nВ небо підноситься дим.\nВітер узори нам пише,\nСвіт спочиває під ним.",
+      "assertions": {
+        "min_lines": 12,
+        "expected_meter": "dactyl",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T2_03_Strict_Anapest_Ternary",
+      "name": "Strict 3-Foot Anapest with Consistent Rising Rhythm",
+      "feature": "F1",
+      "expected_meter": "anapest",
+      "mode": "lyrical",
+      "input_brief": "Строгий 3-стопний анапест про весняне пробудження.",
+      "poem": "У весня́ному са́ду цвіту́ть яблуні́,\nРозлила́ся вода́ по зеленім лугу́,\nЗаспіва́ли пташки́ у дзвінкі́й вишині́,\nПроганя́ючи геть зимову́ю нудьгу́.\n\nОжива́є земля́ у теплі́ і красі́,\nПророста́є зерно́ у ріллі́ запашні́й,\nІ вибли́скують кра́плі у чи́стій росі́,\nВідкрива́ючи шлях сподіва́нням і мрій.",
+      "assertions": {
+        "min_lines": 8,
+        "expected_meter": "anapest",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T2_04_Kolomyika_14Syllable_Caesura",
+      "name": "14-Syllable Kolomyika with Strict 4+4+6 Caesura",
+      "feature": "F2",
+      "expected_meter": "kolomyika",
+      "mode": "folk",
+      "input_brief": "Традиційна коломийка 14 складів (4+4+6) з цезурою.",
+      "poem": "Ой летіли / сиві птахи / через сині гори,\nПринесли нам / тиху звістку / про широке поле.\nЗаспіває / стара сосна / біля того броду,\nНе забуде / вільне серце / козацького роду.",
+      "assertions": {
+        "min_lines": 4,
+        "expected_meter": "kolomyika",
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T2_05_Strict_120Char_StyleBox",
+      "name": "Strict <= 120 Character Multi-Instrument Style Box Cap",
+      "feature": "F9",
+      "strict_compact": true,
+      "style_of_music": "ukrainian indie pop, warm acoustic guitar, breathy female vocal, punchy analog bass, dynamic live drums, 115 bpm",
+      "exclude": "heavy distortion, synthetic brass, autotune, edm drop",
+      "lyrics": "[Verse 1]\nСвітло падає на паркет,\nМісто ховає старий секрет,\nМи залишаємось у теплі,\nДе сяє промінь на столі.",
+      "assertions": {
+        "min_lines": 4,
+        "max_style_chars": 120,
+        "no_metadata_leak": true,
+        "no_artist_leak": true
+      }
+    },
+    {
+      "id": "TC_T2_06_BPM_Extremes_60_vs_180",
+      "name": "Extreme Tempo Boundaries (60 BPM Ambient vs 180 BPM Metalcore)",
+      "feature": "F9",
+      "style_of_music": "ukrainian melodic metalcore, hyper-fast double bass, down-tuned drop guitars, soaring clean vocal hook, 180 bpm",
+      "exclude": "acoustic guitar, slow drone, jazz piano, autotune, reggae",
+      "lyrics": "[Intro]\n[Heavy Blast Beats]\n\n[Verse 1]\n[Screaming]\nВогонь палає на стіні,\nМи стоїмо у боротьбі,\n(не зламати нас)\nВогонь палає на стіні!\n\n[Chorus]\n[Clean Tenor]\nМи стоїмо у боротьбі!",
+      "assertions": {
+        "min_lines": 4,
+        "max_style_chars": 180,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T2_07_Stress_Homographs",
+      "name": "Disambiguation of Stress Homographs (зАмок vs замОк, дорогА vs дорОга)",
+      "feature": "F6",
+      "mode": "reflective",
+      "input_brief": "Вірш із використанням слів-омографів зі збереженням точного наголосу.",
+      "poem": "Стари́й замОк замкну́в важку́ю бра́му,\nВисо́кий зАмок диви́ться у ніч,\nСтупа́є кро́ком пова́жним па́ні,\nВеди́, дорОга, до нови́х облі́ч.\nЦя мить дорогА для серця мого́,\nДе ся́є срі́блом ясни́й атлАс,\nІ ми не зна́йдемо сліду́ друго́го,\nЩо розлучи́в колись обо́х нас.",
+      "assertions": {
+        "min_lines": 8,
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T2_08_Conflicting_Constraints",
+      "name": "Resolution of Polarizing Conflicting Style Constraints",
+      "feature": "F9",
+      "style_of_music": "ukrainian dynamic post-metal, intimate whispered acoustic verses transitioning into explosive heavy chorus, 140 bpm",
+      "exclude": "happy pop brass, tourist polka, monotone beat, cartoon vocals",
+      "lyrics": "[Verse 1]\n[Whisper]\nТихо падає попіл у нічній пітьмі,\nМи стоїмо на холодній землі,\n(тиша довкола)\nМи стоїмо на холодній землі.\n\n[Chorus]\n[Clean Melodic Vocal]\nАле вогонь пробиває граніт!",
+      "assertions": {
+        "min_lines": 4,
+        "max_style_chars": 180,
+        "valid_metatags": true
+      }
+    }
+  ]
+}

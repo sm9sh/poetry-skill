@@ -1,0 +1,126 @@
+{
+  "suite": "Tier 1: Feature Coverage - 8 Modern Ukrainian Suno Music Genres",
+  "category": "suno_genres",
+  "tests": [
+    {
+      "id": "TC_T1_GEN_01_Ethno_Chaos",
+      "name": "Ethno-Chaos (Polyphonic Chants, Driving Acoustic Grooves)",
+      "feature": "F11",
+      "genre": "Ethno-Chaos",
+      "style_of_music": "ukrainian ethno-chaos, polyphonic female vocals, dynamic frame drums, dry cello ostinato, raw acoustic drive, 120 bpm",
+      "exclude": "heavy distortion, electric guitar solos, synth brass, autotune, edm drop",
+      "lyrics": "[Intro]\n(поліфонічний спів)\nОй у лісі на горбочку\n\n[Verse 1]\nШумить вітер поміж трави,\nБ'ють у бубни ясні лави,\n(гей, луна)",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_GEN_02_Post_Punk",
+      "name": "Post-Punk / Coldwave (Chorus Basslines, Monotone Baritone)",
+      "feature": "F11",
+      "genre": "Post-Punk / Coldwave",
+      "style_of_music": "ukrainian post-punk, coldwave, pulsing chorus bassline, dry 80s drum machine, detached baritone vocal, jangle guitar, 135 bpm",
+      "exclude": "acoustic folk instruments, accordion, brass section, trap hi-hats, autotune",
+      "lyrics": "[Verse 1]\nНічні вогні панельних веж,\nХолодний вітер між вітрин,\nТи мовчки вулицею йдеш,\n(і залишаєшся один)\n\n[Chorus]\nБетон і скло, нічний трамвай,\nОстаннє світло відлітає.",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_GEN_03_Dark_Synth",
+      "name": "Dark Synth / Cyberpunk (Analog Arpeggios, Aggressive Bass)",
+      "feature": "F11",
+      "genre": "Dark Synth / Cyberpunk",
+      "style_of_music": "ukrainian dark synthwave, cyberpunk, analog arpeggios, heavy reese bass, atmospheric pads, intimate breathy female vocal, 115 bpm",
+      "exclude": "acoustic guitar, accordion, orchestral strings, country twang, acoustic drums",
+      "lyrics": "[Intro]\n(пульсуючий синтезатор)\n\n[Verse 1]\nНеонові тіні на мокрім склі,\nМісто ховає свої дроти,\nМи загубилися у цій імлі,\n(де не лишилося мети)",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_GEN_04_Trap_Folk",
+      "name": "Trap-Folk (Punchy 808s, Sopilka Riffs, Syncopated Flow)",
+      "feature": "F11",
+      "genre": "Trap-Folk",
+      "style_of_music": "modern ukrainian trap-folk, punchy 808 bass, crisp rolling hi-hats, wood sopilka melody, melodic male vocal hook, 140 bpm",
+      "exclude": "heavy metal distortion, acoustic country guitar, generic polka, brass choir",
+      "lyrics": "[Intro]\n(соло сопілки)\n\n[Verse 1]\nШвидкий біт розрізає темний морок,\nМинає день, минає сорок,\n(на репіті)\n\n[Chorus]\nГей, лети мій звук у небеса,\nТам де сонце й чистая роса.",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_GEN_05_Melodic_Metalcore",
+      "name": "Melodic Metalcore (Drop Tuning, Dual Vocals, Fast Double-Bass)",
+      "feature": "F11",
+      "genre": "Melodic Metalcore",
+      "style_of_music": "ukrainian melodic metalcore, down-tuned heavy riffs, double bass drums, soaring clean melodic chorus, harsh screaming verses, 160 bpm",
+      "exclude": "acoustic guitar, saxophone, jazz piano, pop autotune, reggae groove",
+      "lyrics": "[Verse 1]\n[Screaming]\nКрізь попіл і каміння рветься крик!\n\n[Pre-Chorus]\n(наростання)\n\n[Chorus]\n[Clean Melodic Vocal]\nМи не зламаємось у цій імлі,\nСтоїмо міцно на своїй землі!",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_GEN_06_Shoegaze",
+      "name": "Shoegaze / Dream Pop (Reverb Wall of Sound, Breathy Vocals)",
+      "feature": "F11",
+      "genre": "Shoegaze / Dream Pop",
+      "style_of_music": "ukrainian shoegaze, dream pop, swirling wall of fuzzy guitars, shimmering reverb, ethereal breathy female vocals, slow groove, 95 bpm",
+      "exclude": "harsh vocals, trap hi-hats, brass section, acoustic polka, dry close vocals",
+      "lyrics": "[Intro]\n(гітарний реверб)\n\n[Verse 1]\nРозмиті контури вечірніх вікон,\nСвітло розчиняється у воді,\n(тихо, тихо)\n\n[Chorus]\nПливемо крізь серпанок уві сні,\nДе зникають звуки навісні.",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_GEN_07_Ethno_Rock",
+      "name": "Ethno-Rock (Ringing Electric Guitars, Sopilka Leaps, Driving Drums)",
+      "feature": "F11",
+      "genre": "Ethno-Rock",
+      "style_of_music": "ukrainian ethno-rock, driving organic rock drums, crunchy electric rhythm guitars, energetic sopilka hook, powerful male vocal, 130 bpm",
+      "exclude": "synth pop pads, autotune, edm drop, generic acoustic accordion",
+      "lyrics": "[Intro]\n[Guitar Solo]\n\n[Verse 1]\nВстає зоря над синім небокраєм,\nМи разом пісню волі заспіваєм,\n(гей-гей)\n\n[Chorus]\nШумить Черемош, клекотить вода,\nСтоїть фортеця горда й молода!",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_GEN_08_Neoclassical_Bandura",
+      "name": "Neoclassical Bandura / Acoustic (Resonant Plucking, Cello, Intimate Space)",
+      "feature": "F11",
+      "genre": "Neoclassical Bandura",
+      "style_of_music": "ukrainian neoclassical, acoustic 64-string bandura plucking, warm legato cello, intimate breathy female vocal, room reverb, 75 bpm",
+      "exclude": "drums, electronic synthesizers, distortion, heavy bass, brass, autotune",
+      "lyrics": "[Intro]\n(перебір бандури)\n\n[Verse 1]\nСрібні струни тихо промовляють,\nПадає туман на сонні трави,\n(ніжна луна)\n\n[Outro]\nЗатихає пісня в далині,\nТільки зорі сяють у вікні.",
+      "assertions": {
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    }
+  ]
+}

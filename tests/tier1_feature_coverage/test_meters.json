@@ -1,0 +1,86 @@
+{
+  "suite": "Tier 1: Feature Coverage - Versification Meters",
+  "category": "meters",
+  "tests": [
+    {
+      "id": "TC_T1_MET_01_Iamb",
+      "name": "Strict 4-Foot Iamb with Alternating Clausula (FMFM)",
+      "feature": "F1",
+      "expected_meter": "iamb",
+      "mode": "lyrical",
+      "input_brief": "Вірш ямбом про нічний дощ над містом.",
+      "poem": "Нічни́й трамва́й везе́ вого́нь,\nСпада́є кра́пля на доло́нь,\nВщуха́є шу́рхіт на путя́х,\nІ га́сне про́мінь у крапля́х.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "iamb",
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_MET_02_Trochee",
+      "name": "Strict 4-Foot Trochee with Trochaic Cadence",
+      "feature": "F1",
+      "expected_meter": "trochee",
+      "mode": "lyrical",
+      "input_brief": "Вірш хореєм про ранковий вітер у степу.",
+      "poem": "Ві́тер сте́пом повіва́є,\nТра́ви срі́бні пригина́є,\nСонце небо відкрива́є,\nРа́нок я́сний наступа́є.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "trochee",
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_MET_03_Dactyl",
+      "name": "Pure 3-Foot Dactyl with Ternary Rhythm",
+      "feature": "F1",
+      "expected_meter": "dactyl",
+      "mode": "reflective",
+      "input_brief": "Вірш дактилем про осінній туман над водою.",
+      "poem": "Ти́хо тума́н опуска́ється,\nХви́ля холо́дна коти́ться,\nЛи́стя сухе́ розсипа́ється,\nО́сінь у зе́млю вдивля́ється.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "dactyl",
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_MET_04_Amphibrach",
+      "name": "Pure 3-Foot Amphibrach with Soft Cadence",
+      "feature": "F1",
+      "expected_meter": "amphibrach",
+      "mode": "lyrical",
+      "input_brief": "Вірш амфібрахієм про світло у вікнах.",
+      "poem": "Вже ве́чір запа́лює ві́кна,\nІ ті́ні ляга́ють на сті́ни,\nТриво́га пові́льно зати́хне,\nЧека́ючи я́сної дни́ни.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "amphibrach",
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T1_MET_05_Anapest",
+      "name": "Strict 3-Foot Anapest with Energetic Rising Meter",
+      "feature": "F1",
+      "expected_meter": "anapest",
+      "mode": "reflective",
+      "input_brief": "Вірш анапестом про відлуння кроків у тиші.",
+      "poem": "На перо́ні засні́женім крок,\nІ луна́ відліта́є до зі́р,\nПоміж те́мних нічни́х мовчано́к\nОжива́є засні́жений двір.",
+      "assertions": {
+        "min_lines": 4,
+        "max_lines": 8,
+        "expected_meter": "anapest",
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    }
+  ]
+}

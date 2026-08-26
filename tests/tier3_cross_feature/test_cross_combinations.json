@@ -1,0 +1,93 @@
+{
+  "suite": "Tier 3: Cross-Feature Combinations (Multi-Skill Pipeline)",
+  "category": "cross_feature",
+  "tests": [
+    {
+      "id": "TC_T3_01_Full_Pipeline_E2E",
+      "name": "Full End-to-End Pipeline: Creative Brief -> Dolnik Poem -> Metatags -> Suno Custom Mode",
+      "feature": "F15",
+      "brief": "Пісня про нічну самотність у великому місті, дощ і пошук внутрішнього спокою.",
+      "poem": "Місто вщухає під холодним дощем,\nТрамвай везе останній самотній вогник,\nМи йдемо крізь ніч із тихим щемом,\nЗабуваючи шум денних тривог і колотнеч.\nЛіхтарі креслять мокрі золоті колії,\nКожен крок лунає у порожньому двобої,\nІ коли змовкає гул великої залізниці,\nТиша оселяється у моїй зіниці.",
+      "lyrics": "[Intro]\n(звук дощу та ембієнт)\n\n[Verse 1]\nМісто вщухає під холодним дощем,\nТрамвай везе останній самотній вогник,\n(крізь темний морок)\nМи йдемо крізь ніч із тихим щемом,\nЗабуваючи шум денних тривог.\n\n[Pre-Chorus]\nЛіхтарі креслять мокрі золоті колії,\nКожен крок лунає у порожньому двобої,\n\n[Chorus]\nІ коли змовкає гул великої залізниці,\nТиша оселяється у моїй зіниці,\n(вічне світло)\nТиша оселяється у моїй зіниці.\n\n[Outro]\n[Fade Out]\n(шепіт дощу)",
+      "style_of_music": "ukrainian atmospheric indie electronic, warm analog synth pads, deep sub bass, intimate breathy male vocal, 110 bpm",
+      "exclude": "heavy metal guitars, aggressive screams, autotune, polka accordion, brass",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T3_02_Folk_Lyrics_Dark_Synth",
+      "name": "Pairwise: Authentic Carpathian Folk Lyrics + Cyber Dark Synthwave Production",
+      "feature": "F11",
+      "style_of_music": "ukrainian dark synthwave, carpathian vocal chanting, analog bass arpeggios, industrial percussion, 124 bpm",
+      "exclude": "acoustic guitar, accordion, happy pop brass, acoustic country drums",
+      "lyrics": "[Intro]\n(поліфонічний шепіт)\n\n[Verse 1]\nОй у темнім лісі на крутім роздоллі,\nСплять холодні вітри у важкій неволі,\n(не спи, не спи)\n\n[Chorus]\nЗапалає вогонь на залізній горі,\nОживають у темряві древні царі!",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true
+      }
+    },
+    {
+      "id": "TC_T3_03_Cossack_Baroque_Melodic_Metalcore",
+      "name": "Pairwise: Cossack Baroque Register + Modern Melodic Metalcore with Dual Vocals",
+      "feature": "F11",
+      "style_of_music": "ukrainian melodic metalcore, baroque organ interludes, heavy drop-c guitars, blast beats, harsh growls, clean epic chorus, 155 bpm",
+      "exclude": "pop autotune, saxophone, reggae, acoustic folk strumming",
+      "lyrics": "[Intro]\n[Baroque Organ Solo]\n\n[Verse 1]\n[Growl]\nМарнота марнот — сей світ лукавий!\nВсяк плотський уділ у попіл впаде!\n\n[Chorus]\n[Clean Tenor Choir]\nЛиш правда свята у віках не помре,\nКоли серце до неба свій зір піднесе!",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true
+      }
+    },
+    {
+      "id": "TC_T3_04_Chamber_Intimate_Neoclassical_Bandura",
+      "name": "Pairwise: Chamber Intimate Whispered Lyric + Neoclassical Bandura & Cello",
+      "feature": "F11",
+      "style_of_music": "ukrainian neoclassical chamber, acoustic 64-string bandura, deep legato cello, intimate breathy whisper vocals, room reverb, 72 bpm",
+      "exclude": "drums, electronic synth bass, distortion, autotune, brass",
+      "lyrics": "[Intro]\n(перебір струн бандури)\n\n[Verse 1]\n[Whisper]\nТихий подих застиг на моєму плечі,\nСвічка догоряє у нічній тиші,\n(тільки ти)\n\n[Outro]\n[Cello Solo]\n[Fade Out]",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true
+      }
+    },
+    {
+      "id": "TC_T3_05_Bilingual_UA_EN_Radio_Hook",
+      "name": "Pairwise: Ukrainian Deep Verses + English Crossover Radio Pop-Rock Chorus Hook",
+      "feature": "F11",
+      "style_of_music": "modern ukrainian pop-rock, driving drums, melodic electric guitar riff, powerful female vocals, anthemic crossover, 128 bpm",
+      "exclude": "heavy metal screaming, generic trap hi-hats, polka accordion, harsh clipping, mp3 artifacts",
+      "lyrics": "[Verse 1]\nМи йдемо крізь туман і холодні світанки,\nЗалишаючи в минулому всі перепонки,\n(ми разом)\n\n[Chorus]\nWe will rise above the storm tonight,\nHolding our fire, burning so bright!\n(разом до кінця)\nWe will never break the light!",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true
+      }
+    },
+    {
+      "id": "TC_T3_06_MultiStage_Acoustic_To_Drop",
+      "name": "Dynamic Progression: Acoustic Bandura Verse into Explosive Electronic EDM/Trap Drop",
+      "feature": "F10",
+      "style_of_music": "ukrainian hybrid ethno-edm, acoustic bandura verses building into explosive synth drop, heavy 808 bass, sopilka leads, 130 bpm",
+      "exclude": "metal distortion, country twang, acoustic polka, harsh clipping",
+      "lyrics": "[Verse 1]\n[Acoustic Bandura]\nСрібні струни грають у нічній тиші...\n\n[Pre-Chorus]\n[Buildup]\n(наростання біту)\nОдин, два, три, полетіли!\n\n[Drop]\n[Heavy Synth Solo]\n(соло сопілки та вибуховий дроп)\n\n[Outro]\n[Fade Out]",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true
+      }
+    }
+  ]
+}

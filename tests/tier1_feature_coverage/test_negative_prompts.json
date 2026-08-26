@@ -1,0 +1,71 @@
+{
+  "suite": "Tier 1: Feature Coverage - Negative Prompting & Anti-Artifact Vectors",
+  "category": "negative_prompts",
+  "tests": [
+    {
+      "id": "TC_T1_NEG_01_Acoustic_Anti_Artifact",
+      "name": "Anti-Artifact Vector for Clean Acoustic Recording",
+      "feature": "F13",
+      "style_of_music": "ukrainian acoustic indie folk, fingerstyle acoustic guitar, close warm female vocal, natural wood percussion, 105 bpm",
+      "exclude": "metallic treble, harsh frequencies, digital clipping, muddy bass, reverb wash, compressed mp3 artifacts",
+      "lyrics": "[Verse 1]\nТихий ранок торкається вікон,\nСонце падає на дерев'яну підлогу.",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "valid_exclude": true
+      }
+    },
+    {
+      "id": "TC_T1_NEG_02_Genre_Clash_Suppression",
+      "name": "Anti-Genre Clash Suppression for Intimate Neoclassical",
+      "feature": "F13",
+      "style_of_music": "ukrainian neoclassical chamber, acoustic bandura, solo cello, minimal ambient room tone, 68 bpm",
+      "exclude": "heavy metal distortion, trap 808 bass, autotune, edm build-up, aggressive drums, electric brass",
+      "lyrics": "[Intro]\n[Solo Bandura]\n\n[Verse 1]\nСрібні струни мовчать у півтемряві.",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "valid_exclude": true
+      }
+    },
+    {
+      "id": "TC_T1_NEG_03_Electronic_Anti_Mud",
+      "name": "Anti-Mud and Anti-Distortion Vector for Clean Synthwave",
+      "feature": "F13",
+      "style_of_music": "ukrainian modern synth-pop, clean punchy bass, crisp analog leads, clear airy female vocal, 122 bpm",
+      "exclude": "muddy sub frequencies, garbled audio, distorted vocals, room echo, mono audio, tape degradation",
+      "lyrics": "[Chorus]\nСвітло неону веде нас у ніч,\n(тільки вперед)",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "valid_exclude": true
+      }
+    },
+    {
+      "id": "TC_T1_NEG_04_Speech_Clutter_Suppression",
+      "name": "Anti-Speech Clutter for Instrumental Atmosphere",
+      "feature": "F13",
+      "style_of_music": "cinematic ukrainian ambient, atmospheric drone, bowing cello, shimmering bandura harmonics, slow tempo, 55 bpm",
+      "exclude": "spoken dialogue, crowd chatter, laughing, cheering, whispering voices, singing, percussion",
+      "lyrics": "[Instrumental Break]\n[Bandura Solo]\n[Fade Out]",
+      "assertions": {
+        "min_lines": 0,
+        "max_style_chars": 180,
+        "valid_exclude": true
+      }
+    },
+    {
+      "id": "TC_T1_NEG_05_Folk_Kitsch_Suppression",
+      "name": "Anti-Kitsch and Anti-Polka Vector for Serious Modern Ethno",
+      "feature": "F13",
+      "style_of_music": "dark ukrainian ethno, deep frame drum, polyphonic female chant, gritty cello ostinato, 118 bpm",
+      "exclude": "tourist accordion, generic polka, happy synthesizer brass, comedy vocal inflections, fast synth arpeggio",
+      "lyrics": "[Intro]\n(гучний бубон)\n\n[Verse 1]\nОй вставала хмара чорна над горою.",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "valid_exclude": true
+      }
+    }
+  ]
+}

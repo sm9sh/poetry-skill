@@ -1,0 +1,238 @@
+{
+  "total_adversarial_tests": 18,
+  "passed": 18,
+  "failed": 0,
+  "details": [
+    {
+      "id": "ADV_1_01_Multi_Inst_120_Cap",
+      "name": "5+ Instruments Pack under <=120 Characters",
+      "passed": true,
+      "message": "Length: 93 chars, Score: 100.0/100, Valid: True",
+      "metrics": {
+        "length": 93,
+        "tokens": [
+          "ukrainian ethno-metal",
+          "bandura",
+          "sopilka",
+          "tsymbaly",
+          "808 sub",
+          "djent riffs",
+          "white voice",
+          "140 bpm"
+        ],
+        "score": 100.0
+      }
+    },
+    {
+      "id": "ADV_1_02_Exact_120_Char_Boundary",
+      "name": "Exact 120 Character Budget Boundary Acceptance",
+      "passed": true,
+      "message": "Length: 120 chars, Is Valid: True",
+      "metrics": {
+        "length": 120,
+        "errors": []
+      }
+    },
+    {
+      "id": "ADV_1_03_Reject_121_Char_Overflow",
+      "name": "Strict 121 Character Overflow Rejection in Compact Mode",
+      "passed": true,
+      "message": "Length: 121 chars, Correctly Rejected: True",
+      "metrics": {
+        "errors": [
+          "Style field character limit exceeded: 121 chars (max allowed: 120)."
+        ]
+      }
+    },
+    {
+      "id": "ADV_1_04_Exact_180_Char_Max_Boundary",
+      "name": "Exact 180 Character Upper Bound Acceptance",
+      "passed": true,
+      "message": "Length: 180 chars, Is Valid: True",
+      "metrics": {
+        "length": 180,
+        "errors": []
+      }
+    },
+    {
+      "id": "ADV_1_05_Reject_181_Char_Overflow",
+      "name": "Upper Bound 181 Character Overflow Rejection",
+      "passed": true,
+      "message": "Length: 181 chars, Correctly Rejected: True",
+      "metrics": {
+        "errors": [
+          "Style field character limit exceeded: 181 chars (max allowed: 180)."
+        ]
+      }
+    },
+    {
+      "id": "ADV_2_01_UltraSlow_60BPM_Ambient",
+      "name": "Ultra-Slow 60 BPM Ambient Drone with Pianissimo Directives",
+      "passed": true,
+      "message": "Style: 103 chars, Score: 100.0/100, Valid: True",
+      "metrics": {
+        "score": 100.0,
+        "tags": [
+          "Intro",
+          "Tempo: 60 BPM",
+          "Verse 1",
+          "Pianissimo",
+          "Outro",
+          "Cello Solo",
+          "Fade Out"
+        ]
+      }
+    },
+    {
+      "id": "ADV_2_02_UltraFast_180BPM_Metalcore",
+      "name": "Ultra-Fast 180 BPM Metalcore with Blast Beats & Breakdown",
+      "passed": true,
+      "message": "Style: 108 chars, Score: 100.0/100, Valid: True",
+      "metrics": {
+        "score": 100.0,
+        "tags": [
+          "Intro",
+          "Tempo: 180 BPM",
+          "Heavy Blast Beats",
+          "Verse 1",
+          "Screaming",
+          "Chorus",
+          "Clean Tenor Vocal",
+          "Breakdown",
+          "Guitar Solo",
+          "Outro",
+          "End"
+        ]
+      }
+    },
+    {
+      "id": "ADV_2_03_Dynamic_MultiStage_Tempo_Shift",
+      "name": "Multi-Stage Tempo Acceleration (65 BPM -> 175 BPM) with Buildup & Drop",
+      "passed": true,
+      "message": "Style: 107 chars, Score: 92.0/100, Valid: True",
+      "metrics": {
+        "score": 92.0,
+        "tags": [
+          "Intro",
+          "Tempo: 65 BPM",
+          "Acoustic Bandura Solo",
+          "Verse 1",
+          "Whisper",
+          "Pre-Chorus",
+          "Buildup",
+          "Dynamic: Crescendo",
+          "Drop",
+          "Tempo: 175 BPM",
+          "Heavy Blast Beats",
+          "White Voice Choir",
+          "Outro",
+          "Fade Out"
+        ]
+      }
+    },
+    {
+      "id": "ADV_3_01_Whispered_Lullaby_Metalcore_White_Voice",
+      "name": "Whispered Lullaby + Metalcore Djent Drop + White Voice Polyphony",
+      "passed": true,
+      "message": "Style: 109 chars, Score: 100.0/100, Valid: True",
+      "metrics": {
+        "score": 100.0,
+        "tags": [
+          "Intro",
+          "Solo Bandura",
+          "Whisper",
+          "Verse 1",
+          "Whispered Female Vocal",
+          "Pre-Chorus",
+          "Buildup",
+          "Drop",
+          "Heavy Djent Riff",
+          "White Voice Choir",
+          "Outro",
+          "Fade Out"
+        ]
+      }
+    },
+    {
+      "id": "ADV_3_02_Baroque_Trap_Shoegaze",
+      "name": "Cossack Baroque Church Elements + 808 Sub Trap + Reverb Shoegaze",
+      "passed": true,
+      "message": "Style: 115 chars, Score: 100.0/100, Valid: True",
+      "metrics": {
+        "score": 100.0
+      }
+    },
+    {
+      "id": "ADV_3_03_Cyber_Gabber_Bandura",
+      "name": "190 BPM Gabber Industrial Kick + Acoustic 64-String Bandura",
+      "passed": true,
+      "message": "Style: 107 chars, Score: 100.0/100, Valid: True",
+      "metrics": {
+        "score": 100.0
+      }
+    },
+    {
+      "id": "ADV_4_01_Metadata_Label_Injections",
+      "name": "Detection of Banned Metadata Labels (Language:, Theme:, Mood:, Genre:, BPM:, Instruments:)",
+      "passed": true,
+      "message": "All 6 metadata injection vectors intercepted",
+      "metrics": {
+        "tested_injections_count": 6
+      }
+    },
+    {
+      "id": "ADV_4_02_Artist_Reference_Leaks",
+      "name": "Interception of Direct & Indirect Artist Reference Phrases",
+      "passed": true,
+      "message": "All 7 artist leak vectors intercepted",
+      "metrics": {
+        "tested_leaks_count": 7
+      }
+    },
+    {
+      "id": "ADV_4_03_Metatag_Prose_And_Syntax_Errors",
+      "name": "Detection of Prose Hallucinations, Unclosed Brackets, and Empty Tags",
+      "passed": true,
+      "message": "All 6 metatag corruptions intercepted",
+      "metrics": {
+        "corruptions_count": 6
+      }
+    },
+    {
+      "id": "ADV_4_04_Vague_NonAcoustic_Exclude_Rejection",
+      "name": "Rejection of Vague Emotional/Subjective Exclude Tokens",
+      "passed": true,
+      "message": "All 3 vague exclude inputs rejected",
+      "metrics": {
+        "vague_tests_count": 3
+      }
+    },
+    {
+      "id": "ADV_5_01_Ecosystem_Style_Prompts_Audit",
+      "name": "Audit all 111 Style Prompts across References and Packs",
+      "passed": true,
+      "message": "Passed: 111/111. Failures: 0",
+      "metrics": {
+        "failures": []
+      }
+    },
+    {
+      "id": "ADV_5_02_Ecosystem_Exclude_Prompts_Audit",
+      "name": "Audit all 132 Exclude Prompts across References and Packs",
+      "passed": true,
+      "message": "Passed: 132/132. Failures: 0",
+      "metrics": {
+        "failures": []
+      }
+    },
+    {
+      "id": "ADV_5_03_Ecosystem_Lyrics_Blocks_Audit",
+      "name": "Audit all 19 Lyrics Arrangement Blocks for Metatag Syntax",
+      "passed": true,
+      "message": "Passed: 19/19. Failures: 0",
+      "metrics": {
+        "failures": []
+      }
+    }
+  ]
+}

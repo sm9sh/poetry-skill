@@ -1,0 +1,86 @@
+{
+  "suite": "Tier 1: Feature Coverage - Vocal Timbres and Directives",
+  "category": "vocal_timbres",
+  "tests": [
+    {
+      "id": "TC_T1_VOC_01_White_Voice",
+      "name": "Authentic Ukrainian White Voice (Білий голос, Open-Throat Resonance)",
+      "feature": "F12",
+      "timbre": "White Voice",
+      "style_of_music": "authentic ukrainian white voice, open-throat resonant female chanting, drone harmony, acoustic frame drum, natural reverb, 110 bpm",
+      "exclude": "bel canto operatic vibrato, autotune, whispered vocals, heavy distortion",
+      "lyrics": "[Intro]\n(пронизливий білий спів)\nОй гуляла нічка темна\n\n[Verse 1]\nОй гуляла нічка темна по долині,\nЗалишила росу чисту на калині.",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_VOC_02_Intimate_Breathy",
+      "name": "Intimate Breathy Chamber Vocal (Close-Mic Acoustic Delivery)",
+      "feature": "F12",
+      "timbre": "Intimate Breathy",
+      "style_of_music": "intimate breathy female vocal, close mic acoustic warmth, soft nylon guitar, ambient room acoustics, delicate, 70 bpm",
+      "exclude": "screaming, belting, loud drums, heavy compression, electric guitars, autotune",
+      "lyrics": "[Verse 1]\n[Whisper]\nТихо дихає ніч у порожній кімнаті,\nМи залишились удвох на старій канапі,\n(тільки твій подих)",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_VOC_03_Spoken_Melodeclamation",
+      "name": "Spoken-Word Melodeclamation (Rhythmic Recitation over Ambient)",
+      "feature": "F12",
+      "timbre": "Melodeclamation",
+      "style_of_music": "ukrainian spoken word melodeclamation, deep resonant male voice, atmospheric cello, subtle vinyl crackle, slow tempo, 65 bpm",
+      "exclude": "singing, autotune, pop drums, cheerful chords, upbeat brass",
+      "lyrics": "[Intro]\n(потріскування вінілу)\n\n[Spoken Word]\nЯ пам'ятаю це місто холодним і сирим,\nКоли кожен ліхтар здавався старим маяком,\n(і час спинявся)",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_VOC_04_Extreme_Vocals",
+      "name": "Extreme Vocals (Growl / Harsh Screams with Clean Melodic Chorus)",
+      "feature": "F12",
+      "timbre": "Extreme Vocals",
+      "style_of_music": "ukrainian modern metal, aggressive harsh growls, guttural screams, soaring melodic clean tenor hook, heavy drop guitars, 150 bpm",
+      "exclude": "acoustic guitar, saxophone, happy pop melodies, whisper, folk choir",
+      "lyrics": "[Verse 1]\n[Screaming]\nТемрява душить останній промінь!\n\n[Chorus]\n[Clean Tenor]\nАле ми вирвемось із цієї клітки!",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    },
+    {
+      "id": "TC_T1_VOC_05_Modern_Autotuned_Trap",
+      "name": "Modern Melodic Autotuned Trap Vocal (Stylized Micro-Tuning)",
+      "feature": "F12",
+      "timbre": "Autotuned Trap",
+      "style_of_music": "modern ukrainian trap, melodic autotune vocal effect, pitch-corrected hooks, syncopated 808 bass, crisp claps, 130 bpm",
+      "exclude": "raw acoustic singing, operatic choir, live orchestra, heavy distortion guitars",
+      "lyrics": "[Intro]\n(мелодійний тюнінг)\nО-о-о, нічний вайб\n\n[Verse 1]\nЯ кручу педалі крізь вологий дим,\n(на автопілоті)\nЗалишаюсь вічно молодим.",
+      "assertions": {
+        "min_lines": 1,
+        "max_style_chars": 180,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "valid_metatags": true
+      }
+    }
+  ]
+}

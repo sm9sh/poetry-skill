@@ -1,0 +1,112 @@
+{
+  "suite": "Tier 4: Real-World Application Scenarios (Production Release Briefs)",
+  "category": "real_world_production",
+  "tests": [
+    {
+      "id": "TC_T4_01_Commercial_FolkPop_Single",
+      "name": "Commercial Radio Single / Viral Modern Folk-Pop Track",
+      "feature": "F11",
+      "scenario": "Commercial Pop Single",
+      "brief": "Створити танцювальний радіо-хіт у жанрі modern Ukrainian folk-pop: хуковий приспів, сопілковий дроп, чіткий біт, світлий ліричний настрій без шароварщини.",
+      "style_of_music": "modern ukrainian folk-pop, infectious soprano female vocal hook, catchy sopilka melody, punchy 808 bass, crisp pop drums, 128 bpm",
+      "exclude": "heavy metal distortion, acoustic polka, cheap brass synth, mp3 artifacts, autotune artifacts",
+      "lyrics": "[Intro]\n(яскравий риф сопілки)\nГей-я, гей-я!\n\n[Verse 1]\nРанковий вітер розганяє хмари,\nНад містом сонце золотом горить,\nМи забуваємо старі примари,\n(ловлячи кожну світлу мить)\n\n[Pre-Chorus]\nТоркнись долоні, відчуй цей рух,\nЯк оживає навколо звук!\n\n[Chorus]\nЛети, моя пісне, понад степами,\nДе сонце встає поміж яворами!\n(гей-я, лети)\nЛети, моя пісне, понад степами!\n\n[Drop]\n[Sopilka Solo]\n\n[Outro]\n[Fade Out]\n(шепіт сопілки)",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T4_02_Cinematic_War_Memorial_Anthem",
+      "name": "Dignified Cinematic War Memorial / Chronicle Anthem",
+      "feature": "F8",
+      "scenario": "Cinematic Memorial Soundtrack",
+      "brief": "Стримана, глибока, гідна меморіальна пісня про пам'ять, землю, камінь і стійкість. Без гасел, без абстрактного пафосу, без ура-патріотизму.",
+      "style_of_music": "cinematic ukrainian orchestral folk, solemn cello ostinato, dignified resonant baritone, subtle polyphonic choir, 76 bpm",
+      "exclude": "electric metal guitars, upbeat drums, pop autotune, cheap brass, cheering, applause",
+      "lyrics": "[Intro]\n[Solo Cello]\n(тихий звук степового вітру)\n\n[Verse 1]\nСтоїть полин на випаленій кручі,\nЗемля тримає пам'ять тихих літ,\nТут кожен камінь бачив дні гнітючі,\n(і зберігав нескорений свій слід)\n\n[Chorus]\nНе згасне світло у нічнім вікні,\nДе мати жде світанку на світанні,\nМи виросли на цій святій броні,\n(у непохитнім тихому стоянні)\nМи виросли на цій святій броні.\n\n[Outro]\n[Choir Harmony]\n[Fade Out]\n(мовчання землі)",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T4_03_Animated_Children_Song",
+      "name": "Children's Animated Series Nature & Animals Theme",
+      "feature": "F8",
+      "scenario": "Children Animation Track",
+      "brief": "Весела, жива, ритмічна дитяча пісенька для анімаційного серіалу про лісових звірят і теплий дощик. Без повчань і штучного сюсюкання.",
+      "style_of_music": "playful ukrainian children pop, bright acoustic ukulele, clapping rhythm, cheerful melodic female vocals, wooden xylophone, 120 bpm",
+      "exclude": "distortion, scary dark synths, harsh vocals, trap 808 bass, reverb wash, metallic treble",
+      "lyrics": "[Intro]\n(плескіт у долоні та ксилофон)\nТік-так, тік-так!\n\n[Verse 1]\nПо стежині скаче зайчик,\nОдягнув рудий жупанчик,\nА за ним біжить лисичка,\n(в неї мокра рукавичка!)\n\n[Chorus]\nКап-кап-кап, хлюпоче річка,\nУмивається травичка,\nСонце світить із хмаринки,\nМи збираємо ожинки!\n\n[Outro]\n[Fade Out]\n(дитячий сміх і плескіт)",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T4_04_Melodic_Metalcore_Anthem",
+      "name": "Modern Melodic Metalcore / Existential Struggle Anthem",
+      "feature": "F11",
+      "scenario": "Heavy Metal Single",
+      "brief": "Потужний український мелодійний металкор про внутрішню боротьбу, подолання темряви і незламність. Зміна екстрім-вокалу на приспівний мелодійний спів.",
+      "style_of_music": "ukrainian melodic metalcore, heavy drop-tuned riffing, blast beats, dynamic screaming verses, soaring anthemic clean tenor chorus, 165 bpm",
+      "exclude": "acoustic pop strumming, saxophone, autotune, tourist polka, cheerful synths",
+      "lyrics": "[Intro]\n[Instrumental Break]\n\n[Verse 1]\n[Screaming]\nКрізь темний морок пробиваєм шлях!\nРозбитий попіл на моїх руках!\n\n[Pre-Chorus]\n(наростання гітарного дисторшну)\n\n[Chorus]\n[Clean Tenor Vocal]\nМи не впадемо у безодню сліз,\nКрізь шторм і бурю голос наш проріс!\n(ми стоїмо до кінця)\nКрізь шторм і бурю голос наш проріс!\n\n[Instrumental Break]\n[Guitar Solo]\n\n[Outro]\n[Fade Out]",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "no_surzhyk": true
+      }
+    },
+    {
+      "id": "TC_T4_05_Ambient_SpokenWord_Track",
+      "name": "Intimate Lo-Fi Spoken-Word Poetry Soundtrack",
+      "feature": "F12",
+      "scenario": "Atmospheric Spoken-Word Single",
+      "brief": "Атмосферний лоу-фай трек із глибокою чоловічою декламацією про нічне місто, старий трамвай і дощ.",
+      "style_of_music": "ukrainian lofi ambient, warm vinyl crackle, gentle electric piano chords, intimate close male spoken word, mellow sub bass, 68 bpm",
+      "exclude": "drums, heavy distortion, singing, screaming, fast tempo, loud brass, autotune",
+      "lyrics": "[Intro]\n(вінілове потріскування та тихе рояльне інтро)\n\n[Spoken Word]\nМісто засинає під холодним дощем.\nТрамвай повертає у депо,\nвезучи останніх стомлених пасажирів.\nУ кишенях дзвонять ключі,\nі кожен крок по мокрому асфальту\nзвучить як незакінчене речення...\n\n[Outro]\n[Electric Piano Solo]\n[Fade Out]",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "no_surzhyk": true,
+        "no_kitsch": true
+      }
+    },
+    {
+      "id": "TC_T4_06_Neoclassical_Bandura_Ballad",
+      "name": "Neoclassical Symphonic Bandura & Chamber Orchestra Ballad",
+      "feature": "F11",
+      "scenario": "Symphonic Chamber Release",
+      "brief": "Епічна, але витончена неокласична балада з академічною бандурою, струнним квартетом і пронизливим жіночим вокалом (білий голос у кульмінації).",
+      "style_of_music": "ukrainian neoclassical, virtuoso 64-string acoustic bandura, chamber string quartet, expressive female vocal, white voice climax, 78 bpm",
+      "exclude": "electronic synthesizers, trap beats, autotune, distortion, generic pop drums",
+      "lyrics": "[Intro]\n[Bandura Solo]\n\n[Verse 1]\nДзвенять срібні струни у храмі нічнім,\nПливе тихий морок по травах сухих,\n(у тиші нічній)\n\n[Chorus]\n(білий голос)\nОй встань, сонце ясне, над синім чолом,\nЗігрій наші душі криштальним теплом!\n\n[Outro]\n[Cello Solo]\n[End]",
+      "assertions": {
+        "max_style_chars": 180,
+        "valid_metatags": true,
+        "no_metadata_leak": true,
+        "no_artist_leak": true,
+        "no_surzhyk": true
+      }
+    }
+  ]
+}
