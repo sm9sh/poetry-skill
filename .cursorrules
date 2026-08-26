@@ -1,6 +1,5 @@
-﻿# Cursor Rules for Ukrainian Poetry & Suno Music Skills
-- For Ukrainian poetry tasks, reference skills/ukrainian-poetry/SKILL.md.
-- For Suno AI music prompting, reference skills/ukrainian-poetry-to-suno/SKILL.md.
-- Musical sound design in Suno must always be grounded in Western genres (Post-Punk, Darkwave, Synthwave, Trip-Hop, Alt-Pop, Metalcore, Ambient) to eliminate sharovarshchyna and cheap regional pop.
-- Style box: 80-180 chars, English only, no metadata tags (Language/Theme/Mood forbidden).
-- Run tests with: py -3 tests/run_tests.py --all
+﻿# Cursor Rules
+Read and adhere to @AGENTS.md for all Ukrainian poetry and Suno music prompt generation rules.
+- Poetry: skills/ukrainian-poetry/SKILL.md
+- Suno: skills/ukrainian-poetry-to-suno/SKILL.md
+- Tests: py -3 tests/run_tests.py --all

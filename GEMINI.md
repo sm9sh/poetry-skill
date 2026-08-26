@@ -1,11 +1,8 @@
 ﻿# GEMINI.md — Antigravity & Gemini Agent Configuration
 
-Skill definitions in this repository:
-- `skills/ukrainian-poetry/SKILL.md`
-- `skills/ukrainian-poetry-to-suno/SKILL.md`
+Please read and strictly follow @AGENTS.md for all operational directives, Ukrainian poetry generation, and Suno AI music prompt engineering.
 
 ## Rules
-- When writing Ukrainian verses or songs, apply `ukrainian-poetry`.
-- When converting poetic briefs or lyrics into Suno AI prompts, apply `ukrainian-poetry-to-suno`.
-- Enforce Western musical genre standards for Suno styles, keeping lyrics authentically Ukrainian.
-- Keep style prompts strictly within 80–180 characters, comma-delimited, in English, without metadata labels.
+- Apply `skills/ukrainian-poetry/SKILL.md` for poetry tasks.
+- Apply `skills/ukrainian-poetry-to-suno/SKILL.md` for Suno prompt tasks.
+- Run tests: `py -3 tests/run_tests.py --all`

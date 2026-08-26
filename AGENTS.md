@@ -19,3 +19,16 @@ This repository is an AI Skills ecosystem for authentic Ukrainian poetry generat
   - `Lyrics`: Ukrainian text with bracketed metatags (`[Intro]`, `[Verse 1]`, `[Chorus]`, `[Drop]`, `[Outro]`) and parenthetical backing cues `(луна)`.
   - `Exclude`: Anti-local-pop and anti-artifact suppression tokens (`cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs, muddy bass`).
 - **De-identification**: Never output direct artist names or copyright phrases (`in the style of...`).
+
+## Reference Index & Skill Files
+- Poetry Skill: `skills/ukrainian-poetry/SKILL.md`
+- Suno Conversion Skill: `skills/ukrainian-poetry-to-suno/SKILL.md`
+- Reference & Style Cheatsheet: `skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`
+- Mood to Style Map: `skills/ukrainian-poetry-to-suno/references/mood-to-style-map.md`
+- Prompt Builder: `skills/ukrainian-poetry-to-suno/references/prompt-builder.md`
+
+## Verification & Testing
+Run deterministic test suites (Python 3 standard library):
+```bash
+py -3 tests/run_tests.py --all
+```
