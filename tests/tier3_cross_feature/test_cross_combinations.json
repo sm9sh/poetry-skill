@@ -81,8 +81,9 @@
       "feature": "F10",
       "style_of_music": "ukrainian hybrid ethno-edm, acoustic bandura verses building into explosive synth drop, heavy 808 bass, sopilka leads, 130 bpm",
       "exclude": "metal distortion, country twang, acoustic polka, harsh clipping",
-      "lyrics": "[Verse 1]\n[Acoustic Bandura]\nСрібні струни грають у нічній тиші...\n\n[Pre-Chorus]\n[Buildup]\n(наростання біту)\nОдин, два, три, полетіли!\n\n[Drop]\n[Heavy Synth Solo]\n(соло сопілки та вибуховий дроп)\n\n[Outro]\n[Fade Out]",
+      "lyrics": "[Verse 1 - Acoustic Bandura]\nСрібні струни грають у нічній імлі,\nТихий попіл тане на сирій землі,\nМи шукали світло у глибоких снах,\nДе горить зоря на темних манівцях.\n\n[Pre-Chorus - Buildup]\n(разом крізь туман)\nОдин, два, три, полетіли!\n\n[Drop - Heavy Synth & 808 Sub Bass]\n[Instrumental Break - Fast Sopilka Solo]\n\n[Outro - Slow Fade Out]\n[End]",
       "assertions": {
+        "min_lines": 4,
         "max_style_chars": 180,
         "valid_metatags": true,
         "no_metadata_leak": true,

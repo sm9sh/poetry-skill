@@ -310,18 +310,18 @@ class TestChallenger1EmpiricalChallenge(unittest.TestCase):
 
     def test_10_suno_lyrics_bracketed_metatags_and_stripping(self):
         """Test clean stripping of Suno structural metatags and parenthetical cues."""
-        suno_lyrics = """[Intro]
-(тихий шепіт вітру над водою)
+        suno_lyrics = """[Intro - Atmospheric ambient drone]
+(тихий шепіт вітру)
 [Verse 1]
 Шорстке вапно на стінах кам'яниці,
 Іржавий цвях тримає синій лід.
 [Chorus]
 Вогонь гуде у темному залізі,
 Холодний попіл падає на брук.
-[Drop]
-(потужний синтезаторний бас)
-[Outro]
-(згасаючий гул струн)"""
+[Drop - Heavy 808 synth bass]
+(разом у вогні)
+[Outro - Slow fade out]
+(тиша навколо)"""
 
         # 1. get_lines_without_tags should remove [Intro], [Verse 1], [Chorus], [Drop], [Outro]
         lines = PoeticValidator.get_lines_without_tags(suno_lyrics)

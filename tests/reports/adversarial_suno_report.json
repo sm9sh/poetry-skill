@@ -218,9 +218,9 @@
     },
     {
       "id": "ADV_5_02_Ecosystem_Exclude_Prompts_Audit",
-      "name": "Audit all 132 Exclude Prompts across References and Packs",
+      "name": "Audit all 128 Exclude Prompts across References and Packs",
       "passed": true,
-      "message": "Passed: 132/132. Failures: 0",
+      "message": "Passed: 128/128. Failures: 0",
       "metrics": {
         "failures": []
       }

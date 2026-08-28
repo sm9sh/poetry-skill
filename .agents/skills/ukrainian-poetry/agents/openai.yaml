@@ -1,4 +1,30 @@
 interface:
   display_name: "Ukrainian Poetry"
-  short_description: "Write and refine Ukrainian poetry"
+  short_description: "Write, analyze, and refine authentic Ukrainian poetry with 6 core principles"
   default_prompt: "Use $ukrainian-poetry to write a natural Ukrainian poem from this topic."
+
+agents:
+  poetry-imagery-architect:
+    display_name: "Poetry Imagery Architect (Образотворець)"
+    short_description: "Tactile imagery, sensory grounding, fresh metaphors, and anti-cliché audit"
+    default_prompt: "Use $poetry-imagery-architect to inject sensory tactility, eliminate abstract cliches, and ground this Ukrainian poetic draft in physical detail."
+
+  poetry-emotional-critic:
+    display_name: "Poetry Emotional Critic (Критик щирості)"
+    short_description: "Emotional sincerity audit, zero false pathos, anti-moralizing, and psychological depth"
+    default_prompt: "Use $poetry-emotional-critic to audit emotional sincerity, strip false melodrama and preachy didactics from this Ukrainian poetic draft."
+
+  poetry-prosody-phonics:
+    display_name: "Poetry Prosody & Phonics (Майстер фоніки та просодії)"
+    short_description: "Metric scansion, Ukrainian stress norms, euphony (у/в, і/й), and heterogeneous rhyming"
+    default_prompt: "Use $poetry-prosody-phonics to scan meter, verify orthoepic stresses, enforce euphony laws, and check heterogeneous rhymes in this Ukrainian poetic draft."
+
+  poetry-conciseness-editor:
+    display_name: "Poetry Conciseness Editor (Редактор лаконічності)"
+    short_description: "Semantic compression, filler word purge, and elimination of artificial inversions"
+    default_prompt: "Use $poetry-conciseness-editor to remove filler pronouns, eliminate artificial syntactic inversions, and restore natural Ukrainian word order."
+
+  poetry-form-synthesizer:
+    display_name: "Poetry Form Synthesizer (Архітектор форми та ракурсу)"
+    short_description: "Form-content harmony, defamiliarized perspective, resonant endings, pipeline arbitration, and 100-point rubric scoring"
+    default_prompt: "Use $poetry-form-synthesizer to harmonize form and content, craft a resonant non-moralizing ending, reconcile subagent edits, and score against the 100-point rubric."

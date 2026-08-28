@@ -176,6 +176,12 @@ Legitimately utilize orthoepic double accents for metric elasticity:
 - **Preposition Alternations**: `з / із / зі / зо` (*зі скелі*, *із шовку*, *зо два дні*).
 - **Avoid Hiatus**: Prevent unpleasant vowel clashes (*прийшла ввечері*, not *прийшла у вечері*).
 
+### 6. AI Audio Model Phonetic Stress Standard (Suno AI & Google Flow Music)
+Neural audio engines (Suno v3.5/v4, Google Flow Music) rely on text tokenization where Unicode acute accents (`\u0301`) can sometimes be stripped during normalization. To guarantee exact pronunciation:
+- **Capitalize the Stressed Vowel**: Capitalize the stressed vowel in all words with non-obvious stress, mobile accent paradigms, or homographs:
+  `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`, `одИннадцять`, `листопАд`, `рукОпис`, `перЕпис`, `довІдник`, `фартУх`, `ненАвисть`, `новИй`, `старИй`, `босИй`, `пізнАння`, `читАння`, `завдАння`, `принестИ`, `вИрок`.
+- **Syllable Hyphenation for Fast Tempos**: Use hyphens (`за-спі-вай`, `не-по-втор-ний`) in rapid delivery (e.g. trap-folk recitative) to prevent slurred pronunciation.
+
 ---
 
 ## Rhyme Architecture & Anti-Banal Guardrails

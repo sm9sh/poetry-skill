@@ -25,76 +25,38 @@ class MetatagValidationResult:
 
 
 class MetatagValidator:
-    # Standard recognized Suno metatag prefixes / names (case-insensitive)
-    VALID_TAG_PATTERNS = [
-        # English canonical metatags
-        r"^intro(\s+[\w\s-]+)?$",
-        r"^verse(\s+\d+)?(\s+[\w\s-]+)?$",
-        r"^pre-chorus(\s+\d+)?$",
-        r"^pre chorus(\s+\d+)?$",
-        r"^chorus(\s+\d+)?$",
-        r"^post-chorus(\s+\d+)?$",
-        r"^post chorus(\s+\d+)?$",
-        r"^bridge(\s+\d+)?$",
-        r"^drop(\s+[\w\s-]+)?$",
-        r"^build-up$",
-        r"^buildup$",
-        r"^instrumental(\s+break)?$",
-        r"^instrumental\s+solo$",
-        r"^guitar\s+solo$",
-        r"^bandura\s+solo$",
-        r"^sopilka\s+solo$",
-        r"^synth\s+solo$",
-        r"^bass\s+solo$",
-        r"^drum\s+solo$",
-        r"^solo$",
-        r"^interlude$",
-        r"^breakdown$",
-        r"^hook(\s+\d+)?$",
-        r"^refrain$",
-        r"^spoken\s+word$",
-        r"^spoken$",
-        r"^whisper$",
-        r"^whispering$",
-        r"^chant$",
-        r"^polyphonic\s+chant$",
-        r"^outro$",
-        r"^fade\s+out$",
-        r"^fadeout$",
-        r"^end$",
-        r"^ending$",
-        r"^silence$",
-        r"^pause$",
-
-        # Ukrainian translated canonical metatags
-        r"^інтро$",
-        r"^куплет(\s+\d+)?$",
-        r"^передприспів(\s+\d+)?$",
-        r"^приспів(\s+\d+)?$",
-        r"^післяприспів(\s+\d+)?$",
-        r"^міст(\s+\d+)?$",
-        r"^бридж(\s+\d+)?$",
-        r"^дроп$",
-        r"^програш$",
-        r"^інструментал$",
-        r"^соло$",
-        r"^соло\s+гітари$",
-        r"^соло\s+бандури$",
-        r"^соло\s+сопілки$",
-        r"^речитатив$",
-        r"^декламація$",
-        r"^шепіт$",
-        r"^аутро$",
-        r"^кінцівка$",
-        r"^фінал$",
-        r"^затихання$",
+    # Canonical structural prefixes recognized in Suno / Flow Music
+    STRUCTURAL_PREFIXES = [
+        "intro", "verse", "pre-chorus", "pre chorus", "chorus", "post-chorus",
+        "post chorus", "bridge", "drop", "build-up", "buildup", "build",
+        "instrumental", "instrumental break", "instrumental solo", "guitar solo",
+        "bandura solo", "sopilka solo", "synth solo", "bass solo", "drum solo",
+        "solo", "interlude", "breakdown", "break", "hook", "refrain",
+        "spoken word", "spoken", "whisper", "whispering", "chant",
+        "polyphonic chant", "outro", "fade out", "fadeout", "fade", "end",
+        "ending", "climax", "silence", "pause",
+        # Ukrainian equivalents
+        "інтро", "куплет", "передприспів", "приспів", "післяприспів",
+        "міст", "бридж", "дроп", "програш", "інструментал", "соло",
+        "соло гітари", "соло бандури", "соло сопілки", "речитатив",
+        "декламація", "шепіт", "аутро", "кінцівка", "фінал", "затихання"
     ]
 
-    # Patterns indicating prose / instruction hallucinations inside brackets
+    # Instrumental and arrangement keywords that MUST NEVER appear inside round parentheses ()
+    INSTRUMENTAL_KEYWORDS_IN_PARENS = [
+        "riff", "bassline", "telecaster", "guitar", "bandura", "sopilka", "synth",
+        "drums", "percussion", "arpeggio", "arpeggios", "staccato", "legato",
+        "buildup", "breakdown", "distortion", "reverb", "808", "sub bass",
+        "beat", "solo", "tempo", "bpm", "fade out", "drone", "strings", "cello",
+        "brass", "piano", "organ", "groove", "drop", "бас", "гітара", "барабани",
+        "соло", "дроп", "синтезатор"
+    ]
+    
+    # Narrative conversation prose hallucination patterns (not sound design cues)
     PROSE_HALLUCINATION_PATTERNS = [
-        r"\b(plays|playing|starts|sing|singing|with|and|that|which|very|slowly|emotional|weeps|cries|loudly|softly)\b",
-        r"\b(грає|співає|починає|дуже|тихо|голосно|плаче|емоційно|ніжно|швидко)\b",
-        r"\b(she sings|he sings|vocalist starts|acoustic guitar begins|drums enter)\b",
+        r"\b(the song begins|singer weeps|vocalist starts|starts playing|starts weeping|while \w+ enter|they talk about|conversation starts)\b",
+        r"\b(вона співає|він плаче|починається розмова|співак плаче|розповідає історію|пісня починається)\b",
+        r"\b(playing softly|playing aggressively)\b",
     ]
 
     @classmethod
@@ -110,8 +72,9 @@ class MetatagValidator:
     @classmethod
     def is_valid_tag(cls, tag_content: str) -> Tuple[bool, Optional[str]]:
         """
-        Checks whether a bracketed tag content conforms to standard metatag syntax.
-        Returns (is_valid, error_reason).
+        Validates an individual tag inside square brackets.
+        Supports both canonical 1-3 word tags ([Intro], [Guitar Solo]) and compound
+        sound-design directives ([Intro - Staccato cutting telecaster riff, driving bassline]).
         """
         cleaned = tag_content.strip().lower()
 
@@ -119,23 +82,41 @@ class MetatagValidator:
         if not cleaned:
             return False, "Empty brackets '[]' found in lyrics."
 
-        # Check for length (> 35 chars is almost certainly prose hallucination)
-        if len(cleaned) > 35:
-            return False, f"Metatag '[{tag_content}]' is too long ({len(cleaned)} chars) and looks like prose."
+        # Check for extreme length (> 120 chars is excessive for a section tag)
+        if len(cleaned) > 120:
+            return False, f"Metatag '[{tag_content}]' is too long ({len(cleaned)} chars, max 120)."
 
-        # Check against prose hallucination patterns
+        # Check against narrative prose hallucinations
         for prose_pat in cls.PROSE_HALLUCINATION_PATTERNS:
-            if re.search(prose_pat, cleaned) and not any(re.match(p, cleaned) for p in cls.VALID_TAG_PATTERNS):
-                return False, f"Prose/narrative hallucination detected inside metatag: '[{tag_content}]'."
+            if re.search(prose_pat, cleaned, re.IGNORECASE):
+                return False, f"Narrative prose hallucination detected inside metatag: '[{tag_content}]'."
 
-        # Check against recognized valid tag patterns
-        for pattern in cls.VALID_TAG_PATTERNS:
-            if re.match(pattern, cleaned):
+        # 1. Compound tags with delimiter [Section - Sound description] or [Section: Sound description]
+        if ("-" in cleaned or ":" in cleaned or "–" in cleaned or "—" in cleaned):
+            parts = re.split(r"[-–—:]", cleaned, 1)
+            section = parts[0].strip()
+            # check if the left part is a known structural prefix or valid section name
+            is_valid_section = any(
+                re.match(r"^" + re.escape(prefix) + r"(\s+\d+)?$", section) or section.startswith(prefix)
+                for prefix in cls.STRUCTURAL_PREFIXES
+            )
+            if is_valid_section and len(cleaned) <= 120 and len(cleaned.split()) <= 15:
                 return True, None
 
-        # If it's a short 1-3 word tag that is reasonable (e.g. [Heavy Drop], [Female Vocal Solo])
+        # 2. Direct match with structural prefix (with optional number / simple label)
+        for prefix in cls.STRUCTURAL_PREFIXES:
+            # Matches '[Intro]', '[Verse 1]', '[Chorus 2]', '[Guitar Solo]'
+            if re.match(r"^" + re.escape(prefix) + r"(\s+\d+)?$", cleaned):
+                return True, None
+            # Matches standard combined labels e.g. '[Acoustic Bandura Solo]', '[White Voice Choir]', '[Spoken Word]'
+            if cleaned.startswith(prefix) or cleaned.endswith(prefix):
+                words = cleaned.split()
+                if len(words) <= 4 and not re.search(r"\b(and|with|while)\b", cleaned, re.IGNORECASE):
+                    return True, None
+
+        # 3. Short 1-3 word sound design or dynamic tags (e.g. [Pianissimo], [80s Beat])
         words = cleaned.split()
-        if len(words) <= 3 and not any(re.search(p, cleaned) for p in cls.PROSE_HALLUCINATION_PATTERNS):
+        if len(words) <= 3 and not re.search(r"\b(and|with|while|the|starts|playing)\b", cleaned, re.IGNORECASE):
             return True, None
 
         return False, f"Unrecognized metatag syntax: '[{tag_content}]'."
@@ -149,6 +130,7 @@ class MetatagValidator:
     ) -> MetatagValidationResult:
         """
         Validates lyrics structure, checking all bracketed tags and parenthetical notations.
+        Ensures instrumental descriptors are inside square brackets `[...]` and NEVER in `(...)`.
         """
         errors = []
         warnings = []
@@ -168,6 +150,19 @@ class MetatagValidator:
             else:
                 errors.append(reason or f"Invalid metatag: '[{tag}]'")
                 invalid_tags.append(tag)
+
+        # Validate Parentheses: In Suno & Flow Music, () are read as VOCAL lyrics/ad-libs.
+        # Instrumental instructions inside () will be sung out loud by the voice engine!
+        for paren in parentheses:
+            paren_clean = paren.strip().lower()
+            # Check if paren contains typical instrumental/arrangement descriptors
+            matched_inst = [kw for kw in cls.INSTRUMENTAL_KEYWORDS_IN_PARENS if re.search(r"\b" + re.escape(kw) + r"\b", paren_clean)]
+            if matched_inst:
+                errors.append(
+                    f"Instrumental descriptor '{paren}' found in parentheses '()'. "
+                    f"In Suno AI and Google Flow Music, text in parentheses is read out loud as vocals/ad-libs. "
+                    f"Use square brackets '[...]' for musical instructions (e.g. '[Intro - {paren}]' or '[{paren}]')."
+                )
 
         # Check structural requirements if enabled
         tags_lower = [t.strip().lower() for t in tags]

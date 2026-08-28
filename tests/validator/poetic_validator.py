@@ -297,22 +297,56 @@ class PoeticValidator:
                 found.append(token)
         return found
 
+    # Words with non-obvious Ukrainian orthoepic stress frequently mispronounced by TTS/AI audio models
+    NON_OBVIOUS_STRESS_WORDS = {
+        "випадок": "вИпадок",
+        "чорнозем": "чорнОзем",
+        "одинадцять": "одИннадцять",
+        "чотирнадцять": "чотирнАдцять",
+        "листопад": "листопАд",
+        "рукопис": "рукОпис",
+        "перепис": "перЕпис",
+        "довідник": "довІдник",
+        "фартух": "фартУх",
+        "ненависть": "ненАвисть",
+        "ненавидіти": "ненАвидіти",
+        "новий": "новИй",
+        "старий": "старИй",
+        "босий": "босИй",
+        "пізнання": "пізнАння",
+        "читання": "читАння",
+        "завдання": "завдАння",
+        "принести": "принестИ",
+        "перенести": "перенестИ",
+        "вирок": "вИрок",
+        "заспівай": "заспівАй",
+        "прийде": "прИйде",
+        "серденько": "сердЕнько",
+    }
+
     @classmethod
     def check_stress_homographs(cls, text: str) -> List[Dict[str, Any]]:
         """
-        Detects occurrences of stress-sensitive homographs.
-        Checks if explicit stress accents or capitalization (e.g. зАмок / замОк) are present.
+        Detects occurrences of stress-sensitive homographs and words with non-obvious stress.
+        Checks if explicit stress accents or capitalization (e.g. зАмок / замОк, вИпадок) are present.
+        For Suno AI and Google Flow Music, capital vowel stress (e.g. 'вИпадок', 'дорОга') is the
+        primary, most reliable mechanism recognized by audio tokenizers.
         """
         reports = []
         text_lower = text.lower()
+        
+        # 1. Homographs check
         for homograph, meanings in cls.STRESS_HOMOGRAPHS.items():
             pattern = r"(?<![а-яіїєґА-ЯІЇЄҐ])" + re.escape(homograph) + r"(?![а-яіїєґА-ЯІЇЄҐ])"
             matches = list(re.finditer(pattern, text_lower))
             if matches:
-                # Check if original text has explicit stress notation (acute accent \u0301 or mixed case)
                 for m in matches:
                     orig_word = text[m.start():m.end()]
-                    has_explicit_stress = ("\u0301" in orig_word) or any(c.isupper() for c in orig_word[1:])
+                    has_explicit_stress = (
+                        ("\u0301" in orig_word)
+                        or any(c.isupper() and c in cls.UKR_VOWELS for c in orig_word[1:])
+                        or (orig_word[0].isupper() and orig_word[0] in cls.UKR_VOWELS and any(c in cls.UKR_VOWELS for c in orig_word[1:]))
+                    )
                     reports.append({
                         "word": homograph,
                         "found_as": orig_word,
@@ -320,6 +354,36 @@ class PoeticValidator:
                         "meanings": meanings,
                     })
         return reports
+
+    @classmethod
+    def check_stress_notation_in_lyrics(cls, text: str) -> Dict[str, Any]:
+        """
+        Scans lyrics for words with non-obvious stress and checks if capital vowel
+        stress notation (e.g. 'вИпадок', 'чорнОзем') or acute accent is utilized
+        to prevent TTS mispronunciation in Suno / Flow Music.
+        """
+        found_words = []
+        text_lower = text.lower()
+        for word, recommended in cls.NON_OBVIOUS_STRESS_WORDS.items():
+            pattern = r"(?<![а-яіїєґА-ЯІЇЄҐ])" + re.escape(word) + r"(?![а-яіїєґА-ЯІЇЄҐ])"
+            matches = list(re.finditer(pattern, text_lower))
+            for m in matches:
+                orig = text[m.start():m.end()]
+                has_stress = (
+                    ("\u0301" in orig)
+                    or any(c.isupper() and c in cls.UKR_VOWELS for c in orig)
+                )
+                found_words.append({
+                    "word": word,
+                    "found_as": orig,
+                    "recommended": recommended,
+                    "has_explicit_stress": has_stress,
+                })
+        return {
+            "total_non_obvious_found": len(found_words),
+            "stressed_count": sum(1 for w in found_words if w["has_explicit_stress"]),
+            "words": found_words,
+        }
 
     @classmethod
     def classify_clausula(cls, line: str) -> str:
@@ -868,6 +932,9 @@ class PoeticValidator:
                 "Text is purely abstract and lacks concrete sensory imagery (tactile, acoustic, visual, thermal, olfactory)."
             )
 
+        # 13. Non-obvious stress notation check (Suno / Flow Music capital vowel stress)
+        stress_notation = cls.check_stress_notation_in_lyrics(poem_text)
+
         metrics = {
             "line_count": line_count,
             "lines": lines,
@@ -876,6 +943,7 @@ class PoeticValidator:
             "clausulae": clausulae,
             "grammatical_rhymes_count": len(grammatical_rhymes),
             "homographs_found": homographs,
+            "stress_notation": stress_notation,
             "meter_metrics": meter_metrics,
             "inversions": inversions,
             "inversion_count": len(inversions),

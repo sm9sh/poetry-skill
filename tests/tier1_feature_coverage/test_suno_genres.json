@@ -39,7 +39,7 @@
       "genre": "Dark Synth / Cyberpunk",
       "style_of_music": "ukrainian dark synthwave, cyberpunk, analog arpeggios, heavy reese bass, atmospheric pads, intimate breathy female vocal, 115 bpm",
       "exclude": "acoustic guitar, accordion, orchestral strings, country twang, acoustic drums",
-      "lyrics": "[Intro]\n(пульсуючий синтезатор)\n\n[Verse 1]\nНеонові тіні на мокрім склі,\nМісто ховає свої дроти,\nМи загубилися у цій імлі,\n(де не лишилося мети)",
+      "lyrics": "[Intro - Pulsing analog synth arpeggio, deep bassline]\n\n[Verse 1]\nНеонові тіні на мокрім склі,\nМісто ховає свої дроти,\nМи загубилися у цій імлі,\n(у цій імлі)\nДе ніч запалює ліхтарі.",
       "assertions": {
         "max_style_chars": 180,
         "no_metadata_leak": true,
@@ -54,7 +54,7 @@
       "genre": "Trap-Folk",
       "style_of_music": "modern ukrainian trap-folk, punchy 808 bass, crisp rolling hi-hats, wood sopilka melody, melodic male vocal hook, 140 bpm",
       "exclude": "heavy metal distortion, acoustic country guitar, generic polka, brass choir",
-      "lyrics": "[Intro]\n(соло сопілки)\n\n[Verse 1]\nШвидкий біт розрізає темний морок,\nМинає день, минає сорок,\n(на репіті)\n\n[Chorus]\nГей, лети мій звук у небеса,\nТам де сонце й чистая роса.",
+      "lyrics": "[Intro - Wood sopilka flute melody, 808 sub buildup]\n\n[Verse 1]\nШвидкий біт розрізає темний морок,\nМинає день, минає сорок,\n(на репіті)\n\n[Chorus]\nГей, лети мій звук у небеса,\nТам де сонце й чистая роса.",
       "assertions": {
         "max_style_chars": 180,
         "no_metadata_leak": true,

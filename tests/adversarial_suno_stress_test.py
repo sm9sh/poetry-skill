@@ -221,7 +221,7 @@ class AdversarialTestSuite:
 
         # Test 3.2: Cossack Baroque Trap-Shoegaze (17th c. church organ + 808 trap + shoegaze wall of sound)
         c2_style = "ukrainian baroque trap, 808 sub bass, cathedral harpsichord, reverb shoegaze guitars, deep male recitative, 130 bpm"
-        c2_lyrics = "[Intro]\n[Baroque Organ Solo]\n\n[Verse 1]\n[Spoken Word]\nСвіт ловив мене, та не спіймав...\n(глибокий 808 бас)\n\n[Chorus]\n[Shoegaze Guitar Swell]\nЛиш дух святий над нами лине,\nІ воля світла не загине!\n\n[Outro]\n[Fade Out]"
+        c2_lyrics = "[Intro - Baroque Organ Solo]\n\n[Verse 1 - Spoken Word]\nСвіт ловив мене, та не спіймав...\n(тихий шепіт у пітьмі)\n\n[Chorus - Shoegaze Guitar Swell]\nЛиш дух святий над нами лине,\nІ воля світла не загине!\n\n[Outro - Fade Out]"
         c2_exclude = "happy pop brass, acoustic country strumming, festival edm drop, metallic sibilance"
         res_c2_s = StyleValidator.validate_style_prompt(c2_style)
         res_c2_m = MetatagValidator.validate_lyrics_structure(c2_lyrics)

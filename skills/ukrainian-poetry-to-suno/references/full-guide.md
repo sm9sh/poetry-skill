@@ -76,23 +76,39 @@ Suno зчитує токени зліва направо з найвищим п�
 
 ---
 
-## 5. Повний синтаксис метатегів аранжування
+## 5. Синтаксис метатегів аранжування для Suno AI та Google Flow Music
 
-### 5.1 Секційні метатеги `[Square Brackets]`
+### 5.1 Секційні та аранжувальні метатеги `[Square Brackets]`
+Усі аудіовказівки, структурні секції та інструментальний звуковий дизайн розміщуються **виключно у квадратних дужках**. Вони сприймаються моделями (Suno та Google Flow Music) як німі інструкції звукорежисеру й не співаються:
+- **Комплексні аранжувальні теги**:
+  - `[Intro - Staccato cutting telecaster riff, driving bassline, punchy drum buildup]`
+  - `[Verse 1 - Intimate breathy vocal, fingerpicked acoustic guitar]`
+  - `[Chorus - Explosive wall of sound, powerful vocal belting]`
+  - `[Instrumental Break - Melodic bandura solo with warm analog distortion]`
+  - `[Guitar Solo - Screaming overdrive, fast pentatonic runs]`
+  - `[Drop - Heavy 808 sub bass, aggressive syncopated drums]`
+  - `[Outro - Slow fade out with echoing cello, ambient decay]`
 - **Секції пісні**: `[Intro]`, `[Verse 1]`, `[Verse 2]`, `[Pre-Chorus]`, `[Chorus]`, `[Post-Chorus]`, `[Bridge]`, `[Outro]`, `[End]`.
-- **Інструментальні пасажі**: `[Instrumental Interlude]`, `[Guitar Solo]`, `[Bandura Solo]`, `[Sopilka Solo]`, `[Cello Solo]`, `[Bass Drop]`, `[Beat Drop]`, `[Drum Fill]`.
 - **Динаміка і темп**: `[Tempo: 125 BPM]`, `[Dynamic: Crescendo]`, `[Dynamic: Pianissimo]`, `[Beat Cut]`, `[Silence]`, `[Acapella]`, `[Stripped Back]`.
 - **Вокальний розподіл**: `[Male Lead Vocal]`, `[Female Lead Vocal]`, `[Duet]`, `[White Voice Choir]`.
 
-### 5.2 Бек-вокал та ехо `(Parentheses)`
-Текст у круглих дужках розпізнається нейромережею як бек-вокальна партія, стерео-відлуння або адліб:
+### 5.2 Правило круглих дужок: Лише бек-вокал `(Parentheses)`
+> [!CAUTION]
+> **Критична помилка в Google Flow Music та Suno AI**:
+> Текст у круглих дужках `( ... )` синтезатор вокалу сприймає як **співаний бек-вокал, стерео-відлуння або spoken word**.
+> Якщо написати в круглих дужках `(Staccato cutting telecaster riff, driving bassline)`, модель **прочитає або заспіває ці слова вголос**!
+> **Правило**: круглі дужки призначені виключно для вокального тексту:
 ```text
-[Verse 1]
-У темнім склі тремтить моє безсонне відбиття,
+[Verse 1 - Intimate female vocal]
+У темнім склі тремтИть моє безсОнне відбиттЯ,
 (у темнім склі)
-І чайник знову перший заговорив у тиші.
-(тиша навколо)
+І чайник знОву перший заговорИв у тИші.
+(тИша навкОло)
 ```
+
+### 5.3 Фіксація наголосів великими літерами для Flow Music та Suno
+Щоб уникнути помилок вимови чи зсуву наголосу моделями генерації, наголошена голосна у словах з рухомим наголосом та омографах позначається **великою літерою**:
+- `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` (шлях) / `дорогА` (коштовна), `зАмок` (фортеця) / `замОк` (дверний), `плАчу` (сльози) / `плачУ` (гроші), `сердЕнько`, `одИннадцять`, `листопАд`.
 
 ---
 

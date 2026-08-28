@@ -28,12 +28,17 @@ All models and agents generating, editing, or evaluating Ukrainian poetry MUST s
    - External form (meter, stanza structure, tempo, caesuras, enjambment, line raggedness or smoothness) must intrinsically embody the emotional state and theme.
    - Form is never arbitrary decoration — it is the living body of the poem.
 
-### 2. Suno Music Generation Directives (`ukrainian-poetry-to-suno`)
+### 2. Suno AI & Google Flow Music Generation Directives (`ukrainian-poetry-to-suno`)
 - **Western Genre Anchor**: Musically target Western contemporary and classic genres (UK/US Post-Punk, Darkwave, Synthwave, Trip-Hop, Minimalist Alt-Pop, Shoegaze, Progressive Metalcore, Melodic Techno, Ambient). Music must sound like a top-tier global release, not regional/provincial pop.
 - **Token Economy**: `Style of Music` must be strictly **80–180 characters** (optimal 80–150).
-- **Field Separation**:
+- **Field Separation & Metatag Syntax**:
   - `Style of Music`: English Western genre descriptors, BPM, vocal timbre, instruments, production feel.
-  - `Lyrics`: Ukrainian text with bracketed metatags (`[Intro]`, `[Verse 1]`, `[Chorus]`, `[Drop]`, `[Outro]`) and parenthetical backing cues `(луна)`.
+  - `Lyrics`: Ukrainian text with **bracketed structure & arrangement tags** `[Intro - Staccato cutting telecaster riff, driving bassline]`, `[Verse 1 - Intimate vocal]`, `[Chorus]`, `[Instrumental Break - Bandura solo]`, `[Drop - Heavy 808]`, `[Outro - Slow fade out]`.
+  - **Strict Parentheses vs Brackets Rule**:
+    - `[Square Brackets]`: Used for ALL structural, instrumentation, and arrangement instructions. Models parse them as audio directing cues without singing them.
+    - `(Round Parentheses)`: Used **EXCLUSIVELY for backing vocals, ad-libs, and vocal echoes** `(луна)`, `(ніколи знов)`. Never put instrumental descriptions in parentheses because Google Flow Music and Suno will vocalize/sing them out loud!
+  - **Ukrainian Stress Standard for Audio AI Models**:
+    - To prevent TTS/vocal engines from mispronouncing Ukrainian words or shifting stresses, capitalize the stressed vowel on non-obvious words, homographs, and mobile accents: `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`, `одИннадцять`, `листопАд`.
   - `Exclude`: Anti-local-pop and anti-artifact suppression tokens (`cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs, muddy bass`).
 - **De-identification**: Never output direct artist names or copyright phrases (`in the style of...`).
 

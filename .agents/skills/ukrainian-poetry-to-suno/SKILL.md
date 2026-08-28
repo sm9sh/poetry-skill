@@ -26,25 +26,36 @@ Maintain strict separation between poetic text generation and music prompt engin
 
 ---
 
-## Suno Custom Mode Architecture
+## Suno AI & Google Flow Music Custom Mode Architecture
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │ 1. Style of Music Field (Western Musical Genre Tokens, 80–180 Chars)                    │
 │    dark synthwave, analog moog bass, gated 80s drums, breathy alt-pop vocal, 120 bpm   │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 2. Lyrics Field (Ukrainian Lyrics + Bracketed Metatags + Parenthetical Harmonies)      │
-│    [Intro]                                                                             │
-│    [Verse 1]                                                                           │
-│    У темнім склі тремтить моє безсонне відбиття...                                     │
-│    (тиша навколо)                                                                      │
-│    [Chorus]                                                                            │
-│    [Outro]                                                                             │
+│ 2. Lyrics Field (Ukrainian Lyrics + Bracketed Arrangement Tags + Backing Vocals)       │
+│    [Intro - Staccato cutting telecaster riff, driving bassline, punchy drum buildup]   │
+│    [Verse 1 - Intimate breathy vocal, fingerpicked acoustic guitar]                    │
+│    У темнім склі тремтИть моє безсОнне відбиттЯ...                                     │
+│    (тИша навкОло)                                                                      │
+│    [Chorus - Explosive wall of sound, powerful vocal belting]                          │
+│    [Instrumental Break - Melodic bandura solo with warm analog distortion]             │
+│    [Outro - Slow fade out with echoing cello]                                          │
+│    [End]                                                                               │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
 │ 3. Exclude / Negative Prompt Field (Acoustic Artifacts + Local Pop / Sharovarshchyna)  │
 │    metallic highs, harsh sibilance, muddy bass, cheesy regional pop, tourist folk cliches│
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+> [!IMPORTANT]
+> **Metatag Bracket vs Parentheses Rule (Flow Music & Suno Compatibility)**:
+> - **Square Brackets `[...]`**: Used for ALL section markers, instrumentations, sound design, and arrangement cues (e.g. `[Intro - Staccato cutting telecaster riff, driving bassline]`, `[Guitar Solo]`, `[Instrumental Break]`). Models parse text inside `[...]` as silent musical directions.
+> - **Round Parentheses `(...)`**: Reserved **EXCLUSIVELY for text to be sung/spoken by backing vocals or echoes** (e.g. `(луна)`, `(ніколи знов)`). **NEVER** put instrumental descriptions like `(guitar riff)` in parentheses — Google Flow Music and Suno will sing or read them out loud!
+
+> [!TIP]
+> **Ukrainian Stress Capitalization Standard (`вИпадок`, `дорОга`)**:
+> To force exact Ukrainian orthoepic stress in AI audio generators (Suno & Flow Music) without mispronunciation, **capitalize the stressed vowel** in words with non-obvious stress or homographs (`вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`).
 
 ---
 
@@ -57,17 +68,18 @@ Style of music:
 <genre, vocal timbre, key instruments, production feel, tempo/bpm — 80-180 chars>
 
 Lyrics:
-[Intro]
-<optional intro cue>
+[Intro - <instrumental setup directive>]
 
-[Verse 1]
-<Ukrainian lyrics>
-(parenthetical backing vocal)
+[Verse 1 - <vocal delivery & instrumentation>]
+<Ukrainian lyrics with capitalized stressed vowels on non-obvious words>
+(<parenthetical backing vocal lyrics only — no instruments!>)
 
-[Chorus]
+[Chorus - <arrangement dynamics>]
 <Ukrainian chorus>
 
-[Outro]
+[Instrumental Break - <solo instrument & texture>]
+
+[Outro - <fade out / ending cue>]
 [End]
 
 Exclude:

@@ -1,147 +1,208 @@
----
-name: ukrainian-poetry-to-suno
-description: "Converts Ukrainian song ideas, poems, or lyrics into production-grade Suno AI prompts: 80-180 character token-optimized Style tags, bracketed metatags [Intro]/[Verse]/[Chorus]/[Drop], parenthetical backing cues, 8 modern Ukrainian music genres, and acoustic anti-artifact negative vectors."
----
+# Ukrainian Poetry To Suno AI — Comprehensive Engineering Guide
 
-# Ukrainian Poetry To Suno v2 (Production Audio Prompting System)
-
-Use this skill when you need to:
-- Convert a Ukrainian poem, theme, or lyric draft into production-ready **Suno AI / Flow Music Custom Mode** prompts.
-- Strictly ground the musical style, arrangement, and production in **Western contemporary and classic genres** (UK/US/Nordic/European Post-Punk, Darkwave, Synthwave, Trip-Hop, Alt-Pop, Shoegaze, Progressive Metalcore, Melodic Techno, Cinematic Ambient).
-- Guarantee that generated tracks sound like authentic Western releases with Ukrainian vocals, completely eliminating regional cheesy pop, post-Soviet schlager, and tourist-folk kitsch (*шароварщина*).
-- Translate Ukrainian or Western artist and track references into safe, non-infringing Western stylistic formulas.
-- Optimize the `Style of Music` field within the strict **80–180 character token budget** without metadata leakage.
-- Format lyrics with bracketed structural metatags (`[Verse]`, `[Chorus]`, `[Drop]`, `[Outro]`) and parenthetical backing cues `(луна)`.
-- Formulate acoustic anti-artifact and anti-local-pop `Exclude` vectors.
+Повний посібник із перетворення української поезії, пісенної лірики, музичних референсів та творчих концептів у високоточні запити для сучасних аудіомоделей `Suno AI` (v3.5 / v4 / сучасні гібридні дифюзійно-трансформерні рушії).
 
 ---
 
-## 1. Suno Custom Mode Architecture
+## 1. Архітектура та механіка сучасних моделей Suno AI
+
+### 1.1 Три окремі вхідні вектори Suno Custom Mode
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 1. Style of Music Field (Western Genre Descriptors, 80–180 Chars)                      │
-│    dark synthwave, analog moog bass, gated 80s drums, breathy alt-pop vocal, 120 bpm   │
+│ 1. Поле "Style of Music" (Стиль музики)                                                │
+│    - Призначення: Формування жанрової матриці, темпоритму, інструментів, продакшну.    │
+│    - Мова: Суворо англійські музичні терміни + автентичні українські інструменти.      │
+│    - Економіка токенів: 80–180 символів (оптимально 80–150 символів, ~15–30 токенів). │
+│    - Правило: Повна відсутність метаданих (Language, Theme, Mood).                     │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 2. Lyrics Field (Ukrainian Lyrics + Bracketed Metatags + Parenthetical Harmonies)      │
-│    [Intro]                                                                             │
-│    [Verse 1]                                                                           │
-│    У темнім склі тремтить моє безсонне відбиття...                                     │
-│    (тиша навколо)                                                                      │
-│    [Chorus]                                                                            │
-│    [Outro]                                                                             │
+│ 2. Поле "Lyrics" (Текст пісні та аранжувальні метатеги)                                │
+│    - Призначення: Співаний текст, розподіл куплетів/приспівів, динаміка та бек-вокал.  │
+│    - Синтаксис: Квадратні дужки [Intro], [Verse], [Chorus] для структурних команд;    │
+│                 Круглі дужки (луна), (бек-вокал) для бек-вокалу та гармоній.           │
+│    - Мова: Автентична українська літературна мова або діалекти.                       │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 3. Exclude / Negative Prompt Field (Acoustic Artifacts + Local Pop / Sharovarshchyna)  │
-│    metallic highs, harsh sibilance, muddy bass, cheesy regional pop, tourist folk cliches│
+│ 3. Поле "Exclude Styles" (Негативний промпт)                                           │
+│    - Призначення: Віднімання небажаних звукових векторів із латентного простору.       │
+│    - Наповнення: Акустичні анти-артефакти (металевий бруд, гудіння басу, глітчі)      │
+│                  та стилістичні анти-кліше (шароварщина, дешевий MIDI, EDM-дроп).      │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 2. Core Operational Rules
+## 2. Економіка токенів та ліво-право позиційне зважування
 
-### 2.1 Strict Token Economy (80–180 Characters)
-Suno v3.5 and v4 diffusion-transformer conditioning operates optimally on **80–180 characters** (~15–30 tokens):
-- **Too short (<60 chars)**: Defaults to generic mid-tempo pop-rock averaging.
-- **Optimal (80–150 chars)**: Maximum prompt adhesion, tight frequency control, and audible genre separation.
-- **Hard Max (180 chars)**: Anything beyond 180 characters risks attention dispersion and token truncation.
+### 2.1 Проблема розсіювання уваги (Cross-Attention Dispersion)
+При перевищенні 180–200 символів у полі стилю вага кожного окремого дескриптора падає. Модель потрапляє у стан *style averaging* (усереднення стилю), перетворюючи специфічний пост-панк чи етно-хаос на стандартний середньотемповий поп-рок.
 
-### 2.2 Left-to-Right Positional Priority
-Suno's cross-attention assigns highest weight to initial tokens. Always order your prompt:
-`[Primary Genre / Hybrid] -> [Tempo / Groove / BPM] -> [Vocal Timbre] -> [Key Instruments] -> [Production Aesthetic] -> [Dynamics]`
-
-### 2.3 Clean Field Separation & Zero Metadata Leakage
-- **FORBIDDEN in Style Box**: `Language: Ukrainian`, `Theme: Cossack`, `Mood: Melancholic`, `Lyrics by: ...`. Any text labels inside the style box degrade audio synthesis into mud.
-- Put **only English musical descriptors** with authentic cultural acoustic anchors (e.g. `bandura`, `sopilka`, `white voice`) in `Style of Music`.
-- Put **Ukrainian language lyrics and bracketed metatags** in the `Lyrics` box.
+### 2.2 Формула ліво-правого позиціонування
+Suno зчитує токени зліва направо з найвищим пріоритетом перших трьох позицій:
+1. **Позиція 1–2 (Фундамент)**: Головний жанр і субжанр (`ukrainian post-punk, doomer wave`).
+2. **Позиція 3 (Ритм і пульс)**: Темпоритм, драм-машина або барабанний профіль (`130 bpm, driving bassline, 80s drum machine`).
+3. **Позиція 4 (Вокальний тембр)**: Фізіологічний тип вокалу (`melancholic baritone male vocal`).
+4. **Позиція 5 (Ключовий інструмент)**: Головний тембральний хук (`chorus-drenched electric guitar`).
+5. **Позиція 6 (Продакшн і простір)**: Характер зведення (`lo-fi nocturnal production`).
 
 ---
 
-## 3. The 8 Modern Ukrainian Music Genres
+## 3. 8-Жанрова таксономія сучасної української музики
 
-| Genre | Key Stylistic Descriptors | BPM Range | Typical Instruments | Canonical Reference Anchor |
-| :--- | :--- | :--- | :--- | :--- |
-| **Ethno-Chaos / Avant-Folk** | `ukrainian ethno-chaos, avant-folk, polyphonic chanting, driving acoustic groove` | 115–130 BPM | Cello drone, djembe, drymba, accordion | DakhaBrakha |
-| **Post-Punk / Coldwave** | `ukrainian post-punk, doomer coldwave, chorus bassline, jangly guitar, monotone baritone` | 125–140 BPM | Melodic chorus bass, reverb guitar, 80s drums | SadSvit |
-| **Dark Synth / Cyberpunk** | `dark synthwave, coldwave, analog bass arpeggio, aggressive electro beat, deadpan vocal` | 120–135 BPM | Modular analog synths, punchy drum machine | Kurs Valüt |
-| **Trap-Folk / Drill** | `modern trap-folk, 808 sub bass, rapid-fire flow, traditional sopilka hook, syncopated beat` | 130–145 BPM | Sopilka, distorted 808, rolling hi-hats | Kalush |
-| **Melodic Metalcore** | `progressive metalcore, drop-tuned heavy riffs, blast beats, dual harsh growl and soaring clean` | 140–170 BPM | 7-string down-tuned guitars, double-kick bass | Jinjer |
-| **Shoegaze / Dream Pop** | `dream pop, ethereal shoegaze, wall of sound guitar fuzz, shimmering reverb, breathy falsetto` | 95–115 BPM | Reverb-drenched offset guitars, tape delay | Latexfauna |
-| **Ethno-Rock / Punk** | `energetic ethno-rock, driving punk rhythm, brass section, sopilka riffs, gritty male rock lead` | 130–155 BPM | Electric guitar, brass horn section, sopilka | Kozak System |
-| **Neoclassical Bandura** | `neoclassical ambient, cinematic ballad, acoustic bandura plucking, warm cello, intimate whisper` | 70–90 BPM | Bandura, chamber cello, subtle piano | KRUTЬ |
-
----
-
-## 4. Vocal Timbre Directives
-
-To achieve authentic vocal textures, specify exact delivery modes:
-- **White Voice (*Білий голос*)**: `authentic white voice, open-throat polyphonic female vocal, raw piercing folk delivery`.
-- **Intimate Breathy Chamber**: `intimate breathy female vocal, close-mic, delicate whisper, emotional nuance`.
-- **Post-Punk Monotone Baritone**: `deep monotone baritone, detached cold delivery, subtle reverb wash`.
-- **Spoken-Word Melodeclamation**: `spoken-word recitation, rhythmic melodeclamation, poetic cadence over ambient textures`.
-- **Extreme Dual Metalcore**: `dynamic vocal contrast, savage guttural growls and screams with soaring melodic clean chorus`.
-- **Modern Melodic Trap Autotune**: `melodic autotuned trap vocal, stylized pitch correction, rhythmic syncopated flow`.
+| # | Жанровий кластер & Архетипи | Точний Style Prompt (80–180 chars) | Рекомендований Exclude Vector |
+|---|-----------------------------|------------------------------------|-------------------------------|
+| **1** | **Ethno-Chaos / Avant-Folk**<br>*(DakhaBrakha, Dakh Daughters)* | `ukrainian ethno-chaos, avant-folk, white voice female chanting, acoustic cello drone, heavy tribal percussion, hypnotic dark polyphony, 120 bpm` (138 chars) | `cheesy synth brass, 90s schlager, edm drop, generic pop, metallic highs` |
+| **2** | **Post-Punk / Doomer Wave**<br>*(SadSvit, Mistmorn, Renie Cares)* | `ukrainian post-punk, doomer wave, 130 bpm, driving bassline, melancholic baritone male vocal, chorus electric guitar, lo-fi night production` (135 chars) | `bright acoustic strumming, polished autotune pop, cheerful brass, harsh sibilance` |
+| **3** | **Dark Synth / Coldwave / EBM**<br>*(Kurs Valüt)* | `ukrainian dark synth, minimal wave, coldwave, analog bass pulse, monotone male recitative, crisp electronic drums, nocturnal, 122 bpm` (134 chars) | `acoustic guitar, joyful schlager, live orchestra, heavy metal distortion, reverb mud` |
+| **4** | **Trap-Folk / Modern Drill**<br>*(Kalush, SKOFKA, alyona alyona)* | `ukrainian trap-folk, drill beat, 140 bpm, 808 sub bass, rapid hi-hats, authentic sopilka hook, rhythmic male recitative, energetic chorus` (136 chars) | `tourist folk cliches, cheesy polka accordion, slow acoustic ballad, distorted sub-bass` |
+| **5** | **Progressive Metalcore / Ethno-Metal**<br>*(Jinjer, Motanka, Space of Variations)* | `ukrainian progressive metalcore, djent riffs, tsymbaly folk intro, brutal guttural scream alternating ethereal clean female vocal, heavy drop, 150 bpm` (146 chars) | `mumble vocal, pop synth brass, acoustic ukulele, dance club beat, tinny cymbals` |
+| **6** | **Shoegaze / Dream Pop**<br>*(Latexfauna, Vivienne Mort)* | `ukrainian shoegaze, dream pop, wall of sound reverb guitars, whispered breathy female vocal, lush chorus, sensual slow groove, 90 bpm` (138 chars) | `harsh distortion, aggressive rap, dry close mix, stadium shouting, metallic sibilance` |
+| **7** | **Authentic Modern Ethno-Rock**<br>*(Kozak System, Tin Sontsya, Haydamaky)* | `ukrainian ethno-rock, live heavy guitars, authentic duda bagpipe hook, punchy live drums, energetic male lead, anthemic driving folk, 135 bpm` (137 chars) | `cheap midi instruments, synthpop arpeggios, tourist polka, trap 808, digital clipping` |
+| **8** | **Neoclassical Bandura / Ambient**<br>*(KRUTЬ, chamber acoustic)* | `contemporary ukrainian neoclassical, solo bandura arpeggios, emotive cello, warm ambient synth, intimate breathy female vocal, 75 bpm` (138 chars) | `electronic drums, distorted guitars, aggressive shouting, festival drop, boomy low-end` |
 
 ---
 
-## 5. Structural Metatags & Arrangement Grammar
+## 4. Автентичні тембри українського вокалу
 
-### 5.1 Standard Bracketed Metatags
-Use bracketed headers to control structural transitions in the `Lyrics` box:
-- `[Intro]` / `[Instrumental Intro]`
-- `[Verse 1]` / `[Verse 2]` (Куплет)
-- `[Pre-Chorus]` (Передприспів — builds dynamic tension)
-- `[Chorus]` (Приспів — full melodic energy)
-- `[Post-Chorus]`
-- `[Bridge]` (Міст — melodic/harmonic contrast)
-- `[Guitar Solo]` / `[Sopilka Solo]` / `[Bandura Solo]`
-- `[Beat Drop]` / `[Drop]` (Electronic/Trap explosion)
-- `[Outro]` / `[Fade Out]` / `[End]`
+Щоб отримати живе звучання замість роботизованого синтезу, вказуй точні вокальні дескриптори:
 
-### 5.2 Backing Vocals & Choral Echoes
-- Use **parentheses `(...)`** inside verses and choruses for sung backing vocals, harmonies, and echoing repetitions:
-  ```text
-  [Verse 1]
-  Там, де тумани стеляться на схилах,
-  (густі тумани)
-  Ми чуєм шепіт вікових дібров.
-  (вічний шепіт)
-  ```
+- **Білий голос (*White Voice*)**: `white voice female chanting, authentic slavic village polyphony, open-throat vocal, throat resonance`.
+- **Пост-панк баритон**: `melancholic baritone male vocal, deadpan monotone delivery, cold low register`.
+- **Мелодекламація / Речитатив**: `spoken word male recitative, deadpan rhythmic cadence, poetic speech delivery`.
+- **Інтимний шепіт**: `intimate breathy female vocal, close-mic whisper, fragile emotional delivery, ASMR vocal texture`.
+- **Хрипкий бардичний тембр**: `raspy male vocal, raw textured gravelly timbre, smoked vocal edge, strained emotional delivery`.
+- **Потужний белтинг**: `powerful soaring female vocal, resonant chest voice belting, high-energy emotional release`.
+- **Металкор гроул / скрім**: `brutal guttural growl, harsh screaming alternating ethereal clean melodic vocal`.
+- **Сучасний автотюн**: `modern autotune vocal, formant-shifted vocal chops, futuristic pitch correction`.
 
 ---
 
-## 6. Acoustic Anti-Artifact Negative Prompting
+## 5. Синтаксис метатегів аранжування для Suno AI та Google Flow Music
 
-AI generative diffusion can produce audio artifacts. Use the `Exclude` field to sanitize output:
+### 5.1 Секційні та аранжувальні метатеги `[Square Brackets]`
+Усі аудіовказівки, структурні секції та інструментальний звуковий дизайн розміщуються **виключно у квадратних дужках**. Вони сприймаються моделями (Suno та Google Flow Music) як німі інструкції звукорежисеру й не співаються:
+- **Комплексні аранжувальні теги**:
+  - `[Intro - Staccato cutting telecaster riff, driving bassline, punchy drum buildup]`
+  - `[Verse 1 - Intimate breathy vocal, fingerpicked acoustic guitar]`
+  - `[Chorus - Explosive wall of sound, powerful vocal belting]`
+  - `[Instrumental Break - Melodic bandura solo with warm analog distortion]`
+  - `[Guitar Solo - Screaming overdrive, fast pentatonic runs]`
+  - `[Drop - Heavy 808 sub bass, aggressive syncopated drums]`
+  - `[Outro - Slow fade out with echoing cello, ambient decay]`
+- **Секції пісні**: `[Intro]`, `[Verse 1]`, `[Verse 2]`, `[Pre-Chorus]`, `[Chorus]`, `[Post-Chorus]`, `[Bridge]`, `[Outro]`, `[End]`.
+- **Динаміка і темп**: `[Tempo: 125 BPM]`, `[Dynamic: Crescendo]`, `[Dynamic: Pianissimo]`, `[Beat Cut]`, `[Silence]`, `[Acapella]`, `[Stripped Back]`.
+- **Вокальний розподіл**: `[Male Lead Vocal]`, `[Female Lead Vocal]`, `[Duet]`, `[White Voice Choir]`.
 
-**Standard Anti-Artifact Exclusion Vector**:
+### 5.2 Правило круглих дужок: Лише бек-вокал `(Parentheses)`
+> [!CAUTION]
+> **Критична помилка в Google Flow Music та Suno AI**:
+> Текст у круглих дужках `( ... )` синтезатор вокалу сприймає як **співаний бек-вокал, стерео-відлуння або spoken word**.
+> Якщо написати в круглих дужках `(Staccato cutting telecaster riff, driving bassline)`, модель **прочитає або заспіває ці слова вголос**!
+> **Правило**: круглі дужки призначені виключно для вокального тексту:
 ```text
-metallic highs, harsh sibilance, piercing treble, muddy bass, boomy low-end, garbled vocals, excessive reverb wash, cheesy synth brass
+[Verse 1 - Intimate female vocal]
+У темнім склі тремтИть моє безсОнне відбиттЯ,
+(у темнім склі)
+І чайник знОву перший заговорИв у тИші.
+(тИша навкОло)
 ```
 
-**Genre-Specific Exclusions**:
-- *For Modern Ethno*: `Exclude: tourist folk polka, midi brass, wedding accordion, cabaret kitsch`
-- *For Intimate Acoustic*: `Exclude: heavy drums, distorted guitars, harsh electronic drops, auto-tune`
-- *For Synthwave / Cyberpunk*: `Exclude: acoustic guitar, organic drums, brass horns, orchestral strings`
-- *For Metalcore*: `Exclude: poppy synth, acoustic guitar, soft autotune, dance beats`
+### 5.3 Фіксація наголосів великими літерами для Flow Music та Suno
+Щоб уникнути помилок вимови чи зсуву наголосу моделями генерації, наголошена голосна у словах з рухомим наголосом та омографах позначається **великою літерою**:
+- `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` (шлях) / `дорогА` (коштовна), `зАмок` (фортеця) / `замОк` (дверний), `плАчу` (сльози) / `плачУ` (гроші), `сердЕнько`, `одИннадцять`, `листопАд`.
 
 ---
 
-## 7. Modular 6-Part Style Formula & Reference Translation
+## 6. Акустичний негативний промптинг (Exclude Vectors)
 
-### 7.1 Formula Builder (80–180 Characters)
-`[Genre / Subgenre] + [Tempo / Groove] + [Vocal Directives] + [Key Instruments] + [Production Texture] + [Dynamics]`
+```text
+┌──────────────────────────────┬────────────────────────────────────────────────────────┐
+│ Проблема у згенерованому треку│ Ефективний набір Exclude-токенів                      │
+├──────────────────────────────┼────────────────────────────────────────────────────────┤
+│ Металевий пісок на верхах    │ metallic highs, harsh sibilance, piercing treble,      │
+│                              │ tinny high-end, digital clipping, harsh cymbals        │
+├──────────────────────────────┼────────────────────────────────────────────────────────┤
+│ Бубніння і гул на суб-басі   │ muddy bass, boomy low-end, distorted sub-bass,         │
+│                              │ muffled low frequencies, bass rumble                   │
+├──────────────────────────────┼────────────────────────────────────────────────────────┤
+│ Проковтування слів / глітчі  │ garbled vocals, mumbled words, slurred pronunciation,  │
+│                              │ double-vocal glitch, robotic vocal artifacts           │
+├──────────────────────────────┼────────────────────────────────────────────────────────┤
+│ Кавернозне відлуння холу     │ excessive reverb, cavernous reverb, muddy hall decay,  │
+│                              │ wash of echo, drowning delay, swampy mix               │
+├──────────────────────────────┼────────────────────────────────────────────────────────┤
+│ Шароварщина і дешевий MIDI   │ cheesy synth brass, cheap midi instruments,            │
+│                              │ 90s schlager synthesizer, carnival polka accordion     │
+├──────────────────────────────┼────────────────────────────────────────────────────────┤
+│ Недоречний стадіонний пафос  │ bombastic anthem climax, festival EDM drop,            │
+│                              │ heavy metal blast beats, melodramatic screaming        │
+└──────────────────────────────┴────────────────────────────────────────────────────────┘
+```
 
-*Example*:
-`ukrainian post-punk, coldwave, 130 bpm, monotone male baritone, melodic chorus bass, jangly reverb guitar, analog drum machine` (127 chars)
+---
 
-### 7.2 Reference-to-Style Translation Protocol
-When given an artist or song name as a reference:
-1. **Analyze**: Identify rhythm, vocal style, dominant instruments, and spatial reverb.
-2. **De-name**: Strip all artist names, album titles, and song titles.
-3. **Synthesize**: Map into the 6-part English formula with Ukrainian cultural anchors.
+## 7. Робота з музичними референсами (Safe Reference Extraction)
 
-*Example*:
-- *Input Reference*: «SadSvit — Касета»
-- *Safe Style Output*: `ukrainian post-punk, doomer coldwave, 132 bpm, monotone baritone vocal, melodic chorus bassline, jangly electric guitar, 80s analog beat` (139 chars)
-- *Exclude*: `metallic highs, modern hyperpop, acoustic accordion, heavy metal distortion`
+### Алгоритм деперсоналізації:
+1. Отримати назву артиста чи пісні від користувача.
+2. Проаналізувати ритм, BPM, бас, гітарний тембр, вокальну манеру та атмосферу.
+3. Повністю видалити імена, бренди та прямі фрази `in the style of`.
+4. Скласти легальний `Safe Style Prompt` у межах 80–180 символів.
+
+### Приклад:
+- **Запит**: "Зроби трек як Latexfauna - Lime"
+- **Аналіз**: Дрім-поп, лінивий фанковий бас, пошепки вокал, реверберовані гітари, літній вайб.
+- **Safe Style Prompt (138 символів)**:
+  ```text
+  ukrainian shoegaze, dream pop, wall of sound reverb guitars, whispered breathy female vocal, lush chorus, sensual slow groove, 90 bpm
+  ```
+- **Exclude**: `harsh distortion, aggressive rap, dry close mix, stadium shouting, metallic sibilance`
+
+---
+
+## 8. Покроковий Custom Mode Workflow
+
+```text
+Вхідний вірш / ідея ──> Вибір 1 із 8 жанрів ──> Складання Style Prompt (80-180 chars)
+                                              ├──> Розмітка Lyrics ([Verse], [Chorus], (ехо))
+                                              └──> Підбір Exclude векторів
+```
+
+### Фінальний приклад генерації:
+
+**Style of music (135 символів)**:
+```text
+ukrainian post-punk, doomer wave, 130 bpm, driving bassline, melancholic baritone male vocal, chorus electric guitar, lo-fi night production
+```
+
+**Lyrics**:
+```text
+[Intro]
+[80s Beat]
+[Guitar Riff]
+
+[Verse 1]
+[Baritone Male Vocal]
+Порожній проспект ковтає ліхтарі,
+Холодний дощ стікає по вікні.
+Ми знову чужі у цьому дворі,
+(у цьому дворі)
+Де пам'ять згорає на самому дні.
+
+[Chorus]
+[Driving Bassline]
+Нічний трамвай іржавим колесом,
+Везе мій сум за темний горизонт.
+Лишився тільки мокрий автохтон,
+І вікна, що світять в унісон.
+
+[Guitar Solo]
+[Pedal Lead Solo]
+
+[Outro]
+[Cold End]
+```
+
+**Exclude**:
+```text
+bright acoustic strumming, polished autotune pop, cheerful brass, harsh sibilance, stadium shouting, metallic highs, muddy bass
+```

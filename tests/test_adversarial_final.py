@@ -527,9 +527,12 @@ class FinalAdversarialHarness:
         return self.results
 
 
-if __name__ == "__main__":
+def run_final_adversarial_suite() -> bool:
     harness = FinalAdversarialHarness()
     res = harness.run_all()
-    if res["failed"] > 0:
-        sys.exit(1)
-    sys.exit(0)
+    return res["failed"] == 0
+
+
+if __name__ == "__main__":
+    ok = run_final_adversarial_suite()
+    sys.exit(0 if ok else 1)

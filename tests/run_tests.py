@@ -458,7 +458,27 @@ class TestRunner:
             print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Rubric Scorer Flawed Penalty failed (score: {flawed_score.total_score})")
             unit_passed = False
 
-        # 6. Execute Challenger 1 Empirical Challenge Suite
+        # 6. Test Flow Music Compound Metatags & Capital Vowel Stress
+        compound_tag_lyrics = "[Intro - Staccato cutting telecaster riff, driving bassline]\n[Verse 1 - Intimate breathy vocal]\nЦей дивний вИпадок і чорнОзем нічний,\n(веди, дорОга)\n[Outro - Slow fade out]\n[End]"
+        meta_res = MetatagValidator.validate_lyrics_structure(compound_tag_lyrics)
+        stress_res = PoeticValidator.check_stress_notation_in_lyrics(compound_tag_lyrics)
+        if meta_res.is_valid and stress_res["stressed_count"] >= 2:
+            valid_count = meta_res.metrics.get("valid_tags_count", len(meta_res.metrics.get("tags", [])))
+            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Flow Music Compound Tags & Capital Stress ({valid_count} tags valid, {stress_res['stressed_count']} stress words)")
+        else:
+            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Flow Music Compound Tags & Capital Stress failed: {meta_res.errors}")
+            unit_passed = False
+
+        # Parenthetical instrumental error check
+        bad_parens_lyrics = "[Intro]\n(Staccato cutting telecaster riff, driving bassline)\n[Verse 1]\nРядки пісні..."
+        bad_meta_res = MetatagValidator.validate_lyrics_structure(bad_parens_lyrics)
+        if not bad_meta_res.is_valid and any("found in parentheses" in err for err in bad_meta_res.errors):
+            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Parentheses Instrumental Rejection (Voice Hallucination intercepted)")
+        else:
+            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Parentheses Instrumental Rejection failed")
+            unit_passed = False
+
+        # 7. Execute Challenger 1 Empirical Challenge Suite
         print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
         print(f"{Colors.BOLD}{Colors.HEADER}    EXECUTING CHALLENGER 1 EMPIRICAL CHALLENGE SUITE   {Colors.END}")
         print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
@@ -471,7 +491,7 @@ class TestRunner:
             print(f"  [{Colors.RED}FAIL{Colors.END}] Challenger 1 suite execution error: {e}")
             unit_passed = False
 
-        # 7. Execute Challenger 2 Adversarial Stress & Robustness Suite
+        # 8. Execute Challenger 2 Adversarial Stress & Robustness Suite
         print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
         print(f"{Colors.BOLD}{Colors.HEADER}    EXECUTING CHALLENGER 2 ADVERSARIAL STRESS SUITE    {Colors.END}")
         print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
@@ -484,6 +504,19 @@ class TestRunner:
             print(f"  [{Colors.RED}FAIL{Colors.END}] Challenger 2 suite execution error: {e}")
             unit_passed = False
 
+        # 9. Execute Challenger Final Verification Suite
+        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}      EXECUTING CHALLENGER FINAL ADVERSARIAL SUITE     {Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        try:
+            from test_adversarial_final import run_final_adversarial_suite
+            chal_fin_passed = run_final_adversarial_suite()
+            if not chal_fin_passed:
+                unit_passed = False
+        except Exception as e:
+            print(f"  [{Colors.RED}FAIL{Colors.END}] Challenger Final suite execution error: {e}")
+            unit_passed = False
+
         # Log unit results to file for diagnostics
         log_path = PROJECT_ROOT / "tests" / "reports" / "unit_tests.log"
         log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -491,6 +524,7 @@ class TestRunner:
             f.write(f"Unit Tests Overall: {unit_passed}\n")
             f.write(f"Challenger 1: {chal1_passed}\n")
             f.write(f"Challenger 2: {chal2_passed}\n")
+            f.write(f"Challenger Final: {chal_fin_passed}\n")
 
         return unit_passed
 

@@ -30,11 +30,13 @@ Depending on the task, invoke the specialized sub-workflow:
 6. **Органічна єдність форми та змісту**: Метр, строфіка та динаміка пауз є природним відбитком теми та внутрішнього стану.
 - **5 Subagents Pipeline**: `skills/ukrainian-poetry/agents/` (`poetry-imagery-architect`, `poetry-emotional-critic`, `poetry-prosody-phonics`, `poetry-conciseness-editor`, `poetry-form-synthesizer`).
 
-### Suno AI Music Prompting
+### Suno AI & Google Flow Music Prompting
 - **Western Genre Anchor**: All sound design must strictly target Western genres (Post-Punk, Darkwave, Synthwave, Trip-Hop, Alt-Pop, Shoegaze, Progressive Metalcore, Melodic Techno, Ambient).
 - **Token Economy**: `Style of Music` strictly **80–180 characters** (optimal 80–150), comma-delimited, English only, zero metadata labels (`Language:` forbidden).
-- **Structure Metatags**: Use square brackets `[Verse 1]`, `[Chorus]`, `[Drop]`, `[Outro]` and parenthetical backing cues `(луна)`.
-- **Anti-Local-Pop Exclude**: `cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs`.
+- **Structure & Arrangement Metatags**: Use square brackets for ALL structural and sound design cues: `[Intro - Staccato cutting telecaster riff, driving bassline]`, `[Verse 1 - Intimate vocal]`, `[Chorus]`, `[Instrumental Break - Bandura solo]`, `[Drop - Heavy 808]`, `[Outro - Slow fade out]`.
+- **Parentheses Rule**: Round parentheses `(...)` are used **EXCLUSIVELY for sung backing vocals / echoes** `(луна)`, `(ніколи знов)`. Never put instrumental descriptors in parentheses (Google Flow Music and Suno will vocalize/sing them out loud!).
+- **Ukrainian Stress Standard**: Capitalize the stressed vowel in words with non-obvious stress, homographs, and mobile accents (`вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`).
+- **Anti-Local-Pop Exclude**: `cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs, muddy bass`.
 
 ---
 
