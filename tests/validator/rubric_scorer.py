@@ -46,7 +46,7 @@ class RubricScorer:
         is_free_verse: bool = False,
     ) -> RubricScoreBreakdown:
         """
-        Calculates 100-point score for Ukrainian poetry.
+        Calculates 100-point score for Ukrainian poetry aligned with the 6 Core Poetic Principles.
         Minimum passing threshold: 85/100.
         """
         deductions = []
@@ -60,20 +60,36 @@ class RubricScorer:
             "anti_cliche_guardrails": 10.0,  # Max 10
         }
 
-        # 1. Linguistic Naturalness (25 pts)
+        # 1. Linguistic Naturalness & Syntax (25 pts)
         surzhyk_count = poetic_res.metrics.get("surzhyk_count", 0)
         if surzhyk_count > 0:
             deduction = min(20.0, surzhyk_count * 10.0)
             dim_scores["linguistic_naturalness"] -= deduction
             deductions.append(f"[-{deduction} pts] Found {surzhyk_count} Russianism/Surzhyk error(s).")
 
-        # 2. Imagery & Concreteness (20 pts)
+        inversion_count = poetic_res.metrics.get("inversion_count", 0)
+        if inversion_count > 0:
+            deduction = min(6.0, inversion_count * 2.0)
+            dim_scores["linguistic_naturalness"] -= deduction
+            deductions.append(f"[-{deduction} pts] Found {inversion_count} artificial syntactic inversion(s) forced for rhyme.")
+
+        # 2. Imagery & Sensory Concreteness (20 pts)
         lines = poetic_res.metrics.get("lines", [])
         if len(lines) < 4:
             dim_scores["imagery_concreteness"] -= 8.0
             deductions.append("[-8 pts] Insufficient lines to establish concrete sensory imagery.")
 
-        # 3. Rhythm & Line Breaks (15 pts)
+        sensory_metrics = poetic_res.metrics.get("sensory_grounding", {})
+        grounding_level = sensory_metrics.get("grounding_level", "high")
+        if len(lines) >= 4:
+            if grounding_level == "purely_abstract":
+                dim_scores["imagery_concreteness"] -= 4.0
+                deductions.append("[-4 pts] Text is purely abstract emotional noise lacking tactile/sensory grounding.")
+            elif grounding_level == "low":
+                dim_scores["imagery_concreteness"] -= 2.0
+                deductions.append("[-2 pts] Low sensory grounding and scarce physical realia.")
+
+        # 3. Rhythm & Word Weight (15 pts)
         meter_metrics = poetic_res.metrics.get("meter_metrics", {})
         if meter_metrics:
             syllables = meter_metrics.get("syllable_counts", [])
@@ -83,7 +99,13 @@ class RubricScorer:
                     dim_scores["rhythm_line_breaks"] -= 6.0
                     deductions.append(f"[-6 pts] High syllable count variance ({variance}) in syllabo-tonic verse.")
 
-        # 4. Rhyme & Sound Design (10 pts)
+        filler_count = poetic_res.metrics.get("filler_count", 0)
+        if filler_count > 0:
+            deduction = min(4.0, filler_count * 2.0)
+            dim_scores["rhythm_line_breaks"] -= deduction
+            deductions.append(f"[-{deduction} pts] Found {filler_count} pleonastic filler cluster(s) / high-density meter padding.")
+
+        # 4. Rhyme, Phonics & Sound Design (10 pts)
         if not is_free_verse:
             cheap_rhymes = poetic_res.metrics.get("grammatical_rhymes_count", 0)
             if cheap_rhymes > 0:
@@ -94,13 +116,12 @@ class RubricScorer:
             # For free verse, full score if acoustic cadence is maintained
             dim_scores["rhyme_sound_design"] = 10.0
 
-        # 5. Tonal Integrity (10 pts)
-        # Checked via error status
+        # 5. Emotional Depth & Tonal Sincerity (10 pts)
         if any("register" in err.lower() for err in poetic_res.errors):
             dim_scores["tonal_integrity"] -= 5.0
             deductions.append("[-5 pts] Register inconsistency detected.")
 
-        # 6. Ending Strength (10 pts)
+        # 6. Original Perspective & Ending Strength (10 pts)
         last_2_lines = "\n".join(lines[-2:]).lower() if len(lines) >= 2 else poem_text.lower()
         for pat in cls.DIDACTIC_ENDING_PATTERNS:
             if re.search(pat, last_2_lines):
@@ -108,7 +129,7 @@ class RubricScorer:
                 deductions.append("[-6 pts] Moralizing / didactic conclusion detected in final lines.")
                 break
 
-        # 7. Anti-Cliche & Guardrails (10 pts)
+        # 7. Anti-Cliche & Anti-Sharovarshchyna (10 pts)
         taboo_count = poetic_res.metrics.get("taboo_count", 0)
         if taboo_count > 0:
             deduction = min(10.0, taboo_count * 5.0)
@@ -119,6 +140,13 @@ class RubricScorer:
         if any("sharovarshchyna" in err.lower() or "kitsch" in err.lower() for err in poetic_res.errors):
             dim_scores["anti_cliche_guardrails"] -= 5.0
             deductions.append("[-5 pts] Unprompted kitsch / sharovarshchyna detected.")
+
+        # Banal Cliché Rhymes check
+        cliche_rhyme_count = poetic_res.metrics.get("cliche_rhyme_count", 0)
+        if cliche_rhyme_count > 0:
+            deduction = min(8.0, cliche_rhyme_count * 4.0)
+            dim_scores["anti_cliche_guardrails"] -= deduction
+            deductions.append(f"[-{deduction} pts] Found {cliche_rhyme_count} worn-out cliché rhyme pair(s) from blacklist.")
 
         # Ensure no negative dimension score
         for k in dim_scores:

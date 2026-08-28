@@ -1,22 +1,17 @@
-## 2026-08-26T10:00:11Z
+## 2026-08-28T09:01:19Z
+You are challenger_2 conducting stress, boundary, and robustness verification on the entire `poetry-skill` codebase.
 
-You are Challenger 2 (Suno AI Music Prompt Adversarial Stress-Tester).
-Your working directory is `d:/poetry-skill/.agents/challenger_2`.
-You MUST read `d:/poetry-skill/.agents/ORIGINAL_REQUEST.md`, `d:/poetry-skill/.agents/PROJECT.md`, and `d:/poetry-skill/TEST_READY.md` before starting work.
-Project root: `d:/poetry-skill`.
+Your working directory is `d:\poetry-skill\.agents\challenger_2`.
+You MUST read `d:\poetry-skill\ORIGINAL_REQUEST.md` and `d:\poetry-skill\PROJECT.md`.
 
-Task:
-Adversarially challenge and stress-test the Suno AI conversion skill, prompt builder, genre mappings, and arrangement templates.
+Objectives:
+1. Run `py -3 tests/run_tests.py --all`.
+2. Perform boundary and robustness testing:
+   - Extreme inputs: empty text, single line, 50+ line poems, excessive whitespace, trailing punctuation, non-standard unicode characters.
+   - Surzhyk dictionary & taboo stems detection limits.
+   - Metric scansion robustness across all meters (Iamb, Trochee, Dactyl, Amphibrach, Anapest, Dolnik, 14-syllable Kolomyika).
+   - Verify performance and determinism (0 flaky tests, execution time < 10s).
+   - Verify that subagents files in `skills/ukrainian-poetry/agents/` are valid, well-formed markdown, and adhere to YAML frontmatter schema.
 
-Stress-Test Focus:
-1. Test strict character budget bounds under heavy multi-instrumentation constraints (<=120 characters compressed).
-2. Test extreme tempo contrasts (60 BPM ambient drone vs 180 BPM metalcore blast beats).
-3. Test conflicting multi-constraint prompts (e.g., whispered lullaby metalcore with Ukrainian white voice).
-4. Test cross-feature combinations (Tier 3) and real-world production scenarios (Tier 4).
-5. Execute the test runner `py -3 tests/run_tests.py --tier 3` and `py -3 tests/run_tests.py --tier 4` (or `--all`).
-
-Deliverables:
-- Maintain `progress.md` with `Last visited:` timestamps.
-- Write your adversarial challenge report to `d:/poetry-skill/.agents/challenger_2/challenge_report.md`.
-- Write your formal handoff to `d:/poetry-skill/.agents/challenger_2/handoff.md` with clear verdict (APPROVE or REQUEST_CHANGES).
-- Message parent upon completion.
+Document your boundary stress tests, findings, and explicit verdict (APPROVE or CHALLENGE_FAILED) in `d:\poetry-skill\.agents\challenger_2\challenge_report.md` and `d:\poetry-skill\.agents\challenger_2\handoff.md`.
+Send a message back to parent when done.

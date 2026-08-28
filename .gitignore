@@ -1,0 +1,11 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest / Coverage / Logs
+.pytest_cache/
+*.log
+
+# Antigravity artifacts / scratch
+scratch/

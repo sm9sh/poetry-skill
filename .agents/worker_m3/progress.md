@@ -1,15 +1,27 @@
-# Progress — Worker M3 (Cross-Skill Integration, Root Mirror Sync & Documentation)
+# Progress — Worker M3 (Validation Engine, Rubric Scorer Integration, and Test Suite Enhancements)
 
-Last visited: 2026-08-26T13:00:00Z
+Last visited: 2026-08-28T12:01:00Z
 
 ## Status Overview
-- [x] Read DISPATCH.md, ORIGINAL_REQUEST.md, PROJECT.md, TEST_READY.md
+- [x] Read DISPATCH.md, ORIGINAL_REQUEST.md, PROJECT.md, survey_r3.md
 - [x] Initialized BRIEFING.md and progress.md
-- [x] Initial baseline E2E test verification (59/59 passing)
-- [x] Task 1: Audit and synchronize `packs/*` root files with `skills/ukrainian-poetry-to-suno/references/packs/*` (8 files synchronized & verified)
-- [x] Task 2: Audit and synchronize root Suno reference mirrors (`mood-to-style-map.md`, `prompt-builder.md`, `reference-breakdown-examples.md`, `reference-to-style-cheatsheet.md`, `lyrics-to-suno-template.md`, `song-structure-pack.md`, `suno-prompt-anti-patterns.md`, `ukrainian-song-scenarios.md`, `suno-prompt-tests.md`, `suno-style-rubric.md`)
-- [x] Task 3: Audit and synchronize root Ukrainian Poetry reference & rubric mirrors (`ukrainian-poetry-skill-input-template.md`, `ukrainian-poetry-skill-rubric.md`, `ukrainian-poetry-skill-tests.md`, `ukrainian-poetry-skill-stress-pack.md`)
-- [x] Task 4: Upgrade root standalone skill docs (`ukrainian-poetry-skill.md`, `ukrainian-poetry-skill-uk.md`, `ukrainian-poetry-skill-lite.md`, `ukrainian-poetry-to-suno.md`) with complete F1–F14 rules
-- [x] Task 5: Upgrade documentation (`README.md`, `README.en.md`, `HOWTO.md`, `VERSION.md` bumped to v2.0.0)
-- [x] Task 6: Run full test suite & style validation (59/59 passed, 100% success rate)
-- [x] Task 7: Generate 5-component handoff report and notify parent
+- [x] Verified baseline test suite execution
+- [x] Task 1: Enhance `tests/validator/poetic_validator.py`
+  - [x] Implement `check_artificial_inversions(text, mode)` with folk/baroque mode exemptions
+  - [x] Implement `check_filler_words_and_pronouns(text, mode)` with stanza density analysis
+  - [x] Implement `check_cliche_rhymes(text)` with 23 blacklisted hackneyed pairs
+  - [x] Implement `evaluate_sensory_grounding(text)` across 5 sensory categories
+  - [x] Update `validate_poem` to aggregate metrics and warnings/errors
+- [x] Task 2: Enhance `tests/validator/rubric_scorer.py`
+  - [x] Calibrate `RubricScorer.score_poetry` across 7 dimensions (100 pts) per `rubric.md`
+- [x] Task 3: Test Suite Enhancements and Unit Tests
+  - [x] Add unit test suite `run_unit_tests()` for new validator checks and edge cases
+  - [x] Add craft principle test cases to `test_registers.json`
+  - [x] Run full regression suite (`py -3 tests/run_tests.py --all`) -> 62/62 PASS (100%), 0 failed
+  - [x] Confirm avg poetry score is 98.1 / 100 (>= 95.0), Suno score is 99.9 / 100
+- [x] Task 4: Complete Documentation and Handoff
+  - [x] Write `changes_m3.md`
+  - [x] Write `handoff.md`
+  - [x] Send completion message to parent
+
+

@@ -12,7 +12,11 @@
       "assertions": {
         "min_lines": 6,
         "no_surzhyk": true,
-        "no_kitsch": true
+        "no_kitsch": true,
+        "no_inversions": true,
+        "no_filler_words": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
       }
     },
     {
@@ -25,7 +29,10 @@
       "assertions": {
         "min_lines": 6,
         "no_surzhyk": true,
-        "no_kitsch": true
+        "no_kitsch": true,
+        "no_inversions": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
       }
     },
     {
@@ -38,7 +45,11 @@
       "assertions": {
         "min_lines": 6,
         "no_surzhyk": true,
-        "no_kitsch": true
+        "no_kitsch": true,
+        "no_inversions": true,
+        "no_filler_words": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
       }
     },
     {
@@ -62,7 +73,9 @@
       "poem": "Шумить вода у темній яворині,\nСмереки мовчки слухають вітри,\nВівчар вогонь запалює в долині,\nІ дим встає до синьої гори.\nБринить дзвінок на полонинськім схилі,\nЗбирають коси роси на траві,\nІ ніч пливе у тихім вододілі,\nДе оживають прадавні сліди живі.",
       "assertions": {
         "min_lines": 6,
-        "no_surzhyk": true
+        "no_surzhyk": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
       }
     },
     {
@@ -75,7 +88,58 @@
       "assertions": {
         "min_lines": 6,
         "no_surzhyk": true,
-        "no_kitsch": true
+        "no_kitsch": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_07_Craft_Tactile_Sensory",
+      "name": "Tactile Sensory Anchors & Anti-Cliche Grounding (Principle 1)",
+      "feature": "F1",
+      "mode": "intimate",
+      "input_brief": "Вірш з високою сенсорною тактильністю про осіннє подвір'я.",
+      "poem": "Шорстке вапно на вистиглій стіні,\nІржавий цвях тримає сухий дріт,\nІ шелест міді в тихому вогні\nВстеляє попелом холодний світ.\nТут запах полину і мокрої трави\nБринить у тиші, мов струна туга,\nІ темний дим над схилом сповива\nПівденний вітер, що з долини вибіга.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true,
+        "no_kitsch": true,
+        "no_inversions": true,
+        "no_filler_words": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_08_Craft_Word_Weight",
+      "name": "Conciseness & Word Weight without Padding (Principle 4)",
+      "feature": "F4",
+      "mode": "neoclassical",
+      "input_brief": "Лаконічний вірш без зайвих займенників та слів-заповнювачів.",
+      "poem": "Холодний камінь креслить чітку грань,\nСмиренний мармур стримує світанок,\nНемає зайвих слів чи нарікань,\nКоли лягає тінь на світлий ганок.\nТут карбував годинник кожен звук,\nПливуть хвилини у глибоку тишу,\nІ строга форма випускає з рук\nУсе дрібне, що пам'ять не залишить.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true,
+        "no_inversions": true,
+        "no_filler_words": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
+      }
+    },
+    {
+      "id": "TC_T1_REG_09_Craft_Heterogeneous_Rhymes",
+      "name": "Heterogeneous Rhymes & Acoustic Phonics (Principle 3)",
+      "feature": "F3",
+      "mode": "contemporary",
+      "input_brief": "Вірш з різнорідними римами без граматичних дієслівних пар.",
+      "poem": "Світить ліхтар крізь вологу імлу,\nСрібний метал відбиває розмову,\nВітер розносить осінню смолу,\nМісто будує надію раптову.\nДзенькіт трамвая розрізує дзвін,\nПадає крапля на теплу долоню,\nІ крізь туман із холодних глибин\nСвітло долає нічну заборону.",
+      "assertions": {
+        "min_lines": 6,
+        "no_surzhyk": true,
+        "no_inversions": true,
+        "no_filler_words": true,
+        "no_cliche_rhymes": true,
+        "require_sensory_grounding": true
       }
     }
   ]

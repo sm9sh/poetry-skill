@@ -1,4 +1,4 @@
-﻿---
+---
 name: poetry-skill
 description: "Use when creating, analyzing, editing, or evaluating Ukrainian poetry, versification, rhymed poems, lyrics, or converting Ukrainian poetic material into production-grade Suno AI / Flow Music audio prompts with Western sound standards."
 ---
@@ -21,12 +21,14 @@ Depending on the task, invoke the specialized sub-workflow:
 
 ## 2. Core Directives Summary
 
-### Ukrainian Poetry
-- Natural Ukrainian syntax and rich vocabulary; zero translation calques.
-- Strict meter integrity (syllabo-tonic, dolnik, taktovik, 14-syllable kolomyika, blank verse).
-- Heterogeneous rhymes (avoid grammatical verb-verb rhymes).
-- Disambiguate stress homographs (*зАмок* vs *замОк*).
-- Zero sharovarshchyna / pseudo-folk kitsch.
+### Ukrainian Poetry (6 Poetic Standards & 5 Subagents)
+1. **Свіжа образність та метафоричність**: Показ через дію й тактильну деталь замість декларацій; нуль затертих штампів (*«кров-любов»*, *«серце палає»*).
+2. **Емоційна глибина та щирість**: Справжній психологізм, відсутність фальшивого пафосу, театральщини та моралізаторства.
+3. **Ритмічна та звукова гармонія**: Живе дихання розміру (силабо-тоніка, дольник, верлібр), багаті різнорідні рими, фоніка (асонанси, алітерації, звукопис) та закони евфонії (`у/в`, `і/й`, `з/із/зі`).
+4. **Лаконічність і вага слова**: Максимальна смислова компресія; нуль "води" та займенників-заповнювачів; сувора заборона штучних синтаксичних інверсій заради рими.
+5. **Оригінальність ракурсу**: Нетривіальний авторський погляд на вічні теми, мікро-фокус, парадоксальні або відкриті фінали.
+6. **Органічна єдність форми та змісту**: Метр, строфіка та динаміка пауз є природним відбитком теми та внутрішнього стану.
+- **5 Subagents Pipeline**: `skills/ukrainian-poetry/agents/` (`poetry-imagery-architect`, `poetry-emotional-critic`, `poetry-prosody-phonics`, `poetry-conciseness-editor`, `poetry-form-synthesizer`).
 
 ### Suno AI Music Prompting
 - **Western Genre Anchor**: All sound design must strictly target Western genres (Post-Punk, Darkwave, Synthwave, Trip-Hop, Alt-Pop, Shoegaze, Progressive Metalcore, Melodic Techno, Ambient).
@@ -40,5 +42,7 @@ Depending on the task, invoke the specialized sub-workflow:
 
 - Master Rules: `AGENTS.md`
 - Poetic Guide: `skills/ukrainian-poetry/references/full-guide.md`
+- Evaluation Rubric: `skills/ukrainian-poetry/references/rubric.md`
+- Subagents Pipeline: `skills/ukrainian-poetry/agents/`
 - Reference Cheatsheet: `skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`
 - Tests: `py -3 tests/run_tests.py --all`

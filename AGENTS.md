@@ -1,15 +1,32 @@
-﻿# AGENTS.md — Global Agent Directives for Ukrainian Poetry & Suno Prompting
+# AGENTS.md — Global Agent Directives for Ukrainian Poetry & Suno Prompting
 
 This repository is an AI Skills ecosystem for authentic Ukrainian poetry generation and production-grade Suno AI / Flow Music prompt engineering.
 
 ## Operational Directives
 
 ### 1. Ukrainian Poetry Directives (`ukrainian-poetry`)
-- **Authenticity First**: Ukrainian syntax, idiomatic expressions, natural word order. Never translate word-for-word from Russian or English.
-- **Rhythm & Meter Integrity**: When requested in syllabo-tonic (Iamb, Trochee, Dactyl, Amphibrach, Anapest), non-syllabo-tonic (Dolnik, Taktovik, Kolomyika), or Blank Verse, strictly maintain syllable counts, stresses, and caesuras.
-- **Rhyme Discipline**: Avoid banal grammatical rhymes (verb-verb, feminine adjective pairs, diminutive suffixes). Use heterogeneous, acoustic, and slant rhymes.
-- **Stress Disambiguation**: Use acute accents (`\u0301`) or capitalization to resolve homographs (*зАмок* vs *замОк*).
-- **Zero Sharovarshchyna**: Reject tourist-folk kitsch, pseudo-Cossack cliches, and sentimental Russian-style romance tropes.
+All models and agents generating, editing, or evaluating Ukrainian poetry MUST strictly enforce the **6 Core Poetic Principles (Фундаментальні принципи поетичної майстерності)** as foundational quality standards:
+
+1. **Свіжа образність та метафоричність (Fresh Imagery & Metaphoricity)**:
+   - "Show, don't tell" through concrete physical detail, sensory anchors (sight, sound, touch, smell, temperature), and action rather than abstract declarations of emotion.
+   - Categorical rejection of worn-out cliches and sentimental tropes (*«кров — любов»*, *«троянди — сльози»*, *«серце палає»*, *«душа плаче»*).
+2. **Емоційна глибина та щирість (Emotional Depth & Sincerity)**:
+   - Rooted in psychological truth, restraint, and genuine human empathy.
+   - Zero theatrical pathos, plastic sentimentality, or preachy moralizing (*«і я збагнув, що треба жити»*).
+3. **Ритмічна та звукова гармонія (Rhythmic & Phonic Harmony)**:
+   - Audible, breathing prosodic flow (syllabo-tonic, dolnik, taktovik, 14-syllable kolomyika, blank verse, or verlibre).
+   - Rich heterogeneous cross-grammatical rhymes (verb+noun, noun+adverb) with pre-tonic supporting consonants; zero grammatical verb-verb or diminutive rhymes.
+   - Conscious phonics & soundscapes (alliteration, assonance, Potebnja's inner form of words) and strict adherence to Ukrainian euphony (`у/в`, `і/й`, `з/із/зі`, no hiatus).
+4. **Лаконічність і вага слова (Conciseness & Word Weight)**:
+   - Maximum semantic density («словам тісно, думкам просторо»).
+   - Zero rhythmic padding or filler pronouns (*цей, той, свій, я, вже, ось*) inserted merely to fill foot counts.
+   - Strict prohibition against artificial syntactic inversions (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*) used to force end-rhymes; natural Ukrainian word order is inviolable.
+5. **Оригінальність ракурсу (Originality of Perspective)**:
+   - Unconventional authorial angle on universal themes; shifting focus from macro-abstractions to revealing micro-details.
+   - Paradoxical, lingering, or open endings that avoid trivial closures or moral conclusions.
+6. **Органічна єдність форми та змісту (Organic Unity of Form & Content)**:
+   - External form (meter, stanza structure, tempo, caesuras, enjambment, line raggedness or smoothness) must intrinsically embody the emotional state and theme.
+   - Form is never arbitrary decoration — it is the living body of the poem.
 
 ### 2. Suno Music Generation Directives (`ukrainian-poetry-to-suno`)
 - **Western Genre Anchor**: Musically target Western contemporary and classic genres (UK/US Post-Punk, Darkwave, Synthwave, Trip-Hop, Minimalist Alt-Pop, Shoegaze, Progressive Metalcore, Melodic Techno, Ambient). Music must sound like a top-tier global release, not regional/provincial pop.
@@ -20,8 +37,19 @@ This repository is an AI Skills ecosystem for authentic Ukrainian poetry generat
   - `Exclude`: Anti-local-pop and anti-artifact suppression tokens (`cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs, muddy bass`).
 - **De-identification**: Never output direct artist names or copyright phrases (`in the style of...`).
 
+## Specialized Subagents Pipeline (`skills/ukrainian-poetry/agents/`)
+For multi-stage poetic refinement, the ecosystem utilizes 5 specialized personas:
+1. `poetry-imagery-architect` (**Образотворець**): Tactile imagery, sensory anchors, fresh metaphors, anti-cliche guardrails.
+2. `poetry-emotional-critic` (**Критик щирості**): Sincerity audit, zero pathos, anti-moralizing, psychological nuance.
+3. `poetry-prosody-phonics` (**Майстер фоніки та просодії**): Metric scansion, stress accuracy, acoustic euphony (`у/в`, `і/й`), heterogeneous rhymes, phonics.
+4. `poetry-conciseness-editor` (**Редактор лаконічності**): Semantic compression, removal of filler words/pronouns, elimination of artificial inversions.
+5. `poetry-form-synthesizer` (**Архітектор форми та ракурсу**): Form-content harmony, paradoxical perspective, final assembly.
+
 ## Reference Index & Skill Files
 - Poetry Skill: `skills/ukrainian-poetry/SKILL.md`
+- Subagents Pipeline: `skills/ukrainian-poetry/agents/`
+- Full Poetic Guide: `skills/ukrainian-poetry/references/full-guide.md`
+- 100-Point Poetic Rubric: `skills/ukrainian-poetry/references/rubric.md`
 - Suno Conversion Skill: `skills/ukrainian-poetry-to-suno/SKILL.md`
 - Reference & Style Cheatsheet: `skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`
 - Mood to Style Map: `skills/ukrainian-poetry-to-suno/references/mood-to-style-map.md`

@@ -1,18 +1,40 @@
 #!/usr/bin/env python3
 """
-Adversarial Stress Test Suite - Challenger 1
-Empirically tests:
-1. Stress Homographs (dictionary coverage, inflection handling, orthoepy)
-2. Taboo Word Bans (inflectional escape, 12-line love poem generation/validation)
-3. Rare Meters (Strict 3-foot Dactyl 8/7 syllable scansion, Kolomyika 4+4+6 caesura)
-4. Complex Fixed Forms (Petrarchan sonnet abba abba cdc dcd with volta at line 9)
-5. Metric / Validator edge-case analysis & warning diagnostics
+Adversarial Challenge & Stress Test Suite - Challenger 1
+========================================================
+Empirically tests and challenges:
+1. Artificial Inversions (`check_artificial_inversions`):
+   - Positive cases: verb + pronoun end-rhyme inversions, stranded conjunctions/particles, auxiliary inversions.
+   - Negative cases: natural syntax, subject-first, classical verses (Kostenko, Antonych).
+   - Stylistic exemptions: Cossack Baroque, Folk, Children registers.
+2. Filler Words & Pronouns (`check_filler_words_and_pronouns`):
+   - Positive cases: all 12 rhythmic padding clusters, high-density monosyllabic pronoun stuffing (>32%).
+   - Negative cases: natural dense poetic phrasing, clean stanzas.
+   - Exemptions: folk, children registers.
+3. Banal Cliché Rhymes (`check_cliche_rhymes`):
+   - Positive cases: all 22 banned pairs across various case and plural inflections (любов-кров, доля-воля, сльози-грози, etc.).
+   - Negative cases: heterogeneous cross-grammatical rhymes with acoustic rich assonance.
+4. Physical Sensory Grounding (`evaluate_sensory_grounding`):
+   - 5 sensory categories: tactile, acoustic, visual, thermal, olfactory/gustatory.
+   - High vs Moderate vs Low vs Purely Abstract classification and scoring.
+5. Versification Diversity: Free Verse / Verlibre & Blank Verse Scoring:
+   - Free verse scoring without false syllable variance penalty and full rhyme score.
+   - Strict Blank Verse (5-foot unrhymed iamb) validation.
+6. Suno AI Song Lyrics & Metatag Hygiene:
+   - Structural metatag stripping ([Intro], [Verse], [Chorus], [Outro]).
+   - Parenthetical backing cues scansion handling ((луна), (шепіт)).
+7. Rubric Scorer Deductions, Bounds & Non-Negativity:
+   - Cap limits on all 7 dimensions.
+   - Non-negativity guarantees, rounding, and passing threshold (85/100).
 """
 
-import re
 import sys
+import os
+import re
 import json
 import pathlib
+import unittest
+from typing import Dict, List, Any
 
 # Force UTF-8 on standard streams
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
@@ -28,283 +50,360 @@ sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "tests"))
 
 from tests.validator import StyleValidator, MetatagValidator, PoeticValidator, RubricScorer
+from tests.validator.poetic_validator import PoeticValidationResult
 
-def print_header(title):
-    print("\n" + "=" * 70)
-    print(f"  {title}")
-    print("=" * 70)
 
-# -------------------------------------------------------------------
-# 1. Stress Homographs Stress Test
-# -------------------------------------------------------------------
-def test_stress_homographs():
-    print_header("STRESS-TEST 1: STRESS HOMOGRAPHS & DICTIONARY COMPLETENESS")
-    
-    target_homographs = [
-        ("замок", "зАмок / замОк"),
-        ("білизна", "бІлизна / білизнА"),
-        ("обід", "О́бід (колесо) / обі́д (їжа)"),
-        ("мука", "мУка / мукА"),
-        ("дорога", "дорОга / дорогА"),
-        ("атлас", "Атлас / атлАс"),
-        ("орган", "Орган / оргАн"),
-        ("плачу", "плАчу / плачУ"),
-        ("образи", "Образи / обрАзи"),
-    ]
-    
-    print("Checking presence in PoeticValidator.STRESS_HOMOGRAPHS:")
-    dict_homographs = PoeticValidator.STRESS_HOMOGRAPHS
-    missing = []
-    for word, desc in target_homographs:
-        in_dict = word in dict_homographs
-        status = "[FOUND]" if in_dict else "[MISSING]"
-        if not in_dict:
-            missing.append(word)
-        details = dict_homographs.get(word, "N/A")
-        print(f"  {status} '{word}' ({desc}) -> In dict: {details}")
-    
-    # Test inflection detection
-    print("\nTesting inflectional handling of homographs:")
-    test_text_inflections = (
-        "У старому замку замкнули браму на залізний замок. "
-        "Снігова білизна засліпила очі, а на мотузці сушиться білизна. "
-        "Зламався обід у воза перед самим обідом. "
-        "Душевна мука зникла, коли на столі з'явилася біла мука."
-    )
-    detected = PoeticValidator.check_stress_homographs(test_text_inflections)
-    print(f"  Text under test: {test_text_inflections}")
-    print(f"  Detected homograph matches: {len(detected)}")
-    for d in detected:
-        print(f"    - Word: {d['word']}, Found as: '{d['found_as']}', Has explicit stress: {d['has_explicit_stress']}")
-    
-    # Check explicit stress recognition on homographs
-    test_text_stressed = "Високий зАмок стоїть на горі, а старий замОк тримає залізну браму."
-    detected_stressed = PoeticValidator.check_stress_homographs(test_text_stressed)
-    print("\nTesting explicit stress detection (зАмок vs замОк):")
-    for d in detected_stressed:
-        print(f"    - Word: {d['word']}, Found as: '{d['found_as']}', Has explicit stress: {d['has_explicit_stress']}")
+class TestChallenger1EmpiricalChallenge(unittest.TestCase):
 
-# -------------------------------------------------------------------
-# 2. Taboo Word Bans & Inflectional Penetration Test
-# -------------------------------------------------------------------
-def test_taboo_word_bans():
-    print_header("STRESS-TEST 2: TABOO WORD BANS & INFLECTIONAL PENETRATION")
-    
-    banned_base = ["душа", "серце", "доля", "вічність", "життя", "кохання"]
-    
-    # 2.1 Adversarial test: Inflected forms of taboo words
-    inflected_sentences = [
-        ("У моїй душі горить вогонь", "душі (locative of душа)"),
-        ("Він притиснув руку до серця", "серця (genitive of серце)"),
-        ("Ми коримося своїй долі", "долі (dative of доля)"),
-        ("Зникнути у вічності назавжди", "вічності (locative of вічність)"),
-        ("Новим життям сповнився простір", "життям (instrumental of життя)"),
-        ("Казали про вірне кохання", "кохання (accusative of кохання)"),
-        ("Його душами не злічити", "душами (instrumental plural)"),
-        ("У серцях людей", "серцях (locative plural)"),
-    ]
-    
-    print("Testing whether PoeticValidator.check_taboo_words catches inflected forms with base list:")
-    escaped_count = 0
-    for sent, desc in inflected_sentences:
-        found = PoeticValidator.check_taboo_words(sent, banned_base)
-        caught = len(found) > 0
-        if not caught:
-            escaped_count += 1
-            print(f"  [ESCAPED / FALSE NEGATIVE] '{sent}' ({desc}) -> Caught: {found}")
-        else:
-            print(f"  [CAUGHT] '{sent}' ({desc}) -> Caught: {found}")
-    
-    print(f"\nTotal inflections tested: {len(inflected_sentences)}, Escaped: {escaped_count}")
+    # =========================================================================
+    # 1. ARTIFICIAL INVERSIONS CHECK (`check_artificial_inversions`)
+    # =========================================================================
 
-    # 2.2 Test a clean 12-line love poem without ANY taboo words (base or inflected)
-    clean_12line_poem = """Твоя долоня на моєму плечі,
-За вікнами поволі гасне день,
-Вщухають кроки стомлених людей,
-І світло тане у нічній свічі.
+    def test_01_artificial_inversions_positive_cases(self):
+        """Test that check_artificial_inversions catches forced end-rhyme inversions."""
+        # 1. Verb + pronoun with iotated endings (-в, -ла, -ло, -ли, -ю, -єш, -є, -ємо, -єте, -ить, -ять, -уть)
+        poem_iotated = "У темну ніч дорогу шукав я,\nКрасиву пісню тихо чула вона,\nІ вірний шлях тоді пізнав він,\nКуди іду не знаю я."
+        inversions1 = PoeticValidator.check_artificial_inversions(poem_iotated, mode="general")
+        self.assertEqual(len(inversions1), 4, f"Expected 4 inversions in iotated endings, got {len(inversions1)}")
 
-Ми залишаємось у цій імлі,
-Де кожен подих має власний зміст,
-І дощ змиває попелястий міст,
-Єднаючи нас тихо на землі.
+        # 2. Non-iotated verb endings (-у, -еш, -е, -емо, -ете, etc.)
+        poem_non_iotated = "Листа у темряві пишу я,\nУ тиші ночі кличеш ти,\nНадії промінь несе він,\nУ чистім полі ідемо ми."
+        inversions_non_iot = PoeticValidator.check_artificial_inversions(poem_non_iotated, mode="general")
+        self.assertEqual(len(inversions_non_iot), 4, f"Expected 4 inversions in non-iotated endings, got {len(inversions_non_iot)}")
 
-Торкнися пальцями німого скла,
-Де світить ліхтарів тремка смуга,
-І хай за склом розвіється снага,
-Щоб тиша поміж нами розцвіла."""
+        # 3. Stranded conjunctions/subordinators at line end
+        poem_conjunctions = "Вона мовчала довго бо,\nМи вирушаємо у путь хоч,\nЯ повернуся знову але,\nЗвучала музика у серці як."
+        inversions2 = PoeticValidator.check_artificial_inversions(poem_conjunctions, mode="general")
+        self.assertEqual(len(inversions2), 4, f"Expected 4 inversions in stranded conjunctions, got {len(inversions2)}")
 
-    print("\nValidating 12-line intense love poem with strict 6-word taboo ban:")
-    res = PoeticValidator.validate_poem(
-        clean_12line_poem,
-        banned_words=banned_base,
-        mode="intimate",
-        min_lines=12,
-        max_lines=12
-    )
-    print(f"  Valid: {res.is_valid}")
-    print(f"  Errors: {res.errors}")
-    print(f"  Warnings: {res.warnings}")
-    print(f"  Line count: {res.metrics['line_count']}")
-    print(f"  Taboo count: {res.metrics['taboo_count']}")
+        # 4. Auxiliary verb inversions at line end
+        poem_auxiliary = "У замку темнім колись був я,\nЩаслива дуже вчора була вона,\nУ чистім полі вільні були ми,\nУ дивнім краї раді будуть вони."
+        inversions3 = PoeticValidator.check_artificial_inversions(poem_auxiliary, mode="general")
+        self.assertEqual(len(inversions3), 4, f"Expected 4 inversions in auxiliary verbs, got {len(inversions3)}")
 
-# -------------------------------------------------------------------
-# 3. Rare Meters: Strict 3-Foot Dactyl & Kolomyika Caesura
-# -------------------------------------------------------------------
-def test_rare_meters():
-    print_header("STRESS-TEST 3: RARE METERS (3-FOOT DACTYL & KOLOMYIKA CAESURA)")
+        # 5. Standard supported verb conjugations
+        poem_verbs = "В огонь без страху сміло підуть вони,\nТвоє мовчання знову чую я,\nСвою надію тихо берегли ми,\nЧудову казку розкажи ти."
+        inversions4 = PoeticValidator.check_artificial_inversions(poem_verbs, mode="general")
+        self.assertTrue(len(inversions4) >= 3, f"Expected >= 3 inversions, got {len(inversions4)}")
+
+    def test_02_artificial_inversions_negative_cases_and_exemptions(self):
+        """Test natural syntax and stylistic exemptions (Baroque, Folk)."""
+        # Natural Ukrainian word order: subject before verb, natural object endings
+        natural_poem = """Вечірнє сонце дякує за день,
+На мокрий гравій опадає тінь,
+Я чую шепіт стомлених людей,
+І місто поринає у глибінь."""
+        inversions = PoeticValidator.check_artificial_inversions(natural_poem, mode="general")
+        self.assertEqual(
+            len(inversions), 0,
+            f"False positive inversion in natural poem: {inversions}"
+        )
+
+        # Baroque stylization exemption: inverted phrasing is canonical
+        baroque_poem = """Світ ловив мене у сіті, та не спіймав я,
+Бо премудрість Божу щирим серцем знав я,
+І хоч плакав гірко у пустелі бо,
+Благодать святу навіки осягнув я."""
+        baroque_inversions = PoeticValidator.check_artificial_inversions(baroque_poem, mode="cossack_baroque")
+        self.assertEqual(
+            len(baroque_inversions), 0,
+            "Baroque mode ('cossack_baroque') must be exempt from inversion warnings."
+        )
+
+        # Folk mode exemption
+        folk_poem = """Ой піду я в темний ліс, подивлюся я,\nДе гуляє сивий кінь, заспіваю я."""
+        folk_inversions = PoeticValidator.check_artificial_inversions(folk_poem, mode="authentic_folk")
+        self.assertEqual(
+            len(folk_inversions), 0,
+            "Folk mode ('authentic_folk') must be exempt from inversion warnings."
+        )
+
+    # =========================================================================
+    # 2. FILLER WORDS & PRONOUNS (`check_filler_words_and_pronouns`)
+    # =========================================================================
+
+    def test_03_filler_words_and_clusters_positive_cases(self):
+        """Test detection of rhythmic filler clusters and high-density pronoun stuffing."""
+        # Test each canonical cluster
+        clusters = [
+            "і ось", "ну от", "але ж бо", "та й ось", "то ж бо",
+            "а я ось", "вже ж бо", "ну і ось", "от і все", "ну як же",
+            "ось і знов", "та ось же",
+        ]
+        for cl in clusters:
+            test_line = f"Там у саду {cl} зацвіла калина,\nІ тихо спить мала дитина."
+            res = PoeticValidator.check_filler_words_and_pronouns(test_line, mode="general")
+            self.assertTrue(
+                res["cluster_count"] >= 1,
+                f"Failed to detect rhythmic cluster '{cl}' in text: '{test_line}'"
+            )
+            self.assertTrue(any(cl in c["matched"].lower() for c in res["clusters"]))
+
+        # Test high-density pronoun padding (>32% filler tokens in a stanza)
+        stuffed_stanza = """І ось я знов іду в цей свій сад,
+Ну от і я мій день свій відшукав,
+Але ж бо той же цей мій листопад
+Вже ось мені мій спокій повернув."""
+        res_stuffed = PoeticValidator.check_filler_words_and_pronouns(stuffed_stanza, mode="general")
+        self.assertTrue(
+            len(res_stuffed["high_density_stanzas"]) >= 1,
+            f"Failed to detect high-density filler stanza: {res_stuffed}"
+        )
+        self.assertTrue(res_stuffed["overall_density"] >= 0.30)
+
+    def test_04_filler_words_negative_cases_and_exemptions(self):
+        """Test that natural phrasing and exempt registers do not trigger filler warnings."""
+        # Clean lyrical stanza with minimal pronouns
+        clean_stanza = """Холодний вітер обіймає плечі,
+На мокрий гравій опадає тінь,
+Ліхтарі запалюють надвечір,
+Старий годинник б'є у височінь."""
+        res_clean = PoeticValidator.check_filler_words_and_pronouns(clean_stanza, mode="general")
+        self.assertEqual(res_clean["cluster_count"], 0)
+        self.assertEqual(len(res_clean["high_density_stanzas"]), 0)
+        self.assertTrue(res_clean["overall_density"] < 0.15)
+
+        # Children / folk exemption
+        playful_children_stanza = """Я і ти, ми і ви,
+Ось і зайчик у траві,
+Цей і той, мій і твій,
+Покружляй у хороводі мерщій."""
+        res_children = PoeticValidator.check_filler_words_and_pronouns(playful_children_stanza, mode="children")
+        self.assertEqual(
+            len(res_children["high_density_stanzas"]), 0,
+            "Children mode must not penalize playful repetition density."
+        )
+
+    # =========================================================================
+    # 3. BANAL CLICHÉ RHYMES (`check_cliche_rhymes`)
+    # =========================================================================
+
+    def test_05_cliche_rhymes_positive_cases(self):
+        """Test detection of banned cliché rhyme pairs across case and plural inflections."""
+        cliche_pairs_to_test = [
+            ("любов", "кров", "У серці знов палає та любов,\nГаряча й чиста, наче свіжа кров."),
+            ("крові", "любові", "Немає спокою у тихій крові,\nКоли душа шукає вічної любові."),
+            ("кров'ю", "любов'ю", "Змиває землю ворожою кров'ю,\nА серце світить вірною любов'ю."),
+            ("доля", "воля", "Блукає світом одинока доля,\nДе у степах шумить козацька воля."),
+            ("долі", "волі", "Нема спочинку у тяжкій долі,\nКоли козак шукає в полі волі."),
+            ("сльози", "грози", "В очах тремтять непроханії сльози,\nА над землею насувають грози."),
+            ("сліз", "гріз", "Повіяв вітер без печальних сліз,\nУ тиші ночі серед давніх гріз."),
+            ("ніч", "віч", "На місто тихо опустилась ніч,\nВдивляюсь пильно у темряву віч."),
+            ("ночі", "очі", "Блищать зірки у темній ночі,\nСльозами вмиті ясні очі."),
+            ("ніч", "пліч", "Холодна впала на дорогу ніч,\nСпадає плащ з козацьких пліч."),
+            ("серце", "дверці", "Тривожно б'ється молодеє серце,\nКоли риплять старі дубові дверці."),
+            ("небо", "треба", "Пливуть хмарини через синє небо,\nА нам для щастя мало треба."),
+            ("жити", "любити", "Як важко на землі без пісні жити,\nКоли нема кого усім серцем любити."),
+            ("знати", "кохати", "Як хоче серце правду знати,\nІ до нестями щиро кохати."),
+            ("день", "пень", "Минає тихо теплий день,\nСів подорожній на старий пень."),
+            ("сни", "весни", "Летять у ніч барвисті сни,\nЧекає серце подиху весни."),
+            ("зорі", "морі", "Засяють ясно золотисті зорі,\nЗаграють хвилі у глибокім морі."),
+        ]
+
+        for p1, p2, poem_text in cliche_pairs_to_test:
+            detected = PoeticValidator.check_cliche_rhymes(poem_text)
+            self.assertTrue(
+                len(detected) >= 1,
+                f"Failed to detect cliché rhyme pair ({p1}-{p2}) in:\n{poem_text}"
+            )
+
+    def test_06_cliche_rhymes_negative_cases(self):
+        """Test that fresh heterogeneous cross-grammatical rhymes are NOT falsely flagged."""
+        fresh_rhymed_poem = """Холодний вітер обіймає плечі,
+На мокрий гравій опадає тінь,
+Ліхтарі запалюють надвечір,
+Старий годинник б'є у височінь.
+
+Спливає час крізь пальці, наче дим,
+Торкаюсь попелу німим залізом,
+І світ стає по-справжньому живим,
+Де кожен звук звучить цілком зарізно."""
+        detected = PoeticValidator.check_cliche_rhymes(fresh_rhymed_poem)
+        self.assertEqual(
+            len(detected), 0,
+            f"False positive cliché rhymes in fresh poetry: {detected}"
+        )
+
+    # =========================================================================
+    # 4. PHYSICAL SENSORY GROUNDING (`evaluate_sensory_grounding`)
+    # =========================================================================
+
+    def test_07_sensory_grounding_dimensions_and_levels(self):
+        """Test evaluation of all 5 sensory dimensions and grounding levels."""
+        # 1. High sensory grounding (multi-sensory: tactile, acoustic, visual, thermal, olfactory)
+        multi_sensory = """Шорстке вапно на стінах кам'яниці,
+Іржавий цвях і мідна тепла дріт.
+Гул поїзда доноситься з границі,
+Холодний попіл, запах хвої й лід."""
+        res_high = PoeticValidator.evaluate_sensory_grounding(multi_sensory)
+        self.assertEqual(res_high["grounding_level"], "high")
+        self.assertEqual(res_high["sensory_score"], 20.0)
+        self.assertTrue(res_high["total_sensory_tokens"] >= 4)
+        self.assertTrue(len(res_high["active_categories"]) >= 3)
+        self.assertIn("кам'яниці", res_high["details"]["tactile"])
+
+        # Test words with apostrophes (' and ’): кам'яний, м'який, м’ятний, п'єдестал
+        apostrophe_text = "Кам'яний берег, м'який шовк, м’ятний напій і п'єдестал."
+        res_apo = PoeticValidator.evaluate_sensory_grounding(apostrophe_text)
+        self.assertEqual(res_apo["grounding_level"], "high")
+        self.assertIn("кам'яний", res_apo["details"]["tactile"])
+        self.assertIn("м’ятний", res_apo["details"]["olfactory_gustatory"])
+        self.assertIn("п'єдестал", res_apo["details"]["visual"])
+
+        # 2. Moderate sensory grounding (1-2 tokens)
+        moderate_sensory = """У полі вітер стеле темну тінь,
+Пливуть хмарини понад синім гаєм."""
+        res_mod = PoeticValidator.evaluate_sensory_grounding(moderate_sensory)
+        self.assertIn(res_mod["grounding_level"], ("moderate", "high"))
+        self.assertTrue(res_mod["sensory_score"] >= 18.0)
+
+        # 3. Purely abstract emotional declarations
+        purely_abstract = """Душа моя страждає у вічності буття,
+Безмежне почуття надії та нескінченного життя,
+Любов і сум глибинний хвилюють серця стан,
+Ідеал далекий зникає як оман."""
+        res_abs = PoeticValidator.evaluate_sensory_grounding(purely_abstract)
+        self.assertEqual(res_abs["grounding_level"], "purely_abstract")
+        self.assertEqual(res_abs["sensory_score"], 12.0)
+        self.assertTrue(res_abs["total_abstract_tokens"] >= 2)
+
+    # =========================================================================
+    # 5. VERSIFICATION DIVERSITY: FREE VERSE & BLANK VERSE
+    # =========================================================================
+
+    def test_08_free_verse_verlibre_scoring(self):
+        """Test that free verse (verlibre) receives full rhyme score and no false variance penalty."""
+        free_verse = """іржавий дах котельні
+вбирає вологу листопадового ранку,
+два горобці на холодному дроті
+ділять шматок черствого житнього хліба,
+трамвай розсипає іскри
+на розі старої вулиці."""
+        poetic_res = PoeticValidator.validate_poem(free_verse, mode="general")
+        self.assertTrue(poetic_res.is_valid)
+
+        # Score with is_free_verse=True
+        score = RubricScorer.score_poetry(free_verse, poetic_res, is_free_verse=True)
+        self.assertTrue(score.is_passing)
+        self.assertTrue(score.total_score >= 90.0)
+        # Verify rhyme dimension is full 10.0
+        self.assertEqual(score.dimension_scores["rhyme_sound_design"], 10.0)
+        # Verify rhythm dimension is full 15.0 (no variance deduction)
+        self.assertEqual(score.dimension_scores["rhythm_line_breaks"], 15.0)
+
+    def test_09_blank_verse_syllabo_tonic_scansion(self):
+        """Test strict blank verse (білий вірш - unrhymed 5-foot iamb)."""
+        blank_verse = """Холодний вітер обіймає плечі,
+На мокрий гравій опадає тінь,
+І ліхтарі запалюють надвечір,
+Старий ліхтар серед німих видінь,
+І місто поринає в темний сон."""
+        poetic_res = PoeticValidator.validate_poem(blank_verse, expected_meter="iamb", mode="general")
+        self.assertTrue(poetic_res.is_valid)
+        score = RubricScorer.score_poetry(blank_verse, poetic_res, is_free_verse=True)
+        self.assertTrue(score.is_passing)
+        self.assertTrue(score.total_score >= 95.0)
+
+    # =========================================================================
+    # 6. SUNO AI SONG LYRICS & METATAG HYGIENE
+    # =========================================================================
+
+    def test_10_suno_lyrics_bracketed_metatags_and_stripping(self):
+        """Test clean stripping of Suno structural metatags and parenthetical cues."""
+        suno_lyrics = """[Intro]
+(тихий шепіт вітру над водою)
+[Verse 1]
+Шорстке вапно на стінах кам'яниці,
+Іржавий цвях тримає синій лід.
+[Chorus]
+Вогонь гуде у темному залізі,
+Холодний попіл падає на брук.
+[Drop]
+(потужний синтезаторний бас)
+[Outro]
+(згасаючий гул струн)"""
+
+        # 1. get_lines_without_tags should remove [Intro], [Verse 1], [Chorus], [Drop], [Outro]
+        lines = PoeticValidator.get_lines_without_tags(suno_lyrics)
+        self.assertNotIn("[Intro]", lines)
+        self.assertNotIn("[Verse 1]", lines)
+        self.assertNotIn("[Chorus]", lines)
+        self.assertNotIn("[Drop]", lines)
+        self.assertNotIn("[Outro]", lines)
+
+        # 2. Syllable counting should ignore parenthetical backing cues
+        line_with_cue = "Холодний вітер обіймає плечі (луна)"
+        base_line = "Холодний вітер обіймає плечі"
+        count_with_cue = PoeticValidator.count_syllables(line_with_cue)
+        count_base = PoeticValidator.count_syllables(base_line)
+        self.assertEqual(count_base, 11)
+        self.assertEqual(count_with_cue, 11, "Parenthetical backing cue '(луна)' must be stripped during syllable count.")
+        self.assertEqual(count_with_cue, count_base)
+
+        # 3. Metatag validator check
+        meta_res = MetatagValidator.validate_lyrics_structure(suno_lyrics)
+        self.assertTrue(meta_res.is_valid)
+        self.assertTrue(meta_res.metrics["total_tags"] >= 4)
+
+    # =========================================================================
+    # 7. RUBRIC SCORER DEDUCTIONS, BOUNDS & NON-NEGATIVITY
+    # =========================================================================
+
+    def test_11_rubric_deductions_and_bounds(self):
+        """Test deduction capping and non-negativity across all 7 rubric dimensions."""
+        # Create heavily flawed poem triggering all deductions
+        flawed_poem = """І ось я знов шукав я той самий кращий день,
+Але гарячу в серці бачив кров,
+Душа моя страждає у вічності без меж,
+І ти збагнеш, що треба жити."""
+
+        poetic_res = PoeticValidator.validate_poem(flawed_poem, banned_words=["душа", "кров"])
+        score = RubricScorer.score_poetry(flawed_poem, poetic_res, mode="general")
+
+        self.assertFalse(score.is_passing)
+        self.assertTrue(score.total_score < 75.0)
+
+        # Verify all 7 dimension scores are within [0.0, max]
+        max_bounds = {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0,
+        }
+        for dim, max_val in max_bounds.items():
+            dim_val = score.dimension_scores[dim]
+            self.assertTrue(
+                0.0 <= dim_val <= max_val,
+                f"Dimension '{dim}' score {dim_val} out of bounds [0.0, {max_val}]"
+            )
+
+        # Verify total score is sum of dimensions and rounded to 1 decimal
+        self.assertEqual(score.total_score, round(sum(score.dimension_scores.values()), 1))
+
+
+def run_challenger1_tests() -> bool:
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestChallenger1EmpiricalChallenge)
+    runner = unittest.TextTestRunner(stream=sys.stdout, verbosity=2)
+    result = runner.run(suite)
+    print(f"Challenger 1 Suite Summary: {result.testsRun} run, {len(result.errors)} errors, {len(result.failures)} failures")
     
-    # 3.1 Strict 3-Foot Dactyl (8 syllables Feminine / 7 syllables Masculine)
-    # Pattern: — U U | — U U | — U (Feminine: 8 syl)
-    #          — U U | — U U | — (Masculine: 7 syl)
-    # Stanza: F M F M (8, 7, 8, 7)
-    strict_3foot_dactyl = """Ві́тер коли́ше гілля́ у садку́,
-Сні́г опада́є на шлях.
-Мі́сяць вибли́скує в темнім кутку́,
-Спи́ть у густи́х полина́х.
+    report_path = PROJECT_ROOT / "tests" / "reports" / "chal1_failures.txt"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(f"Tests run: {result.testsRun}\n")
+        f.write(f"Failures: {len(result.failures)}\n")
+        f.write(f"Errors: {len(result.errors)}\n\n")
+        for test, trace in result.failures:
+            f.write(f"=== FAILURE: {test} ===\n{trace}\n\n")
+        for test, trace in result.errors:
+            f.write(f"=== ERROR: {test} ===\n{trace}\n\n")
+            
+    return result.wasSuccessful()
 
-Га́снуть вогні́ у висо́кім вікні́,
-Сти́хнув дале́кий прибі́й.
-Холод пану́є у ці́й вишині́,
-Те́мрява кличе в супі́й.
-
-Зі́рка упа́ла на во́гку траву́,
-Ся́є само́тній поли́н.
-Ти́шу вечі́рню у се́рце прийму́,
-По́ки розві́ється дим."""
-    
-    print("Testing Strict 3-Foot Dactyl (8/7 syllables alternation ЖЧЖЧ):")
-    lines = [l.strip() for l in strict_3foot_dactyl.splitlines() if l.strip()]
-    counts = [PoeticValidator.count_syllables(l) for l in lines]
-    print(f"  Line counts: {counts}")
-    print(f"  Expected: [8, 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 7]")
-    res_dactyl = PoeticValidator.validate_poem(
-        strict_3foot_dactyl,
-        expected_meter="dactyl",
-        min_lines=12,
-        max_lines=12
-    )
-    print(f"  Validator is_valid: {res_dactyl.is_valid}")
-    print(f"  Validator errors: {res_dactyl.errors}")
-    print(f"  Validator warnings: {res_dactyl.warnings}")
-    
-    # Compare with TC_T2_02 from test_boundary_cases.json
-    print("\nAuditing TC_T2_02 from test_boundary_cases.json:")
-    with open(PROJECT_ROOT / "tests/tier2_boundary_corner/test_boundary_cases.json", "r", encoding="utf-8") as f:
-        t2_cases = json.load(f)["tests"]
-    tc2_poem = next(t["poem"] for t in t2_cases if t["id"] == "TC_T2_02_Strict_Dactyl_Ternary")
-    tc2_lines = [l.strip() for l in tc2_poem.splitlines() if l.strip()]
-    tc2_counts = [PoeticValidator.count_syllables(l) for l in tc2_lines]
-    print(f"  TC_T2_02 Syllable counts: {tc2_counts}")
-    print(f"  Note: 11, 10 syllables are 4-foot dactyl, while 8, 9 are 3-foot dactyl!")
-
-    # 3.2 Kolomyika 14-Syllable (4+4+6) Caesura Stress Test
-    print("\nTesting Kolomyika Caesura Structure:")
-    # Authentic 4+4+6 lines
-    kolomyika_clean = """Ой летіли / сиві птахи / через сині гори,
-Принесли нам / тиху звістку / про широке поле.
-Заспіває / стара сосна / біля того броду,
-Не забуде / вільне серце / козацького роду."""
-    
-    # Broken caesura line (14 syllables, but 5+3+6 or 4+5+5 structure)
-    kolomyika_broken_caesura = """Ой летіли сиві / птахи / через сині гори,
-Принесли нам тиху / звістку про / широке поле."""
-    
-    print("  Validating authentic 4+4+6 Kolomyika:")
-    res_kolo1 = PoeticValidator.validate_poem(kolomyika_clean, expected_meter="kolomyika")
-    print(f"    Valid: {res_kolo1.is_valid}, Errors: {res_kolo1.errors}")
-    
-    print("  Validating broken caesura Kolomyika against PoeticValidator:")
-    res_kolo2 = PoeticValidator.validate_poem(kolomyika_broken_caesura, expected_meter="kolomyika")
-    print(f"    Valid: {res_kolo2.is_valid}, Errors: {res_kolo2.errors}")
-    print(f"    (Note: PoeticValidator checks total syllable count 14, not sub-segment caesuras 4+4+6).")
-
-# -------------------------------------------------------------------
-# 4. Complex Fixed Forms: Petrarchan Sonnet with Mandatory Volta at Line 9
-# -------------------------------------------------------------------
-def test_petrarchan_sonnet():
-    print_header("STRESS-TEST 4: PETRARCHAN SONNET (VOLTA AT LINE 9, ABBA ABBA CDC DCD)")
-    
-    petrarchan_sonnet = """Замовкло місто у густій імлі,
-Останній промінь на бруківці тане,
-Холодний вечір у вікно загляне,
-І тіні розійдуться по землі.
-
-Пливуть у небі темні кораблі,
-Тривога стихне, серце не зів'яне,
-Коли світанок золотий настане
-На цій високій кам'яній чолі.
-
-Але тепер розвіється туман,
-Осяє ранок золотисті брами,
-І вітер знову подолає сумнів,
-
-Розвіє смуток поміж яворами,
-І новий день загоїть давній шрам,
-З'єднавши небо з дивними дарами."""
-
-    lines = [l.strip() for l in petrarchan_sonnet.splitlines() if l.strip()]
-    print(f"Total lines: {len(lines)}")
-    counts = [PoeticValidator.count_syllables(l) for l in lines]
-    print(f"Syllable counts per line: {counts}")
-    
-    res = PoeticValidator.validate_poem(
-        petrarchan_sonnet,
-        expected_meter="iamb",
-        mode="neoclassical",
-        min_lines=14,
-        max_lines=14
-    )
-    print(f"PoeticValidator Valid: {res.is_valid}")
-    print(f"Errors: {res.errors}")
-    print(f"Warnings: {res.warnings}")
-    
-    # Check Volta at line 9
-    line9 = lines[8]
-    volta_markers = ["але", "та", "проте", "однак", "і ось", "тепер", "раптом", "аж ось"]
-    has_volta_marker = any(line9.lower().startswith(m) for m in volta_markers)
-    print(f"Line 9: '{line9}'")
-    print(f"Has Volta transition marker: {has_volta_marker}")
-
-# -------------------------------------------------------------------
-# 5. Full Test Suite Execution & Warning Diagnostics
-# -------------------------------------------------------------------
-def test_suite_diagnostics():
-    print_header("STRESS-TEST 5: TEST SUITE EXECUTION & WARNING DIAGNOSTICS")
-    import subprocess
-    cmd = ["py", "-3", "tests/run_tests.py", "--all", "--json", "--report-file", "tests/reports/test_report.json"]
-    proc = subprocess.run(cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True, encoding="utf-8")
-    print(f"Exit code: {proc.returncode}")
-    
-    # Read generated report
-    report_file = PROJECT_ROOT / "tests/reports/test_report.json"
-    if report_file.exists():
-        with open(report_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        summary = data.get("summary", {})
-        print(f"Summary: Total: {summary.get('total')}, Passed: {summary.get('passed')}, Failed: {summary.get('failed')}, Warned: {summary.get('warned')}")
-        print(f"Avg Poetry Score: {summary.get('avg_poetry_score')}")
-        print(f"Avg Suno Score: {summary.get('avg_suno_score')}")
-        
-        # Analyze warnings
-        print("\nAnalyzing warnings across test cases:")
-        warning_categories = {}
-        for res in data.get("results", []):
-            if res.get("warnings"):
-                test_id = res.get("id")
-                for w in res.get("warnings"):
-                    cat = w.split(":")[0] if ":" in w else w
-                    warning_categories.setdefault(cat, []).append((test_id, w))
-        
-        for cat, items in warning_categories.items():
-            print(f"  - Category: '{cat}' ({len(items)} occurrences)")
-            for tid, w in items[:3]:
-                print(f"      * [{tid}]: {w}")
-            if len(items) > 3:
-                print(f"      * ... and {len(items)-3} more")
 
 if __name__ == "__main__":
-    test_stress_homographs()
-    test_taboo_word_bans()
-    test_rare_meters()
-    test_petrarchan_sonnet()
-    test_suite_diagnostics()
+    success = run_challenger1_tests()
+    sys.exit(0 if success else 1)

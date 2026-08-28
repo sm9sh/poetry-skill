@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ukrainian Poetry to Suno"
+  short_description: "Build Ukrainian Suno music prompts"
+  default_prompt: "Use $ukrainian-poetry-to-suno to turn these Ukrainian lyrics into Suno prompts."

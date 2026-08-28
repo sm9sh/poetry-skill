@@ -1,143 +1,134 @@
 # Forensic Integrity Audit Report
 
-**Target**: Full Ukrainian Poetry & Suno AI Skill System Repository (d:/poetry-skill)  
-**Auditor**: uditor_1 (Forensic Integrity Auditor)  
-**Profile**: General Project / Integrity Forensics (Development Mode per ORIGINAL_REQUEST.md)  
-**Audit Date**: 2026-08-26  
-**Final Binary Verdict**: **CLEAN** (Zero Integrity Violations Detected)
+**Work Product**: Ukrainian Poetry & Suno Prompting Ecosystem (`poetry-skill`)  
+**Auditor**: `auditor_1` (Forensic Integrity Auditor)  
+**Date**: 2026-08-28  
+**Integrity Mode**: Development Mode (per `ORIGINAL_REQUEST.md`)  
+**Verdict**: **CLEAN** (Zero Integrity Violations)
 
 ---
 
 ## 1. Executive Summary
 
-An exhaustive forensic integrity audit was conducted across the entire repository, encompassing all skill instruction files (skills/ukrainian-poetry/, skills/ukrainian-poetry-to-suno/), canonical reference guides, prompt packs (packs/ and skills/ukrainian-poetry-to-suno/references/packs/), cheatsheets, test suites (	ests/), and deterministic validation engines (	ests/validator/).
+A comprehensive, adversarial forensic integrity audit was conducted across the `poetry-skill` repository to verify authenticity, theoretical fidelity, algorithmic substance, and runtime integrity following the integration of the **6 Core Poetic Principles** and **5 Specialized Subagents**.
 
-The audit verified that:
-1. **Zero Hardcoded Escapes or Mock Shortcuts**: All test executions pass through genuine validation algorithms without bypasses, hardcoded returns, or fake validator logic.
-2. **Deterministic & Genuine Validation Engine**: PoeticValidator, StyleValidator, MetatagValidator, and RubricScorer perform authentic linguistic scansion, vowel counting, stress homograph analysis, Russianism/Surzhyk phrase matching, taboo word enforcement, metatag grammar parsing, and mathematical 100-point rubric calculations.
-3. **Adversarial Hardening Verified**: The validation engines were subjected to 8 adversarial injection attacks (deliberate Surzhyk, taboo words, sharovarshchyna, meter breaks, metadata leaks, artist name leaks, vague exclude tokens, and broken metatags), and all 8 attacks were caught and rejected with 100% accuracy.
-4. **Complete Content & Zero Placeholders**: All 64 markdown/yaml files in the repository contain authentic, complete, professional documentation with zero TODO, FIXME, TBD, or placeholder text.
-5. **100% Test Pass Rate**: py -3 tests/run_tests.py --all independently executed all 59 tests across 4 tiers with 59 PASS, 0 FAIL, 29 non-fatal informational warnings, average poetry score of 98.4/100, and average Suno score of 99.9/100.
-
----
-
-## 2. Forensic Phase-by-Phase Verification
-
-### Phase 1: Source Code & Prohibited Pattern Analysis
-
-| Check # | Prohibited Pattern | Inspection Scope | Tool Command & Empirical Finding | Status |
-|:---|:---|:---|:---|:---:|
-| 1.1 | **Hardcoded Test Passes** | 	ests/validator/*.py, 	ests/run_tests.py | AST / Regex scan for hardcoded test ID branches, static pass flags, or bypasses. 0 hardcoded test escapes found. | **PASS** |
-| 1.2 | **Facade / Stub Implementations** | 	ests/validator/ | Deep inspection of methods in PoeticValidator, StyleValidator, MetatagValidator, RubricScorer. All methods implement genuine computational logic. | **PASS** |
-| 1.3 | **Pre-populated / Fabricated Logs** | 	ests/reports/ | Test report is dynamically generated upon test execution with accurate execution timestamps, test metrics, and score breakdowns. | **PASS** |
-| 1.4 | **Placeholder & Incomplete Content** | Entire workspace (64 .md/.yaml files) | Full-text regex scan for TODO, FIXME, TBD, placeholder, lorem ipsum, truncated sentences. Exactly 0 occurrences found. | **PASS** |
-
-### Phase 2: Behavioral & Algorithmic Validation
-
-#### 2.1 Poetic Validation Engine (	ests/validator/poetic_validator.py)
-- **Syllable Scansion**: Uses Ukrainian vowel set to count syllables per line and strip bracketed annotations.
-- **Surzhyk & Russianism Scanner**: 28 compiled regexes with Ukrainian replacement suggestions (e.g., *самий кращий -> найкращий*, *на протязі -> протягом*, *приймати участь -> брати участь*).
-- **Taboo Word Filter**: Word-boundary Cyrillic regex matching against specified banned word lists.
-- **Sharovarshchyna / Kitsch Guardrail**: Rejects unprompted kitsch tokens (*шаровари, сало, горілка, чуприна*) in non-folk contexts.
-- **Stress Homograph Disambiguation**: Tracks 8 core mobile stress homographs (*зАмок/замОк, мукА/мУка, дорогА/дорОга, бІлизна/білизнА*) and verifies explicit acute/capitalization markers.
-- **Meter Consistency**: Validates binary meters (iamb, trochee), ternary meters (dactyl, amphibrach, anapest), non-syllabo-tonic systems (dolnik, taktovik), and authentic 14-syllable Kolomyika (4+4+6 caesura).
-- **Clausula Cadence Classifier**: Classifies masculine (M), feminine (F), dactylic (D), and verifies stanza alternating schemes (e.g. ЖЧЖЧ).
-- **Rhyme Classifier**: Scans line-ending words for cheap grammatical verb-verb rhymes across 24 inflected verb suffixes.
-
-#### 2.2 Style Prompt & Exclude Engine (	ests/validator/style_validator.py)
-- **Character Budget**: Enforces strict <=180 character limit (and strict <=120 limit for compact mode), recommending optimal 80-150 character density.
-- **Metadata Purity**: Scans for forbidden metadata labels (Language:, Theme:, BPM:, Genre:, Title:, etc.) and narrative story descriptions.
-- **Reference De-Identification**: Rejects banned copyright-triggering phrases (*in the style of*, *sounds like*, *cover of*) and matches 38+ Ukrainian artist/band names (*DakhaBrakha, Okean Elzy, SadSvit, ONUKA, Hardkiss, Jerry Heil, Go_A, etc.*).
-- **Exclude / Negative Prompt Precision**: Rejects vague emotional words (*sadness, depression, evil, bad vibes, low quality*) and enforces concrete acoustic instrument/artifact tokens.
-
-#### 2.3 Bracketed Metatag Engine (	ests/validator/metatag_validator.py)
-- **Metatag Syntax**: Matches against 37 English and 21 Ukrainian canonical structural metatag patterns ([Intro], [Verse], [Chorus], [Drop], [Outro], [Соло бандури], etc.).
-- **Prose Hallucination Rejection**: Detects and rejects descriptive narrative prose inside brackets ([She starts singing softly with guitar]).
-- **Parenthetical Notation**: Verifies backing vocals, echoes, and ad-libs syntax (бек-вокал).
-- **Bracket Matching**: Verifies open/close bracket counts for square brackets and parentheses.
-
-#### 2.4 100-Point Rubric Scoring Engine (	ests/validator/rubric_scorer.py)
-- **Poetry Rubric (7 Dimensions, 100 pts Max, >=85 Passing)**:
-  - Linguistic Naturalness (25 pts)
-  - Imagery & Concreteness (20 pts)
-  - Rhythm & Line Breaks (15 pts)
-  - Rhyme & Sound Design (10 pts)
-  - Tonal Integrity (10 pts)
-  - Ending Strength (10 pts)
-  - Anti-Cliche Guardrails (10 pts)
-- **Suno Style Rubric (8 Dimensions, 100 pts Max, >=88 Passing)**:
-  - Musical Concreteness (20 pts)
-  - Token Economy (15 pts)
-  - Reference De-Identification (20 pts)
-  - Structural Metatags (10 pts)
-  - Style Field Purity (10 pts)
-  - Ukrainian Authenticity (10 pts)
-  - Exclude Precision (10 pts)
-  - Custom Mode Split (5 pts)
+All four forensic audit objectives were systematically evaluated against ground truth requirements in `ORIGINAL_REQUEST.md` and architectural contracts in `PROJECT.md`:
+1. **Zero Hardcoded Test Results / Cheating**: No hardcoded test IDs, fake scores, bypass conditionals, or test escapes exist in `tests/validator/poetic_validator.py`, `tests/validator/rubric_scorer.py`, or test suites.
+2. **Zero Dummy / Facade Implementations**: `check_artificial_inversions`, `check_filler_words_and_pronouns`, `check_cliche_rhymes`, and `evaluate_sensory_grounding` contain genuine algorithmic logic, regex engines, and rich lexical stem taxonomies (140+ sensory stems, 23 cliché pairs, 28 filler tokens). All 5 subagent specifications in `skills/ukrainian-poetry/agents/` are exhaustive, standalone domain specifications with complete input/output contracts and operational rules.
+3. **Flawless Documentation Integrity**: `skills/ukrainian-poetry/SKILL.md`, `references/full-guide.md`, `references/rubric.md`, `skills/poetry-skill/SKILL.md`, and `AGENTS.md` thoroughly integrate all 6 principles with deep linguistic theory (Potebnja, Yakubsky, Zerov, Movchun), actionable examples, transformations, and self-edit checklists.
+4. **Behavioral Verification & Test Execution**: Independent CLI execution of `py -3 tests/run_tests.py --all` resulted in **62/62 tests passing (100.0% success rate)** with an average poetry rubric score of **98.1/100** and an average Suno style score of **99.9/100**.
 
 ---
 
-## 3. Adversarial Stress-Test Verification
+## 2. Phase-by-Phase Forensic Findings
 
-To empirically prove that the validators are genuine and not dummy passes, 8 adversarial injection test cases were executed directly against the validator modules:
-
-`	ext
-========================================================================================
-                          ADVERSARIAL STRESS TEST RESULTS
-========================================================================================
-1. Surzhyk Injection:          CAUGHT & REJECTED (5 violations detected, Score: 80.0/100, is_valid=False)
-2. Taboo Lexicon Injection:    CAUGHT & REJECTED (6/6 taboo words detected, is_valid=False)
-3. Sharovarshchyna Injection:  CAUGHT & REJECTED (3 kitsch tokens detected in urban mode, is_valid=False)
-4. Kolomyika Metric Breakage:  CAUGHT & REJECTED (4 lines flagged for syllable/caesura violation, is_valid=False)
-5. Style Box Metadata Leakage: CAUGHT & REJECTED (Character excess + 4 metadata label leaks detected, is_valid=False)
-6. Banned Artist Leakage:      CAUGHT & REJECTED (3 copyright phrases + 3 artist names detected, is_valid=False)
-7. Vague Exclude Vector:       CAUGHT & REJECTED (5 vague emotional tokens detected, is_valid=False)
-8. Metatag Hallucination:      CAUGHT & REJECTED (Prose hallucination + mismatched bracket detected, is_valid=False)
-========================================================================================
-RESULT: 8 / 8 Adversarial Attacks Blocked (100% Detection Rate)
-========================================================================================
-`
+### Check 1: Audit for Hardcoded Test Results / Cheating / Bypasses
+- **Scope**: `tests/validator/poetic_validator.py`, `tests/validator/rubric_scorer.py`, `tests/validator/style_validator.py`, `tests/validator/metatag_validator.py`, and `tests/run_tests.py`.
+- **Methodology**: Static pattern scanning for test IDs (`TC_T1_*`, `TC_T2_*`), mock return values, conditional bypasses (`if "test" in text: return 100`), and hardcoded result assertions.
+- **Evidence**:
+  - Full-text search across `tests/validator/` for `test_`, `tier`, `mock`, `fake`, `dummy`, `bypass`, and `100.0` returned **zero instances** of hardcoding.
+  - In `rubric_scorer.py`, scoring is entirely calculated dynamically through mathematical deductions across 7 distinct dimensions (`linguistic_naturalness: 25`, `imagery_concreteness: 20`, `rhythm_line_breaks: 15`, `rhyme_sound_design: 10`, `tonal_integrity: 10`, `ending_strength: 10`, `anti_cliche_guardrails: 10`).
+  - Example of dynamic deduction: In `TC_T1_FIX_01_Petrarchan_Sonnet`, 4 grammatical rhyme pairs were detected, causing an authentic deduction of `min(6.0, 4 * 2.0) = -6.0 pts` on `rhyme_sound_design`, lowering the score to `94.0/100`.
+- **Finding**: **PASS (CLEAN)** — Zero cheating or hardcoding mechanisms detected.
 
 ---
 
-## 4. Independent Test Execution Results
+### Check 2: Audit for Dummy / Facade Implementations
 
-`	ext
-=======================================================
-                 TEST EXECUTION SUMMARY
-=======================================================
-Command:          py -3 tests/run_tests.py --all
-Total Test Cases: 59
-Passed:           59
-Failed:           0
-Warnings:         29 (Informational: non-standard clausulae in fixed forms / verb rhyme warnings)
-Avg Poetry Score: 98.4 / 100 (Passing Threshold: >= 85.0)
-Avg Suno Score:   99.9 / 100 (Passing Threshold: >= 88.0)
-Success Rate:     100.0%
-Report Artifact:  tests/reports/test_report.json
-=======================================================
-`
+#### 2.1 Validator Functions in `tests/validator/poetic_validator.py`:
+1. `check_artificial_inversions(poem_text, mode)`:
+   - Contains 3 distinct regex pattern classes in `ARTIFICIAL_INVERSION_PATTERNS` detecting:
+     1. Verb + Postpositive Personal Pronoun at line end (`r"\b([а-яіїєґА-ЯІЇЄҐ]+(?:в|ла|ло|ли|ю|єш|є|ємо|єте|ить|ять|уть|нув|нула|нуло|нули|тиме|тиму|тимеш|тимуть|всь|вся|лась|лося|лися))\s+(я|ти|він|вона|воно|ми|ви|вони)\s*[\.,!?;:—\-]*$"`)
+     2. Stranded conjunctions/particles at line end (`r"\b([а-яіїєґА-ЯІЇЄҐ]+)\s+(що|щоб|як|мов|немов|ніби|бо|але|хоч|хоча)\s*[\.,!?;:—\-]*$"`)
+     3. Inverted auxiliary verbs with pronouns (`r"\b(був|була|було|були|буде|будуть)\s+(я|ти|він|вона|воно|ми|ви|вони)\s*[\.,!?;:—\-]*$"`)
+   - Includes legitimate stylistic exemption handling for historical registers (`folk`, `baroque`, `cossack_baroque`).
+2. `check_filler_words_and_pronouns(poem_text, mode)`:
+   - Includes 12 multi-word rhythmic padding idioms (`FILLER_RHYTHMIC_CLUSTERS`: `і ось`, `ну от`, `але ж бо`, `та й ось`, `то ж бо`, `а я ось`, `вже ж бо`, `ну і ось`, `от і все`, `ну як же`, `ось і знов`, `та ось же`).
+   - Includes 28 monosyllabic padding tokens (`FILLER_PRONOUNS_AND_PARTICLES`).
+   - Computes stanza-level and text-wide pronoun density, flagging stanzas exceeding threshold density (`>= 32%` or `>= 5` filler tokens).
+3. `check_cliche_rhymes(poem_text)`:
+   - Implements 23 banned cliché rhyming pairs (`BANAL_RHYME_PAIRS`) with an internal morphological stem matcher (`_word_matches_stem`) handling Ukrainian vowel mutations (`о/і`, `е/і`, `дол/діл`, `гроз/гріз`, `сон/сн`).
+   - Scans line pairings across distance spans of 1 to 3 lines.
+4. `evaluate_sensory_grounding(poem_text)`:
+   - Implements `SENSORY_LEXICON` across 5 physical modalities with 140+ Ukrainian morphological root stems:
+     - `tactile`: 36 stems (ірж, мід, вапн, гравій, шовк, шорстк, глин, шкір, граніт, пісок, пил, скл, заліз, сталь, дерев, тканин, колюч, гостр, шерст, камін, бетон, бруд, волог, сух, мокр, крапл, долон, пальц, дотик, кора, голк, струн, склян, мармур...)
+     - `acoustic`: 29 stems (рип, шелест, скрегіт, свист, гул, дзеньк, тріск, лун, дзвін, гомін, хруск, шепіт, стогін, плюск, брязк, шум, стук, грім, крик, цокіт, клацан, тиш, дзвен, мовчан, голос, музик, спів, бриніт...)
+     - `visual`: 38 stems (попіл, морок, бурштин, слюд, полин, чад, відблиск, дим, смол, тінь, туман, іскр, світл, темр, відтін, багрян, смарагд, золот, сріб, куряв, сяйв, хмар, зоря, промін, блиск, шибк, плям, віддзеркал, колір, барв, ліхтар, п'єдестал, колон, рудий, жовт, синій, червон, чорн, біл, зелен...)
+     - `thermal`: 17 stems (холод, тепл, жар, мороз, криг, крижан, лід, льод, палюч, студен, прохолод, пекуч, вогн, плам, полум, стиг, охолон...)
+     - `olfactory_gustatory`: 22 stems (полин, м'ят, смол, хвой, гірк, солод, кисл, терпк, дим, запах, аромат, пріл, солон, сиріст, деревій, кав, хліб, смак, пахощ, чайник, мед...)
+   - Includes `ABSTRACT_LEXICON` (17 stems: душ, серц, дол, вічн, житт, кохан, почутт, мрій, наді, сут, бутт, нескінчен, ідеал, абстракц, духовн, глибин, стражд...).
+   - Computes grounding levels (`high`, `moderate`, `low`, `purely_abstract`) and sensory scores.
+
+#### 2.2 Subagent Specifications in `skills/ukrainian-poetry/agents/`:
+- All 5 subagent files (`poetry-imagery-architect.md`, `poetry-emotional-critic.md`, `poetry-prosody-phonics.md`, `poetry-conciseness-editor.md`, `poetry-form-synthesizer.md`) and `openai.yaml` were inspected.
+- File sizes range between 9.5 KB and 13.5 KB (totaling >57 KB of authentic domain instructions).
+- Each agent contains:
+  1. YAML frontmatter (`name`, `description`, `<example>`, negative boundaries, model configuration).
+  2. Role & Identity with Ukrainian titles.
+  3. Strict Scope & Boundaries (What it owns vs what it does NOT do).
+  4. Input Contract with typed YAML parameters.
+  5. Operational Rules & Heuristics with concrete transformation catalogs (`❌ До ➔ ✅ Після`).
+  6. Output Contract with 5 structured Markdown sections.
+  7. Edge-Case Handling (fixed forms, archaic registers, Suno audio handshake).
+- **Finding**: **PASS (CLEAN)** — All implementations and agent files are authentic, substantive, and comprehensive.
 
 ---
 
-## 5. Artifact Completeness & Quality Review
+### Check 3: Audit for Documentation Integrity
+- **Scope**: `skills/ukrainian-poetry/SKILL.md`, `references/full-guide.md`, `references/rubric.md`, `skills/poetry-skill/SKILL.md`, `AGENTS.md`.
+- **Findings**:
+  - The 6 Poetic Principles are consistently defined and synchronized across all documentation tiers:
+    1. *Свіжа образність та метафоричність (Show, don't tell, sensory tactility, zero cliches)*
+    2. *Емоційна глибина та щирість (Psychological realism, zero false pathos, zero preachy moralizing)*
+    3. *Ритмічна та звукова гармонія (Living prosody, heterogeneous rhymes, pre-tonic consonants, euphony `у/в`, `і/й`, `з/із/зі`, no hiatus)*
+    4. *Лаконічність і вага слова (Semantic compression, zero filler pronouns, zero artificial inversions)*
+    5. *Оригінальність ракурсу (Unconventional angle, micro-focus, paradoxical/lingering endings)*
+    6. *Органічна єдність форми та змісту (Form organically mirrors emotional theme and state)*
+  - `full-guide.md` (62.7 KB, 573 lines) incorporates Ukrainian literary scholarship (O. Potebnja, B. Yakubsky, M. Zerov, L. Movchun, Y. Kovaliv) with comprehensive meter diagrams, clausula rules, and Russianism/Surzhyk correction catalogs.
+  - `rubric.md` (18.0 KB, 142 lines) details the 100-point scoring breakdown across 7 dimensions aligned with the 6 principles, plus a 14-item deduction matrix.
+  - `AGENTS.md` and `poetry-skill/SKILL.md` serve as immutable SSOT routers for the entire ecosystem.
+- **Finding**: **PASS (CLEAN)** — Deep linguistic and theoretical fidelity confirmed.
 
-| Artifact Category | Files Checked | Integrity Assessment |
+---
+
+### Check 4: Behavioral Verification & Independent Test Execution
+- **Command Executed**: `py -3 tests/run_tests.py --all`
+- **Exit Code**: `0`
+- **Output Summary**:
+  ```text
+  =======================================================
+                   TEST EXECUTION SUMMARY               
+  =======================================================
+  Total Test Cases: 62
+  Passed:           62
+  Failed:           0
+  Warnings:         31
+  Avg Poetry Score: 98.1 / 100
+  Avg Suno Score:   99.9 / 100
+  Success Rate:     100.0%
+  =======================================================
+  ```
+- **Validation Engine Unit Tests**: All 5 internal unit suites passed:
+  - `[PASS] Unit: Artificial Inversion Detection (4 detected)`
+  - `[PASS] Unit: Baroque Stylization Exemption (0 flagged in baroque)`
+  - `[PASS] Unit: Filler Padding Detection (2 clusters, 10 tokens)`
+  - `[PASS] Unit: Banal Cliché Rhymes Detection (2 pairs detected)`
+  - `[PASS] Unit: Sensory Grounding High Level (5 tokens in 5 categories)`
+  - `[PASS] Unit: Abstract Fluff Detection (flagged as purely_abstract)`
+  - `[PASS] Unit: Rubric Scorer Flawed Penalty (74.0/100, deductions: 4)`
+- **Finding**: **PASS (CLEAN)** — 100% deterministic test execution verified.
+
+---
+
+## 3. Final Verdict
+
+| Forensic Check | Result | Evidence / Details |
 |---|---|---|
-| **Skill Entry Points** | skills/ukrainian-poetry/SKILL.md<br>skills/ukrainian-poetry-to-suno/SKILL.md | Authentic, comprehensive instructions with clear parameter extraction, scansion rules, 8 music genres, vocal timbres, and checklist. |
-| **Poetry Canonical References** | ull-guide.md, input-templates.md, 
-ubric.md, 	ests.md, stress-tests.md | Full coverage of F1-F8: ternary meters, dolnik, kolomyika, blank verse, sonnets/fixed forms, mobile stress, heterogeneous rhyming, 6 registers. |
-| **Suno Canonical References** | ull-guide.md, prompt-builder.md, mood-to-style-map.md, 
-eference-to-style-cheatsheet.md, 
-eference-breakdown-examples.md, lyrics-to-suno-template.md, song-structure-pack.md, suno-prompt-anti-patterns.md, ukrainian-song-scenarios.md | Full coverage of F9-F14: 80-180 char token economy, bracketed metatags, 8 modern Ukrainian genres, vocal timbre directives, exclude vectors. |
-| **Prompt Packs** | 7 Packs in packs/ & skills/.../packs/ (dark, emale, male, sad, uplifting, uk-ref, 
-ef-pack) | Exactly synchronized between root and canonical skill subdirectories. 0 truncated lines. |
-| **Test Suites** | 10 JSON files in 	ests/tier1_feature_coverage/, 	ier2_boundary_corner/, 	ier3_cross_feature/, 	ier4_real_world/ | 59 richly populated test cases covering all 18 features (F1-F18). |
+| 1. Hardcoded Test Results / Cheating | **PASS** | Zero hardcoded test IDs, mocks, or bypass conditionals in validator or tests. |
+| 2. Dummy / Facade Implementations | **PASS** | Rich algorithmic engines, 140+ stems, 23 cliché pairs; 5 comprehensive subagents. |
+| 3. Documentation Integrity | **PASS** | 6 Poetic Principles and 5 subagents fully integrated with deep linguistic rigor. |
+| 4. Test Execution & Runtime Behavior | **PASS** | 62/62 test cases pass, 0 errors, 98.1/100 avg poetic score, pure Python stdlib. |
 
----
+### Final Forensic Verdict: **CLEAN**
+No integrity violations, cheating mechanisms, or facade implementations were detected. The work product is authentic, robust, and fully compliant with `ORIGINAL_REQUEST.md` and `PROJECT.md`.
 
-## 6. Final Verdict
-
-**VERDICT: CLEAN**
-
-The entire work product is authentic, rigorous, fully implemented, and free of any integrity violations, dummy implementations, or hardcoded test escapes. All requirements and acceptance criteria from ORIGINAL_REQUEST.md and PROJECT.md have been verified empirically.

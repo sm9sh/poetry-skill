@@ -19,3 +19,21 @@ Deliverables:
 - Write your adversarial challenge report to `d:/poetry-skill/.agents/challenger_1/challenge_report.md`.
 - Write your formal handoff to `d:/poetry-skill/.agents/challenger_1/handoff.md` with clear verdict (APPROVE or REQUEST_CHANGES).
 - Message parent upon completion.
+
+## 2026-08-28T09:01:19Z
+You are challenger_1 conducting empirical challenge testing and stress-testing on the Ukrainian poetry validation engine and rubric scorer in `poetry-skill`.
+
+Your working directory is `d:\poetry-skill\.agents\challenger_1`.
+You MUST read `d:\poetry-skill\ORIGINAL_REQUEST.md` and `d:\poetry-skill\PROJECT.md`.
+
+Objectives:
+1. Run `py -3 tests/run_tests.py --all` and inspect test outputs.
+2. Empirically challenge the new validator methods (`check_artificial_inversions`, `check_filler_words_and_pronouns`, `check_cliche_rhymes`, `evaluate_sensory_grounding`):
+   - Test deliberate positive cases (poems with artificial inversions like "бачив я", filler clusters like "і ось", cliché rhymes like "кров-любов") -> ensure validator flags them.
+   - Test negative cases (authentic contemporary and classical poems, folk/baroque stylizations) -> ensure validator passes them without false alarms.
+   - Test free verse / verlibre and blank verse poems -> ensure proper scoring.
+   - Test Suno song lyrics with bracketed tags `[Intro]`, `[Verse]` -> ensure tags are cleanly stripped.
+3. Verify rubric score calculations and deduction limits.
+
+Document all test runs, stress tests, empirical findings, and your explicit verdict (APPROVE or CHALLENGE_FAILED) in `d:\poetry-skill\.agents\challenger_1\challenge_report.md` and `d:\poetry-skill\.agents\challenger_1\handoff.md`.
+Send a message back to parent when done.

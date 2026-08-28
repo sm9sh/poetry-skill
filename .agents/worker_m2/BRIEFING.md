@@ -1,14 +1,14 @@
-# BRIEFING — 2026-08-26T10:00:00Z
+# BRIEFING — 2026-08-28T08:52:40Z
 
 ## Mission
-Execute Milestone M2: Implement Features F9-F14 for Suno AI Music Prompt Engineering in `skills/ukrainian-poetry-to-suno/` and its reference ecosystem.
+Execute Milestone M2: Creation and Registration of 5 Specialized Subagents and Multi-Agent Pipeline (`skills/ukrainian-poetry/agents/`).
 
 ## 🔒 My Identity
 - Archetype: Specialist / Implementer / QA
-- Roles: implementer, qa, specialist (Suno AI prompt engineering)
+- Roles: implementer, qa, specialist (Ukrainian Poetry Subagents & Pipeline)
 - Working directory: d:/poetry-skill/.agents/worker_m2
-- Original parent: 1f051654-233b-4bf7-ad7d-e9c4beed0a3d
-- Milestone: M2 (Suno AI Music Prompt Engineering Specialization)
+- Original parent: 2d012eef-7ad8-429a-adde-8fa3c5ce7185
+- Milestone: M2 (5 Subagents & Pipeline)
 
 ## 🔒 Key Constraints
 - Strictly genuine implementations (no hardcoded test hacks, no facade logic).
@@ -20,49 +20,53 @@ Execute Milestone M2: Implement Features F9-F14 for Suno AI Music Prompt Enginee
 - Codify acoustic anti-artifact negative prompting.
 - Overhaul all 7 prompt packs and reference files with zero redundancy.
 - Maintain `progress.md` with `Last visited:` timestamps.
+- Milestone M2 constraints: Create 5 comprehensive subagent files in `skills/ukrainian-poetry/agents/` and register them in `openai.yaml`.
+- Each subagent file must follow full schema: YAML frontmatter (name, description, examples, negative constraints), Role & Identity, Scope & Boundaries, Input Contract, Operational Rules & Heuristics, Output Contract, Edge-Case Handling.
 
 ## Current Parent
-- Conversation ID: 1f051654-233b-4bf7-ad7d-e9c4beed0a3d
-- Updated: 2026-08-26T10:00:00Z
+- Conversation ID: 2d012eef-7ad8-429a-adde-8fa3c5ce7185
+- Updated: 2026-08-28T08:52:40Z
 
 ## Task Summary
-- **What to build**: Implement F9 (Token Economy), F10 (Bracketed Metatags), F11 (8 Modern Ukrainian Genres), F12 (Vocal Timbre Directives), F13 (Acoustic Anti-Artifact Exclude Vectors), F14 (Modernize 7 Prompt Packs), update all references and test suites.
-- **Success criteria**: All files updated with high precision, zero token leakage, correct metatag syntax, comprehensive Ukrainian genre/vocal taxonomy, acoustic anti-artifact rules, and updated test suite in `references/tests.md`.
-- **Interface contracts**: `d:/poetry-skill/.agents/PROJECT.md`
-- **Code layout**: `skills/ukrainian-poetry-to-suno/`
+- **What to build**: 5 subagent personas (`poetry-imagery-architect.md`, `poetry-emotional-critic.md`, `poetry-prosody-phonics.md`, `poetry-conciseness-editor.md`, `poetry-form-synthesizer.md`) and updated agent registry (`openai.yaml`).
+- **Success criteria**: All 5 markdown files and `openai.yaml` created with rich domain rules, contracts, and examples. Deterministic test suite passes with 0 failures (59/59 tests pass, avg poetry score 98.2/100).
+- **Interface contracts**: `d:/poetry-skill/PROJECT.md` & `d:/poetry-skill/.agents/survey_explorer_2/survey_r2.md`.
+- **Code layout**: `skills/ukrainian-poetry/agents/`.
 
 ## Key Decisions Made
-- Style of Music field uses English musical tokens exclusively (with specific cultural instruments like bandura/sopilka), while Ukrainian text is restricted to the Lyrics field to prevent model degradation.
-- All ASCII arrow structure notation has been converted to parseable Suno bracketed metatags with optional dynamics, tempo, and key tags.
-- Verified 100% of all generated style prompts conform to 80-180 character bounds (optimal 80-150 chars).
+- Structured each subagent with standard frontmatter and detailed Ukrainian & English domain rules.
+- Assigned clear principle ownership to each subagent to prevent cognitive drift.
+- Registered all 5 subagents in `openai.yaml` with clear entry points and invocation syntax.
+- Verified zero regression across all 59 tests in test harness.
 
 ## Change Tracker
 - **Files modified**:
-  - `skills/ukrainian-poetry-to-suno/SKILL.md`: Core skill definitions, token economy, 8 genres, vocal timbres, bracketed metatags, exclude vectors.
-  - `skills/ukrainian-poetry-to-suno/references/prompt-builder.md`: 6-block modular builder, positional weighting, anti-artifact vectors, zero metadata leakage.
-  - `skills/ukrainian-poetry-to-suno/references/mood-to-style-map.md`: 8 modern Ukrainian genres, acoustic profiles, character-budgeted prompt formulas.
-  - `skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`: 10 contemporary Ukrainian artist archetype maps and safe style translation.
-  - `skills/ukrainian-poetry-to-suno/references/reference-breakdown-examples.md`: 5 complete real-world reference breakdowns across modern Ukrainian styles.
-  - `skills/ukrainian-poetry-to-suno/references/lyrics-to-suno-template.md`: Full Custom Mode arrangement workflows with bracketed metatags.
-  - `skills/ukrainian-poetry-to-suno/references/song-structure-pack.md`: Standard bracketed metatag grammar, dynamics, and 8 modern structural templates.
-  - `skills/ukrainian-poetry-to-suno/references/suno-prompt-anti-patterns.md`: Top-10 anti-patterns, localization paradox, acoustic failure modes, and exclude solutions.
-  - `skills/ukrainian-poetry-to-suno/references/ukrainian-song-scenarios.md`: 24 modern scenarios across 8 genres with character-budgeted prompt seeds.
-  - `skills/ukrainian-poetry-to-suno/references/tests.md`: Standard and stress test suites covering extreme BPM, subgenre blending, dynamic drops, budget audits.
-  - `skills/ukrainian-poetry-to-suno/references/rubric.md`: Updated 100-point rubric with strict token budget and anti-artifact criteria.
-  - `skills/ukrainian-poetry-to-suno/references/packs/dark-pack.md`: 8 distinct dark genres with character budgeting and exclude vectors.
-  - `skills/ukrainian-poetry-to-suno/references/packs/female-vocal-pack.md`: 8 distinct female vocal styles and timbres.
-  - `skills/ukrainian-poetry-to-suno/references/packs/male-vocal-pack.md`: 8 distinct male vocal styles and timbres.
-  - `skills/ukrainian-poetry-to-suno/references/packs/sad-pack.md`: 8 distinct sorrowful and melancholic styles.
-  - `skills/ukrainian-poetry-to-suno/references/packs/uplifting-pack.md`: 8 distinct energetic and uplifting styles.
-  - `skills/ukrainian-poetry-to-suno/references/packs/suno-reference-prompt-pack-uk.md`: 10 full Custom Mode setups (English Style + Ukrainian Lyrics).
-  - `skills/ukrainian-poetry-to-suno/references/packs/suno-reference-prompt-pack.md`: 20 master reference styles.
-  - `skills/ukrainian-poetry-to-suno/references/packs/README.md`: Index of modernized prompt packs.
+  - `skills/ukrainian-poetry/agents/poetry-imagery-architect.md` (created, 155 lines)
+  - `skills/ukrainian-poetry/agents/poetry-emotional-critic.md` (created, 142 lines)
+  - `skills/ukrainian-poetry/agents/poetry-prosody-phonics.md` (created, 194 lines)
+  - `skills/ukrainian-poetry/agents/poetry-conciseness-editor.md` (created, 146 lines)
+  - `skills/ukrainian-poetry/agents/poetry-form-synthesizer.md` (created, 168 lines)
+  - `skills/ukrainian-poetry/agents/openai.yaml` (updated, 31 lines)
+  - `.agents/worker_m2/changes_m2.md` (created)
+  - `.agents/worker_m2/handoff.md` (created)
+- **Build status**: PASS (59/59 tests, 0 failures, 98.2 avg poetry score)
+- **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: All character counts validated (100% within 80-180 chars). Zero metadata leakage in prompt blocks. Zero ASCII arrow syntax remaining.
-- **Tests added/modified**: `references/tests.md` expanded with 12 comprehensive test scenarios.
+- **Build/test result**: PASS (py -3 tests/run_tests.py --all)
+- **Lint status**: 0 violations
+- **Tests added/modified**: Full suite validation passed
+
+## Loaded Skills
+- **Source**: `d:\poetry-skill\.agents\skills\poetry-skill\SKILL.md`, `skills/ukrainian-poetry/SKILL.md`
+- **Core methodology**: 6 Core Poetic Principles, 5 Subagent Pipeline, Prosody, Phonics, Euphony, Sincerity, Conciseness, Form/Content Unity.
 
 ## Artifact Index
-- `skills/ukrainian-poetry-to-suno/SKILL.md` — Core Suno skill definition
-- `skills/ukrainian-poetry-to-suno/references/` — Detailed reference guides and prompt packs
-- `d:/poetry-skill/.agents/worker_m2/handoff.md` — Final handoff report
+- `skills/ukrainian-poetry/agents/poetry-imagery-architect.md` — Subagent 1 specification
+- `skills/ukrainian-poetry/agents/poetry-emotional-critic.md` — Subagent 2 specification
+- `skills/ukrainian-poetry/agents/poetry-prosody-phonics.md` — Subagent 3 specification
+- `skills/ukrainian-poetry/agents/poetry-conciseness-editor.md` — Subagent 4 specification
+- `skills/ukrainian-poetry/agents/poetry-form-synthesizer.md` — Subagent 5 specification
+- `skills/ukrainian-poetry/agents/openai.yaml` — Subagents registry
+- `d:/poetry-skill/.agents/worker_m2/changes_m2.md` — Changes report
+- `d:/poetry-skill/.agents/worker_m2/handoff.md` — Handoff report

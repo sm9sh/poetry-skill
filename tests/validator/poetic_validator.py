@@ -110,6 +110,114 @@ class PoeticValidator:
         "біль": r"\b(бол[іеяюью][а-яіїєґ]*|болюч[а-яіїєґ]*|біль|болю|болем|болями)\b",
     }
 
+    # Patterns for artificial / forced end-rhyme syntactic inversions
+    ARTIFICIAL_INVERSION_PATTERNS = [
+        # 1. Verb + Postpositive Personal Pronoun at line end
+        (
+            r"\b([а-яіїєґА-ЯІЇЄҐ]+(?:в|ла|ло|ли|у|ю|еш|єш|е|є|емо|ємо|ете|єте|ить|їть|ать|ять|уть|ють|иш|їш|имо|їмо|ите|їте|нув|нула|нуло|нули|тиме|тиму|тимеш|тимемо|тимете|тимуть|всь|вся|лась|лося|лися))\s+(я|ти|він|вона|воно|ми|ви|вони)\s*[\.,!?;:—\-]*$",
+            "Штучна інверсія 'дієслово + особовий займенник' у кінці рядка заради рими",
+        ),
+        # 2. Conjunction / subordinator / particle stranded at line end
+        (
+            r"\b([а-яіїєґА-ЯІЇЄҐ]+)\s+(що|щоб|як|мов|немов|ніби|бо|але|хоч|хоча)\s*[\.,!?;:—\-]*$",
+            "Синтаксичний розрив сполучника / частки в кінці рядка",
+        ),
+        # 3. Unnatural auxiliary inversion at line end
+        (
+            r"\b(був|була|було|були|буде|будуть)\s+(я|ти|він|вона|воно|ми|ви|вони)\s*[\.,!?;:—\-]*$",
+            "Штучна інверсія допоміжного дієслова із займенником у кінці рядка",
+        ),
+    ]
+
+    # Rhythmic filler / padding clusters used solely for meter stuffing
+    FILLER_RHYTHMIC_CLUSTERS = [
+        r"\b(і\s+ось)\b",
+        r"\b(ну\s+от)\b",
+        r"\b(але\s+ж\s+бо)\b",
+        r"\b(та\s+й\s+ось)\b",
+        r"\b(то\s+ж\s+бо)\b",
+        r"\b(а\s+я\s+ось)\b",
+        r"\b(вже\s+ж\s+бо)\b",
+        r"\b(ну\s+і\s+ось)\b",
+        r"\b(от\s+і\s+все)\b",
+        r"\b(ну\s+як\s+же)\b",
+        r"\b(ось\s+і\s+знов)\b",
+        r"\b(та\s+ось\s+же)\b",
+    ]
+
+    # High-density monosyllabic padding pronouns and particles
+    FILLER_PRONOUNS_AND_PARTICLES = {
+        "я", "ти", "він", "вона", "воно", "ми", "ви", "вони",
+        "мій", "моє", "моя", "мої", "твій", "твоє", "твоя", "твої",
+        "свій", "своє", "своя", "свої", "цей", "ця", "це", "ці",
+        "той", "та", "те", "ті", "ось", "от", "вже",
+    }
+
+    # Banal / hackneyed cliché rhyme pairs
+    BANAL_RHYME_PAIRS = [
+        ("любов", "кров"),
+        ("серце", "перце"),
+        ("серце", "дверці"),
+        ("доля", "воля"),
+        ("сльози", "грози"),
+        ("сльози", "морози"),
+        ("грози", "морози"),
+        ("сліз", "гріз"),
+        ("ніч", "віч"),
+        ("ніч", "пліч"),
+        ("віч", "пліч"),
+        ("ночі", "очі"),
+        ("зорі", "морі"),
+        ("зоря", "моря"),
+        ("небо", "треба"),
+        ("туга", "розлука"),
+        ("туга", "друга"),
+        ("день", "пень"),
+        ("рано", "кохано"),
+        ("жити", "любити"),
+        ("знати", "кохати"),
+        ("сон", "дзвін"),
+        ("сни", "весни"),
+    ]
+
+    # Sensory grounding lexicon categorized by physical perception
+    SENSORY_LEXICON = {
+        "tactile": [
+            "ірж", "мід", "вапн", "гравій", "шовк", "шорстк", "глин", "шкір", "граніт",
+            "пісок", "піск", "пил", "скл", "заліз", "сталь", "дерев", "тканин", "колюч",
+            "гостр", "шерст", "камін", "кам'ян", "бетон", "бруд", "волог", "сух", "мокр",
+            "крапл", "долон", "пальц", "дотик", "кора", "голк", "струн", "склян", "мармур",
+        ],
+        "acoustic": [
+            "рип", "шелест", "скрегіт", "свист", "гул", "дзеньк", "тріск", "лун", "дзвін",
+            "гомін", "хруск", "шепіт", "стогін", "плюск", "брязк", "шум", "стук", "грім",
+            "крик", "цокіт", "клацан", "тиш", "дзвен", "мовчан", "голос", "музик", "спів",
+            "бриніт", "бринить",
+        ],
+        "visual": [
+            "попіл", "морок", "бурштин", "слюд", "полин", "чад", "відблиск", "дим", "смол",
+            "тінь", "туман", "іскр", "світл", "темр", "відтін", "багрян", "смарагд", "золот",
+            "сріб", "куряв", "сяйв", "хмар", "зоря", "промін", "блиск", "шибк", "плям",
+            "віддзеркал", "колір", "барв", "ліхтар", "п'єдестал", "колон", "рудий", "жовт",
+            "синій", "червон", "чорн", "біл", "зелен",
+        ],
+        "thermal": [
+            "холод", "тепл", "жар", "мороз", "криг", "крижан", "лід", "льод", "палюч",
+            "студен", "прохолод", "пекуч", "вогн", "плам", "полум", "стиг", "охолон",
+        ],
+        "olfactory_gustatory": [
+            "полин", "м'ят", "смол", "хвой", "гірк", "солод", "кисл", "терпк", "дим",
+            "запах", "аромат", "пріл", "солон", "сиріст", "деревій", "кав", "хліб",
+            "смак", "пахощ", "чайник", "мед",
+        ],
+    }
+
+    # Abstract emotional noise lexicon
+    ABSTRACT_LEXICON = [
+        "душ", "серц", "дол", "вічн", "житт", "кохан", "почутт", "мрій", "наді",
+        "сут", "бутт", "нескінчен", "ідеал", "абстракц", "духовн", "глибин", "стражд",
+    ]
+
     @classmethod
     def count_syllables(cls, line: str) -> int:
         """Counts the number of syllables in a line of Ukrainian text."""
@@ -420,6 +528,250 @@ class PoeticValidator:
         return cheap_rhymes
 
     @classmethod
+    def check_artificial_inversions(cls, poem_text: str, mode: str = "general") -> List[Dict[str, Any]]:
+        """
+        Detects artificial, forced end-rhyme syntactic inversions.
+        Exempts authentic folk, baroque, and cossack baroque registers where
+        traditional inverted phrasing is historically and stylistically canonical.
+        """
+        if mode in ("folk", "historical_folk", "authentic_folk", "baroque", "cossack_baroque", "baroque_cossack"):
+            return []
+
+        lines = cls.get_lines_without_tags(poem_text)
+        inversions = []
+
+        for i, line in enumerate(lines):
+            line_clean = line.strip()
+            for pattern, desc in cls.ARTIFICIAL_INVERSION_PATTERNS:
+                m = re.search(pattern, line_clean, re.IGNORECASE)
+                if m:
+                    inversions.append({
+                        "line_num": i + 1,
+                        "line": line_clean,
+                        "matched": m.group(0).strip(),
+                        "description": desc,
+                    })
+                    break
+
+        return inversions
+
+    @classmethod
+    def check_filler_words_and_pronouns(cls, poem_text: str, mode: str = "general") -> Dict[str, Any]:
+        """
+        Detects excessive monosyllabic filler clusters and padding pronouns
+        used merely for meter stuffing.
+        """
+        lines = cls.get_lines_without_tags(poem_text)
+        found_clusters = []
+
+        # 1. Cluster check
+        for i, line in enumerate(lines):
+            line_clean = line.strip()
+            for pat in cls.FILLER_RHYTHMIC_CLUSTERS:
+                m = re.search(pat, line_clean, re.IGNORECASE)
+                if m:
+                    found_clusters.append({
+                        "line_num": i + 1,
+                        "line": line_clean,
+                        "matched": m.group(0).strip(),
+                    })
+
+        # 2. Stanza-level pronoun and particle density check
+        high_density_stanzas = []
+        total_filler_count = 0
+        total_word_count = 0
+
+        stanza_size = 4
+        for stanza_idx in range(0, len(lines), stanza_size):
+            stanza_lines = lines[stanza_idx:stanza_idx + stanza_size]
+            stanza_text = " ".join(stanza_lines)
+            words = re.findall(r"[а-яіїєґА-ЯІЇЄҐ]+", stanza_text.lower())
+            total_word_count += len(words)
+
+            filler_tokens = [w for w in words if w in cls.FILLER_PRONOUNS_AND_PARTICLES]
+            total_filler_count += len(filler_tokens)
+
+            if len(words) >= 10 and mode not in ("folk", "children"):
+                density = len(filler_tokens) / len(words)
+                if len(filler_tokens) >= 5 or density >= 0.32:
+                    high_density_stanzas.append({
+                        "stanza_index": (stanza_idx // stanza_size) + 1,
+                        "start_line": stanza_idx + 1,
+                        "filler_count": len(filler_tokens),
+                        "total_words": len(words),
+                        "density": density,
+                        "tokens": filler_tokens,
+                    })
+
+        overall_density = (total_filler_count / max(1, total_word_count)) if total_word_count > 0 else 0.0
+
+        return {
+            "clusters": found_clusters,
+            "cluster_count": len(found_clusters),
+            "high_density_stanzas": high_density_stanzas,
+            "total_filler_count": total_filler_count,
+            "overall_density": overall_density,
+        }
+
+    @classmethod
+    def check_cliche_rhymes(cls, poem_text: str) -> List[Dict[str, Any]]:
+        """
+        Detects banned, worn-out cliché rhyming pairs (e.g. кров-любов, доля-воля, сльози-грози).
+        """
+        lines = cls.get_lines_without_tags(poem_text)
+        cliche_rhymes = []
+
+        last_words = []
+        for i, line in enumerate(lines):
+            cleaned = re.sub(r"[^\wа-яіїєґА-ЯІЇЄҐ\u0300-\u036f]", "", line.split()[-1] if line.split() else "").lower()
+            cleaned = re.sub(r"[\u0300-\u036f]", "", cleaned)
+            if cleaned:
+                last_words.append((i + 1, cleaned, line))
+
+        def _word_matches_stem(w: str, stem: str) -> bool:
+            if w == stem:
+                return True
+            if stem in ("любов", "кров"):
+                return w.startswith("любов") if stem == "любов" else w.startswith("кров")
+            if stem in ("доля", "воля"):
+                return (w.startswith("дол") or w.startswith("діл")) if stem == "доля" else (w.startswith("вол") or w.startswith("віл"))
+            if stem in ("сльози", "сліз"):
+                return w.startswith("сльоз") or w.startswith("сліз")
+            if stem in ("грози", "гріз"):
+                return w.startswith("гроз") or w.startswith("гріз")
+            if stem == "морози":
+                return w.startswith("мороз")
+            if stem == "серце":
+                return w.startswith("серц") or w.startswith("серд")
+            if stem == "перце":
+                return w.startswith("перц")
+            if stem == "дверці":
+                return w.startswith("дверц") or w.startswith("двер")
+            if stem == "ніч":
+                return w in ("ніч", "ночі", "ніччю", "ночах", "ночей")
+            if stem == "віч":
+                return w.startswith("віч")
+            if stem == "пліч":
+                return w.startswith("пліч")
+            if stem in ("очі", "ночі"):
+                return w.startswith("оч") if stem == "очі" else w.startswith("ноч")
+            if stem in ("зорі", "зоря"):
+                return w.startswith("зор") or w.startswith("зір")
+            if stem in ("морі", "моря"):
+                return w.startswith("мор")
+            if stem == "небо":
+                return w.startswith("неб")
+            if stem == "треба":
+                return w.startswith("треб")
+            if stem == "туга":
+                return w.startswith("туг")
+            if stem == "розлука":
+                return w.startswith("розлук")
+            if stem == "друга":
+                return w.startswith("друг")
+            if stem == "день":
+                return w in ("день", "дня", "днем", "дні")
+            if stem == "пень":
+                return w in ("пень", "пня", "пнем", "пні")
+            if stem == "рано":
+                return w.startswith("ран")
+            if stem == "кохано":
+                return w.startswith("кохан")
+            if stem == "жити":
+                return w.startswith("жит") or w.startswith("жив")
+            if stem == "любити":
+                return w.startswith("люб")
+            if stem == "знати":
+                return w.startswith("зна")
+            if stem == "кохати":
+                return w.startswith("коха")
+            if stem in ("сон", "сни"):
+                return w.startswith("сон") or w.startswith("сн")
+            if stem == "дзвін":
+                return w.startswith("дзвін") or w.startswith("дзвон")
+            if stem == "весни":
+                return w.startswith("весн")
+            return w.startswith(stem[:-1]) if len(stem) > 3 else (w == stem)
+
+        for i in range(len(last_words)):
+            for j in (i + 1, i + 2, i + 3):
+                if j < len(last_words):
+                    l_num1, w1, line1 = last_words[i]
+                    l_num2, w2, line2 = last_words[j]
+                    if w1 != w2:
+                        for p1, p2 in cls.BANAL_RHYME_PAIRS:
+                            if (_word_matches_stem(w1, p1) and _word_matches_stem(w2, p2)) or \
+                               (_word_matches_stem(w1, p2) and _word_matches_stem(w2, p1)):
+                                cliche_rhymes.append({
+                                    "line_num1": l_num1,
+                                    "line_num2": l_num2,
+                                    "word1": w1,
+                                    "word2": w2,
+                                    "pair": f"{p1}-{p2}",
+                                    "line1": line1,
+                                    "line2": line2,
+                                })
+                                break
+
+        return cliche_rhymes
+
+    @classmethod
+    def evaluate_sensory_grounding(cls, poem_text: str) -> Dict[str, Any]:
+        """
+        Evaluates physical sensory grounding (tactile, acoustic, visual, thermal, olfactory)
+        versus abstract emotional declarations.
+        """
+        words = re.findall(r"[а-яіїєґА-ЯІЇЄҐ'’]+", poem_text.lower())
+        found_sensory: Dict[str, List[str]] = {cat: [] for cat in cls.SENSORY_LEXICON}
+        found_abstract: List[str] = []
+
+        for word in words:
+            word_norm = word.replace("’", "'").replace("ʼ", "'")
+            # Check sensory categories
+            matched_sensory = False
+            for cat, stems in cls.SENSORY_LEXICON.items():
+                for stem in stems:
+                    if word_norm.startswith(stem):
+                        found_sensory[cat].append(word)
+                        matched_sensory = True
+                        break
+                if matched_sensory:
+                    break
+
+            # Check abstract stems
+            for stem in cls.ABSTRACT_LEXICON:
+                if word_norm.startswith(stem):
+                    found_abstract.append(word)
+                    break
+
+        total_sensory = sum(len(v) for v in found_sensory.values())
+        active_categories = [cat for cat, toks in found_sensory.items() if len(toks) > 0]
+        total_abstract = len(found_abstract)
+
+        if total_sensory >= 3 and len(active_categories) >= 2:
+            grounding_level = "high"
+            sensory_score = 20.0
+        elif total_sensory >= 1:
+            grounding_level = "moderate"
+            sensory_score = 18.0
+        elif total_sensory == 0 and total_abstract >= 2:
+            grounding_level = "purely_abstract"
+            sensory_score = 12.0
+        else:
+            grounding_level = "low"
+            sensory_score = 15.0
+
+        return {
+            "grounding_level": grounding_level,
+            "sensory_score": sensory_score,
+            "total_sensory_tokens": total_sensory,
+            "active_categories": active_categories,
+            "total_abstract_tokens": total_abstract,
+            "details": {cat: toks for cat, toks in found_sensory.items() if toks},
+            "abstract_tokens": found_abstract,
+        }
+
+    @classmethod
     def validate_poem(
         cls,
         poem_text: str,
@@ -480,6 +832,42 @@ class PoeticValidator:
             for w1, w2 in grammatical_rhymes:
                 warnings.append(f"Potential cheap grammatical/verb rhyme detected: '{w1}' - '{w2}'.")
 
+        # 9. Artificial Inversions check
+        inversions = cls.check_artificial_inversions(poem_text, mode=mode)
+        if inversions:
+            for inv in inversions:
+                warnings.append(
+                    f"Line {inv['line_num']}: Potential artificial syntactic inversion detected: '{inv['matched']}' ({inv['description']})."
+                )
+
+        # 10. Filler words and pronouns check
+        filler_metrics = cls.check_filler_words_and_pronouns(poem_text, mode=mode)
+        if filler_metrics["cluster_count"] > 0:
+            for cl in filler_metrics["clusters"]:
+                warnings.append(
+                    f"Line {cl['line_num']}: Pleonastic rhythmic filler padding detected: '{cl['matched']}'."
+                )
+        if filler_metrics["high_density_stanzas"]:
+            for s in filler_metrics["high_density_stanzas"]:
+                warnings.append(
+                    f"Stanza {s['stanza_index']}: Excessive filler pronoun/particle density ({s['filler_count']} tokens, {s['density']:.1%})."
+                )
+
+        # 11. Cliché rhymes check
+        cliche_rhymes = cls.check_cliche_rhymes(poem_text)
+        if cliche_rhymes:
+            for cr in cliche_rhymes:
+                warnings.append(
+                    f"Lines {cr['line_num1']} & {cr['line_num2']}: Worn-out cliché rhyme pair detected: '{cr['word1']}' - '{cr['word2']}'."
+                )
+
+        # 12. Sensory Grounding evaluation
+        sensory_metrics = cls.evaluate_sensory_grounding(poem_text)
+        if sensory_metrics["grounding_level"] == "purely_abstract":
+            warnings.append(
+                "Text is purely abstract and lacks concrete sensory imagery (tactile, acoustic, visual, thermal, olfactory)."
+            )
+
         metrics = {
             "line_count": line_count,
             "lines": lines,
@@ -489,6 +877,13 @@ class PoeticValidator:
             "grammatical_rhymes_count": len(grammatical_rhymes),
             "homographs_found": homographs,
             "meter_metrics": meter_metrics,
+            "inversions": inversions,
+            "inversion_count": len(inversions),
+            "filler_metrics": filler_metrics,
+            "filler_count": filler_metrics["cluster_count"] + len(filler_metrics["high_density_stanzas"]),
+            "cliche_rhymes": cliche_rhymes,
+            "cliche_rhyme_count": len(cliche_rhymes),
+            "sensory_grounding": sensory_metrics,
         }
 
         is_valid = len(errors) == 0

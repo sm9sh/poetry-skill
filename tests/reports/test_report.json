@@ -1,10 +1,10 @@
 {
   "summary": {
-    "total": 59,
-    "passed": 59,
+    "total": 62,
+    "passed": 62,
     "failed": 0,
     "warnings": 31,
-    "avg_poetry_score": 98.20338983050847,
+    "avg_poetry_score": 98.12903225806451,
     "avg_suno_score": 99.9090909090909
   },
   "results": [
@@ -195,12 +195,12 @@
       ],
       "scores": {
         "poetry_rubric": {
-          "total_score": 94.0,
+          "total_score": 92.0,
           "max_score": 100.0,
           "is_passing": true,
           "dimension_scores": {
             "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 20.0,
+            "imagery_concreteness": 18.0,
             "rhythm_line_breaks": 15.0,
             "rhyme_sound_design": 4.0,
             "tonal_integrity": 10.0,
@@ -208,6 +208,7 @@
             "anti_cliche_guardrails": 10.0
           },
           "deductions": [
+            "[-2 pts] Low sensory grounding and scarce physical realia.",
             "[-6.0 pts] 5 potential cheap grammatical/verb rhyme(s)."
           ]
         }
@@ -255,19 +256,21 @@
       "warnings": [],
       "scores": {
         "poetry_rubric": {
-          "total_score": 100.0,
+          "total_score": 98.0,
           "max_score": 100.0,
           "is_passing": true,
           "dimension_scores": {
             "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 20.0,
+            "imagery_concreteness": 18.0,
             "rhythm_line_breaks": 15.0,
             "rhyme_sound_design": 10.0,
             "tonal_integrity": 10.0,
             "ending_strength": 10.0,
             "anti_cliche_guardrails": 10.0
           },
-          "deductions": []
+          "deductions": [
+            "[-2 pts] Low sensory grounding and scarce physical realia."
+          ]
         }
       }
     },
@@ -524,12 +527,12 @@
       ],
       "scores": {
         "poetry_rubric": {
-          "total_score": 92.0,
+          "total_score": 90.0,
           "max_score": 100.0,
           "is_passing": true,
           "dimension_scores": {
             "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 20.0,
+            "imagery_concreteness": 18.0,
             "rhythm_line_breaks": 9.0,
             "rhyme_sound_design": 8.0,
             "tonal_integrity": 10.0,
@@ -537,6 +540,7 @@
             "anti_cliche_guardrails": 10.0
           },
           "deductions": [
+            "[-2 pts] Low sensory grounding and scarce physical realia.",
             "[-6 pts] High syllable count variance (5) in syllabo-tonic verse.",
             "[-2.0 pts] 1 potential cheap grammatical/verb rhyme(s)."
           ]
@@ -792,6 +796,81 @@
       "warnings": [
         "Stanza starting line 1 has irregular clausula cadence: 'MMFM'"
       ],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": []
+        }
+      }
+    },
+    {
+      "id": "TC_T1_REG_07_Craft_Tactile_Sensory",
+      "name": "Tactile Sensory Anchors & Anti-Cliche Grounding (Principle 1)",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": []
+        }
+      }
+    },
+    {
+      "id": "TC_T1_REG_08_Craft_Word_Weight",
+      "name": "Conciseness & Word Weight without Padding (Principle 4)",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": []
+        }
+      }
+    },
+    {
+      "id": "TC_T1_REG_09_Craft_Heterogeneous_Rhymes",
+      "name": "Heterogeneous Rhymes & Acoustic Phonics (Principle 3)",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
       "scores": {
         "poetry_rubric": {
           "total_score": 100.0,
@@ -1520,19 +1599,21 @@
       ],
       "scores": {
         "poetry_rubric": {
-          "total_score": 100.0,
+          "total_score": 98.0,
           "max_score": 100.0,
           "is_passing": true,
           "dimension_scores": {
             "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 20.0,
+            "imagery_concreteness": 18.0,
             "rhythm_line_breaks": 15.0,
             "rhyme_sound_design": 10.0,
             "tonal_integrity": 10.0,
             "ending_strength": 10.0,
             "anti_cliche_guardrails": 10.0
           },
-          "deductions": []
+          "deductions": [
+            "[-2 pts] Low sensory grounding and scarce physical realia."
+          ]
         },
         "suno_rubric": {
           "total_score": 100.0,
@@ -1563,19 +1644,21 @@
       ],
       "scores": {
         "poetry_rubric": {
-          "total_score": 100.0,
+          "total_score": 98.0,
           "max_score": 100.0,
           "is_passing": true,
           "dimension_scores": {
             "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 20.0,
+            "imagery_concreteness": 18.0,
             "rhythm_line_breaks": 15.0,
             "rhyme_sound_design": 10.0,
             "tonal_integrity": 10.0,
             "ending_strength": 10.0,
             "anti_cliche_guardrails": 10.0
           },
-          "deductions": []
+          "deductions": [
+            "[-2 pts] Low sensory grounding and scarce physical realia."
+          ]
         }
       }
     },

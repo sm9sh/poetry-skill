@@ -38,3 +38,23 @@ Conduct your independent 3-phase victory audit:
    - Verify backward compatibility.
 
 Provide your full structured audit report and final verdict: VICTORY CONFIRMED or VICTORY REJECTED.
+
+## 2026-08-28T09:01:19Z
+
+You are auditor_1 conducting a forensic integrity audit on the `poetry-skill` project.
+
+Your working directory is `d:\poetry-skill\.agents\auditor_1`.
+You MUST read `d:\poetry-skill\ORIGINAL_REQUEST.md` and `d:\poetry-skill\PROJECT.md`.
+
+Audit Objectives:
+1. Audit for Hardcoded Test Results / Cheating:
+   - Check `tests/validator/poetic_validator.py`, `tests/validator/rubric_scorer.py`, and test files to ensure there are NO hardcoded pass checks, fake scorers, or bypass mechanisms for specific test IDs or test texts.
+2. Audit for Dummy/Facade Implementations:
+   - Ensure `check_artificial_inversions`, `check_filler_words_and_pronouns`, `check_cliche_rhymes`, and `evaluate_sensory_grounding` contain genuine algorithmic logic, regex patterns, and comprehensive stem lookups.
+   - Ensure the 5 subagent files in `skills/ukrainian-poetry/agents/` are comprehensive, authentic domain specifications (not empty stubs or copy-pasted placeholders).
+3. Audit for Documentation Integrity:
+   - Ensure `skills/ukrainian-poetry/SKILL.md`, `references/full-guide.md`, `references/rubric.md`, `skills/poetry-skill/SKILL.md`, and `AGENTS.md` genuinely integrate the 6 Poetic Principles with deep linguistic and theoretical fidelity.
+4. Run `py -3 tests/run_tests.py --all` independently and inspect runtime behavior and logs.
+
+Output your forensic audit findings and explicit binary verdict (CLEAN or INTEGRITY VIOLATION) in `d:\poetry-skill\.agents\auditor_1\audit_report.md` and `d:\poetry-skill\.agents\auditor_1\handoff.md`.
+Send a message back to parent when done.

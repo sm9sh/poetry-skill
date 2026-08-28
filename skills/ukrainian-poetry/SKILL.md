@@ -11,15 +11,39 @@ Produce poetry that sounds originally conceived and crafted in Ukrainian: authen
 
 Prefer a finished poem over explanation unless the user explicitly asks for scansion, analysis, variants, scoring, or process notes.
 
-## Core Standard
+## 6 Core Poetic Principles (Фундаментальні принципи майстерності)
 
-Prioritize in this strict order:
+Prioritize these 6 inviolable quality standards across all generations and audits:
 
-1. **Authentic Ukrainian Phrasing & Accentuation**: Native stress norms, phonetic euphony (`у/в`, `і/й`, `з/із/зі`), and un-calqued syntax.
-2. **Tactile Imagery & Concrete Voice**: Rooted in sensory reality, physical detail, or psychological precision rather than decorative abstraction.
-3. **Prosodic Integrity & Stanza Dynamics**: Audible metric cadence, natural pyrrhic flow, meaningful line-breaks, and conscious clausula alternation (`ЖЧЖЧ`).
-4. **Heterogeneous Rhyme & Sound Architecture**: Cross-grammatical rhymes (verb+noun, noun+adverb) and pre-tonic assonance; zero tolerance for grammatical clichés or banal pairings.
-5. **Formal Discipline without Linguistic Distortion**: If strict meter or rhyme threatens natural Ukrainian syntax or forces misaccentuation, adjust the formal constraint before degrading the language.
+1. **Свіжа образність та метафоричність (Fresh Imagery & Metaphoricity)**:
+   - *Rule*: "Show, don't tell". Anchor emotions in tangible sensory details (tactile, visual, acoustic, olfactory, temperature), physical actions, and unexpected authorial metaphors.
+   - *Anti-patterns*: Clichéd tropes (*«кров — любов»*, *«серце палає»*, *«душа плаче»*, *«море сліз»*, *«крила надії»*), declarative abstract statements without physical embodiment.
+   - *Example*: ❌ *«Моє серце розривається від болю в холодній самотності.»* ➔ ✅ *«Холодна застібка куртки торкається підборіддя. На дні кишені — квиток на потяг, якого більше немає в розкладі.»*
+
+2. **Емоційна глибина та щирість (Emotional Depth & Sincerity)**:
+   - *Rule*: Authentic psychological truth, empathy, and restraint. Build emotional resonance through domestic gestures, unspoken tension, and quiet psychological truth.
+   - *Anti-patterns*: Theatrical pathos, melodramatic hysteria, preachy moralizing (*«пам'ятай завжди»*, *«і я збагнув, що треба жити»*, *«любіть природу»* as cheap slogans).
+   - *Example*: ❌ *«О люди, любіть свій рідний край і знайте, що в єдності наше щастя!»* ➔ ✅ *«Батько мовчки обкопує яблуню до перших заморозків. Земля під лопатою ще пахне серпневим дощем.»*
+
+3. **Ритмічна та звукова гармонія (Rhythmic & Phonic Harmony)**:
+   - *Rule*: Breathing prosody and organic cadence. In syllabo-tonic verse — natural pyrrhics; in dolnik/taktovik — disciplined ictic intervals; in verlibre — syntagmatic breath units. Elevate acoustics with heterogeneous rhymes (verb+noun, noun+adverb), pre-tonic supporting consonants (*трава́ — трива́*), conscious phonics (alliteration, assonance, soundscapes), and flawless euphony (`у/в`, `і/й`, `з/із/зі`, no hiatus).
+   - *Anti-patterns*: Banal grammatical rhymes (verb-verb *знати-кохати*, noun-noun in identical case), suffixal rhyming (*-очка/-енька*), hiatus, dissonant consonant clusters.
+   - *Example*: ❌ *«Я іду у поле і шукаю волю, щоб знайти у ньому свою кращу долю.»* ➔ ✅ *«Колючий вітер вистудив траву́, / І перша паморозь лягла без зву́ку. / Я цим осіннім вечором живу́, / В кишеню заховавши змерзлу ру́ку.»*
+
+4. **Лаконічність і вага слова (Conciseness & Word Weight)**:
+   - *Rule*: High semantic compression («словам тісно, думкам просторо»). Every noun, verb, and epithet must carry irreplaceable weight.
+   - *Anti-patterns*: Rhythmic padding ("водичка"), filler pronouns (*я, мій, твій, цей, той, свій, вже, ось, то, ж*) used merely to pad syllable counts; **artificial syntactic inversions** (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч темну»*) forced for rhyme. Natural Ukrainian word order is mandatory.
+   - *Example*: ❌ *«І от уже цей мій сумний і темний вечір прийшов до мене у моє вікно знов.»* ➔ ✅ *«Сутінки осідають на підвіконня. Ліхтарі вмикаються за секунду до темряви.»*
+
+5. **Оригінальність ракурсу (Originality of Perspective)**:
+   - *Rule*: Unconventional authorial angle on eternal themes (love, war, memory, loneliness). Shift focus from macro-abstractions to revealing micro-details. Close with paradoxical, lingering, or open endings that avoid didactic conclusions.
+   - *Anti-patterns*: Predictable storylines, cliché perspectives (generic battlefield, generic broken heart), banal moralizing final lines.
+   - *Example*: ❌ *«І так ми прожили життя щасливо, бо головне — це вірити в добро.»* ➔ ✅ *«Годинник на вокзалі поспішає на три хвилини — рівно на стільки, щоб встигнути передумати й залишитися.»*
+
+6. **Органічна єдність форми та змісту (Organic Unity of Form & Content)**:
+   - *Rule*: External architecture (meter, stanza structure, speed, line breaks, caesuras, enjambments) must intrinsically embody the psychological state and theme.
+   - *Anti-patterns*: Mismatched form and tone (e.g. expressing tragic grief via a cheerful, bouncy 4-foot trochee with diminutive suffixes).
+   - *Example*: An urban panic or anxiety expressed through an abrupt, irregular dolnik or syncopated verlibre rather than an ornate, rigid classical stanza.
 
 ---
 
@@ -48,9 +72,15 @@ Prioritize in this strict order:
    image_density: balanced
    ending_strength: resonant
    ```
-3. **Draft with Scansion Awareness**: Ensure stress placement respects Ukrainian orthoepy; avoid Russianized stress shifts (*вИпадок*, not *випАдок*).
-4. **Apply Heterogeneous Rhyming & Euphony**: Check that rhyme pairs bridge different grammatical classes and that vowel/consonant alternations flow without hiatus.
-5. **Run Silent Self-Edit**: Scan for filler lines, forced inversions, banal rhymes, and sharovarshchyna clichés before emitting output.
+3. **Draft with Scansion & Principle Awareness**:
+   - Align meter and stanza architecture with emotional dynamics (**Principle 6: Form & Content**).
+   - Ground themes in tactile sensory anchors, avoiding declarative statements and cliches (**Principle 1: Imagery** & **Principle 2: Sincerity**).
+   - Ensure stress placement respects Ukrainian orthoepy; avoid Russianized stress shifts (*вИпадок*, not *випАдок*).
+4. **Apply Heterogeneous Rhyming, Phonics & Natural Syntax**:
+   - Mandate cross-grammatical rhymes with pre-tonic supporting consonants (**Principle 3: Phonics & Rhyme**).
+   - Enforce natural Ukrainian word order: strictly prohibit artificial inversions created to force end-rhymes (**Principle 4: Conciseness & Syntax**).
+   - Cleanse any filler pronouns (*цей, той, свій*) or rhythmic padding words.
+5. **Run Silent Self-Edit**: Scan for filler lines, forced inversions, banal rhymes, declarative emotions, and sharovarshchyna clichés before emitting output.
 
 ---
 
@@ -171,6 +201,14 @@ Reject the following categories completely:
 - **Banal Lexical Pairs**:
   `любов — кров`, `доля — воля`, `серце — перце`, `день — пень`, `ніч — очі / віч-на-віч`, `зорі — морі`, `жаль — печаль`, `квіти — діти`, `вік — чоловік`, `сльози — морози`, `хмара — пара`, `осінь — просинь`, `тиша — колише`.
 
+### 4. Natural Syntax & Anti-Inversion Prohibition (Заборона штучних інверсій)
+- **Natural Word Order**: Ukrainian syntax is flexible, but poetic phrasing must remain natural and organic. Never invert word order artificially merely to force a rhyme word to the end of a line (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч»*).
+- **Rule**: If maintaining a strict rhyme requires breaking natural syntax or inserting filler pronouns (*цей, той, свій*), **rephrase the entire line or change the rhyme scheme**. Linguistic naturalness takes precedence over mechanical form.
+
+### 5. Phonics, Soundscapes & Euphony (Фоніка та звукопис)
+- **Acoustic Orchestration**: Deliberately employ alliteration and assonance to enhance atmosphere (soft sibilants and fricatives for silence, snow, or whispering; sonorous liquids `/l/, /r/, /m/, /n/` for vastness and bell-like resonance).
+- **Potebnja's Inner Form**: Leverage the acoustic root memory of Ukrainian words for multilayered poetic resonance.
+
 ---
 
 ## 6 Authentic Registers & Anti-Sharovarshchyna
@@ -211,13 +249,13 @@ Reject the following categories completely:
 
 ## Self-Edit Checklist
 
-Before presenting the final poem, silently verify:
-1. **Accentuation Scan**: Are all word stresses in accordance with literary Ukrainian? (Check *вИпадок*, *чорнОзем*, *новИй*, *одИннадцять*).
-2. **Metric & Clausula Audit**: Does the line cadence hold without unnatural pauses? Is clausula alternation maintained (`ЖЧЖЧ`)?
-3. **Rhyme Scrutiny**: Are all rhymes heterogeneous? Are there any forbidden grammatical pairs or diminutive suffixes?
-4. **Euphony Sweep**: Are `у/в` and `і/й` properly balanced? Is hiatus avoided?
-5. **Anti-Kitsch Filter**: Is the poem free from sharovarshchyna and decorative abstractions (`душа`, `серце`, `доля`)?
-6. **Final Line Resonance**: Does the closing line land on a sensory, physical, or unresolved psychological image rather than a moralizing conclusion?
+Before presenting the final poem, silently verify all 6 Poetic Principles:
+1. **Imagery & Sensory Anchor (Принцип 1)**: Is the poem grounded in concrete physical details and fresh metaphors ("show, don't tell")? Are abstract clichés (*душа, серце, доля, крила надії*) eliminated?
+2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions?
+3. **Prosody, Phonics & Euphony (Принцип 3)**: Does the rhythm breathe naturally with correct pyrrhics? Are stresses strictly literary (*вИпадок*, *чорнОзем*, *новИй*)? Are `у/в`, `і/й`, `з/із/зі` balanced? Is assonance/alliteration harmonized?
+4. **Conciseness, Natural Syntax & Anti-Inversion (Принцип 4)**: Is the poem compressed without filler pronouns (*цей, той, свій*) or rhythmic padding? Is the word order 100% natural without artificial inversions for rhyme?
+5. **Perspective & Paradoxical Ending (Принцип 5)**: Does the poem offer an unexpected angle on the topic? Does the final line leave a lingering sensory or philosophical resonance without preaching?
+6. **Form & Content Unity (Принцип 6)**: Does the metric structure, stanza pace, and line breaks organically match the emotional weight of the theme?
 
 ---
 
@@ -236,5 +274,6 @@ Before presenting the final poem, silently verify:
 | Full Theoretical & Operational Guide | `references/full-guide.md` |
 | Structured Input Request Templates | `references/input-templates.md` |
 | 100-Point Evaluation & Scansion Rubric | `references/rubric.md` |
+| 5 Specialized Subagents Pipeline | `agents/` (`agents/openai.yaml`) |
 | Standardized Test Suite (27 Scenarios) | `references/tests.md` |
 | Hardened Stress & Edge-Case Suite | `references/stress-tests.md` |

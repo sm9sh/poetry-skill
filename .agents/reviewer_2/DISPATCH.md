@@ -1,24 +1,21 @@
-## 2026-08-26T10:00:11Z
+## 2026-08-28T09:01:19Z
+You are reviewer_2 conducting an independent review of Milestone M3 (Validator, Rubric Scorer, and Test Suite) in `poetry-skill`.
 
-You are Reviewer 2 (Suno AI Music Prompt Engineering Reviewer).
-Your working directory is `d:/poetry-skill/.agents/reviewer_2`.
-You MUST read `d:/poetry-skill/.agents/ORIGINAL_REQUEST.md`, `d:/poetry-skill/.agents/PROJECT.md`, and `d:/poetry-skill/TEST_READY.md` before starting work.
-Project root: `d:/poetry-skill`.
+Your working directory is `d:\poetry-skill\.agents\reviewer_2`.
+You MUST read `d:\poetry-skill\ORIGINAL_REQUEST.md` and `d:\poetry-skill\PROJECT.md`.
 
-Task:
-Perform an exhaustive, objective review of the Suno AI conversion skill and all related materials (`skills/ukrainian-poetry-to-suno/`, `SKILL.md`, `references/`, `packs/`, root mirrors, and test suites).
+Review the following files:
+1. `d:\poetry-skill\tests\validator\poetic_validator.py`
+2. `d:\poetry-skill\tests\validator\rubric_scorer.py`
+3. `d:\poetry-skill\tests\run_tests.py`
+4. `d:\poetry-skill\tests\tier1_feature_coverage\` through `tier4_real_world\`
 
 Review Criteria:
-1. Token economy & style prompt bounds: verify strictly 80-180 character bounds (optimal 80-150) and zero metadata leakage (`Language: Ukrainian`, `Theme: ...` strictly eliminated).
-2. Metatag syntax: verify standard bracketed syntax `[Intro]`, `[Verse]`, `[Chorus]`, `[Drop]`, `[Outro]`, parenthetical backing vocals `(harmony)`, and performance directives.
-3. Modern Ukrainian music taxonomy: verify 8 genres (Ethno-Chaos, Post-Punk, Dark Synth, Trap-Folk, Metalcore, Shoegaze, Ethno-Rock, Bandura).
-4. Vocal timbre & White voice directives: verify authentic vocal styling.
-5. Acoustic anti-artifact negative prompting: verify Exclude vectors for metallic sibilance, muddy sub-bass, garbled audio, reverb wash.
-6. Overhaul of all 7 prompt packs and resolution of the localization paradox.
-7. Run the test suite: execute `py -3 tests/run_tests.py --all` and inspect results.
+- Verify that `check_artificial_inversions`, `check_filler_words_and_pronouns`, `check_cliche_rhymes`, and `evaluate_sensory_grounding` are genuinely implemented in pure Python standard library.
+- Verify that `RubricScorer.score_poetry` correctly scores all 7 dimensions with appropriate bounds and aligns with `rubric.md`.
+- Verify that historical and folk registers (modes) are properly handled without false positives.
+- Verify that `ukrainian-poetry-to-suno` pipeline is 100% compatible.
+- Run `py -3 tests/run_tests.py --all` to verify that all tests pass 100% and average poetry score is >= 95/100.
 
-Deliverables:
-- Maintain `progress.md` with `Last visited:` timestamps.
-- Write your comprehensive review report to `d:/poetry-skill/.agents/reviewer_2/review.md`.
-- Write your formal handoff to `d:/poetry-skill/.agents/reviewer_2/handoff.md` with clear verdict (APPROVE or REQUEST_CHANGES).
-- Message parent upon completion.
+Output your review to `d:\poetry-skill\.agents\reviewer_2\review.md` and `d:\poetry-skill\.agents\reviewer_2\handoff.md` with an explicit verdict: APPROVE or REQUEST_CHANGES.
+Send a message back to parent when done.
