@@ -1,208 +1,273 @@
-# Ukrainian Poetry To Suno AI — Comprehensive Engineering Guide
+# Ukrainian Poetry To Suno, Udio & Google Flow Music — Comprehensive Engineering Guide (v8)
 
-Повний посібник із перетворення української поезії, пісенної лірики, музичних референсів та творчих концептів у високоточні запити для сучасних аудіомоделей `Suno AI` (v3.5 / v4 / сучасні гібридні дифюзійно-трансформерні рушії).
+Повний посібник із перетворення української поезії, пісенної лірики, музичних референсів та творчих концептів у високоточні запити для сучасних аудіомоделей **Suno AI (v4.5 / v5.5)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**, з професійним DAW-зведенням стемів, алгоритмічним мастерингом та **10 AI Quality Gates**.
 
 ---
 
-## 1. Архітектура та механіка сучасних моделей Suno AI
-
-### 1.1 Три окремі вхідні вектори Suno Custom Mode
+## 1. Архітектурна логіка мета-скіла (Повний 6-етапний цикл)
 
 ```text
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 1. Поле "Style of Music" (Стиль музики)                                                │
-│    - Призначення: Формування жанрової матриці, темпоритму, інструментів, продакшну.    │
-│    - Мова: Суворо англійські музичні терміни + автентичні українські інструменти.      │
-│    - Економіка токенів: 80–180 символів (оптимально 80–150 символів, ~15–30 токенів). │
-│    - Правило: Повна відсутність метаданих (Language, Theme, Mood).                     │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 2. Поле "Lyrics" (Текст пісні та аранжувальні метатеги)                                │
-│    - Призначення: Співаний текст, розподіл куплетів/приспівів, динаміка та бек-вокал.  │
-│    - Синтаксис: Квадратні дужки [Intro], [Verse], [Chorus] для структурних команд;    │
-│                 Круглі дужки (луна), (бек-вокал) для бек-вокалу та гармоній.           │
-│    - Мова: Автентична українська літературна мова або діалекти.                       │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 3. Поле "Exclude Styles" (Негативний промпт)                                           │
-│    - Призначення: Віднімання небажаних звукових векторів із латентного простору.       │
-│    - Наповнення: Акустичні анти-артефакти (металевий бруд, гудіння басу, глітчі)      │
-│                  та стилістичні анти-кліше (шароварщина, дешевий MIDI, EDM-дроп).      │
-└────────────────────────────────────────────────────────────────────────────────────────┘
+[ВХІД: Ідея користувача + Референси (трек / артист)]
+                    │
+                    ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │ Крок 1: Глибока деконструкція референсів (Track/Artist) │
+ │ ─ Визначення жанрового гібрида, темпу (BPM), тональності │
+ │ ─ Екстракція тембрів та інструментів, текстура запису   │
+ │ ─ Вокальний архетип: Triple-Stack (Персонаж+Подача+Ефект)│
+ │ ─ Побудова мапи структури та виділення хуків (Melodic)  │
+ └─────────────────────┬───────────────────────────────────┘
+                       │
+                       ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │ Крок 2: AI-Оптимізоване написання лірики (Lyrics Sheet) │
+ │ ─ Складова симетрія та мовний ритм (Spoken Prosody Test)│
+ │ ─ Секційний контраст простору (Staccato vs Legato)      │
+ │ ─ Melodic Math: «Правило 50 секунд» та Previews/Hooks   │
+ │ ─ Фіксація наголосів великими літерами (вИпадок, дорОга)│
+ └─────────────────────┬───────────────────────────────────┘
+                       │
+                       ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │ Крок 3: Інжиніринг промптів та метатегів стилю          │
+ │ ─ Suno Style Prompt: Conversational vs Tag-Based Matrix │
+ │ ─ Udio Style Prompt: Context Length & Inpainting rules  │
+ │ ─ Flow Music Prompt: Conversational Agent на Lyria 3.5  │
+ │ ─ Розширена бібліотека метатегів [] та інлайн-жестів () │
+ └─────────────────────┬───────────────────────────────────┘
+                       │
+                       ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │ Крок 4: Дорожня карта покрокової генерації (Extensions) │
+ │ ─ Seed: створення Hook-first вступу (Skip-rate control) │
+ │ ─ Послідовні розширення (Verse 2 development за Пауеллом)│
+ │ ─ Breakdown та Mega-Chorus (Склеювання та кульмінація)  │
+ │ ─ Лаконічне Outro (<= 20с) для максимального Completion │
+ └─────────────────────┬───────────────────────────────────┘
+                       │
+                       ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │ Крок 5: Інженерна DAW-обробка та зведення AI-стемів     │
+ │ ─ Split Compression басу (<200Hz brickwall vs >200Hz dy)│
+ │ ─ Частотне розділення Kick & Bass, усунення фазових ям  │
+ │ ─ Паралельна сатурація Тчада Блейка безпосередньо на Master│
+ │ ─ Динамічний вокальний сайдчейн (Mid-Side Reverb Sc)    │
+ └─────────────────────┬───────────────────────────────────┘
+                       │
+                       ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │ Крок 6: Мастеринг та Алгоритмічна Дистрибуція          │
+ │ ─ Мастеринг: усунення TP-пастки (-1 dBTP для гучних)    │
+ │ ─ Алгоритми: уникнення Playlist-реклами (Single-only)   │
+ │ ─ Інструменти: Spotify Canvas, Marquee & Discovery Mode │
+ └─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 2. Економіка токенів та ліво-право позиційне зважування
+## 2. Крок 1: Реверс-інжиніринг та деконструкція референсів (Reverse Engineering)
 
-### 2.1 Проблема розсіювання уваги (Cross-Attention Dispersion)
-При перевищенні 180–200 символів у полі стилю вага кожного окремого дескриптора падає. Модель потрапляє у стан *style averaging* (усереднення стилю), перетворюючи специфічний пост-панк чи етно-хаос на стандартний середньотемповий поп-рок.
+При отриманні назви треку чи артиста (західного або українського) проводиться аналітична деконструкція:
 
-### 2.2 Формула ліво-правого позиціонування
-Suno зчитує токени зліва направо з найвищим пріоритетом перших трьох позицій:
-1. **Позиція 1–2 (Фундамент)**: Головний жанр і субжанр (`ukrainian post-punk, doomer wave`).
-2. **Позиція 3 (Ритм і пульс)**: Темпоритм, драм-машина або барабанний профіль (`130 bpm, driving bassline, 80s drum machine`).
-3. **Позиція 4 (Вокальний тембр)**: Фізіологічний тип вокалу (`melancholic baritone male vocal`).
-4. **Позиція 5 (Ключовий інструмент)**: Головний тембральний хук (`chorus-drenched electric guitar`).
-5. **Позиція 6 (Продакшн і простір)**: Характер зведення (`lo-fi nocturnal production`).
-
----
-
-## 3. 8-Жанрова таксономія сучасної української музики
-
-| # | Жанровий кластер & Архетипи | Точний Style Prompt (80–180 chars) | Рекомендований Exclude Vector |
-|---|-----------------------------|------------------------------------|-------------------------------|
-| **1** | **Ethno-Chaos / Avant-Folk**<br>*(DakhaBrakha, Dakh Daughters)* | `ukrainian ethno-chaos, avant-folk, white voice female chanting, acoustic cello drone, heavy tribal percussion, hypnotic dark polyphony, 120 bpm` (138 chars) | `cheesy synth brass, 90s schlager, edm drop, generic pop, metallic highs` |
-| **2** | **Post-Punk / Doomer Wave**<br>*(SadSvit, Mistmorn, Renie Cares)* | `ukrainian post-punk, doomer wave, 130 bpm, driving bassline, melancholic baritone male vocal, chorus electric guitar, lo-fi night production` (135 chars) | `bright acoustic strumming, polished autotune pop, cheerful brass, harsh sibilance` |
-| **3** | **Dark Synth / Coldwave / EBM**<br>*(Kurs Valüt)* | `ukrainian dark synth, minimal wave, coldwave, analog bass pulse, monotone male recitative, crisp electronic drums, nocturnal, 122 bpm` (134 chars) | `acoustic guitar, joyful schlager, live orchestra, heavy metal distortion, reverb mud` |
-| **4** | **Trap-Folk / Modern Drill**<br>*(Kalush, SKOFKA, alyona alyona)* | `ukrainian trap-folk, drill beat, 140 bpm, 808 sub bass, rapid hi-hats, authentic sopilka hook, rhythmic male recitative, energetic chorus` (136 chars) | `tourist folk cliches, cheesy polka accordion, slow acoustic ballad, distorted sub-bass` |
-| **5** | **Progressive Metalcore / Ethno-Metal**<br>*(Jinjer, Motanka, Space of Variations)* | `ukrainian progressive metalcore, djent riffs, tsymbaly folk intro, brutal guttural scream alternating ethereal clean female vocal, heavy drop, 150 bpm` (146 chars) | `mumble vocal, pop synth brass, acoustic ukulele, dance club beat, tinny cymbals` |
-| **6** | **Shoegaze / Dream Pop**<br>*(Latexfauna, Vivienne Mort)* | `ukrainian shoegaze, dream pop, wall of sound reverb guitars, whispered breathy female vocal, lush chorus, sensual slow groove, 90 bpm` (138 chars) | `harsh distortion, aggressive rap, dry close mix, stadium shouting, metallic sibilance` |
-| **7** | **Authentic Modern Ethno-Rock**<br>*(Kozak System, Tin Sontsya, Haydamaky)* | `ukrainian ethno-rock, live heavy guitars, authentic duda bagpipe hook, punchy live drums, energetic male lead, anthemic driving folk, 135 bpm` (137 chars) | `cheap midi instruments, synthpop arpeggios, tourist polka, trap 808, digital clipping` |
-| **8** | **Neoclassical Bandura / Ambient**<br>*(KRUTЬ, chamber acoustic)* | `contemporary ukrainian neoclassical, solo bandura arpeggios, emotive cello, warm ambient synth, intimate breathy female vocal, 75 bpm` (138 chars) | `electronic drums, distorted guitars, aggressive shouting, festival drop, boomy low-end` |
+1. **Жанровий гібрид (Genre Complexes)**: Визначення базового жанру та унікального субжанрового кросовера (наприклад, не просто "інді-рок", а `indie rock, alternative rock, post-punk revival, gritty garage vibe`).
+2. **Специфікація ритму та темпу (BPM Range)**: Визначення точного темпу для фіксації енергії треку (120–128 BPM для енергійного інді-року, 75–85 BPM для тріп-хопу). Темп є якорем проти жанрового дрейфу.
+3. **Звуковий ландшафт та тембри (Sonic Aesthetic & Palette)**: Вилучення конкретних тембрів (`fuzzy analog bass, spring-reverb snare, dirty garage guitars, spacey synthesizers`) та опис текстури запису (`lo-fi tape hiss`, `stadium reverb`, `vinyl crackle`, `warm analog console`).
+4. **Вокальний архетип (Vocal Triple-Stack)**: Трикомпонентна формула:
+   - **Характер (Character)**: `raw passionate male tenor`, `fragile breathy female soprano`, `deep melancholic baritone`, `authentic white voice`.
+   - **Подача (Delivery)**: `intimate, dry, conversational close-mic`, `deadpan monotone recitative`, `soaring anthemic belting`.
+   - **Ефекти та Простір (FX & Space)**: `sansamp vocal distortion, tape slap delay, dry close-up microphone, subtle room plate`.
+   *Імена виконавців ніколи не передаються в промпт безпосередньо!*
+5. **Емоційне наповнення (Mood & Energy)**: Визначення емоційного спектра (`reflective and melancholic`, `haunting and brooding`, `euphoric and nostalgic`).
+6. **Гармонічні особливості та напруга**: Аналіз тональності (`key of D minor`), наявності модуляцій та структури побудови гармонійної напруги у вступі (старт із субдомінанти або саспенс-акорду для миттєвого захоплення уваги).
+7. **Анатомія Хуків (Melodic Math)**:
+   - *Melodic Previews*: Ритмічний або текстовий анонс приспіву наприкінці куплету.
+   - *Glue Hooks*: Імплантація ключової фрази або назви пісні в куплет чи пре-приспів.
+   - *Nano Hooks*: Дрібні інструментальні прикраси та звукові маркери.
+8. **Структурна розмітка (Bracket Tags)**: Деконструкція форми треку на чіткі блоки у квадратних дужках.
 
 ---
 
-## 4. Автентичні тембри українського вокалу
+## 3. Крок 2: AI-Оптимізоване написання лірики (Lyrics Sheet)
 
-Щоб отримати живе звучання замість роботизованого синтезу, вказуй точні вокальні дескриптори:
+Написання тексту підпорядковується правилам природної просодії Пета Паттісона та когнітивної мелодичної математики Макса Мартіна.
 
-- **Білий голос (*White Voice*)**: `white voice female chanting, authentic slavic village polyphony, open-throat vocal, throat resonance`.
-- **Пост-панк баритон**: `melancholic baritone male vocal, deadpan monotone delivery, cold low register`.
-- **Мелодекламація / Речитатив**: `spoken word male recitative, deadpan rhythmic cadence, poetic speech delivery`.
-- **Інтимний шепіт**: `intimate breathy female vocal, close-mic whisper, fragile emotional delivery, ASMR vocal texture`.
-- **Хрипкий бардичний тембр**: `raspy male vocal, raw textured gravelly timbre, smoked vocal edge, strained emotional delivery`.
-- **Потужний белтинг**: `powerful soaring female vocal, resonant chest voice belting, high-energy emotional release`.
-- **Металкор гроул / скрім**: `brutal guttural growl, harsh screaming alternating ethereal clean melodic vocal`.
-- **Сучасний автотюн**: `modern autotune vocal, formant-shifted vocal chops, futuristic pitch correction`.
+### 3.1 Структура просодії та складової сітки
+- **Складова симетрія**: Всі рядки куплету мають дзеркальну кількість складів (наприклад, 8-8-8-8 або 10-8-10-8). Це стабілізує ритмічний крок ШІ та змушує його наголошувати слова на сильних долях (downbeats).
+- **Природний наголос (Downbeat Alignment)**: Жодних штучних зміщень наголосу заради рими. Ключові слова збігаються з сильними частками такту.
+- **Контраст простору (Verse Staccato vs Chorus Legato)**:
+  - Куплет пишеться короткими, гострими словами (багато приголосних, уривчаста ритміка *Staccato*).
+  - Приспів пишеться довгими відкритими голосними, створюючи широкий вокальний політ (*Legato*):
+    ```text
+    [Chorus - epic soaring vocals, wall of sound, open space]
+    Ооооой, лети-и-и крізь хмарну вись,
+    Де зОрі в нЕбі обнялИсь...
+    ```
 
----
-
-## 5. Синтаксис метатегів аранжування для Suno AI та Google Flow Music
-
-### 5.1 Секційні та аранжувальні метатеги `[Square Brackets]`
-Усі аудіовказівки, структурні секції та інструментальний звуковий дизайн розміщуються **виключно у квадратних дужках**. Вони сприймаються моделями (Suno та Google Flow Music) як німі інструкції звукорежисеру й не співаються:
-- **Комплексні аранжувальні теги**:
-  - `[Intro - Staccato cutting telecaster riff, driving bassline, punchy drum buildup]`
-  - `[Verse 1 - Intimate breathy vocal, fingerpicked acoustic guitar]`
-  - `[Chorus - Explosive wall of sound, powerful vocal belting]`
-  - `[Instrumental Break - Melodic bandura solo with warm analog distortion]`
-  - `[Guitar Solo - Screaming overdrive, fast pentatonic runs]`
-  - `[Drop - Heavy 808 sub bass, aggressive syncopated drums]`
-  - `[Outro - Slow fade out with echoing cello, ambient decay]`
-- **Секції пісні**: `[Intro]`, `[Verse 1]`, `[Verse 2]`, `[Pre-Chorus]`, `[Chorus]`, `[Post-Chorus]`, `[Bridge]`, `[Outro]`, `[End]`.
-- **Динаміка і темп**: `[Tempo: 125 BPM]`, `[Dynamic: Crescendo]`, `[Dynamic: Pianissimo]`, `[Beat Cut]`, `[Silence]`, `[Acapella]`, `[Stripped Back]`.
-- **Вокальний розподіл**: `[Male Lead Vocal]`, `[Female Lead Vocal]`, `[Duet]`, `[White Voice Choir]`.
-
-### 5.2 Правило круглих дужок: Лише бек-вокал `(Parentheses)`
-> [!CAUTION]
-> **Критична помилка в Google Flow Music та Suno AI**:
-> Текст у круглих дужках `( ... )` синтезатор вокалу сприймає як **співаний бек-вокал, стерео-відлуння або spoken word**.
-> Якщо написати в круглих дужках `(Staccato cutting telecaster riff, driving bassline)`, модель **прочитає або заспіває ці слова вголос**!
-> **Правило**: круглі дужки призначені виключно для вокального тексту:
-```text
-[Verse 1 - Intimate female vocal]
-У темнім склі тремтИть моє безсОнне відбиттЯ,
-(у темнім склі)
-І чайник знОву перший заговорИв у тИші.
-(тИша навкОло)
-```
-
-### 5.3 Фіксація наголосів великими літерами для Flow Music та Suno
-Щоб уникнути помилок вимови чи зсуву наголосу моделями генерації, наголошена голосна у словах з рухомим наголосом та омографах позначається **великою літерою**:
-- `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` (шлях) / `дорогА` (коштовна), `зАмок` (фортеця) / `замОк` (дверний), `плАчу` (сльози) / `плачУ` (гроші), `сердЕнько`, `одИннадцять`, `листопАд`.
-
----
-
-## 6. Акустичний негативний промптинг (Exclude Vectors)
-
-```text
-┌──────────────────────────────┬────────────────────────────────────────────────────────┐
-│ Проблема у згенерованому треку│ Ефективний набір Exclude-токенів                      │
-├──────────────────────────────┼────────────────────────────────────────────────────────┤
-│ Металевий пісок на верхах    │ metallic highs, harsh sibilance, piercing treble,      │
-│                              │ tinny high-end, digital clipping, harsh cymbals        │
-├──────────────────────────────┼────────────────────────────────────────────────────────┤
-│ Бубніння і гул на суб-басі   │ muddy bass, boomy low-end, distorted sub-bass,         │
-│                              │ muffled low frequencies, bass rumble                   │
-├──────────────────────────────┼────────────────────────────────────────────────────────┤
-│ Проковтування слів / глітчі  │ garbled vocals, mumbled words, slurred pronunciation,  │
-│                              │ double-vocal glitch, robotic vocal artifacts           │
-├──────────────────────────────┼────────────────────────────────────────────────────────┤
-│ Кавернозне відлуння холу     │ excessive reverb, cavernous reverb, muddy hall decay,  │
-│                              │ wash of echo, drowning delay, swampy mix               │
-├──────────────────────────────┼────────────────────────────────────────────────────────┤
-│ Шароварщина і дешевий MIDI   │ cheesy synth brass, cheap midi instruments,            │
-│                              │ 90s schlager synthesizer, carnival polka accordion     │
-├──────────────────────────────┼────────────────────────────────────────────────────────┤
-│ Недоречний стадіонний пафос  │ bombastic anthem climax, festival EDM drop,            │
-│                              │ heavy metal blast beats, melodramatic screaming        │
-└──────────────────────────────┴────────────────────────────────────────────────────────┘
-```
-
----
-
-## 7. Робота з музичними референсами (Safe Reference Extraction)
-
-### Алгоритм деперсоналізації:
-1. Отримати назву артиста чи пісні від користувача.
-2. Проаналізувати ритм, BPM, бас, гітарний тембр, вокальну манеру та атмосферу.
-3. Повністю видалити імена, бренди та прямі фрази `in the style of`.
-4. Скласти легальний `Safe Style Prompt` у межах 80–180 символів.
-
-### Приклад:
-- **Запит**: "Зроби трек як Latexfauna - Lime"
-- **Аналіз**: Дрім-поп, лінивий фанковий бас, пошепки вокал, реверберовані гітари, літній вайб.
-- **Safe Style Prompt (138 символів)**:
+### 3.2 Впровадження інструментів Melodic Math
+- **The 5-Second Rule (Захист від Skip Rate)**: Пісня починається не з довгого інструментального вступу, а з вокального хука (акапели) або виразного звукового маркера у перші 5 секунд:
   ```text
-  ukrainian shoegaze, dream pop, wall of sound reverb guitars, whispered breathy female vocal, lush chorus, sensual slow groove, 90 bpm
+  [Vocal Intro - solo passionate raspy vocal, dry]
+  (Почуй цей шУм у нАших вЕнах...)
+  [Beat Drop - heavy fuzzed bass, punchy tight drums]
   ```
-- **Exclude**: `harsh distortion, aggressive rap, dry close mix, stadium shouting, metallic sibilance`
+- **«Правило 50 секунд»**: Перший повноцінний приспів обов'язково звучить у межах **перших 50 секунд** треку.
+- **Melodic Preview**: Кінцівка куплету готує приспів:
+  ```text
+  [Verse 1 - final line acting as Preview]
+  І ми згораємо... під цим небом сталІ.
+  ```
+  *(Приспів вибухає: "НЕбо сталІ, тримАй моЮ рУку...")*
+- **Glue Hooks**: Ключові ліричні фрази повторюються між секціями.
+- **Когнітивний ліміт мелодій**: Не більше **3–4 унікальних мелодичних частин** на всю пісню (куплет, пре-приспів, приспів, бридж).
+- **Тест розмовним ритмом (Spoken Prosody Test)**: Перед генерацією прочитати лірику вголос у природному розмовному темпі. Якщо прийменники неприродно розтягуються — текст коригується *до* відправки в ШІ.
+- **Фіксація наголосів великими літерами**: `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`, `одИннадцять`, `листопАд`.
 
 ---
 
-## 8. Покроковий Custom Mode Workflow
+## 4. Крок 3: Інжиніринг промптів та метатегів стилю (Multi-Platform Prompting)
+
+### 4.1 Suno AI (v4.5 / v5.5)
+- **Ліміти**: `Style of Music` — 1000 символів (оптимально 80–180 символів / 8–15 тегів); `Lyrics` — 5000 символів.
+- **Метод 1: «Conversational Paragraph» (Правило «First 5 Words»)**:
+  - *Формула*: `[Genre & Subgenre] + [Vocal Character] + [Instruments] + [Mood/Energy] + [Aesthetic & BPM]`
+  - *Приклад*: `Alternative rock, passionate dry male tenor vocals, gritty garage guitars, warm analog bass, tape saturation, dark melancholic mood, 115 BPM.`
+- **Метод 2: «Tag-Based Matrix» (Формула HookGenius)**:
+  - *Формула*: `[1. Genre/Subgenre], [2. Mood/Energy], [3. Vocal Triple-Stack], [4. Lead Instruments], [5. Production Aesthetic, BPM]`
+  - *Приклад*: `indie rock, melancholic, raspy male vocals, intimate close-up delivery, dry mic, clean electric guitar, driving melodic bass, live drum kit, lo-fi tape hiss, 115 BPM` (168 chars)
+- **Функції v5.5**: *My Taste* (налаштування вподобань), *Voices* (вокальне клонування), *Custom Models* (до 3 власних моделей).
+- **Failure Modes**:
+  - *Lyrics Rushing*: рядки по 4–8 слів, фіксація темпу, `(half-time feel)`.
+  - *Robotic Vocals*: обов'язковий Vocal Triple-Stack (**характер** + **подача** + **ефекти**).
+  - *The Negation Trap*: позитивні заміни замість "no drums" (`purely acoustic, solo piano, isolated vocals`).
+- **Ліцензії**: Pro ($10/міс) та Premier ($30/міс) — комерційні права; Free — заборонено.
+
+### 4.2 Udio AI (v4)
+- **Параметри**: **48 кГц стерео**, довжина треку **до 10 хвилин**, Context Length **до 15 хвилин**.
+- **Формула промпту**: `[Main Genre], [Sub-Genre], [Year/Era], [Vocal Timbre & Character], [Analog Production Style], [Acoustic Space, BPM]`
+- **Context Length**: 10–15 секунд для різких змін стилю чи мови; максимум для збереження тембру.
+- **Inpainting**: Текст для заміни позначається зірочками: `*static sky*`.
+- **Ліцензії**: Тільки Pro ($30/міс) має комерційні права (Standard $10/міс — некомерційний).
+
+### 4.3 Google Flow Music (Lyria 3.5)
+- **Параметри**: Модель **Lyria 3.5** від DeepMind, **500 щоденних безкоштовних кредитів** із повними комерційними правами (MusicFX закрито 31 липня 2026).
+- **Conversational Agent Mode**:
+  `[Опис концепту і стилю] + [Референс атмосфери] + [Специфікація інструментів] + [Керування динамікою і вокалом]`
+- **Spaces & Turntable**: Браузерні біт-мейкери та DJ-пульти для живого семплювання.
+- **Section-Level Replace**: Виділення таймкоду (1:12–1:35) і заміна слів, мови або інструментів без зміни решти пісні.
+- **AI Cover & Gemini Omni Flash**: Переаранжування треків та автоматична генерація відеокліпів, синхронізованих за темпом та монтажними склейками.
+
+---
+
+## 5. Розширена бібліотека метатегів та інлайн-команд
+
+### 5.1 Структурні метатеги `[Square Brackets]` (Німі інструкції)
+- `[Intro - atmospheric synth swell, vinyl crackle]`
+- `[Vocal Intro - dynamic acapella, dry and close]`
+- `[Beat Drop - heavy fuzz bass, punchy driving drums]`
+- `[Verse 1 - rhythmic, dry vocals, clean muted guitar]`
+- `[Pre-Chorus - building intensity, rising snare roll]`
+- `[Chorus - explosive, epic harmonies, wide stereo]`
+- `[Verse 2 - add driving tambourine, shaker, backing vocals]` (Венс Пауелл)
+- `[Post-Chorus - rhythmic vocal chops, synth arpeggio]`
+- `[Instrumental Break - gritty fuzz slide guitar solo]`
+- `[Bridge - acoustic, stripped-back, warm Rhodes chords]`
+- `[Breakdown - vocal and sub-bass only, intimate, dry]`
+- `[Mega-Chorus - maximum energy, layered harmonies, guitars clashing]`
+- `[Outro - fading out, solo analog synth, tape hiss]`
+- `[End]` / `[Cold End]`
+
+### 5.2 9 Канонічних інлайн вокальних жестів у `(Round Parentheses)`
+1. `(whispered)` / `(whispered, intimate)` — Інтимний шепіт біля мікрофона (Verse 1, Breakdown).
+2. `(belted)` / `(belted, powerful)` — Потужний відкритий грудний вокал на емоційному піку (Chorus).
+3. `(falsetto)` — Перехід на фальцет для створення емоційної крихкості.
+4. `(screamed)` / `(growl)` — Агресивна вокальна експресія (Metalcore, Post-Punk).
+5. `(ad-lib)` / `(vocal runs)` — Вокальні мелізми та фонова імпровізація.
+6. `(building intensity)` — Поступове наростання гучності та вокального тиску.
+7. `(key change)` — Тональна модуляція для фінального вибуху приспіву.
+8. `(half-time feel)` — Уповільнення ритму фразування вокалу вдвічі (усуває вокальну скоромовку).
+9. `(harmonized)` / `(layered harmonies)` — Багатоголосся на ключовому слові хука.
+- Бек-вокальна лірика: `(луна)`, `(ніколи знов)`, `(разом у темряві)`.
+
+---
+
+## 6. Крок 4: Дорожня карта покрокової генерації (The AI Conductor)
+
+1. **Seed (30–50s)**: Вокальний вступ (`[Vocal Intro - dynamic acapella, dry]`) для виконання правила 5 секунд та захисту від skip-rate. Перевірка темпу та груву.
+2. **Extend 1 (Verse & Pre-Chorus)**: Розгін до першого приспіву; обов'язкова поява приспіву до 50-ї секунди треку.
+3. **Extend 2 (Verse 2 Development за Венсом Пауеллом)**: Оновлення промпту метатегом:
+   `[Verse 2 - add driving tambourine, syncopated backing vocals, stereo guitar riffs]`.
+4. **Extend 3 (Breakdown & Mega-Chorus)**: 15–20 секунд спаду енергії `[Breakdown - vocal and sub-bass only]` перед фінальним вибухом `[Mega-Chorus - maximum energy, layered harmonies, guitars clashing]`.
+5. **Extend 4 (Outro)**: Лаконічне аутро $\le 20$s (`[Outro - dynamic fading vocal]`, `[End]`).
+
+---
+
+## 7. Крок 5: Інженерна DAW-обробка та зведення AI-стемів (Post-Production)
+
+1. **Stem Splitting**: Розбиття треку на Vocals, Bass, Drums, Other через Moises Pro, RipX або LALAL.AI.
+2. **Phase Alignment**: Зведення бочки та басу в моно, перевірка інверсії полярності ($180^\circ$) або застосування *Sound Radix Auto-Align / FUSER* для максимального панчу.
+3. **Dynamic Unmasking**: Динамічний сайдчейн-еквалайзер (*Trackspacer* на 10–25% або *Neutron Unmask*) на басі, керований від Kick.
+4. **Bass Split Compression**:
+   - *Sub-Bass (<200 Hz)*: Brickwall limiting з 3–6 dB пригнічення для кам'яної стабільності низу.
+   - *Mid-High Bass (>200 Hz)*: Аналогова сатурація (*Decapitator / Saturn 2*) та динамічна компресія (*1176* 4:1) для виразності атаки струн.
+5. **Tchad Blake Parallel Drum Distortion**: Сильно сатуровані барабани (*SansAmp / Devil-Loc*) направляються **безпосередньо на Master Fader**, оминаючи Drum Bus для збереження headroom.
+6. **Dynamic Mid-Side Reverb Sidechaining**: Сайдчейн-компресор на вокальній реверберації, керований від Lead Vocal (пригнічення 3–6 dB), у режимі **Mid-Side** (пригнічується тільки центр, стерео-боки залишаються широкими).
+
+---
+
+## 8. Крок 6: Мастеринг та Алгоритмічна Дистрибуція
+
+1. **Мастеринг без True Peak пастки**:
+   - Для гучних сучасних майстрів ($-6\dots-8\text{ LUFS}$): **вимкнути True Peak лімітування** та встановити стелю лімітера на **-1 dBTP** (або -0.2 dB).
+   - Якщо платформа суворо вимагає -2 dBTP: цільова гучність має бути знижена до **-14 LUFS** (або -8 LUFS).
+2. **Spotify 2026 Skip Rate пороги**:
+   - Поп: критично $> 48\%$
+   - Хіп-хоп: критично $> 44\%$
+   - Електроніка: критично $> 37\%$
+   - Інді-рок: критично $> 31\%$
+   - **Універсальний поріг тривоги**: $> 45\%$ повністю закриває алгоритмічні плейлисти (*Discover Weekly*, *Radio*).
+3. **Метрики утримання**: Completion Rate $> 55\text{--}60\%$ (довжина треку 2:30–4:00 хв), Save Rate $\ge 20\%$.
+4. **Ліквідація Playlist Placement Trap**: Рекламний трафік (Meta/TikTok Ads) спрямовується **виключно на цільовий сингл**, а не на плейлист артиста.
+5. **Промо-інструменти**: Spotify Canvas (8с відео, +5% завершення), Marquee (15% конверсія наміру), Discovery Mode.
+
+---
+
+## 9. Системний промпт скіла (System Prompt v8)
 
 ```text
-Вхідний вірш / ідея ──> Вибір 1 із 8 жанрів ──> Складання Style Prompt (80-180 chars)
-                                              ├──> Розмітка Lyrics ([Verse], [Chorus], (ехо))
-                                              └──> Підбір Exclude векторів
+Ти — «AI Music Alchemy & Prompt Engineer (Suno / Udio / Flow Music)» (версія v8). Твоє завдання — приймати від користувача ідею пісні, референси треків або виконавців, і створювати бездоганний пакет для генерації музики світового рівня, її подальшого DAW-зведення та маркетингу.
+
+Для кожної сесії ти зобов'язаний надати:
+1. ДЕКОНСТРУКЦІЮ РЕФЕРЕНСУ (Конкретного треку/виконавця): Опиши жанровий гібрид, BPM, тональність, звуковий ландшафт (інструменти), емоційний настрій, анатомію хуків та структуру.
+2. SUNO v4.5 / v5.5 PROMPTS (два варіанти):
+   - Метод 1 (Conversational Paragraph): Промпт абзацом із правилом «First 5 Words».
+   - Метод 2 (Tag-Based Matrix за HookGenius): Промпт із 10-15 точних тегів за 5-модульною формулою.
+3. UDIO v4 PROMPT: Промпт стилю (до 250 симв.), налаштування контексту (Context Length) для переходів.
+4. GOOGLE FLOW MUSIC PROMPT: Розмовний промпт для AI-агента на моделі Lyria 3.5.
+5. AI-ОПТИМІЗОВАНИЙ LYRICS SHEET:
+   - Розмітка Bracket Tags та вокальні інлайн-команди в круглих дужках.
+   - Складова симетрія та мовний контраст простору (Staccato у куплетах, Legato у приспівах).
+   - Melodic Math: «Правило 50 секунд» та анонси Previews.
+   - Фіксація наголосів великими літерами (вИпадок, дорОга).
+6. ПОКРОКОВУ ДОРОЖНЮ КАРТУ ГЕНЕРАЦІЇ (EXTENSIONS): Інструкція щодо Seed, Extend, розширення куплету за Венсом Пауеллом та створення Breakdown/Mega-Chorus.
+7. ЧЕК-ЛИСТ ДЛЯ DAW-ЗВЕДЕННЯ СТЕМІВ: Інструкції про Split Compression басу, фазову корекцію, усунення частотного маскування, паралельний дисторшн Тчада Блейка безпосередньо на майстер, та вокальний Mid-Side Reverb sidechain.
+8. АЛГОРИТМІЧНІ СТАНДАРТИ ТА МАРКЕТИНГ: Нормалізація гучності без TP-пастки (-1 dBTP для гучних майстрів), гнучкі жанрові пороги Skip Rate, скасування плейлист-реклами на користь синглів, нативні інструменти (Canvas, Marquee, Discovery Mode).
+
+Твій тон: професійний, безжально об'єктивний, орієнтований на деталі та когнітивну психологію сприйняття звуку.
 ```
 
-### Фінальний приклад генерації:
+---
 
-**Style of music (135 символів)**:
-```text
-ukrainian post-punk, doomer wave, 130 bpm, driving bassline, melancholic baritone male vocal, chorus electric guitar, lo-fi night production
-```
+## 10. Критерії прийомки згенерованого AI-треку (The 10 AI Quality Gates)
 
-**Lyrics**:
-```text
-[Intro]
-[80s Beat]
-[Guitar Riff]
-
-[Verse 1]
-[Baritone Male Vocal]
-Порожній проспект ковтає ліхтарі,
-Холодний дощ стікає по вікні.
-Ми знову чужі у цьому дворі,
-(у цьому дворі)
-Де пам'ять згорає на самому дні.
-
-[Chorus]
-[Driving Bassline]
-Нічний трамвай іржавим колесом,
-Везе мій сум за темний горизонт.
-Лишився тільки мокрий автохтон,
-І вікна, що світять в унісон.
-
-[Guitar Solo]
-[Pedal Lead Solo]
-
-[Outro]
-[Cold End]
-```
-
-**Exclude**:
-```text
-bright acoustic strumming, polished autotune pop, cheerful brass, harsh sibilance, stadium shouting, metallic highs, muddy bass
-```
+| № гейту | Сфера перевірки | Метод контролю / Суворий критерій якості | Усунення помилки |
+| :--- | :--- | :--- | :--- |
+| **Gate 1** | **Анти-Skip (Перші 5с)** | Чи звучить живий людський голос або впізнаваний інструментальний хук у перші 5 секунд? Якщо трек починається з довгого програшу — *Гейт не пройдено*. | Перегенерувати вступний «Seed»-блок, змінивши метатег на `[Vocal Intro - dynamic acapella]`. |
+| **Gate 2** | **«Правило 50 секунд»** | Чи пролунав перший приспів з головним вокальним хуком протягом перших 50 секунд? Якщо ні — *Гейт не пройдено*. | Зменшити довжину куплету в ліричному аркуші та перегенерувати вступний блок треку. |
+| **Gate 3** | **Природність слів та просодія** | Проговорити лірику вголос (Spoken Prosody Test). Чи є викривлення слів або штучне зміщення наголосів? Чи виділено наголоси (`вИпадок`, `дорОга`)? Якщо ні — *Гейт не пройдено*. | Збалансувати кількість складів у проблемному рядку та застосувати Inpainting (`*words*`) / Section Replace. |
+| **Gate 4** | **Секційний контраст простору** | Чи відрізняється куплет від приспіву за енергією та простором? Чи реалізовано контраст Staccato vs Legato? Якщо приспів звучить монотонно — *Гейт не пройдено*. | Додати в лірику приспіву широкі голосні (Оооо, Аааа) та оновити тег на `[Chorus - explosive open wide space]`. |
+| **Gate 5** | **Розвиток 2-го куплету** | Чи повторює другий куплет аранжування першого один в один? Якщо так — *Гейт не пройдено*. | Зробити Extend після 1-го приспіву з додаванням у промпт тегу `[Verse 2 - add driving percussion, shaker, backing vocals]`. |
+| **Gate 6** | **Breakdown & Climax** | Чи присутній різкий спад енергії перед фінальним приспівом? Якщо фінал звучить плоско, без емоційного вибуху — *Гейт не пройдено*. | Перегенерувати фінал, подовживши зону `[Breakdown]` та наклавши додаткові бек-вокали у `[Mega-Chorus]`. |
+| **Gate 7** | **Низькі частоти (DAW)** | Чи розділено басовий стем на Sub (<200Hz) та Mid-High (>200Hz)? Чи є хірургічне розмаскування басу від Kick? Якщо ні — *Гейт не пройдено*. | Застосувати Split Compression та налаштувати Trackspacer/Neutron Unmask по сайдчейну від бочки. |
+| **Gate 8** | **Маршрутизація бруду (DAW)** | Чи спрямовано паралельні дисторшн-треки барабанів на Drum Bus? Якщо так — *Гейт не пройдено* (ризик втрати Headroom). | Перенаправити паралельно оброблені брудні доріжки барабанів безпосередньо на Master Fader, оминаючи Drum Bus. |
+| **Gate 9** | **Мастеринг True Peak** | Чи перевищує True Peak рівень -1 dBTP для гучних майстрів (-6...-8 LUFS)? Чи є кліпування? Якщо так — *Гейт не пройдено*. | Вимкнути True Peak лімітування, встановити стелю на -1 dBTP або знизити гучність майстра до -14 LUFS. |
+| **Gate 10**| **Рекламний трафік** | Чи спрямовується трафік реклами на плейлист артиста? Якщо так — *Гейт не пройдено* (небезпека Playlist Placement Trap). | Перенаправити рекламні бюджети виключно на посилання конкретного цільового синглу. |

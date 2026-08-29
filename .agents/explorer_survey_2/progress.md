@@ -1,24 +1,24 @@
-# Progress — Explorer 2 (Suno AI Music Prompt Engineering Specialization)
+# Progress Log — Explorer 2 (Templates & Audio Engineering Survey)
 
-Last visited: 2026-08-26T12:43:30+03:00
+Last visited: 2026-08-29T19:25:00Z
 
-## Status
-- Investigation and synthesis complete.
-- Audit report written to `d:/poetry-skill/.agents/explorer_survey_2/analysis.md`.
-- Handoff report written to `d:/poetry-skill/.agents/explorer_survey_2/handoff.md`.
-- Ready to send message to parent orchestrator.
-
-## Plan
-1. [x] Initialize tracking files (`DISPATCH.md`, `progress.md`, `BRIEFING.md`)
-2. [x] Read `d:/poetry-skill/.agents/ORIGINAL_REQUEST.md`
-3. [x] Inventory and read all existing Suno AI conversion skill files, references, packs, test suites, and templates across `d:/poetry-skill`
-4. [x] Deep-dive audit into:
-   - [x] 1. Modern Suno AI model mechanics (v3.5, v4 / modern engines, token economy, prompt length limits)
-   - [x] 2. Structure metatags & arrangement directives ([Intro], [Verse], [Chorus], [Drop], [Guitar Solo], BPM/Key, parentheses/brackets/asterisks)
-   - [x] 3. Style & genre blending rules (Ukrainian ethno-chaos, indie pop, post-punk, synthwave, drill, metalcore, turbofolk vs authentic folk-rock, avoiding tag clash)
-   - [x] 4. Vocal timbre & delivery directives (male/female, pitch registers, emotional tones, raspy, belting, recitative, spoken word, autotune)
-   - [x] 5. Negative prompting / Exclude field behavior (anti-prompts, artifact mitigation: metallic highs, muddy bass, garbled vocals)
-   - [x] 6. Reference prompt packs & cheat sheets audit (`dark-pack.md`, `female-vocal-pack.md`, `male-vocal-pack.md`, `sad-pack.md`, `uplifting-pack.md`, `suno-reference-prompt-pack-uk.md`, `suno-reference-prompt-pack.md`)
-5. [x] Synthesize comprehensive findings in `d:/poetry-skill/.agents/explorer_survey_2/analysis.md`
-6. [x] Formulate 5-component handoff report in `d:/poetry-skill/.agents/explorer_survey_2/handoff.md`
-7. [x] Send message back to parent agent
+- [x] Initialized workspace and tracking files (DISPATCH.md, BRIEFING.md, progress.md)
+- [x] Read and analyze ORIGINAL_REQUEST.md
+- [x] Read and analyze ai-music-generation-meta-spec-v8.md in full detail
+- [x] Inspect existing root files and reference templates:
+  - `ukrainian-poetry-to-suno.md` (and `skills/ukrainian-poetry-to-suno/references/full-guide.md`)
+  - `ukrainian-poetry-skill.md`
+  - `lyrics-to-suno-template.md` (and `skills/ukrainian-poetry-to-suno/references/lyrics-to-suno-template.md`)
+  - `song-structure-pack.md` (and `skills/ukrainian-poetry-to-suno/references/song-structure-pack.md`)
+  - `suno-prompt-anti-patterns.md` (and `skills/ukrainian-poetry-to-suno/references/suno-prompt-anti-patterns.md`)
+  - `prompt-builder.md`, `reference-to-style-cheatsheet.md`, `reference-breakdown-examples.md`, `mood-to-style-map.md`, `ukrainian-song-scenarios.md`
+  - `skills/ukrainian-poetry-to-suno/SKILL.md`, `skills/poetry-skill/SKILL.md`, `AGENTS.md`, `GEMINI.md`
+  - Validator engines (`tests/validator/metatag_validator.py`, `tests/validator/style_validator.py`)
+- [x] Map Metatags library & inline vocal gestures in `(...)` vs `[...]`
+- [x] Map 10 AI Quality Gates definitions and comparison tables
+- [x] Map Step 4 (The AI Conductor / Vance Powell Verse 2 development / Mega-Chorus / Outro <=20s)
+- [x] Map Step 5 (DAW Engineering: Stem splitting, Phase optimization, dynamic sidechain, Split Bass Compression, Tchad Blake parallel distortion on Master Fader, Mid-Side Reverb sidechaining)
+- [x] Map Step 6 (Mastering & Algorithmic Streaming Distribution: True Peak trap, -1 dBTP / -2 dBTP, genre skip rate thresholds, single-only ads, Spotify Canvas/Marquee/Discovery Mode)
+- [ ] Compile comprehensive `handoff.md` report
+- [ ] Update `BRIEFING.md`
+- [ ] Send message to parent

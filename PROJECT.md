@@ -1,126 +1,57 @@
-# Project: Ukrainian Poetry Skills & 5 Subagents Ecosystem
+# Project: AI Music Alchemy & Prompt Engineer v8 Integration
 
 ## Architecture
-This project extends the Ukrainian Poetry & Suno Prompting ecosystem (`poetry-skill`) with 6 fundamental principles of poetic craftsmanship and 5 specialized subagent personas, integrated across the skill instructions, reference guides, agent definitions, deterministic validators, and test suites.
-
-```
-                  ┌─────────────────────────────────────────────────┐
-                  │                 Master Router                   │
-                  │           (skills/poetry-skill/SKILL.md)        │
-                  │                   (AGENTS.md)                   │
-                  └──────────────┬──────────────────┬───────────────┘
-                                 │                  │
-           ┌─────────────────────▼───────┐   ┌──────▼───────────────────────┐
-           │   ukrainian-poetry (Core)   │   │  ukrainian-poetry-to-suno    │
-           │  (6 Poetic Craft Principles)│   │  (Suno Prompt Engineering)   │
-           └──────────────┬──────────────┘   └──────────────────────────────┘
-                          │
-          ┌───────────────┴───────────────────────────────┐
-          │  5 Specialized Subagents Pipeline             │
-          │  (skills/ukrainian-poetry/agents/*.md)        │
-          │                                               │
-          │  1. poetry-imagery-architect (Образотворець)  │
-          │  2. poetry-emotional-critic (Критик щирості)  │
-          │  3. poetry-prosody-phonics (Майстер фоніки)   │
-          │  4. poetry-conciseness-editor (Редактор)      │
-          │  5. poetry-form-synthesizer (Синтезатор)      │
-          └───────────────┬───────────────────────────────┘
-                          │
-          ┌───────────────▼───────────────────────────────┐
-          │  Validation & Scoring Engine                  │
-          │  (tests/validator/poetic_validator.py)        │
-          │  (tests/validator/rubric_scorer.py)           │
-          │  (skills/ukrainian-poetry/references/rubric.md│
-          └───────────────┬───────────────────────────────┘
-                          │
-          ┌───────────────▼───────────────────────────────┐
-          │  Deterministic Test Suite (62 Tests)          │
-          │  (tests/run_tests.py --all)                   │
-          └───────────────────────────────────────────────┘
-```
-
----
+This project integrates the authoritative specification `ai-music-generation-meta-spec-v8.md` into the `poetry-skill` repository.
+The architecture unites:
+1. **6-Step AI Music Lifecycle**: Reverse Engineering -> AI Lyrics & Melodic Math -> Multi-Platform Prompting -> AI Conductor Extensions -> DAW Stem Mixing -> Mastering & Streaming Distribution.
+2. **Multi-Platform Matrix**: Suno AI (v4.5/v5.5 Method 1 & 2), Udio AI (v4 48kHz, Context Length, Inpainting `*stars*`, Pro license), Google Flow Music (Lyria 3.5 Conversational Agent, Spaces, Turntable, Section Replace, AI Cover, Gemini Omni Flash video sync, 500 daily credits).
+3. **10 AI Quality Gates**: Verification matrix across composition, prosody, generation, stem mixing, mastering, and marketing.
+4. **Metatag & Phonics Rules**: Square brackets `[...]` for silent structural/arrangement cues; round parentheses `(...)` exclusively for vocals, backing vocals, and 9 canonical inline vocal gestures (`(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`).
+5. **Ukrainian Poetic Integrity**: Full preservation of 6 Core Poetic Principles, capitalized stressed vowels (`вИпадок`, `дорОга`), zero grammatical rhyming, and natural syntax.
 
 ## Feature Inventory
-
-| # | Feature | Description | Milestone | Status | Source |
-|---|---------|-------------|-----------|--------|--------|
-| 1 | 6 Poetic Principles in `SKILL.md` | Formalize 6 principles in Ukrainian poetry core skill with rules, self-edit checklist, and anti-patterns | M1 | DONE | ORIGINAL_REQUEST R1 |
-| 2 | 6 Principles in `full-guide.md` | Deep dive theory, before/after examples, acoustic phonics, and anti-inversion rules in reference guide | M1 | DONE | ORIGINAL_REQUEST R1 |
-| 3 | 6 Principles in `rubric.md` | Align 100-point rubric breakdown and penalty deductions with the 6 principles | M1 | DONE | ORIGINAL_REQUEST R1 |
-| 4 | Master Directives in `AGENTS.md` & `poetry-skill/SKILL.md` | Update repository SSOT and top-level skill router with the 6 mandatory quality standards | M1 | DONE | ORIGINAL_REQUEST R1 |
-| 5 | `poetry-imagery-architect` | Subagent persona: tactile imagery, fresh metaphors, anti-cliche guardrails | M2 | DONE | ORIGINAL_REQUEST R2 |
-| 6 | `poetry-emotional-critic` | Subagent persona: sincerity, zero-pathos, anti-moralizing, psychological micro-details | M2 | DONE | ORIGINAL_REQUEST R2 |
-| 7 | `poetry-prosody-phonics` | Subagent persona: meter consistency, stress accuracy, acoustic euphony (у/в, і/й), heterogeneous rhymes | M2 | DONE | ORIGINAL_REQUEST R2 |
-| 8 | `poetry-conciseness-editor` | Subagent persona: word economy, anti-water, eliminating filler pronouns and artificial inversions | M2 | DONE | ORIGINAL_REQUEST R2 |
-| 9 | `poetry-form-synthesizer` | Subagent persona: form-content harmony, paradoxical endings, novel perspective, pipeline aggregation | M2 | DONE | ORIGINAL_REQUEST R2 |
-| 10 | Pipeline Orchestration & Subagent Registration | Register 5 subagents in `openai.yaml`, commands, and define sequential/modular pipeline flow | M2 | DONE | ORIGINAL_REQUEST R2 |
-| 11 | Poetic Validator Updates | Implement deterministic checks for artificial inversions, filler pronouns/words, and sensory details | M3 | DONE | ORIGINAL_REQUEST R3 |
-| 12 | Rubric Scorer Calibration | Update `RubricScorer.score_poetry` with refined 7-dimension scoring logic and penalty bounds | M3 | DONE | ORIGINAL_REQUEST R3 |
-| 13 | Test Suite Enhancements | Update/add test scenarios for new criteria while ensuring 100% backward compatibility with Suno pipeline | M3 | DONE | ORIGINAL_REQUEST R3 |
-| 14 | E2E Regression & Quality Verification | Full test suite execution (`py -3 tests/run_tests.py --all`): 62 tests pass, 0 errors, >=95/100 avg score | M4 | DONE | ORIGINAL_REQUEST Acceptance |
-
----
+| # | Feature | Description | Milestone | Source |
+|---|---------|-------------|-----------|--------|
+| 1 | Step 1 Reverse Engineering | Genre hybrid, BPM, Key, Vocal Triple-Stack, Melodic Math hooks, bracketed layout | M1 | meta-spec v8 |
+| 2 | Step 2 AI-Optimized Lyrics | Syllable symmetry, Spoken Prosody Test, Staccato vs Legato, 5s Rule, 50s Chorus Rule, Melodic Previews, Glue Hooks, <=3-4 melodies | M1 | meta-spec v8 |
+| 3 | Step 3 Suno v4.5/v5.5 Prompting | Method 1 First 5 Words & Method 2 HookGenius Tag Matrix 5 modules, My Taste, Voices, Custom Models, Failure Modes | M1 | meta-spec v8 |
+| 4 | Step 3 Udio v4 Prompting | 48kHz stereo, Context Length 10-15s vs max, Inpainting `*stars*`, Pro licensing rights ($30/mo) | M1 | meta-spec v8 |
+| 5 | Step 3 Flow Music Lyria 3.5 | Conversational Agent, Spaces, Turntable, Section Replace, AI Cover, Gemini Omni Flash sync, 500 daily credits | M1 | meta-spec v8 |
+| 6 | Step 4 AI Conductor Extensions | Seed 30-50s, Extend, Vance Powell Verse 2 development (tambourine/shaker/backing), Breakdown 15-20s & Mega-Chorus, Outro <=20s | M1 | meta-spec v8 |
+| 7 | Step 5 DAW Stem Post-Production | Stem splitting, Phase alignment mono check, dynamic sidechain unmasking, Bass Split Compression (<200Hz brickwall vs >200Hz saturated), Tchad Blake parallel drum distortion directly to Master Fader, Mid-Side Reverb sidechain | M1 | meta-spec v8 |
+| 8 | Step 6 Mastering & Distribution | Mastering without True Peak trap (-1 dBTP for -6..-8 LUFS with TP limiting disabled, or -14 LUFS for -2 dBTP), genre skip rate thresholds (Pop >48%, Hip-hop >44%, Electronic >37%, Indie rock >31%, alarm >45%), Playlist Placement Trap elimination (single-only ads), Spotify Canvas/Marquee/Discovery Mode | M1 | meta-spec v8 |
+| 9 | 10 AI Quality Gates Table | Full 10-gate quality matrix (Anti-Skip 5s, 50s Chorus, Spoken Prosody, Staccato/Legato, Verse 2 Development, Breakdown/Mega-Chorus, Low-End Split Compression, Tchad Blake Distortion to Master, True Peak Mastering, Single-Only Ads) | M1, M2 | meta-spec v8 |
+| 10 | Global Directives Sync | Update AGENTS.md, GEMINI.md, skills/poetry-skill/SKILL.md with v8 directives and constraints | M1 | ORIGINAL_REQUEST |
+| 11 | Metatag Grammar & Inline Gestures | Expand song-structure-pack.md, lyrics-to-suno-template.md, suno-prompt-anti-patterns.md with 9 inline gestures in `(...)` and structural tags in `[...]` | M2 | meta-spec v8 |
+| 12 | Root Files Synchronization | Synchronize root mirror files (`ukrainian-poetry-to-suno.md`, `ukrainian-poetry-skill.md`, `lyrics-to-suno-template.md`, `song-structure-pack.md`, `suno-prompt-anti-patterns.md`, `suno-style-rubric.md`) | M2 | ORIGINAL_REQUEST |
+| 13 | Validator Extension | Update `tests/validator/metatag_validator.py` and `tests/validator/suno_validator.py` to support new structural prefixes and whitelist inline gestures in parentheses | M3 | meta-spec v8 |
+| 14 | Test Suite Verification | Run `py -3 tests/run_tests.py --all` ensuring 100% pass (63+ tests, 0 errors, high rubric scores) | M3 | ORIGINAL_REQUEST |
+| 15 | Local & Global Plugin Sync | Copy updated skills and directives to `.agents/skills/` and `C:\Users\sm9sh\.gemini\config\plugins\poetry-skill\` | M4 | ORIGINAL_REQUEST |
+| 16 | Post-Implementation 3-Agent Audit | 3 specialized auditor agents: Prompt & Platform Spec Auditor, Audio Engineering & Distribution Auditor, Ukrainian Poetry & Cross-System Integrity Auditor | M5 | ORIGINAL_REQUEST R4 |
 
 ## Milestones
-
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| M1 | R1: Skill & Reference Integration | `skills/ukrainian-poetry/SKILL.md`, `references/full-guide.md`, `references/rubric.md`, `skills/poetry-skill/SKILL.md`, `AGENTS.md` | none | DONE |
-| M2 | R2: 5 Subagents & Pipeline | `skills/ukrainian-poetry/agents/*.md`, `openai.yaml`, `skills/ukrainian-poetry/SKILL.md`, `AGENTS.md` | M1 | DONE |
-| M3 | R3: Validator & Rubric Scorer | `tests/validator/poetic_validator.py`, `tests/validator/rubric_scorer.py`, `tests/` | M1, M2 | DONE |
-| M4 | R4: E2E Verification & Final Audit | Full test suite execution, multi-agent review, challenger validation, forensic integrity audit | M1, M2, M3 | DONE |
-
----
+| 1 | M1: Skills & Reference Guides Update | Update `skills/ukrainian-poetry-to-suno/`, `skills/poetry-skill/`, `AGENTS.md`, `GEMINI.md` | none | DONE |
+| 2 | M2: Root Mirrored Files & Template Packs Sync | Update root templates, song-structure-pack, anti-patterns, rubric | M1 | DONE |
+| 3 | M3: Validators, Test Suite Sync & Test Pass | Update `tests/validator/`, verify 100% tests pass on `py -3 tests/run_tests.py --all` | M2 | DONE |
+| 4 | M4: Ecosystem & Global Plugin Sync | Synchronize to `.agents/skills/` and `C:\Users\sm9sh\.gemini\config\plugins\poetry-skill\` | M3 | DONE |
+| 5 | M5: Post-Implementation 3-Agent Audit | Dispatch 3 independent specialized auditors to verify compliance with zero findings | M4 | DONE |
 
 ## Interface Contracts
+### `skills/ukrainian-poetry-to-suno` ↔ `tests/validator/metatag_validator.py`
+- Structural tags in `[...]`: `[Intro]`, `[Vocal Intro]`, `[Beat Drop]`, `[Verse]`, `[Verse 1]`, `[Verse 2]`, `[Pre-Chorus]`, `[Chorus]`, `[Post-Chorus]`, `[Instrumental Break]`, `[Bridge]`, `[Breakdown]`, `[Mega-Chorus]`, `[Outro]`, `[End]`.
+- Inline vocal gestures in `(...)`: `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)` alongside backing vocal words/echoes.
+- Disallowed in `(...)`: instrumental/arrangement keywords like `(guitar solo)`, `(drum roll)`, `(synthesizer)`, `(drop)`, etc.
 
-### 1. 6 Poetic Principles Standard
-1. **Свіжа образність та метафоричність**: Show, don't tell; authorial unexpected metaphors; tactile sensory anchors; zero hackneyed cliches (*кров-любов*, *троянди-сльози*).
-2. **Емоційна глибина та щирість**: Authentic psychological truth; zero theatrical pathos or moralizing sermonizing; micro-details instead of loud declarations.
-3. **Ритмічна та звукова гармонія**: Breathing prosody; rich heterogeneous, acoustic, and slant rhymes; deliberate phonics (alliteration, assonance, soundscapes).
-4. **Лаконічність і вага слова**: High semantic compression; zero filler pronouns (*цей, той, свій*) or rhythmic padding (*і ось*, *ну от*); zero artificial inversions for rhyme.
-5. **Оригінальність ракурсу**: Unconventional perspective on universal themes; paradoxical or open endings; shifting focus from macro-abstractions to revealing micro-details.
-6. **Органічна єдність форми та змісту**: Form (meter, stanza structure, caesura, enjambment, speed) intrinsically mirrors emotional dynamics and theme.
-
-### 2. Subagent Contract Interface
-Every subagent specification in `skills/ukrainian-poetry/agents/` adheres to:
-- YAML Frontmatter: `name`, `description`, `<example>`, negative constraints, `model: gemini-2.5-pro`, `temperature: 0.7`.
-- Markdown Sections:
-  1. `Role & Identity` (Ukrainian name and mission)
-  2. `Scope & Boundaries` (what it does and does NOT do)
-  3. `Input Contract` (raw prompt, poem draft, metadata)
-  4. `Operational Rules & Heuristics` (concrete actionable checks, `❌ До ➔ ✅ Після` transformations)
-  5. `Output Contract` (5-part structured report: critique, sensory/prosodic/stylistic analysis, proposed edits, metrics)
-  6. `Edge-Case Handling` (archaic/folk styles, song lyrics, verlibres, blank verse)
-
-### 3. Validator & Scorer Interface
-- `PoeticValidator`: Pure Python 3 standard library; methods return `(passed: bool, message: str, details: dict)`.
-  - `check_artificial_inversions(text, mode)`
-  - `check_filler_words_and_pronouns(text, mode)`
-  - `check_cliche_rhymes(text)`
-  - `evaluate_sensory_grounding(text)`
-- `RubricScorer.score_poetry(text, poetic_res, mode, is_free_verse)`: Returns dict with 7 dimension scores and `total_score` in `[0.0, 100.0]`. Passing threshold `>= 85.0`, suite average `>= 95.0` (achieved `98.1 / 100`).
-
----
+### `skills/ukrainian-poetry` ↔ `skills/ukrainian-poetry-to-suno`
+- Poetry module output adheres to 6 Poetic Principles and capitalizes stressed vowels on non-obvious/homographic words (`вИпадок`, `дорОга`, `моЯ`, `землЯ`, `зЕмлю`).
+- Suno module consumes Ukrainian poetic lyrics, validates Spoken Prosody and syllable balance, wraps arrangement instructions in `[...]`, and applies Western sonic aesthetics in prompt generation.
 
 ## Code Layout
-
-- `AGENTS.md` — Global repository SSOT directives.
-- `skills/poetry-skill/SKILL.md` — Master ecosystem skill router.
-- `skills/ukrainian-poetry/SKILL.md` — Core Ukrainian poetry skill instruction.
-- `skills/ukrainian-poetry/references/full-guide.md` — In-depth guide & reference manual.
-- `skills/ukrainian-poetry/references/rubric.md` — 100-point evaluation rubric.
-- `skills/ukrainian-poetry/agents/` — 5 specialized subagent prompt files:
-  - `poetry-imagery-architect.md`
-  - `poetry-emotional-critic.md`
-  - `poetry-prosody-phonics.md`
-  - `poetry-conciseness-editor.md`
-  - `poetry-form-synthesizer.md`
-  - `openai.yaml` — Agent registry definition.
-- `tests/validator/poetic_validator.py` — Deterministic poetic validation engine.
-- `tests/validator/rubric_scorer.py` — 100-point rubric scoring engine.
-- `tests/validator/style_validator.py` & `metatag_validator.py` — Suno prompt validators.
-- `tests/run_tests.py` — Test runner.
-- `tests/tier1_feature_coverage/` through `tests/tier4_real_world/` — Test case definitions (62 tests).
-- `tests/test_adversarial_challenger1.py` & `tests/test_adversarial_challenger2.py` — Adversarial test suites.
+- `skills/ukrainian-poetry-to-suno/SKILL.md`: Main entry point for AI music generation skill.
+- `skills/ukrainian-poetry-to-suno/references/`: Reference manuals (`full-guide.md`, `prompt-builder.md`, `mood-to-style-map.md`, `reference-to-style-cheatsheet.md`, `song-structure-pack.md`, `lyrics-to-suno-template.md`, `suno-prompt-anti-patterns.md`, `rubric.md`).
+- Root mirrored documentation: `ukrainian-poetry-to-suno.md`, `ukrainian-poetry-skill.md`, `lyrics-to-suno-template.md`, `song-structure-pack.md`, `suno-prompt-anti-patterns.md`, `suno-style-rubric.md`.
+- `AGENTS.md`, `GEMINI.md`: Root configuration directives.
+- `tests/`: Test runners and validators (`tests/run_tests.py`, `tests/validator/*.py`).
+- Global Plugin Path: `C:\Users\sm9sh\.gemini\config\plugins\poetry-skill\`.

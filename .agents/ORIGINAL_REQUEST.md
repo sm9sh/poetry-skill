@@ -50,3 +50,55 @@ Integrity mode: development
 - [ ] Середній бал поетичної рубрики залишається >= 95/100.
 
 </USER_REQUEST>
+
+## 2026-08-29T19:16:28Z
+
+<USER_REQUEST>
+# Teamwork Project Prompt
+
+Інтегрувати повномасштабну специфікацію «AI Music Alchemy & Prompt Engineer (Suno / Udio / Flow Music)» v8 (файл `d:\poetry-skill\ai-music-generation-meta-spec-v8.md`) у навички, референси, архітектуру промптів, валідатори та тести екосистеми `poetry-skill`, забезпечивши безшовну взаємодію з модулем української поезії, підтримку Suno v4.5/v5.5, Udio v4 та Google Flow Music (Lyria 3.5), інженерне DAW-зведення, мастеринг без True Peak пастки та 10 AI Quality Gates. Після виконання завдання створити 3 незалежних агентів-аудиторів для суворої перевірки на відсутність помилок, суперечностей або регресій.
+
+Working directory: `d:\poetry-skill`
+Integrity mode: development
+
+## Requirements
+
+### R1. Оновлення та розширення навичок екосистеми (Skill Architecture & Guides)
+- Оновити `skills/ukrainian-poetry-to-suno/SKILL.md`, `skills/ukrainian-poetry-to-suno/references/full-guide.md`, `skills/poetry-skill/SKILL.md`, `AGENTS.md` та `GEMINI.md`.
+- Оновити кореневі симетричні файли: `ukrainian-poetry-to-suno.md`, `ukrainian-poetry-skill.md`, `lyrics-to-suno-template.md`, `song-structure-pack.md`, `suno-prompt-anti-patterns.md`.
+- Інтегрувати 6-етапний повний цикл:
+  1. Step 1: Deep Reference Reverse Engineering (Genre hybrid, BPM, Key, Sonic aesthetic/timbre, Vocal Triple-Stack [Character+Delivery+FX], Melodic Math hooks, Bracketed layout).
+  2. Step 2: AI-Optimized Lyrics Writing (Syllable symmetry, Spoken Prosody Test, Staccato vs Legato spatial contrast, 5-Second Rule, 50-Second Chorus Rule, Melodic Previews, Glue Hooks, Cognitive melody limits <=3-4).
+  3. Step 3: Multi-Platform Prompt Engineering:
+     - **Suno v4.5 / v5.5**: Метод 1 (Conversational Paragraph із правилом «First 5 Words») та Метод 2 (Tag-Based Matrix за формулою HookGenius 5 модулів), нові системні фічі (My Taste, Voices cloning, Custom Models), усунення Failure Modes (Lyrics Rushing, Sterile Vocals, The Negation Trap), комерційні ліцензії (Pro/Premier).
+     - **Udio v4**: 48 кГц якість, керування Context Length (10-15с для переходів vs максимум для спадковості), Inpainting синтаксис `*stars*`, комерційні права на Pro.
+     - **Google Flow Music (Lyria 3.5)**: Conversational Agent Mode, Spaces, Turntable, Section-level replace editing, AI Cover, синхронізація Gemini Omni Flash для музичних кліпів, 500 кредитів щодня + комерційні ліцензії (MusicFX закрито 31 липня 2026).
+  4. Step 4: Step-by-Step Extensions Roadmap (The AI Conductor: Seed 30-50s, Extend, Vance Powell Verse 2 development з додаванням tambourine/shaker/backing vocals, Breakdown & Mega-Chorus, лаконічне Outro <=20s).
+  5. Step 5: Engineering DAW Post-Production & Stem Mixing (Stem splitting [Moises, RipX, LALAL.AI], фазова оптимізація бочки/басу, хірургічне частотне розмаскування через динамічний сайдчейн, Split Compression басу [<200Hz brickwall sub vs >200Hz dynamic saturated], паралельна сатурація Тчада Блейка безпосередньо на Master Fader [минаючи Drum Bus для збереження headroom], динамічний Mid-Side Reverb sidechaining вокалу).
+  6. Step 6: Mastering & Algorithmic Streaming Distribution (Мастеринг без True Peak пастки: -1 dBTP для гучних майстрів -6...-8 LUFS з вимкненням TP-лімітування, або -14 LUFS для -2 dBTP; гнучкі жанрові пороги Skip Rate [Поп >48%, Хіп-хоп >44%, Електроніка >37%, Інді-рок >31%, тривога >45%]; ліквідація пастки Playlist Placement Trap [спрямування реклами виключно на цільовий сингл, а не на плейлист артиста]; Spotify Canvas, Marquee, Discovery Mode).
+
+### R2. Розширення бібліотеки метатегів, правил просодії та 10 AI Quality Gates
+- Оновити `song-structure-pack.md`, `lyrics-to-suno-template.md`, `suno-prompt-anti-patterns.md`.
+- Додати інлайн вокальні жести в круглих дужках: `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`.
+- Додати повну таблицю 10 гейтів контролю якості (Gate 1: Anti-Skip 5s, Gate 2: 50s Rule, Gate 3: Spoken Prosody, Gate 4: Staccato vs Legato, Gate 5: Verse 2 development за Пауеллом, Gate 6: Breakdown & Mega-Chorus, Gate 7: Low end Split Compression, Gate 8: Tchad Blake drum distortion routing to Master, Gate 9: Mastering True Peak, Gate 10: Single-only Ads).
+
+### R3. Синхронізація валідаторів, тестів та збереження сумісності
+- Оновити валідатори `tests/validator/metatag_validator.py`, `tests/validator/suno_validator.py` та `tests/validator/poetic_validator.py` за потреби для підтримки нових тегів (`[Vocal Intro]`, `[Beat Drop]`, `[Post-Chorus]`, `[Mega-Chorus]`, `[Breakdown]`, інлайн-жестів та лімітів).
+- Зберегти 100% сумісність з 6 принципами української поезії, правилом великих літер у наголосах (`вИпадок`, `дорОга`), правилом квадратних дужок `[...]` для аранжувань та ізоляцією круглих дужок `(...)` під вокальні партії/бек-вокал.
+- Забезпечити повне проходження тестів `py -3 tests/run_tests.py --all` (100% успішних тестів, 0 помилок).
+- Синхронізувати оновлені файли в `.agents/skills/` та глобальний каталог `C:\Users\sm9sh\.gemini\config\plugins\poetry-skill\`.
+
+### R4. Верифікаційний аудит трьома спеціалізованими агентами (Post-Implementation 3-Agent Audit)
+Після завершення інтеграції та виконання тестів виконати аудит трьома спеціалізованими ролями:
+1. **Agent 1: Prompt & Platform Spec Auditor (Аудитор платформних промптів)** — перевірити повноту правил Suno v4.5/v5.5 (Conversational & Tag-Based), Udio v4 (Context Length, Inpainting), Google Flow Music (Lyria 3.5, Spaces, Turntable, Omni Flash), лімітів символів, токенів та цілісності метатегів.
+2. **Agent 2: Audio Engineering & Distribution Auditor (Аудитор аудіоінженерії та мастерингу)** — перевірити коректність DAW-стем зведення (Split Compression, фазова оптимізація, паралельний дисторшн Тчада Блейка на майстер, Mid-Side сайдчейн), усунення True Peak пастки, жанрових порогів Skip Rate та відсутності суперечностей у Quality Gates.
+3. **Agent 3: Ukrainian Poetry & Cross-System Integrity Auditor (Аудитор поетичної та системної інтеграції)** — перевірити збереження 6 принципів поетичної майстерності, коректності наголосів великими літерами, правила дужок `[...]` vs `(...)`, відсутності суперечностей або регресій в існуючих модулях та автотестах.
+
+## Acceptance Criteria
+- [ ] Повний цикл з 6 кроків, 10 AI Quality Gates та специфікації Suno v4.5/v5.5, Udio v4, Flow Music Lyria 3.5 інтегровані в `SKILL.md` та `references/full-guide.md`.
+- [ ] Оновлено `AGENTS.md`, `GEMINI.md`, шаблони `lyrics-to-suno-template.md`, `song-structure-pack.md`, `suno-prompt-anti-patterns.md`.
+- [ ] `py -3 tests/run_tests.py --all` виконується з кодом 0 (100% успішних тестів, 0 помилок).
+- [ ] Зміни синхронізовано в `C:\Users\sm9sh\.gemini\config\plugins\poetry-skill\`.
+- [ ] Звіт 3 аудиторів підтверджує повну відсутність конфліктів, помилок і суперечностей.
+
+</USER_REQUEST>

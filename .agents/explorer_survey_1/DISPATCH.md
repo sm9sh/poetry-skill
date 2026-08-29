@@ -1,22 +1,22 @@
-## 2026-08-26T09:40:03Z
+## 2026-08-29T19:17:25Z
+You are Explorer 1 (Spec & Skills Survey).
+Your working directory is: d:\poetry-skill\.agents\explorer_survey_1
+Read ORIGINAL_REQUEST.md at: d:\poetry-skill\.agents\ORIGINAL_REQUEST.md
+Authoritative source specification: d:\poetry-skill\ai-music-generation-meta-spec-v8.md
 
-You are Explorer 1 (Ukrainian Poetic & Linguistic Specialization).
-Your working directory is `d:/poetry-skill/.agents/explorer_survey_1`.
-You MUST read `d:/poetry-skill/.agents/ORIGINAL_REQUEST.md` before starting work.
-Project root: `d:/poetry-skill`.
-
-Task:
-Conduct a comprehensive, deep audit and feature exploration of the Ukrainian Poetry generation skill and all related materials in the repository (`skills/ukrainian-poetry/`, `SKILL.md`, `references/full-guide.md`, `references/input-templates.md`, `references/rubric.md`, `references/stress-tests.md`, `references/tests.md`, `ukrainian-poetry-skill-tests.md`, and any root-level mirrors).
-
-Audit & Analyze:
-1. Versification mechanics: syllabo-tonic meters (iamb, trochee, dactyl, amphibrach, anapest), tonic/accentual verse, dolnik, taktovik, free verse (verlibre), rondo/sonnet/complex poetic forms.
-2. Stress & accentuation rules: variable and mobile stress in Ukrainian, dialectal/archaic shifts, rhythmic elisions, apostrophe/soft-sign accent impacts, stress-marking conventions (acute accent, capital letters), ambiguous homographs (зАмок / замОк, нАголос / наголОс).
-3. Rhyme classification & quality: rich vs poor rhymes, exact vs approximate (асонансні, дисонансні), avoiding banal grammatical rhymes (verb-verb, adjective-adjective in identical case, diminutive-diminutive suffix rhymes) without forcing unidiomatic or awkward syntax.
-4. Linguistic registers & anti-cliche guardrails: authentic contemporary Ukrainian, archaic/Cossack/baroque registers, urban slang, psychological nuance, strict prevention of pseudo-folk cliches (шароварщина, калина-калина-соловейко kitsch), Russianisms/surzhyk/calques (суржик, калька з російської).
-5. Input templates, parameter options, and evaluation rubrics: identify missing parameters, structural ambiguities, scoring rubrics gaps.
-
-Deliverables:
-- Create `progress.md` in your working directory and keep it updated with `Last visited: [timestamp]` heartbeat.
-- Write your comprehensive audit and feature findings to `d:/poetry-skill/.agents/explorer_survey_1/analysis.md`.
-- Write your formal handoff to `d:/poetry-skill/.agents/explorer_survey_1/handoff.md` following the Handoff Protocol (Observation, Logic Chain, Caveats, Conclusion, Feature Inventory recommendations).
-- Send a message back to parent when complete referencing the file paths.
+Your mission:
+1. Thoroughly read and analyze ai-music-generation-meta-spec-v8.md and ORIGINAL_REQUEST.md.
+2. Investigate all existing skills and guides in d:\poetry-skill:
+   - skills/ukrainian-poetry-to-suno/SKILL.md
+   - skills/ukrainian-poetry-to-suno/references/full-guide.md
+   - skills/ukrainian-poetry-to-suno/references/mood-to-style-map.md
+   - skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md
+   - skills/ukrainian-poetry-to-suno/references/prompt-builder.md
+   - skills/poetry-skill/SKILL.md
+   - AGENTS.md, GEMINI.md
+3. Map every required update for:
+   - 6-step lifecycle integration
+   - Multi-platform prompt engineering (Suno v4.5/v5.5 Method 1 First 5 Words & Method 2 Tag Matrix 5 modules, My Taste, Voices cloning, Custom Models, Failure modes; Udio v4 48kHz, Context Length, Inpainting *stars*, Pro rights; Google Flow Music Lyria 3.5 Conversational Agent, Spaces, Turntable, Section replace, AI Cover, Gemini Omni Flash sync, 500 daily credits)
+   - 10 AI Quality Gates integration
+4. Output a detailed report to d:\poetry-skill\.agents\explorer_survey_1\handoff.md with concrete file paths, section breakdowns, and implementation guidance.
+5. Send a completion message back to parent.

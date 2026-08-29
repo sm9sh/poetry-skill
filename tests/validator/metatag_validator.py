@@ -1,7 +1,9 @@
 """
-Suno AI Bracketed Metatag and Song Structure Validation Engine.
-Validates standard bracketed metatags ([Verse], [Chorus], [Drop], etc.),
-detects descriptive prose hallucinations inside brackets, and verifies parenthetical backing notation.
+Suno AI & Multi-Platform Audio Metatag and Song Structure Validation Engine.
+Validates standard bracketed metatags ([Verse], [Chorus], [Vocal Intro], [Beat Drop], [Mega-Chorus], etc.),
+detects descriptive prose hallucinations inside brackets, and verifies parenthetical backing notation
+and inline vocal delivery gestures ((whispered), (belted), (falsetto), (screamed), (ad-lib), (building intensity),
+(key change), (half-time feel), (harmonized)).
 """
 
 import re
@@ -25,31 +27,52 @@ class MetatagValidationResult:
 
 
 class MetatagValidator:
-    # Canonical structural prefixes recognized in Suno / Flow Music
+    # Canonical structural prefixes recognized in Suno / Udio / Google Flow Music
     STRUCTURAL_PREFIXES = [
-        "intro", "verse", "pre-chorus", "pre chorus", "chorus", "post-chorus",
-        "post chorus", "bridge", "drop", "build-up", "buildup", "build",
+        # English structural markers
+        "vocal intro", "intro", "verse", "pre-chorus", "pre chorus", "chorus",
+        "mega-chorus", "mega chorus", "post-chorus", "post chorus", "bridge",
+        "drop", "beat drop", "build-up", "buildup", "build", "breakdown", "break",
         "instrumental", "instrumental break", "instrumental solo", "guitar solo",
         "bandura solo", "sopilka solo", "synth solo", "bass solo", "drum solo",
-        "solo", "interlude", "breakdown", "break", "hook", "refrain",
-        "spoken word", "spoken", "whisper", "whispering", "chant",
-        "polyphonic chant", "outro", "fade out", "fadeout", "fade", "end",
-        "ending", "climax", "silence", "pause",
-        # Ukrainian equivalents
-        "інтро", "куплет", "передприспів", "приспів", "післяприспів",
-        "міст", "бридж", "дроп", "програш", "інструментал", "соло",
-        "соло гітари", "соло бандури", "соло сопілки", "речитатив",
-        "декламація", "шепіт", "аутро", "кінцівка", "фінал", "затихання"
+        "solo", "acoustic solo", "acoustic bandura solo", "interlude", "hook",
+        "vocal hook", "vocal solo", "refrain", "spoken word", "spoken", "whisper",
+        "whispering", "chant", "polyphonic chant", "white voice choir", "choir",
+        "acapella", "outro", "fade out", "fadeout", "fade", "end", "ending",
+        "cold end", "climax", "silence", "pause", "pianissimo", "fortissimo",
+        "tempo", "dynamic",
+        
+        # Ukrainian structural markers
+        "вокальний вступ", "інтро", "вступ", "куплет", "передприспів", "приспів",
+        "мега-приспів", "мега приспів", "післяприспів", "міст", "бридж",
+        "дроп", "біт дроп", "брейкдаун", "програш", "інструментал", "соло",
+        "соло гітари", "соло бандури", "соло сопілки", "соло басу", "соло ударних",
+        "акустичне соло", "речитатив", "декламація", "шепіт", "хор", "багатоголосся",
+        "білий голос", "акапела", "аутро", "кінцівка", "фінал", "холодний фінал",
+        "затихання", "кульмінація", "пауза", "тиша", "темп", "динаміка"
     ]
 
-    # Instrumental and arrangement keywords that MUST NEVER appear inside round parentheses ()
+    # Whitelisted inline vocal delivery gestures & ad-libs in round parentheses ()
+    WHITELISTED_VOCAL_GESTURES = [
+        "whispered", "belted", "falsetto", "screamed", "ad-lib", "ad lib",
+        "building intensity", "key change", "half-time feel", "half time feel",
+        "harmonized", "growl", "guttural scream", "vocal runs", "layered harmonies",
+        "backing vocals", "backing", "harmony", "harmonies", "shout", "chant",
+        "spoken", "acapella", "whisper", "echo", "melisma",
+        # Ukrainian equivalents
+        "шепіт", "прошепотіти", "фальцет", "скрім", "гроул", "гармонія",
+        "бек-вокал", "бек вокал", "луна", "вигук", "ад-ліб", "хор", "білий голос"
+    ]
+
+    # Instrumental and arrangement keywords that MUST NEVER appear alone inside round parentheses ()
+    # because Suno & Flow Music vocalize/sing parenthetical text out loud
     INSTRUMENTAL_KEYWORDS_IN_PARENS = [
         "riff", "bassline", "telecaster", "guitar", "bandura", "sopilka", "synth",
         "drums", "percussion", "arpeggio", "arpeggios", "staccato", "legato",
-        "buildup", "breakdown", "distortion", "reverb", "808", "sub bass",
-        "beat", "solo", "tempo", "bpm", "fade out", "drone", "strings", "cello",
-        "brass", "piano", "organ", "groove", "drop", "бас", "гітара", "барабани",
-        "соло", "дроп", "синтезатор"
+        "buildup", "distortion", "reverb", "808", "sub bass",
+        "bpm", "fade out", "drone", "strings", "cello",
+        "brass", "piano", "organ", "groove", "бас", "гітара", "барабани",
+        "соло", "синтезатор"
     ]
     
     # Narrative conversation prose hallucination patterns (not sound design cues)
@@ -70,11 +93,37 @@ class MetatagValidator:
         return re.findall(r"\((.*?)\)", lyrics_text)
 
     @classmethod
+    def is_valid_vocal_gesture_or_backing(cls, paren_content: str) -> bool:
+        """
+        Returns True if parenthetical text is an allowed vocal gesture, ad-lib, or backing lyric.
+        """
+        cleaned = paren_content.strip().lower()
+        if not cleaned:
+            return True
+            
+        # 1. Direct match or startswith with whitelisted vocal gestures
+        for gesture in cls.WHITELISTED_VOCAL_GESTURES:
+            if gesture in cleaned or cleaned.startswith(gesture):
+                return True
+                
+        # 2. Check if it's natural Ukrainian backing lyrics (e.g. (луна), (ніколи знов), (веди, дорОга))
+        # If it has NO pure instrumental keywords, it is treated as backing lyrics text
+        has_inst = any(
+            re.search(r"\b" + re.escape(kw) + r"\b", cleaned)
+            for kw in cls.INSTRUMENTAL_KEYWORDS_IN_PARENS
+        )
+        return not has_inst
+
+    @classmethod
     def is_valid_tag(cls, tag_content: str) -> Tuple[bool, Optional[str]]:
         """
         Validates an individual tag inside square brackets.
-        Supports both canonical 1-3 word tags ([Intro], [Guitar Solo]) and compound
-        sound-design directives ([Intro - Staccato cutting telecaster riff, driving bassline]).
+        Supports:
+        - Canonical section tags ([Verse], [Chorus], [Vocal Intro], [Beat Drop], [Mega-Chorus], [Breakdown], [Cold End])
+        - Compound sound-design directives ([Vocal Intro - dynamic acapella, dry and close])
+        - Section with Vance Powell / extension notes ([Verse 2 - Vance Powell: add driving tambourine, syncopated backing])
+        - Ukrainian equivalents ([Вокальний вступ - акапела], [Мега-приспів - максимальна енергія])
+        - Rejects prose hallucinations and conjunction-bloated standalone tags without delimiters.
         """
         cleaned = tag_content.strip().lower()
 
@@ -91,33 +140,44 @@ class MetatagValidator:
             if re.search(prose_pat, cleaned, re.IGNORECASE):
                 return False, f"Narrative prose hallucination detected inside metatag: '[{tag_content}]'."
 
-        # 1. Compound tags with delimiter [Section - Sound description] or [Section: Sound description]
-        if ("-" in cleaned or ":" in cleaned or "–" in cleaned or "—" in cleaned):
-            parts = re.split(r"[-–—:]", cleaned, 1)
-            section = parts[0].strip()
-            # check if the left part is a known structural prefix or valid section name
-            is_valid_section = any(
-                re.match(r"^" + re.escape(prefix) + r"(\s+\d+)?$", section) or section.startswith(prefix)
-                for prefix in cls.STRUCTURAL_PREFIXES
-            )
-            if is_valid_section and len(cleaned) <= 120 and len(cleaned.split()) <= 15:
-                return True, None
+        sorted_prefixes = sorted(cls.STRUCTURAL_PREFIXES, key=len, reverse=True)
 
-        # 2. Direct match with structural prefix (with optional number / simple label)
-        for prefix in cls.STRUCTURAL_PREFIXES:
-            # Matches '[Intro]', '[Verse 1]', '[Chorus 2]', '[Guitar Solo]'
-            if re.match(r"^" + re.escape(prefix) + r"(\s+\d+)?$", cleaned):
-                return True, None
-            # Matches standard combined labels e.g. '[Acoustic Bandura Solo]', '[White Voice Choir]', '[Spoken Word]'
-            if cleaned.startswith(prefix) or cleaned.endswith(prefix):
-                words = cleaned.split()
-                if len(words) <= 4 and not re.search(r"\b(and|with|while)\b", cleaned, re.IGNORECASE):
+        # 1. Compound tags with delimiter [Section - Sound description] or [Section: Sound description]
+        # Match standard delimiters: " - ", " – ", " — ", ":", or hyphen preceded by space
+        delim_match = re.search(r"\s+[-–—:]\s*|:\s*", cleaned)
+        if delim_match:
+            parts = re.split(r"\s+[-–—:]\s*|:\s*", cleaned, 1)
+            section = parts[0].strip()
+            desc = parts[1].strip() if len(parts) > 1 else ""
+
+            # Check if section starts with or equals a known structural prefix
+            is_valid_section = any(
+                re.match(r"^" + re.escape(p) + r"(\s+\d+)?$", section) or section == p
+                for p in sorted_prefixes
+            )
+            if is_valid_section and len(cleaned.split()) <= 20:
+                if not re.search(r"\b(the song begins|singer weeps|vocalist starts)\b", desc):
                     return True, None
 
-        # 3. Short 1-3 word sound design or dynamic tags (e.g. [Pianissimo], [80s Beat])
+        # 2. Standalone tags without delimiter
+        # Standalone tags must NOT contain narrative prose conjunctions/verbs (e.g. 'and', 'with', 'while', 'starts', 'playing', 'weeps')
+        if re.search(r"\b(and|with|while|starts|playing|weeps|weeping|begins|entered|enter|about|loudly|softly)\b", cleaned):
+            return False, f"Prose conjunction or action verb detected in standalone metatag: '[{tag_content}]'."
+
+        # Direct exact match or prefix match
+        for prefix in sorted_prefixes:
+            # Exact match (e.g. '[Intro]', '[Verse 1]', '[Chorus 2]', '[Guitar Solo]', '[Cold End]')
+            if re.match(r"^" + re.escape(prefix) + r"(\s+\d+)?$", cleaned):
+                return True, None
+
+        # Short 1-4 word sound design or dynamic tags (e.g. [Acoustic Bandura Solo], [White Voice Choir], [Pianissimo])
         words = cleaned.split()
-        if len(words) <= 3 and not re.search(r"\b(and|with|while|the|starts|playing)\b", cleaned, re.IGNORECASE):
-            return True, None
+        if len(words) <= 4:
+            for prefix in sorted_prefixes:
+                if cleaned.startswith(prefix) or cleaned.endswith(prefix):
+                    return True, None
+            if len(words) <= 3:
+                return True, None
 
         return False, f"Unrecognized metatag syntax: '[{tag_content}]'."
 
@@ -131,6 +191,9 @@ class MetatagValidator:
         """
         Validates lyrics structure, checking all bracketed tags and parenthetical notations.
         Ensures instrumental descriptors are inside square brackets `[...]` and NEVER in `(...)`.
+        Whitelists 9 canonical inline vocal gestures:
+        (whispered), (belted), (falsetto), (screamed), (ad-lib), (building intensity),
+        (key change), (half-time feel), (harmonized).
         """
         errors = []
         warnings = []
@@ -152,11 +215,19 @@ class MetatagValidator:
                 invalid_tags.append(tag)
 
         # Validate Parentheses: In Suno & Flow Music, () are read as VOCAL lyrics/ad-libs.
-        # Instrumental instructions inside () will be sung out loud by the voice engine!
+        # Pure instrumental instructions inside () will be sung out loud by the voice engine!
         for paren in parentheses:
             paren_clean = paren.strip().lower()
-            # Check if paren contains typical instrumental/arrangement descriptors
-            matched_inst = [kw for kw in cls.INSTRUMENTAL_KEYWORDS_IN_PARENS if re.search(r"\b" + re.escape(kw) + r"\b", paren_clean)]
+            
+            # If it is a whitelisted vocal delivery gesture or Ukrainian backing text, it is completely valid
+            if cls.is_valid_vocal_gesture_or_backing(paren_clean):
+                continue
+                
+            # Check if paren contains typical forbidden instrumental/arrangement descriptors
+            matched_inst = [
+                kw for kw in cls.INSTRUMENTAL_KEYWORDS_IN_PARENS
+                if re.search(r"\b" + re.escape(kw) + r"\b", paren_clean)
+            ]
             if matched_inst:
                 errors.append(
                     f"Instrumental descriptor '{paren}' found in parentheses '()'. "
@@ -168,7 +239,7 @@ class MetatagValidator:
         tags_lower = [t.strip().lower() for t in tags]
         has_verse = any("verse" in t or "куплет" in t for t in tags_lower)
         has_chorus = any("chorus" in t or "приспів" in t or "hook" in t for t in tags_lower)
-        has_intro = any("intro" in t or "інтро" in t for t in tags_lower)
+        has_intro = any("intro" in t or "інтро" in t or "вступ" in t for t in tags_lower)
 
         if require_intro_or_verse and not (has_intro or has_verse):
             errors.append("Lyrics structure missing an opening [Intro] or [Verse] metatag.")

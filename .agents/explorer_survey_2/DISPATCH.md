@@ -1,23 +1,24 @@
-## 2026-08-26T09:40:03Z
+## 2026-08-29T19:17:25Z
 
-You are Explorer 2 (Suno AI Music Prompt Engineering Specialization).
-Your working directory is `d:/poetry-skill/.agents/explorer_survey_2`.
-You MUST read `d:/poetry-skill/.agents/ORIGINAL_REQUEST.md` before starting work.
-Project root: `d:/poetry-skill`.
+You are Explorer 2 (Templates & Audio Engineering Survey).
+Your working directory is: d:\poetry-skill\.agents\explorer_survey_2
+Read ORIGINAL_REQUEST.md at: d:\poetry-skill\.agents\ORIGINAL_REQUEST.md
+Authoritative source specification: d:\poetry-skill\ai-music-generation-meta-spec-v8.md
 
-Task:
-Conduct a comprehensive, deep audit and feature exploration of the Suno AI conversion skill, prompt builder, style mapping, and prompt packs across the repository (`skills/ukrainian-poetry-to-suno/`, `SKILL.md`, `references/`, `packs/`, `mood-to-style-map.md`, `prompt-builder.md`, `reference-breakdown-examples.md`, `reference-to-style-cheatsheet.md`, `lyrics-to-suno-template.md`, `suno-prompt-tests.md`, etc.).
-
-Audit & Analyze:
-1. Modern Suno AI model mechanics (v3.5, v4 / modern engines): prompt token efficiency, style tag weighting, maximum character/token economy in style prompt vs lyrics field.
-2. Structure metatags & arrangement directives: correct placement and syntax of [Intro], [Verse], [Pre-Chorus], [Chorus], [Post-Chorus], [Bridge], [Guitar Solo], [Drop], [Build-up], [Instrumental Interlude], [Outro], [Fade Out], [End], BPM/Key directives, vocal delivery cues in brackets vs parentheses vs asterisks.
-3. Style & genre blending rules: modern Ukrainian genres (ethno-chaos, indie pop, post-punk, synthwave, drill, modern trap, melodic metalcore, shoegaze, turbofolk vs authentic folk-rock, dark synth, etc.), subgenre synthesis without tag clash or contradictory prompts.
-4. Vocal timbre & delivery directives: male/female vocal descriptions, pitch registers, emotional tone (whispered, raspy, belting, operatic, recitative, spoken word, autotune/pitch correction styling).
-5. Negative prompting / Exclude field behavior: anti-prompt best practices, artifact avoidance (preventing metallic highs, muddy bass, garbled vocals, hall reverb overrun).
-6. Reference prompt packs & cheat sheets: audit all packs (`dark-pack.md`, `female-vocal-pack.md`, `male-vocal-pack.md`, `sad-pack.md`, `uplifting-pack.md`, `suno-reference-prompt-pack-uk.md`, `suno-reference-prompt-pack.md`) for quality, redundancy, stale tags, and missing modern templates.
-
-Deliverables:
-- Create `progress.md` in your working directory and keep it updated with `Last visited: [timestamp]` heartbeat.
-- Write your comprehensive audit and feature findings to `d:/poetry-skill/.agents/explorer_survey_2/analysis.md`.
-- Write your formal handoff to `d:/poetry-skill/.agents/explorer_survey_2/handoff.md` following the Handoff Protocol.
-- Send a message back to parent when complete referencing the file paths.
+Your mission:
+1. Thoroughly read and analyze ai-music-generation-meta-spec-v8.md and ORIGINAL_REQUEST.md.
+2. Investigate all root files and reference templates in d:\poetry-skill:
+   - ukrainian-poetry-to-suno.md
+   - ukrainian-poetry-skill.md
+   - lyrics-to-suno-template.md
+   - song-structure-pack.md
+   - suno-prompt-anti-patterns.md
+   - prompt-matrix-v8-templates (or relevant files)
+3. Map all required updates for:
+   - Metatags library & inline vocal gestures in round parentheses: (whispered), (belted), (falsetto), (screamed), (ad-lib), (building intensity), (key change), (half-time feel), (harmonized) vs square brackets [...] for arrangements.
+   - 10 AI Quality Gates complete definitions and tables.
+   - Step 4 (The AI Conductor / Vance Powell Verse 2 development / Mega-Chorus / Outro <=20s).
+   - Step 5 (Engineering DAW Post-Production: Stem splitting, Phase optimization kick/bass, dynamic sidechain unmasking, Split Compression bass <200Hz brickwall vs >200Hz dynamic saturated, Tchad Blake parallel distortion directly on Master Fader bypassing Drum Bus, dynamic Mid-Side Reverb sidechaining).
+   - Step 6 (Mastering & Algorithmic Streaming Distribution: True Peak trap elimination -1 dBTP for -6..-8 LUFS without TP limiting or -14 LUFS for -2 dBTP, genre skip rate thresholds [Pop >48%, Hip-hop >44%, Electronic >37%, Indie rock >31%, alert >45%], Playlist Placement Trap elimination - single-only ads, Spotify Canvas/Marquee/Discovery Mode).
+4. Output a detailed report to d:\poetry-skill\.agents\explorer_survey_2\handoff.md.
+5. Send a completion message back to parent.

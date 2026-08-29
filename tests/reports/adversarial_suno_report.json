@@ -209,27 +209,27 @@
     },
     {
       "id": "ADV_5_01_Ecosystem_Style_Prompts_Audit",
-      "name": "Audit all 111 Style Prompts across References and Packs",
+      "name": "Audit all 99 Style Prompts across References and Packs",
       "passed": true,
-      "message": "Passed: 111/111. Failures: 0",
+      "message": "Passed: 99/99. Failures: 0",
       "metrics": {
         "failures": []
       }
     },
     {
       "id": "ADV_5_02_Ecosystem_Exclude_Prompts_Audit",
-      "name": "Audit all 128 Exclude Prompts across References and Packs",
+      "name": "Audit all 113 Exclude Prompts across References and Packs",
       "passed": true,
-      "message": "Passed: 128/128. Failures: 0",
+      "message": "Passed: 113/113. Failures: 0",
       "metrics": {
         "failures": []
       }
     },
     {
       "id": "ADV_5_03_Ecosystem_Lyrics_Blocks_Audit",
-      "name": "Audit all 19 Lyrics Arrangement Blocks for Metatag Syntax",
+      "name": "Audit all 15 Lyrics Arrangement Blocks for Metatag Syntax",
       "passed": true,
-      "message": "Passed: 19/19. Failures: 0",
+      "message": "Passed: 15/15. Failures: 0",
       "metrics": {
         "failures": []
       }

@@ -517,6 +517,37 @@ class TestRunner:
             print(f"  [{Colors.RED}FAIL{Colors.END}] Challenger Final suite execution error: {e}")
             unit_passed = False
 
+        # 10. Execute MetatagValidator Dedicated Unit Test Suite
+        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}      EXECUTING METATAG VALIDATOR UNIT TEST SUITE      {Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        try:
+            import test_metatag_validator
+            import unittest
+            suite = unittest.defaultTestLoader.loadTestsFromModule(test_metatag_validator)
+            runner = unittest.TextTestRunner(stream=sys.stdout, verbosity=1)
+            meta_res = runner.run(suite)
+            if not meta_res.wasSuccessful():
+                unit_passed = False
+        except Exception as e:
+            print(f"  [{Colors.RED}FAIL{Colors.END}] Metatag validator unit test execution error: {e}")
+            unit_passed = False
+
+        # 11. Execute SunoValidator Dedicated Unit Test Suite
+        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}        EXECUTING SUNO VALIDATOR UNIT TEST SUITE       {Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        try:
+            import test_suno_validator
+            suite = unittest.defaultTestLoader.loadTestsFromModule(test_suno_validator)
+            runner = unittest.TextTestRunner(stream=sys.stdout, verbosity=1)
+            suno_res = runner.run(suite)
+            if not suno_res.wasSuccessful():
+                unit_passed = False
+        except Exception as e:
+            print(f"  [{Colors.RED}FAIL{Colors.END}] Suno validator unit test execution error: {e}")
+            unit_passed = False
+
         # Log unit results to file for diagnostics
         log_path = PROJECT_ROOT / "tests" / "reports" / "unit_tests.log"
         log_path.parent.mkdir(parents=True, exist_ok=True)
