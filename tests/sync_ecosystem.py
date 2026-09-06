@@ -38,8 +38,12 @@ def sync_global_plugin():
     
     # 2. Copy root config files
     config_files = [
+        ("plugin.json", PROJECT_ROOT / "plugin.json"),
         ("AGENTS.md", PROJECT_ROOT / "AGENTS.md"),
         ("GEMINI.md", PROJECT_ROOT / "GEMINI.md"),
+        ("CLAUDE.md", PROJECT_ROOT / "CLAUDE.md"),
+        ("INSTALL.md", PROJECT_ROOT / "INSTALL.md"),
+        ("README.md", PROJECT_ROOT / "README.md"),
         ("ai-music-generation-meta-spec-v8.md", PROJECT_ROOT / "source" / "upstream" / "ai-music-generation-meta-spec-v8.md"),
     ]
     for filename, src in config_files:
@@ -49,6 +53,15 @@ def sync_global_plugin():
             dest = GLOBAL_PLUGIN_DIR / filename
             shutil.copy2(src, dest)
             print(f"  [OK] Copied {src.name} -> {dest}")
+
+    # 3. Copy commands
+    commands_dir = PROJECT_ROOT / "commands"
+    if commands_dir.exists():
+        dest_commands = GLOBAL_PLUGIN_DIR / "commands"
+        if dest_commands.exists():
+            shutil.rmtree(dest_commands)
+        shutil.copytree(commands_dir, dest_commands)
+        print(f"  [OK] Copied commands -> {dest_commands}")
 
 
 DEPRECATED_ROOT_FILES = [
