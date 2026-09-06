@@ -28,3 +28,9 @@ agents:
     display_name: "Poetry Form Synthesizer (Архітектор форми та ракурсу)"
     short_description: "Form-content harmony, defamiliarized perspective, resonant endings, pipeline arbitration, and 100-point rubric scoring"
     default_prompt: "Use $poetry-form-synthesizer to harmonize form and content, craft a resonant non-moralizing ending, reconcile subagent edits, and score against the 100-point rubric."
+
+  poetry-qa-bot:
+    display_name: "Poetry QA Bot (Аудитор якості)"
+    short_description: "Autonomous quality audit against 6 core principles, 100-point rubric scoring, and remediation blueprint"
+    default_prompt: "Use $poetry-qa-bot to audit this Ukrainian poem against the 6 core principles, apply the 100-point deduction rubric, and output a detailed scorecard with step-by-step fixes."
+

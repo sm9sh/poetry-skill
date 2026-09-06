@@ -1,17 +1,29 @@
-## 2026-08-28T09:01:19Z
-You are challenger_2 conducting stress, boundary, and robustness verification on the entire `poetry-skill` codebase.
+# Task Assignment: Challenger 2 (Adversarial Schema, Contracts & Rubric Verifier)
 
-Your working directory is `d:\poetry-skill\.agents\challenger_2`.
-You MUST read `d:\poetry-skill\ORIGINAL_REQUEST.md` and `d:\poetry-skill\PROJECT.md`.
+## Working Directory
+d:\poetry-skill\.agents\challenger_2
 
-Objectives:
-1. Run `py -3 tests/run_tests.py --all`.
-2. Perform boundary and robustness testing:
-   - Extreme inputs: empty text, single line, 50+ line poems, excessive whitespace, trailing punctuation, non-standard unicode characters.
-   - Surzhyk dictionary & taboo stems detection limits.
-   - Metric scansion robustness across all meters (Iamb, Trochee, Dactyl, Amphibrach, Anapest, Dolnik, 14-syllable Kolomyika).
-   - Verify performance and determinism (0 flaky tests, execution time < 10s).
-   - Verify that subagents files in `skills/ukrainian-poetry/agents/` are valid, well-formed markdown, and adhere to YAML frontmatter schema.
+## Context & Request
+- Read `d:\poetry-skill\ORIGINAL_REQUEST.md` (specifically section ## 2026-09-06T09:42:47Z).
+- Directives: `d:\poetry-skill\AGENTS.md`, `d:\poetry-skill\GEMINI.md`.
+- Read Scope: `d:\poetry-skill\.agents\orchestrator_3\SCOPE.md`.
 
-Document your boundary stress tests, findings, and explicit verdict (APPROVE or CHALLENGE_FAILED) in `d:\poetry-skill\.agents\challenger_2\challenge_report.md` and `d:\poetry-skill\.agents\challenger_2\handoff.md`.
-Send a message back to parent when done.
+## Mission
+Adversarially challenge and verify the subagent schema, contract integrity, and playground units:
+1. Run `py -3 -m unittest tests/test_adversarial_challenger2.py`. Assert that all 21 tests pass including schema validation for all 6 subagents in `skills/ukrainian-poetry/agents/`.
+2. Run `py -3 -m unittest tests/test_examples_playground.py`. Assert that all 9 unit tests pass.
+3. Test edge cases of `poetry-qa-bot.md`: ensure contract specifies behavior for free verse, kolomyika, historical styles, and song metatags.
+4. Verify that brackets vs parentheses rule is 100% adhered to across all markdown templates.
+5. Emit your verdict: **APPROVE** or **REQUEST_CHANGES** in `d:\poetry-skill\.agents\challenger_2\handoff.md`.
+6. Report back when done with send_message.
+
+
+## 2026-09-06T09:59:45Z
+You are Challenger 2 assigned to adversarially challenge schemas, contracts, rubric rules, and playground unit tests.
+Your working directory is d:\poetry-skill\.agents\challenger_2.
+Read your instructions in d:\poetry-skill\.agents\challenger_2\DISPATCH.md.
+Also read d:\poetry-skill\ORIGINAL_REQUEST.md (specifically section ## 2026-09-06T09:42:47Z), AGENTS.md, GEMINI.md, and d:\poetry-skill\.agents\orchestrator_3\SCOPE.md.
+Run tests/test_adversarial_challenger2.py and tests/test_examples_playground.py.
+Test edge cases of poetry-qa-bot and bracket/parentheses rules across all files.
+Write your verdict (APPROVE or REQUEST_CHANGES) and full report to d:\poetry-skill\.agents\challenger_2\handoff.md.
+Report back via send_message.

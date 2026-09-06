@@ -284,7 +284,7 @@ class TestRunner:
         print(f"Failed:           {Colors.RED}{self.failed_tests}{Colors.END}")
         print(f"Warnings:         {Colors.YELLOW}{self.warned_tests}{Colors.END}")
 
-        unit_status = f"{Colors.GREEN}PASSED (All Unit + Challenger 1 & 2 Tests OK){Colors.END}" if unit_ok else f"{Colors.RED}FAILED{Colors.END}"
+        unit_status = f"{Colors.GREEN}PASSED (All Unit + Challenger 1, 2, Final & Playground Tests OK){Colors.END}" if unit_ok else f"{Colors.RED}FAILED{Colors.END}"
         print(f"Unit & Challenge: {unit_status}")
 
         if self.poetry_scores:
@@ -548,6 +548,20 @@ class TestRunner:
             print(f"  [{Colors.RED}FAIL{Colors.END}] Suno validator unit test execution error: {e}")
             unit_passed = False
 
+        # 12. Execute Examples Playground Dedicated Unit Test Suite
+        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}     EXECUTING EXAMPLES PLAYGROUND UNIT TEST SUITE     {Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
+        playground_passed = False
+        try:
+            from test_examples_playground import run_playground_tests
+            playground_passed = run_playground_tests()
+            if not playground_passed:
+                unit_passed = False
+        except Exception as e:
+            print(f"  [{Colors.RED}FAIL{Colors.END}] Examples playground unit test execution error: {e}")
+            unit_passed = False
+
         # Log unit results to file for diagnostics
         log_path = PROJECT_ROOT / "tests" / "reports" / "unit_tests.log"
         log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -556,6 +570,7 @@ class TestRunner:
             f.write(f"Challenger 1: {chal1_passed}\n")
             f.write(f"Challenger 2: {chal2_passed}\n")
             f.write(f"Challenger Final: {chal_fin_passed}\n")
+            f.write(f"Playground: {playground_passed}\n")
 
         return unit_passed
 

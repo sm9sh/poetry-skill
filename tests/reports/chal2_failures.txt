@@ -1,4 +1,4 @@
-Tests run: 21
+Tests run: 22
 Failures: 0
 Errors: 0
 

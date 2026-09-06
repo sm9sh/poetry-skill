@@ -273,13 +273,96 @@ Before presenting the final poem, silently verify all 6 Poetic Principles:
 
 ---
 
+## Pipeline Orchestration (5 Subagents Sequential Flow)
+
+When performing a multi-agent deep refinement (e.g., the user requests a "refined" or "production-grade" poem, or the orchestrator deems the draft requires full pipeline treatment), execute the 5 subagents in sequence:
+
+```text
+User Input (topic, draft, or brief)
+         │
+         ▼
+┌──────────────────────────────────────┐
+│ 1. poetry-imagery-architect          │
+│    (Образотворець)                   │
+│    → Sensory grounding, anti-cliché  │
+│    → Output: Enhanced draft +        │
+│      Sensory Map + Imagery Score     │
+└─────────────┬────────────────────────┘
+              │ draft + sensory_map
+              ▼
+┌──────────────────────────────────────┐
+│ 2. poetry-emotional-critic           │
+│    (Критик щирості)                  │
+│    → Sincerity audit, anti-pathos    │
+│    → Output: Emotional Audit Report  │
+│      + Revised draft                 │
+└─────────────┬────────────────────────┘
+              │ draft + emotional_audit
+              ▼
+┌──────────────────────────────────────┐
+│ 3. poetry-prosody-phonics            │
+│    (Майстер фоніки та просодії)      │
+│    → Meter scansion, stress check,   │
+│      euphony, rhyme heterogeneity    │
+│    → Output: Scansion Diagram +      │
+│      Phonics Report + Revised draft  │
+└─────────────┬────────────────────────┘
+              │ draft + scansion + phonics
+              ▼
+┌──────────────────────────────────────┐
+│ 4. poetry-conciseness-editor         │
+│    (Редактор лаконічності)           │
+│    → Filler purge, anti-inversion    │
+│    → Output: Compression Report +    │
+│      Lean draft                      │
+└─────────────┬────────────────────────┘
+              │ lean_draft + all_reports
+              ▼
+┌──────────────────────────────────────┐
+│ 5. poetry-form-synthesizer           │
+│    (Архітектор форми та ракурсу)      │
+│    → Form-content harmony, voltas,   │
+│      conflict arbitration, 100-pt    │
+│      rubric scoring                  │
+│    → Output: FINAL POEM + Scorecard  │
+└──────────────────────────────────────┘
+```
+
+### Data Flow Contract
+
+Each agent receives:
+```yaml
+draft_text: string       # Current draft (output from previous agent)
+register: enum           # Passed through from user request
+mode: enum               # Passed through from user request
+previous_reports: list    # Accumulated reports from prior agents
+```
+
+Each agent outputs:
+```yaml
+revised_draft: string    # Updated draft text
+report: object           # Agent-specific audit report
+score_impact: object     # Estimated rubric dimension scores
+```
+
+### When to Use Full Pipeline vs Single Agent
+
+- **Full pipeline**: New poem from scratch, "production quality" request, 100-point rubric evaluation
+- **Single agent**: Targeted editing ("fix the rhymes", "remove clichés", "check meter"), where only the relevant specialist is invoked
+- **Partial pipeline**: Skip agents whose domain the draft already satisfies (e.g., skip imagery-architect if the draft is already sensory-rich)
+
+---
+
 ## References
 
 | Need | Reference |
 | :--- | :--- |
 | Full Theoretical & Operational Guide | `references/full-guide.md` |
+| Ukrainian-Language Reference Guide | `references/ukrainian-poetry-skill-uk.md` |
+| Quick-Reference Cheat Sheet | `references/ukrainian-poetry-skill-lite.md` |
 | Structured Input Request Templates | `references/input-templates.md` |
 | 100-Point Evaluation & Scansion Rubric | `references/rubric.md` |
 | 5 Specialized Subagents Pipeline | `agents/` (`agents/openai.yaml`) |
 | Standardized Test Suite (27 Scenarios) | `references/tests.md` |
 | Hardened Stress & Edge-Case Suite | `references/stress-tests.md` |
+

@@ -102,3 +102,53 @@ Integrity mode: development
 - [ ] Звіт 3 аудиторів підтверджує повну відсутність конфліктів, помилок і суперечностей.
 
 </USER_REQUEST>
+
+## 2026-09-06T09:42:47Z
+
+<USER_REQUEST>
+Завершити реалізацію залишкових завдань екосистеми poetry-skill: очистити корінь репозиторію від файлів-дзеркал з оновленням скрипта синхронізації, створити субагента Poetry QA Bot, додати наскрізний пайплайн (End-to-End Song Bridge) у головний оркестратор та створити бібліотеку прикладів (Playground) із кейсами успіху та розбором типових помилок.
+
+Working directory: d:\poetry-skill
+Integrity mode: development
+
+## Requirements
+
+### R1. Очищення кореня та оновлення синхронізації (Root Cleanup & Sync Refactoring)
+- Видалити 16 надлишкових файлів-дзеркал із кореневої директорії репозиторію (`ukrainian-poetry-skill.md`, `ukrainian-poetry-to-suno.md`, `lyrics-to-suno-template.md`, `song-structure-pack.md`, `suno-prompt-anti-patterns.md`, `prompt-builder.md`, `reference-to-style-cheatsheet.md`, `mood-to-style-map.md`, `suno-style-rubric.md`, `reference-breakdown-examples.md`, `ukrainian-song-scenarios.md`, `suno-prompt-tests.md`, `ukrainian-poetry-skill-rubric.md`, `ukrainian-poetry-skill-input-template.md`, `ukrainian-poetry-skill-stress-pack.md`, `ukrainian-poetry-skill-tests.md` та кореневу папку `packs/`).
+- Оновити `tests/sync_ecosystem.py`: видалити логіку копіювання файлів у корінь; скрипт повинен синхронізувати виключно канонічні скіли між `skills/`, `.agents/skills/` та глобальним плагіном Gemini.
+- Перемістити або синхронізувати `ukrainian-poetry-skill-uk.md` та `ukrainian-poetry-skill-lite.md` у відповідні папки `docs/` або `references/`, щоб у корені не залишалося неконтрольованих розрізнених гайдів.
+- Перевірити всі посилання у `README.md`, `README.en.md`, `HOWTO.md` та документації — вони повинні вказувати на шляхи всередині `.agents/skills/` або `skills/`, без посилань на видалені кореневі дзеркала.
+
+### R2. Агент контролю якості Poetry QA Bot
+- Створити файл специфікації субагента `poetry-qa-bot.md` у `skills/ukrainian-poetry/agents/` та `.agents/skills/ukrainian-poetry/agents/`.
+- Зареєструвати агента у `skills/ukrainian-poetry/agents/openai.yaml` та `.agents/skills/ukrainian-poetry/agents/openai.yaml`.
+- Агент повинен діяти як автономний аудитор: приймати віршований текст, сканувати його на відповідність 6 принципам майстерності, застосовувати 100-бальну матрицю штрафів з `rubric.md` та повертати деталізований скоринг-звіт із балами по кожному критерію і конкретними покроковими рекомендаціями щодо покращення.
+
+### R3. Наскрізний пайплайн створення пісні (End-to-End Song Creation Bridge)
+- Оновити головний оркестратор `skills/poetry-skill/SKILL.md` та `.agents/skills/poetry-skill/SKILL.md`, додавши розділ `## End-to-End Song Creation Pipeline`.
+- Задокументувати повний єдиний протокол: «Ідея / тема → генерація вірша (ukrainian-poetry) → аудит якості (poetry-qa-bot) → адаптація лірики та Spoken Prosody Test (music-lyrics-architect) → вибір платформи та синтез промптів (music-prompt-synthesizer: Suno / Udio / Flow Music) → перевірка 10 AI Quality Gates → рекомендації DAW-зведення (music-daw-mastering-critic)».
+
+### R4. Бібліотека прикладів та розбору помилок (Prompt Playground)
+- Створити каталог `examples/` із підкаталогами `examples/success/` та `examples/failures/`.
+- `examples/success/` має містити щонайменше 3 готові наскрізні сценарії для різних платформ:
+  1. Darkwave / Post-Punk трек для Suno v4.5/v5.5 (вірш з акцентуацією + промпт + ексклюди).
+  2. Trip-Hop трек для Udio v4 (текст + промпт 250 симв. + розмітка Inpainting `*stars*` + Context Length).
+  3. Cinematic Ambient трек для Google Flow Music Lyria 3.5 (діалоговий промпт агента + опис простору).
+- `examples/failures/` має містити розбір типових помилок та інструкції з виправлення:
+  1. `lyrics-rushing-fix.md`: проблема вокальної скоромовки та її вирішення через `(half-time feel)` і ліміти 4–8 слів/рядок.
+  2. `robotic-vocals-fix.md`: усунення пластикового вокалу через вокальний Triple-Stack.
+  3. `true-peak-clipping-fix.md`: запобігання міжсемпловому спотворенню на стрімінгах.
+
+## Acceptance Criteria
+
+### Цілісність кодової бази та тести
+- [ ] Виконання `py -3 tests/run_tests.py --all` завершується кодом 0, 100% тестів пройдено (75+ тестів), відсутні помилки імпорту чи відсутніх файлів.
+- [ ] Виконання `py -3 tests/sync_ecosystem.py` не створює нових файлів-дзеркал у кореневій директорії репозиторію.
+- [ ] У корені репозиторію відсутні старі 16 файлів-дублікатів та папка `packs/`.
+
+### Нові компоненти та функціонал
+- [ ] Створено та зареєстровано `poetry-qa-bot.md` з повною структурою специфікації (Role, Boundaries, Contracts, Heuristics, Output, Edge cases).
+- [ ] У `poetry-skill/SKILL.md` повністю розписано протокол `End-to-End Song Creation Pipeline`.
+- [ ] У каталозі `examples/` створено щонайменше 3 робочі кейси в `success/` та 3 інструкції з діагностики в `failures/`.
+- [ ] Усі внутрішні посилання в оновленій документації ведуть на дійсні файли без 404/dead links.
+</USER_REQUEST>

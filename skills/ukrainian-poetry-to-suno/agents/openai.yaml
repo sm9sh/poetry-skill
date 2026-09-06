@@ -1,4 +1,25 @@
 interface:
-  display_name: "Ukrainian Poetry to Suno"
-  short_description: "Build Ukrainian Suno music prompts"
-  default_prompt: "Use $ukrainian-poetry-to-suno to turn these Ukrainian lyrics into Suno prompts."
+  display_name: "Ukrainian Poetry to Multi-Platform AI Music"
+  short_description: "Transforms Ukrainian poetry into production-ready multi-platform AI music tracks (Suno, Udio, Lyria)."
+  default_prompt: "Convert this Ukrainian poem into a structured song and generate AI music prompts."
+
+agents:
+  music-reference-engineer:
+    display_name: "Деконструктор референсів (Reference Engineer)"
+    short_description: "Deconstructs artist/track references into safe acoustic DNA (Genre Hybrid, BPM, Key, Palette)."
+    default_prompt: "Analyze these reference tracks and generate an Acoustic DNA Report."
+
+  music-lyrics-architect:
+    display_name: "Архітектор пісенної лірики (Lyrics Architect)"
+    short_description: "Transforms raw Ukrainian poetry into AI-generation-optimized lyrics with metatags and syllable symmetry."
+    default_prompt: "Optimize this Ukrainian poem for AI vocal generation."
+
+  music-prompt-synthesizer:
+    display_name: "Синтезатор мультиплатформенних промптів (Prompt Synthesizer)"
+    short_description: "Builds production-ready prompts for Suno, Udio, and Google Lyria from Reference DNA and Lyrics."
+    default_prompt: "Create prompts for Suno, Udio, and Lyria based on this DNA and lyrics."
+
+  music-daw-mastering-critic:
+    display_name: "Критик DAW-зведення та мастерингу (DAW Mastering Critic)"
+    short_description: "Audits generated tracks against professional mixing, mastering, and streaming distribution standards."
+    default_prompt: "Audit this track's stem mixing plan and mastering targets."

@@ -454,6 +454,7 @@ class TestChallenger2Robustness(unittest.TestCase):
             "poetry-prosody-phonics.md",
             "poetry-conciseness-editor.md",
             "poetry-form-synthesizer.md",
+            "poetry-qa-bot.md",
         ]
 
         mandatory_sections = [
@@ -502,6 +503,58 @@ class TestChallenger2Robustness(unittest.TestCase):
         self.assertTrue(openai_yaml_path.exists(), "openai.yaml must exist")
         openai_content = openai_yaml_path.read_text(encoding="utf-8")
         for agent_file in expected_agents:
+            agent_name = agent_file.replace(".md", "")
+            self.assertIn(agent_name, openai_content, f"openai.yaml missing registration for {agent_name}")
+
+    def test_22_music_subagents_and_metatags(self):
+        """Verify all 4 music subagent markdown files exist, parse valid YAML, and contain valid lyrics metatags."""
+        music_agents_dir = PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "agents"
+        self.assertTrue(music_agents_dir.exists(), "music agents directory must exist")
+
+        expected_music_agents = [
+            "music-lyrics-architect.md",
+            "music-reference-engineer.md",
+            "music-prompt-synthesizer.md",
+            "music-daw-mastering-critic.md",
+        ]
+
+        mandatory_sections = [
+            "# Role & Identity",
+            "# Scope & Boundaries",
+            "# Input Contract",
+            "# Operational Rules & Heuristics",
+            "# Output Contract",
+            "# Edge-Case Handling",
+        ]
+
+        for agent_file in expected_music_agents:
+            agent_path = music_agents_dir / agent_file
+            self.assertTrue(agent_path.exists(), f"Music agent file missing: {agent_file}")
+
+            content = agent_path.read_text(encoding="utf-8")
+            self.assertTrue(content.startswith("---"), f"{agent_file} must start with '---'")
+            parts = content.split("---", 2)
+            self.assertTrue(len(parts) >= 3, f"{agent_file} must have closing '---'")
+
+            body = parts[2]
+            for sec in mandatory_sections:
+                self.assertIn(sec, body, f"{agent_file} missing section '{sec}'")
+
+            # Validate all code blocks containing lyrics/song-structure metatags
+            blocks = re.findall(r"```[^\n]*\n(.*?)```", body, re.DOTALL)
+            for block in blocks:
+                if any(t in block for t in ["[Verse", "[Chorus", "[Intro", "[Outro", "[Drop", "[Breakdown"]):
+                    res = MetatagValidator.validate_lyrics_structure(block)
+                    self.assertTrue(
+                        res.is_valid,
+                        f"Lyrics block in {agent_file} failed MetatagValidator: {res.errors}"
+                    )
+
+        # Check openai.yaml registry
+        openai_yaml_path = music_agents_dir / "openai.yaml"
+        self.assertTrue(openai_yaml_path.exists(), "openai.yaml must exist")
+        openai_content = openai_yaml_path.read_text(encoding="utf-8")
+        for agent_file in expected_music_agents:
             agent_name = agent_file.replace(".md", "")
             self.assertIn(agent_name, openai_content, f"openai.yaml missing registration for {agent_name}")
 

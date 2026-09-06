@@ -1,4 +1,4 @@
-﻿# Інструкція зі встановлення (Antigravity / Claude / Codex / Cursor)
+# Інструкція зі встановлення (Antigravity / Claude / Codex / Cursor)
 
 Цей репозиторій розроблено за відкритим стандартом **Agent Skills Specification** (YAML frontmatter + Markdown + модульні посилання), що дозволяє використовувати його у будь-якому сучасному ШІ-агенті або LLM-середовищі.
 
@@ -16,9 +16,9 @@ Claude Code автоматично знаходить скіли у робочі
 ### 1.2. Claude.ai (Веб / Projects)
 1. Створіть новий проєкт у Claude.ai (**Projects**).
 2. У розділ **Project Knowledge** завантажте:
-   - [`ukrainian-poetry-skill.md`](./ukrainian-poetry-skill.md) (повна поетична інструкція);
-   - [`ukrainian-poetry-to-suno.md`](./ukrainian-poetry-to-suno.md) (повна музична інструкція);
-   - [`reference-to-style-cheatsheet.md`](./reference-to-style-cheatsheet.md) (таблиця референсів).
+   - [`skills/ukrainian-poetry/references/full-guide.md`](./skills/ukrainian-poetry/references/full-guide.md) (повна поетична інструкція);
+   - [`skills/ukrainian-poetry-to-suno/references/full-guide.md`](./skills/ukrainian-poetry-to-suno/references/full-guide.md) (повна музична інструкція);
+   - [`skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`](./skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md) (таблиця референсів).
 3. У поле **Project Instructions** скопіюйте текст із [`CLAUDE.md`](./CLAUDE.md).
 
 ---
@@ -79,4 +79,4 @@ Antigravity автоматично підтягує скіли з поточно
 ```bash
 py -3 tests/run_tests.py --all
 ```
-Всі 59 тестів мають повернути статус `[PASS]` зі 100% успішністю.
+Всі 75+ тестів мають повернути статус `[PASS]` зі 100% успішністю.

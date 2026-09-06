@@ -1,7 +1,7 @@
-# BRIEFING — 2026-08-29T22:23:00Z
+# BRIEFING — 2026-09-06T09:52:00Z
 
 ## Mission
-Upgrade the entire poetry and AI music generation skills ecosystem to v8 production standards based on ai-music-generation-meta-spec-v8.md, maintaining 100% adherence to Ukrainian poetry principles, multi-platform prompt engineering (Suno v4.5/v5.5, Udio v4, Google Flow Music Lyria 3.5), 6-step lifecycle, 10 AI Quality Gates, DAW mixing, and algorithmic mastering.
+Execute Milestone 1: Root Cleanup & Sync Refactoring for poetry-skill repository — permanently remove 16 redundant root mirror files and root `packs/` directory, relocate standalone Ukrainian guides to `skills/ukrainian-poetry/references/`, refactor `tests/sync_ecosystem.py` to eliminate root mirroring, update references in `INSTALL.md` and `tests/audit_challenger2_empirical.py`, and verify with deterministic test suites.
 
 ## 🔒 My Identity
 - Archetype: worker
@@ -9,6 +9,8 @@ Upgrade the entire poetry and AI music generation skills ecosystem to v8 product
 - Working directory: d:\poetry-skill\.agents\worker_m1
 - Original parent: ca7a4e26-2d53-46fa-908a-9a743ab835b0
 - Milestone: M1 (Skills & References Implementation)
+- Current Milestone: Milestone 1: Root Cleanup & Sync Refactoring (2026-09-06)
+- Invoking Parent: 79ba3c17-08be-449c-b213-0cd03aa4a10d
 
 ## 🔒 Key Constraints
 - Exclusive write ownership:
@@ -26,47 +28,61 @@ Upgrade the entire poetry and AI music generation skills ecosystem to v8 product
   - GEMINI.md
 - Zero regressions in existing Ukrainian poetry principles and tests.
 - DO NOT hardcode test results; implement genuine logic and comprehensive reference knowledge.
+- Milestone 1 Exclusive write ownership:
+  - Deleting 16 redundant root files: `ukrainian-poetry-skill.md`, `ukrainian-poetry-to-suno.md`, `lyrics-to-suno-template.md`, `song-structure-pack.md`, `suno-prompt-anti-patterns.md`, `prompt-builder.md`, `reference-to-style-cheatsheet.md`, `mood-to-style-map.md`, `suno-style-rubric.md`, `reference-breakdown-examples.md`, `ukrainian-song-scenarios.md`, `suno-prompt-tests.md`, `ukrainian-poetry-skill-rubric.md`, `ukrainian-poetry-skill-input-template.md`, `ukrainian-poetry-skill-stress-pack.md`, `ukrainian-poetry-skill-tests.md`
+  - Deleting root folder `packs/`
+  - Relocating `ukrainian-poetry-skill-uk.md` and `ukrainian-poetry-skill-lite.md` to `skills/ukrainian-poetry/references/`
+  - Updating reference table in `skills/ukrainian-poetry/SKILL.md` and `.agents/skills/ukrainian-poetry/SKILL.md`
+  - Refactoring `tests/sync_ecosystem.py`
+  - Updating references in `INSTALL.md` and `tests/audit_challenger2_empirical.py`
 
 ## Current Parent
-- Conversation ID: ca7a4e26-2d53-46fa-908a-9a743ab835b0
-- Updated: 2026-08-29T22:23:00Z
+- Conversation ID: 79ba3c17-08be-449c-b213-0cd03aa4a10d
+- Updated: 2026-09-06T09:52:00Z
 
 ## Task Summary
-- **What to build**: Full integration of ai-music-generation-meta-spec-v8.md across all skill files, references, AGENTS.md, and GEMINI.md.
-- **Success criteria**: All 6 lifecycle steps, 10 Quality Gates, platform specifications (Suno v4.5/v5.5, Udio v4, Flow Music Lyria 3.5), DAW stem mixing, mastering standards, Ukrainian vocal stress standards, and bracket/parentheses rules accurately documented and tested with `py -3 tests/run_tests.py --all`.
-- **Interface contracts**: ai-music-generation-meta-spec-v8.md and AGENTS.md.
-- **Code layout**: skills/ and references/ directories.
+- **What to build**: Root cleanup, Ukrainian guide relocation, sync ecosystem script refactor, reference updates.
+- **Success criteria**:
+  - All 16 root duplicate files and `packs/` directory removed.
+  - Standalone Ukrainian guides relocated into `skills/ukrainian-poetry/references/`.
+  - `skills/ukrainian-poetry/SKILL.md` reference table updated.
+  - `tests/sync_ecosystem.py` does not repopulate root on execution.
+  - `INSTALL.md` and `tests/audit_challenger2_empirical.py` reference valid paths.
+  - `py -3 tests/sync_ecosystem.py` runs cleanly without touching root.
+  - `py -3 tests/audit_challenger2_empirical.py` and `py -3 tests/run_tests.py --all` pass with 100%.
+- **Interface contracts**: `ORIGINAL_REQUEST.md` (2026-09-06T09:42:47Z), `AGENTS.md`, `GEMINI.md`, `explorer_survey_1/handoff.md`.
+- **Code layout**: Root repo, `skills/ukrainian-poetry/references/`, `tests/`.
+
+## Key Decisions Made
+- Relocate both Ukrainian guides (`ukrainian-poetry-skill-uk.md` and `ukrainian-poetry-skill-lite.md`) directly into `skills/ukrainian-poetry/references/` to ensure they are part of canonical skills and propagated via sync.
+- Refactor `tests/sync_ecosystem.py` to completely eliminate `ROOT_MIRRORS` and `sync_root_mirrors()`, retaining robust synchronization of `skills/` to `.agents/skills/` and global plugin `C:\Users\sm9sh\.gemini\config\plugins\poetry-skill\`.
+
+## Artifact Index
+- `d:\poetry-skill\.agents\worker_m1\BRIEFING.md` — persistent situational awareness
+- `d:\poetry-skill\.agents\worker_m1\DISPATCH.md` — incoming task requirements
+- `d:\poetry-skill\.agents\worker_m1\progress.md` — heartbeat and progress tracking
+- `d:\poetry-skill\.agents\worker_m1\handoff.md` — formal 5-component handoff report
 
 ## Change Tracker
 - **Files modified**:
-  - `AGENTS.md`: Full multi-platform v8 operational directives and 10 Quality Gates table.
-  - `GEMINI.md`: Synchronized Gemini agent directives for multi-platform generation.
-  - `skills/poetry-skill/SKILL.md`: Unified routing, v8 multi-platform architecture summary, and 10 Quality Gates.
-  - `skills/ukrainian-poetry-to-suno/SKILL.md`: Full 6-step lifecycle, multi-platform matrices (Suno v4.5/v5.5 Method 1 & 2, Udio v4, Flow Music Lyria 3.5), 10 Quality Gates table, DAW mixing, and mastering.
-  - `skills/ukrainian-poetry-to-suno/references/full-guide.md`: Complete 10-section engineering manual from meta-spec v8.
-  - `skills/ukrainian-poetry-to-suno/references/prompt-builder.md`: Multi-platform prompt constructor (Conversational & Tag-Based, Udio, Flow Music).
-  - `skills/ukrainian-poetry-to-suno/references/mood-to-style-map.md`: 8 mood clusters with multi-platform outputs and Vocal Triple-Stacks.
-  - `skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`: Western and Ukrainian reference mappings with Melodic Math hooks.
-  - `skills/ukrainian-poetry-to-suno/references/song-structure-pack.md`: Metatag syntax, 9 inline vocal gestures in `(...)`, 8 structural templates with Vance Powell development and breakdowns.
-  - `skills/ukrainian-poetry-to-suno/references/lyrics-to-suno-template.md`: Multi-platform Custom Mode templates and AI Conductor roadmap.
-  - `skills/ukrainian-poetry-to-suno/references/suno-prompt-anti-patterns.md`: 14 anti-patterns and failure mode remedies.
-  - `skills/ukrainian-poetry-to-suno/references/rubric.md`: 100-point scoring rubric with 10 AI Quality Gates checklist.
-- **Build status**: PASS (63 / 63 tests passing, Avg Poetry Score: 98.2/100, Avg Suno Score: 99.9/100)
+  - `skills/ukrainian-poetry/SKILL.md` (and `.agents/skills/...`): Indexed relocated Ukrainian guides in references table.
+  - `tests/sync_ecosystem.py`: Removed `ROOT_MIRRORS` & `sync_root_mirrors()`, updated plugin sync to handle upstream meta-spec location.
+  - `INSTALL.md`: Corrected links to canonical paths in `skills/` and updated test count to 75+.
+  - `tests/audit_challenger2_empirical.py`: Pruned stale root mirror targets and templates.
+  - Relocated files: `ukrainian-poetry-skill-uk.md` and `ukrainian-poetry-skill-lite.md` moved to `skills/ukrainian-poetry/references/`.
+  - Deleted files: 16 redundant root mirrors and `packs/` directory permanently removed.
+- **Build status**: PASS (75 / 75 tests passing, 0 failures, 100% success rate)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: PASS (100% pass rate)
+- **Build/test result**: PASS (75/75 passed, Avg Poetry: 98.2/100, Avg Suno: 99.8/100, Empirical Audit: 0 errors)
 - **Lint status**: 0 violations
-- **Tests added/modified**: 63 existing tests all passing
+- **Tests added/modified**: `tests/audit_challenger2_empirical.py` updated to verify canonical paths without dead root references.
 
 ## Loaded Skills
 - **ukrainian-poetry**: d:\poetry-skill\.agents\skills\ukrainian-poetry\SKILL.md
+  - Core methodology: 6 core principles of Ukrainian poetry, prosody, versification, meter catalog.
 - **ukrainian-poetry-to-suno**: d:\poetry-skill\.agents\skills\ukrainian-poetry-to-suno\SKILL.md
+  - Core methodology: 6-step lifecycle, multi-platform prompt engineering, 10 AI Quality Gates, DAW stem mixing.
 - **poetry-skill**: d:\poetry-skill\.agents\skills\poetry-skill\SKILL.md
-
-## Key Decisions Made
-- Fully integrated all 6 lifecycle steps and 10 Quality Gates without omitting any audio engineering or multi-platform specifications.
-
-## Artifact Index
-- d:\poetry-skill\.agents\worker_m1\handoff.md — Final handoff report
-- d:\poetry-skill\.agents\worker_m1\progress.md — Liveness heartbeat and progress log
+  - Core methodology: Unified routing and orchestrator between poetry and AI music generation.

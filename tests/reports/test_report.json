@@ -1,13 +1,156 @@
 {
   "summary": {
-    "total": 63,
-    "passed": 63,
+    "total": 78,
+    "passed": 78,
     "failed": 0,
-    "warnings": 32,
-    "avg_poetry_score": 98.19047619047619,
-    "avg_suno_score": 99.91176470588235
+    "warnings": 35,
+    "avg_poetry_score": 98.26865671641791,
+    "avg_suno_score": 99.71052631578948
   },
   "results": [
+    {
+      "id": "TC_T1_UDIO_01_Valid",
+      "name": "Udio valid prompt",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_UDIO_02_Too_Long",
+      "name": "Udio prompt too long",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_UDIO_03_Artist_Name",
+      "name": "Udio prompt with artist name",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_UDIO_04_Valid_Inpainting",
+      "name": "Udio valid inpainting",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_UDIO_05_Invalid_Inpainting",
+      "name": "Udio inpainting without stars",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_FLOW_01_Valid",
+      "name": "Flow Music valid prompt",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_FLOW_02_Too_Short",
+      "name": "Flow Music prompt too short",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_FLOW_03_Suno_Syntax",
+      "name": "Flow Music prompt with Suno syntax",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_FLOW_04_Artist_Name",
+      "name": "Flow Music prompt with artist name",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_MULTI_01_Suno",
+      "name": "Multi-platform Suno routing",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": []
+        },
+        "suno_rubric": {
+          "total_score": 95.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "musical_concreteness": 20.0,
+            "token_economy": 15.0,
+            "reference_deidentification": 20.0,
+            "structural_metatags": 10.0,
+            "style_field_purity": 10.0,
+            "ukrainian_authenticity": 7.0,
+            "exclude_precision": 8.0,
+            "custom_mode_split": 5.0
+          },
+          "deductions": [
+            "[-3 pts] No distinctive Ukrainian/Slavic sonic or vocal timbre markers specified.",
+            "[-2 pts] Exclude field was left empty."
+          ]
+        }
+      }
+    },
+    {
+      "id": "TC_T1_MULTI_02_Udio",
+      "name": "Multi-platform Udio routing",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
+    {
+      "id": "TC_T1_MULTI_03_Flow",
+      "name": "Multi-platform Flow Music routing",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {}
+    },
     {
       "id": "TC_T1_FIX_01_Petrarchan_Sonnet",
       "name": "Classical Petrarchan Sonnet (14 Lines, ABBA ABBA CDE CDE)",
@@ -2223,6 +2366,156 @@
       "passed": true,
       "errors": [],
       "warnings": [],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": []
+        },
+        "suno_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "musical_concreteness": 20.0,
+            "token_economy": 15.0,
+            "reference_deidentification": 20.0,
+            "structural_metatags": 10.0,
+            "style_field_purity": 10.0,
+            "ukrainian_authenticity": 10.0,
+            "exclude_precision": 10.0,
+            "custom_mode_split": 5.0
+          },
+          "deductions": []
+        }
+      }
+    },
+    {
+      "id": "TC_T4_07_Playground_Suno_Darkwave",
+      "name": "Production Playground: Ukrainian Darkwave / Post-Punk (Suno AI v4.5/v5.5)",
+      "tier": "Tier 4",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "Poem is long: 45 lines (max expected: 40).",
+        "Stanza starting line 1 has irregular clausula cadence: 'UFMM'",
+        "Stanza starting line 9 has irregular clausula cadence: 'FMMU'",
+        "Stanza starting line 13 has irregular clausula cadence: 'FFUF'",
+        "Stanza starting line 17 has irregular clausula cadence: 'FUMU'",
+        "Stanza starting line 21 has irregular clausula cadence: 'MMFM'",
+        "Stanza starting line 29 has irregular clausula cadence: 'MUMU'",
+        "Stanza starting line 33 has irregular clausula cadence: 'MFUM'",
+        "Stanza starting line 37 has irregular clausula cadence: 'UMMF'",
+        "Stanza starting line 41 has irregular clausula cadence: 'MFFF'",
+        "Style field length (154 chars) outside optimal range (80-150 chars)."
+      ],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": []
+        },
+        "suno_rubric": {
+          "total_score": 97.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "musical_concreteness": 20.0,
+            "token_economy": 12.0,
+            "reference_deidentification": 20.0,
+            "structural_metatags": 10.0,
+            "style_field_purity": 10.0,
+            "ukrainian_authenticity": 10.0,
+            "exclude_precision": 10.0,
+            "custom_mode_split": 5.0
+          },
+          "deductions": [
+            "[-3 pts] Length 154 chars outside optimal 80-150 range."
+          ]
+        }
+      }
+    },
+    {
+      "id": "TC_T4_08_Playground_Udio_TripHop",
+      "name": "Production Playground: Ukrainian Trip-Hop / Downtempo (Udio AI v4)",
+      "tier": "Tier 4",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "Stanza starting line 5 has irregular clausula cadence: 'MMFM'",
+        "Stanza starting line 9 has irregular clausula cadence: 'MUMU'",
+        "Stanza starting line 13 has irregular clausula cadence: 'MMMU'",
+        "Stanza starting line 17 has irregular clausula cadence: 'FFMF'",
+        "Stanza starting line 21 has irregular clausula cadence: 'MUMU'",
+        "Potential cheap grammatical/verb rhyme detected: 'ліхтарів' - 'слів'."
+      ],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 98.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 8.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": [
+            "[-2.0 pts] 1 potential cheap grammatical/verb rhyme(s)."
+          ]
+        },
+        "suno_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "musical_concreteness": 20.0,
+            "token_economy": 15.0,
+            "reference_deidentification": 20.0,
+            "structural_metatags": 10.0,
+            "style_field_purity": 10.0,
+            "ukrainian_authenticity": 10.0,
+            "exclude_precision": 10.0,
+            "custom_mode_split": 5.0
+          },
+          "deductions": []
+        }
+      }
+    },
+    {
+      "id": "TC_T4_09_Playground_FlowMusic_Ambient",
+      "name": "Production Playground: Ukrainian Cinematic Ambient / Spoken-Word (Google Flow Music)",
+      "tier": "Tier 4",
+      "passed": true,
+      "errors": [],
+      "warnings": [
+        "Stanza starting line 1 has irregular clausula cadence: 'UMFU'",
+        "Stanza starting line 13 has irregular clausula cadence: 'FUFF'",
+        "Stanza starting line 17 has irregular clausula cadence: 'UFFM'"
+      ],
       "scores": {
         "poetry_rubric": {
           "total_score": 100.0,

@@ -1,266 +1,709 @@
-# Handoff Report — Explorer 2: Templates & Audio Engineering Survey
+# Handoff Report: Explorer Survey 2 — Poetry QA Bot (R2) & End-to-End Song Creation Bridge (R3)
 
-## Executive Summary
-This survey provides an exhaustive audit and gap analysis of all template files, root guides, and audio engineering specifications in the `poetry-skill` repository against the authoritative `ai-music-generation-meta-spec-v8.md`. It maps all required updates for:
-1. The expanded Metatag Grammar & Inline Vocal Gestures library (`[...]` vs `(...)`).
-2. The 10 AI Quality Gates complete definitions and failure-remediation matrices.
-3. Step 4: The AI Conductor Generation Roadmap (Seed 30–50s, Vance Powell Verse 2 development, Breakdown & Mega-Chorus, Outro $\le$ 20s).
-4. Step 5: Professional DAW Stem Engineering (Stem splitting, Kick/Bass phase alignment, dynamic sidechain unmasking, Sub/Mid-High Split Bass Compression, Tchad Blake parallel drum distortion routed directly to Master Fader bypassing Drum Bus, dynamic Mid-Side Reverb sidechaining).
-5. Step 6: Mastering & Algorithmic Streaming Distribution (True Peak trap elimination: -1 dBTP for -6..-8 LUFS without TP limiting or -14 LUFS for -2 dBTP; genre skip rate thresholds; single-only ad traffic to eliminate the Playlist Placement Trap; Spotify Canvas, Marquee, Discovery Mode).
+**Author**: Explorer 2  
+**Working Directory**: `d:\poetry-skill\.agents\explorer_survey_2`  
+**Date**: 2026-09-06  
+**Parent / Recipient**: `orchestrator_3` (`79ba3c17-08be-449c-b213-0cd03aa4a10d`)  
+**Scope**: Detailed Investigation, Gap Analysis, and Complete Architectural Blueprints for:
+1. **R2: Poetry QA Bot (`poetry-qa-bot.md` and `openai.yaml`)**
+2. **R3: End-to-End Song Creation Pipeline in `skills/poetry-skill/SKILL.md`**
 
 ---
 
 ## 1. Observation
 
-### 1.1 Root & Skill Template Files Current State
-Direct inspection of repository files revealed the following exact states and line numbers:
+### 1.1 Source Directives & Original Requirements
+Directives extracted from `d:\poetry-skill\ORIGINAL_REQUEST.md` (Section `## 2026-09-06T09:42:47Z`, lines 122–130):
+> **R2. Агент контролю якості Poetry QA Bot**:
+> - Створити файл специфікації субагента `poetry-qa-bot.md` у `skills/ukrainian-poetry/agents/` та `.agents/skills/ukrainian-poetry/agents/`.
+> - Зареєструвати агента у `skills/ukrainian-poetry/agents/openai.yaml` та `.agents/skills/ukrainian-poetry/agents/openai.yaml`.
+> - Агент повинен діяти як автономний аудитор: приймати віршований текст, сканувати його на відповідність 6 принципам майстерності, застосовувати 100-бальну матрицю штрафів з `rubric.md` та повертати деталізований скоринг-звіт із балами по кожному критерію і конкретними покроковими рекомендаціями щодо покращення.
+>
+> **R3. Наскрізний пайплайн створення пісні (End-to-End Song Creation Bridge)**:
+> - Оновити головний оркестратор `skills/poetry-skill/SKILL.md` та `.agents/skills/poetry-skill/SKILL.md`, додавши розділ `## End-to-End Song Creation Pipeline`.
+> - Задокументувати повний єдиний протокол: «Ідея / тема → генерація вірша (ukrainian-poetry) → аудит якості (poetry-qa-bot) → адаптація лірики та Spoken Prosody Test (music-lyrics-architect) → вибір платформи та синтез промптів (music-prompt-synthesizer: Suno / Udio / Flow Music) → перевірка 10 AI Quality Gates → рекомендації DAW-зведення (music-daw-mastering-critic)».
 
-1. **`ukrainian-poetry-to-suno.md` (and `skills/ukrainian-poetry-to-suno/references/full-guide.md`)**:
-   - *Current Lines 1–209*: Contains basic Custom Mode architecture (Style 80–180 chars, Lyrics with bracket tags and parentheses, Exclude vectors, 8-genre taxonomy, Ukrainian stress capitalization).
-   - *Gaps Observed*:
-     - Completely lacks the 6-step lifecycle architecture diagram.
-     - Lacks Step 1 (Reverse Engineering: Vocal Triple-Stack [Character+Delivery+FX], Melodic Math hooks, key of track, harmonic tension).
-     - Lacks Step 2 (AI-Optimized Lyrics Writing: syllable symmetry, Spoken Prosody Test, Staccato vs Legato spatial contrast, 5-Second Rule, 50-Second Chorus Rule, Melodic Previews, Glue Hooks, Cognitive melody limits $\le$ 3–4).
-     - Lacks Step 3 Multi-Platform Prompt Engineering details (Suno v4.5/v5.5 Conversational "First 5 Words" rule, HookGenius 5-module matrix, My Taste, Voices cloning, Custom Models, Failure modes; Udio v4 48 kHz stereo, Context Length 10–15s vs max, Inpainting `*stars*`; Flow Music Lyria 3.5 Conversational Agent, Spaces, Turntable, Section-level replace editing, AI Cover, Gemini Omni Flash video sync, 500 daily credits).
-     - Lacks Step 4 (The AI Conductor: Seed, Extend, Vance Powell Verse 2 development, Breakdown & Mega-Chorus, Outro $\le$ 20s).
-     - Lacks Step 5 (DAW Stem Engineering: Split Bass Compression, Phase alignment, Kick/Bass unmasking, Tchad Blake parallel distortion to Master Fader, Mid-Side Reverb sidechaining).
-     - Lacks Step 6 (Mastering True Peak trap elimination, genre skip rate thresholds, single-only ads, Spotify Canvas/Marquee/Discovery Mode).
-     - Lacks the complete 10 AI Quality Gates table.
+### 1.2 Inspection of Existing Subagents (`skills/ukrainian-poetry/agents/`)
+Inspection of the 5 existing subagents reveals a strict, standardized structural pattern:
+1. `poetry-imagery-architect.md` (148 lines, 10,804 bytes)
+2. `poetry-emotional-critic.md` (136 lines, 9,503 bytes)
+3. `poetry-prosody-phonics.md` (197 lines, 14,444 bytes)
+4. `poetry-conciseness-editor.md` (141 lines, 9,892 bytes)
+5. `poetry-form-synthesizer.md` (159 lines, 11,320 bytes)
 
-2. **`lyrics-to-suno-template.md` (and `skills/ukrainian-poetry-to-suno/references/lyrics-to-suno-template.md`)**:
-   - *Current Lines 1–258*: Focuses on basic Custom Mode copy-paste templates (80–180 char style box, basic section markers `[Intro]`, `[Verse 1]`, `[Pre-Chorus]`, `[Chorus]`, `[Instrumental Break]`, `[Bridge]`, `[Outro]`).
-   - *Gaps Observed*:
-     - Does not showcase the complete library of inline vocal gestures in round parentheses: `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`.
-     - Does not demonstrate Step 4 Vance Powell Verse 2 development tag (`[Verse 2 - add driving tambourine, shaker, backing vocals]`), `[Vocal Intro]`, `[Beat Drop]`, `[Breakdown]`, or `[Mega-Chorus]`.
-     - Lacks multi-platform template blocks for Suno v4.5/v5.5 (Conversational Paragraph vs Tag-Based Matrix), Udio v4 (with Context Length notes & Inpainting `*stars*`), and Google Flow Music (Conversational Agent format).
+Every agent specification strictly adheres to:
+- **YAML Frontmatter**:
+  - `name`: string identifier
+  - `description`: multiline summary containing `<example>...</example>` block and `Do NOT use this agent for:` negative boundary bullet points.
+  - `model`: `gemini-2.5-pro`
+  - `temperature`: float (0.2–0.7 depending on role determinism)
+  - `max_output_tokens`: `4096`
+- **Mandatory Markdown Headings (6 canonical sections)**:
+  - `## 1. Role & Identity`: Ukrainian title, core mission, guiding principles from the 6 Core Principles, philosophical grounding.
+  - `## 2. Scope & Boundaries`: `### What This Agent Owns` vs `### What This Agent Does NOT Do (Boundaries)`.
+  - `## 3. Input Contract`: YAML codeblock defining schema, types, descriptions, and constraints.
+  - `## 4. Operational Rules & Heuristics`: Detailed transformation rules, tables, anti-patterns (`❌` vs `✅`).
+  - `## 5. Output Contract`: Markdown codeblock defining the exact structure of emitted outputs.
+  - `## 6. Edge-Case Handling`: Explicit edge cases (e.g. classical forms, free verse, folk meters, song adaptation).
 
-3. **`song-structure-pack.md` (and `skills/ukrainian-poetry-to-suno/references/song-structure-pack.md`)**:
-   - *Current Lines 1–352*: Lists syntax grammar table, standard metatag list, and 8 genre structure templates.
-   - *Gaps Observed*:
-     - Section 1 Syntax table (Lines 9–27) mentions `*Зірочки*` as "Уникати. Модель може вимовляти зірочки вголос" without explaining that in **Udio v4 Inpainting**, `*stars*` is the official syntax for vocal regeneration/inpainting!
-     - Lacks dedicated subsection for inline vocal gestures in `(...)` (`(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`).
-     - Missing modern meta-spec v8 tags: `[Vocal Intro]`, `[Beat Drop]`, `[Mega-Chorus]`, `[Breakdown]`, `[Post-Chorus]`.
-     - Templates do not embed Vance Powell Verse 2 development or Breakdown/Mega-Chorus dynamics.
+### 1.3 Inspection of Subagent Test Constraints (`tests/test_adversarial_challenger2.py`)
+Lines 446–507 of `tests/test_adversarial_challenger2.py` programmatically enforce the subagent structure:
+- Lines 451–457: List of expected agents.
+- Lines 459–466: Mandatory sections array:
+  `["## 1. Role & Identity", "## 2. Scope & Boundaries", "## 3. Input Contract", "## 4. Operational Rules & Heuristics", "## 5. Output Contract", "## 6. Edge-Case Handling"]`.
+- Lines 483–489: Assertions for frontmatter keys (`name:`, `description:`, `<example>`, `Do NOT use this agent for:`, `model: gemini-2.5-pro`, `temperature:`, `max_output_tokens:`).
+- Lines 496–498: Assertion that Section 3 contains ````yaml` and Section 5 contains ````markdown`.
+- Lines 500–506: Assertion that `openai.yaml` exists and registers each agent name.
 
-4. **`suno-prompt-anti-patterns.md` (and `skills/ukrainian-poetry-to-suno/references/suno-prompt-anti-patterns.md`)**:
-   - *Current Lines 1–162*: Outlines 10 prompt anti-patterns (Token overflow, metadata leakage, Ukrainian in style box, parentheses hallucination, stress shifting, arrows, conflicting styles, copyright naming, empty exclude, provincial kitsch).
-   - *Gaps Observed*:
-     - Missing meta-spec v8 Failure Modes: **Lyrics Rushing** (vocal speedup on long lines $\rightarrow$ fix: 4–8 words per line, moderate BPM, `(half-time feel)`), **Robotic/Sterile Vocals** ($\rightarrow$ fix: Vocal Triple-Stack), and **The Negation Trap** (Suno ignores "no drums" $\rightarrow$ fix: hyper-specific positive tags `purely acoustic, solo piano, isolated vocals, sparse`).
-     - Missing the **True Peak Mastering Trap** (-2 dBTP double specification trap on loud masters).
-     - Missing the **Playlist Placement Trap** (driving cold ad traffic to artist playlists instead of single-only smart links).
+### 1.4 Inspection of `openai.yaml`
+In `skills/ukrainian-poetry/agents/openai.yaml` (lines 1–31):
+```yaml
+interface:
+  display_name: "Ukrainian Poetry"
+  short_description: "Write, analyze, and refine authentic Ukrainian poetry with 6 core principles"
+  default_prompt: "Use $ukrainian-poetry to write a natural Ukrainian poem from this topic."
 
-5. **`ukrainian-poetry-skill.md`**:
-   - *Current Lines 1–581*: Focuses on 6 poetic principles, Ukrainian versification, prosody, meters, forms, and subagents.
-   - *Gaps Observed*: Needs explicit reference links to the new 6-step AI music lifecycle, Spoken Prosody Test, and Melodic Math rules when poetry is intended for AI song conversion.
+agents:
+  poetry-imagery-architect: ...
+  poetry-emotional-critic: ...
+  poetry-prosody-phonics: ...
+  poetry-conciseness-editor: ...
+  poetry-form-synthesizer: ...
+```
+Each entry requires:
+- `display_name`: string (e.g., `"Poetry QA Bot (Аудитор якості)"`)
+- `short_description`: string
+- `default_prompt`: string (e.g., `"Use $poetry-qa-bot to audit this Ukrainian poem against the 6 core principles..."`)
 
-6. **`skills/ukrainian-poetry-to-suno/SKILL.md` & `skills/poetry-skill/SKILL.md`**:
-   - *Current Content*: Outlines Custom Mode basics, Western genre anchoring, token economy.
-   - *Gaps Observed*: Needs full synchronization with 6-step lifecycle, multi-platform prompt engineering (Suno v4.5/v5.5, Udio v4, Flow Music Lyria 3.5), 10 AI Quality Gates, DAW post-production, and True Peak mastering standards.
+### 1.5 Inspection of Evaluation Rubric & Penalty Matrix (`skills/ukrainian-poetry/references/rubric.md`)
+The rubric defines 7 core dimensions (total 100 points) and a 14-item penalty deduction matrix:
+- **Dimension 1: Природність української мови, наголоси й синтаксис (П4)** — 25 балів
+- **Dimension 2: Свіжа образність, тактильна конкретика та показ (П1)** — 20 балів
+- **Dimension 3: Метроритмічна дисципліна, дихання та єдність форми/змісту (П3/6)** — 15 балів
+- **Dimension 4: Рима, клаузули, фоніка та звукова гармонія (П3)** — 10 балів
+- **Dimension 5: Емоційна глибина, щирість та автентичність регістру (П2)** — 10 балів
+- **Dimension 6: Оригінальність ракурсу, сила й парадоксальний резонанс фіналу (П5)** — 10 балів
+- **Dimension 7: Антиштампи, антишароварщина та авторська самобутність (П1/5)** — 10 балів
+- **Penalty Matrix (Deductions)**:
+  1. *Метричний збій*: -5 to -15 pts
+  2. *Хибний наголос (Русизм)*: -5 to -10 pts per case (`випАдок`, `чорнозЕм`, `новИй`, `одИннадцять`, `листопАд`)
+  3. *Змішування омографів*: -5 pts (`замОк` vs `зАмок`)
+  4. *Однорідна дієслівна рима*: -3 to -8 pts (`знати-кохати`)
+  5. *Пестливі суфікси в римі*: -4 pts (`-очка/-енька`)
+  6. *Банальна пара з блекліста*: -5 pts (`любов-кров`, `доля-воля`, `день-пень`)
+  7. *Штучна синтаксична інверсія*: -3 to -6 pts (`«сонце ясне зійшло»`, `«погляд свій сумний підвів»`)
+  8. *Займенники-заповнювачі / "вода"*: -2 to -5 pts (`я, мій, цей, той, свій, вже, ось`)
+  9. *Декларування емоцій*: -3 to -6 pts (Telling instead of showing)
+  10. *Фальшивий / театральний пафос*: -5 to -10 pts (Hysteria, exclamation storms)
+  11. *Моралізаторський фінал*: -5 pts (`«пам'ятай завжди»`, `«і я збагнув, що треба жити»`)
+  12. *Шароварщина та кітч*: -10 pts (Souvenir pseudo-patriotism)
+  13. *Синтаксична калька*: -5 to -15 pts (`по вечорах`, `приймати участь`)
+  14. *Монотонні клаузули*: -3 to -5 pts (Blocks of `ЖЖЖЖ` or `ЧЧЧЧ`)
+- Scoring logic verified in Python: `tests/validator/rubric_scorer.py` (lines 41–157).
 
-7. **`tests/validator/metatag_validator.py`**:
-   - *Current Lines 27–60, 154–166*: Validates `[...]` tags against `STRUCTURAL_PREFIXES` and flags `INSTRUMENTAL_KEYWORDS_IN_PARENS` inside `(...)`.
-   - *Gaps Observed*:
-     - `STRUCTURAL_PREFIXES` should explicitly recognize `vocal intro`, `beat drop`, `mega-chorus`, `mega chorus`, `мега-приспів`, `мегаприспів`, `вокальне інтро`.
-     - `INSTRUMENTAL_KEYWORDS_IN_PARENS` must not accidentally flag valid inline vocal gestures such as `(half-time feel)`, `(building intensity)`, `(key change)`, `(harmonized)`, `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(vocal runs)` when they contain words like `half-time` or `key` or `feel`.
+### 1.6 Inspection of Music Subagents (`skills/ukrainian-poetry-to-suno/agents/`)
+We observed that the music generation module has its own 4 subagents registered in `skills/ukrainian-poetry-to-suno/agents/openai.yaml`:
+- `music-reference-engineer` (Reference DNA extraction, Step 1)
+- `music-lyrics-architect` (AI song lyrics adaptation, Spoken Prosody Test, Step 2)
+- `music-prompt-synthesizer` (Multi-platform prompt generation: Suno/Udio/Flow Music, Step 3)
+- `music-daw-mastering-critic` (DAW stem mixing & True Peak mastering audit, Steps 4–6)
+
+### 1.7 Current Master Orchestrator (`skills/poetry-skill/SKILL.md`)
+Currently, `skills/poetry-skill/SKILL.md` (68 lines) has:
+- Section 1: `## 1. Sub-Skill Routing` (3-row table)
+- Section 2: `## 2. Core Directives Summary`
+- Section 3: `## 3. Quick Reference`
+Missing: An explicit, actionable, step-by-step protocol section detailing the unified multi-agent bridge between Ukrainian poetry creation and AI music production.
+
+### 1.8 Baseline Test Suite Execution
+Execution command: `py -3 tests/run_tests.py --all`
+Result: **75 test cases, 75 passed, 0 failed, 0 errors, 100% success rate** (Average Poetry Score: 98.2/100, Average Suno Score: 99.8/100).
 
 ---
 
 ## 2. Logic Chain
 
-### 2.1 Logic Chain: Metatag Syntax & Inline Vocal Gestures
-1. **Observation**: Meta-spec v8 distinguishes between:
-   - Structural & arrangement cues in square brackets `[...]` (processed silently by audio engines).
-   - Backing vocals, echoes, and inline vocal delivery gestures in round parentheses `(...)` (vocalized or executed by the vocal synthesis engine).
-2. **Inference**:
-   - In Suno and Google Flow Music, text in `(...)` is fed to the vocal phoneme/timbre generator.
-   - Therefore, putting `(guitar solo)` or `(drum buildup)` causes the singer to sing the words "guitar solo".
-   - Conversely, vocal performance directives that directly modulate the vocal delivery—such as `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`—are intended as inline performance modifiers embedded directly before/after lyrical phrases.
-3. **Required Action**:
-   - Update `song-structure-pack.md`, `lyrics-to-suno-template.md`, `ukrainian-poetry-to-suno.md`, and `suno-prompt-anti-patterns.md` to document the exact 9 canonical inline vocal gestures in `(...)` alongside bracketed structural tags `[...]`.
-   - Update `tests/validator/metatag_validator.py` so that regex/keyword matching explicitly whitelists these 9 inline vocal gestures while maintaining strict prohibition against instrumental keywords inside `(...)`.
+1. **Schema and Contract Synchronization**:
+   - `test_adversarial_challenger2.py` enforces that all agents in `skills/ukrainian-poetry/agents/` must have exact YAML frontmatter keys, 6 specific section headings, a ````yaml` input block, and a ````markdown` output block.
+   - Therefore, `poetry-qa-bot.md` must be designed with 100% adherence to this exact schema to prevent test regressions.
 
-### 2.2 Logic Chain: The 10 AI Quality Gates
-1. **Observation**: Meta-spec v8 defines a strict, 10-gate quality control table spanning the entire production pipeline (composition, prosody, generation, DAW post-production, mastering, and marketing).
-2. **Inference**:
-   - A song cannot be declared production-ready if it fails any of these 10 objective acoustic or structural gates.
-   - Each gate has a precise detection criterion and a deterministic remediation procedure.
-3. **Required Action**:
-   - Integrate the complete 10 AI Quality Gates table into `ukrainian-poetry-to-suno.md`, `skills/ukrainian-poetry-to-suno/references/full-guide.md`, `suno-style-rubric.md`, and `skills/ukrainian-poetry-to-suno/SKILL.md`.
+2. **Functional Boundary: Synthesizer vs QA Bot**:
+   - `poetry-form-synthesizer` is a *creative assembler and mediator* that harmonizes outputs from upstream specialists during generation and self-evaluates a new draft.
+   - `poetry-qa-bot` is an *autonomous, neutral quality auditor*. It does not create poems or negotiate artistic compromises. Instead, it ingests ANY poem, scans it forensically against the 6 principles and 14 penalty categories, outputs a detailed scorecard, and produces a prioritized, actionable remediation blueprint with exact line-by-line rewrite recipes and subagent delegation tags.
+   - Operating temperature must be set to deterministic low (`0.2`).
 
-### 2.3 Logic Chain: Step 4 — The AI Conductor Generation Roadmap
-1. **Observation**: Generating a full 3–4 minute song in a single prompt causes arrangement fatigue, structural collapse, and vocal rushing.
-2. **Inference**:
-   - Professional results require modular generation using iterative extensions (`Extend`):
-     - **Seed (30–50s)**: Hook-first intro (5-Second Rule), verify groove and vocal tone.
-     - **Verse & Pre-Chorus**: Build momentum to the first chorus within 50s.
-     - **Verse 2 Development (Vance Powell)**: Add percussion (tambourine, shaker), backing vocals, or stereo guitar riffs so the second verse is not a static duplicate of Verse 1.
-     - **Breakdown & Mega-Chorus**: 15–20s energy drop (vocal + sub-bass only) followed by an explosive climax with layered harmonies and clashing guitars.
-     - **Concise Outro ($\le$ 20s)**: Prevent listeners from dropping off at the end of the track.
-3. **Required Action**:
-   - Embed this step-by-step roadmap into all guides, prompt templates, and scenario walkthroughs.
+3. **Autonomous Rubric Scorer Integration**:
+   - The bot's logic must mirror both the human evaluation standards of `skills/ukrainian-poetry/references/rubric.md` and the programmatic rules in `tests/validator/rubric_scorer.py`.
+   - The scorecard must provide the 7 dimension scores, itemize every defect with exact line numbers and penalty deductions, state the final score / 100, and evaluate Pass/Fail against the Master-level threshold ($\ge 90/100$).
 
-### 2.4 Logic Chain: Step 5 — DAW Post-Production Engineering
-1. **Observation**: Raw AI audio generations contain low-end phase cancellations, frequency masking between kick and bass, sterile dynamics, and mono/stereo reverb clutter.
-2. **Inference**:
-   - 6 specific DAW engineering techniques elevate AI stems to commercial release quality:
-     1. *Stem Splitting*: Moises, RipX, LALAL.AI into Vocals, Bass, Drums, Other.
-     2. *Phase Optimization*: Check Kick & Bass in Mono; invert polarity or apply alignment plugins (FUSER) to recover lost low-end punch.
-     3. *Dynamic Frequency Unmasking*: Sidechain dynamic EQ (Trackspacer / Neutron Unmask) on Bass ducking specific frequencies during Kick hits.
-     4. *Split Compression on Bass*: Sub-channel (<200 Hz) with brickwall limiting for solid bedrock; Mid-High channel (>200 Hz) with analog saturation and dynamic compression for string attack.
-     5. *Tchad Blake Parallel Drum Distortion*: Heavily saturated/crushed parallel drums routed **directly to Master Fader**, deliberately bypassing the Drum Bus to preserve mix headroom.
-     6. *Dynamic Mid-Side Reverb Sidechaining*: Duck vocal reverb 3–6 dB via sidechain from dry lead vocal, applied in Mid-Side mode so center reverb ducks for vocal intelligibility while stereo sides remain lush.
-3. **Required Action**:
-   - Document the full DAW engineering protocol in `ukrainian-poetry-to-suno.md`, `skills/ukrainian-poetry-to-suno/references/full-guide.md`, and `skills/ukrainian-poetry-to-suno/SKILL.md`.
-
-### 2.5 Logic Chain: Step 6 — Mastering & Algorithmic Streaming Distribution
-1. **Observation**:
-   - Loud masters (-6..-8 LUFS) forced to meet -2 dBTP True Peak ceilings suffer harsh inter-sample distortion.
-   - Algorithmic discovery on Spotify is governed by strict Skip Rate thresholds, Completion Rates (55–60%), Save Rates (>20%), and ad traffic routing.
-2. **Inference**:
-   - *Mastering Rule*: For loud commercial masters (-6..-8 LUFS), disable True Peak limiting and set ceiling to **-1 dBTP** (or -0.2 dB for transient punch). If -2 dBTP is strictly required, master at **-14 LUFS** (or -8 LUFS safe).
-   - *Genre Skip Rate Thresholds (Spotify 2026)*:
-     - Pop: >48%
-     - Hip-Hop: >44%
-     - Electronic: >37%
-     - Indie Rock: >31%
-     - Absolute Alarm: >45% (completely terminates algorithmic recommendations).
-   - *Playlist Placement Trap*: Directing cold Meta Ads traffic to an artist playlist results in rapid skips across the catalog, degrading the artist's algorithmic standing. Cold ad traffic must point exclusively to a single target track.
-   - *Spotify Native Tools*: Utilize Spotify Canvas (8s video loop, +5% retention), Marquee (full-screen recs, 15% intent), and Discovery Mode.
-3. **Required Action**:
-   - Integrate these mastering, algorithmic, and distribution specifications into all relevant reference guides and checklists.
+4. **Bridging Ukrainian Poetry & AI Music Generation (R3)**:
+   - The user request requires a unified end-to-end song creation bridge linking the two major halves of the repository.
+   - The sequence is strictly sequential:
+     $$\text{Idea} \longrightarrow \text{Poem Generation (ukrainian-poetry)} \longrightarrow \text{Quality Audit (poetry-qa-bot)} \longrightarrow \text{Lyrics Adaptation (music-lyrics-architect)} \longrightarrow \text{Platform Prompts (music-prompt-synthesizer)} \longrightarrow \text{10 Quality Gates} \longrightarrow \text{DAW/Mastering (music-daw-mastering-critic)}$$
+   - This bridge must be documented as Section `## 3. End-to-End Song Creation Pipeline` in `skills/poetry-skill/SKILL.md` (and `.agents/skills/poetry-skill/SKILL.md`), detailing data contracts, artifact flow, timing rules, bracket conventions, and remediation loops.
 
 ---
 
-## 3. Detailed Specification Mapping Tables
+## 3. Caveats
 
-### 3.1 Complete 10 AI Quality Gates Definition & Remediation Matrix
-
-| Gate # | Name & Scope | Pass Criteria (Verification Standard) | Failure Condition | Deterministic Remediation Action |
-| :--- | :--- | :--- | :--- | :--- |
-| **Gate 1** | **Anti-Skip (First 5s)** | Live human voice, vocal hook, or recognizable signature sound starts within the first 5 seconds. | Track opens with a long, generic instrumental buildup (>5s). | Regenerate the Seed block using `[Vocal Intro - dynamic acapella]` or `[Hook Intro]`. |
-| **Gate 2** | **«Правило 50 секунд» (50s Chorus Rule)** | Main chorus hook with full energy and lyrical thesis lands within the first 50 seconds. | First chorus delayed past 0:50 due to verbose verses or multiple pre-choruses. | Shorten Verse 1 lines, eliminate filler couplets, and re-generate initial segment. |
-| **Gate 3** | **Spoken Prosody & Stress** | Lyrics pass the Spoken Prosody Test when read aloud naturally; all stressed vowels on homographs/mobile accents are capitalized (`вИпадок`, `дорОга`). | Words distorted by AI accentuation or forced unnatural stress to fit meter/rhyme. | Rebalance syllable counts; apply Udio Inpainting (`*words*`) or Flow Music Section Replace. |
-| **Gate 4** | **Spatial Contrast (Staccato vs Legato)** | Distinct spatial contrast: Verse is rhythmic, crisp, staccato; Chorus features soaring, open-vowel legato (`Ooooh`, `Aaah`). | Chorus sounds flat, narrow, and rhythmically identical to verses. | Insert open vowel extensions in chorus lyrics and update tag to `[Chorus - explosive open wide space]`. |
-| **Gate 5** | **Verse 2 Development (Vance Powell)** | Verse 2 introduces new arrangement elements (percussion, shaker, tambourine, backing harmonies, guitar counter-melodies). | Verse 2 is an exact acoustic copy of Verse 1 (causing cognitive listener fatigue). | Extend after Chorus 1 using `[Verse 2 - add driving tambourine, shaker, backing vocals]`. |
-| **Gate 6** | **Breakdown & Mega-Chorus** | Dynamic 15–20s energy drop (`[Breakdown]`) before exploding into a multi-layered climax (`[Mega-Chorus]`). | Final section lacks dynamic reset and sounds emotionally flat. | Re-extend finale: insert `[Breakdown - vocal and sub-bass only]` followed by `[Mega-Chorus - maximum energy]`. |
-| **Gate 7** | **Low-End Split Compression (DAW)** | Bass split into Sub (<200 Hz brickwall limited) and Mid-High (>200 Hz saturated); dynamic sidechain unmasking keyed to Kick. | Muddy low end, bass masking kick transients, uncontrolled sub-bass rumble. | Split bass stem at 200 Hz; apply Trackspacer / Neutron dynamic EQ on bass keyed to Kick. |
-| **Gate 8** | **Tchad Blake Distortion Routing (DAW)** | Parallel crushed/distorted drum channels routed directly to Master Fader, bypassing Drum Bus. | Parallel distortion sent through Drum Bus, choking bus compressor and killing mix headroom. | Reroute parallel distortion auxiliary tracks directly to Master Fader. |
-| **Gate 9** | **Mastering True Peak Trap** | Loud masters (-6..-8 LUFS) have TP limiting disabled with ceiling at -1 dBTP (or -14 LUFS if -2 dBTP required). | Harsh inter-sample clipping or limiter pumping caused by forcing -2 dBTP on loud masters. | Disable True Peak limiting; set limiter ceiling to -1 dBTP or lower master to -14 LUFS. |
-| **Gate 10** | **Single-Only Ad Traffic** | Paid advertising (Meta/TikTok ads) directed exclusively to a single-track link / smart link. | Cold ad traffic directed to artist playlist, causing cascading catalog skips. | Retarget all cold ad campaigns to dedicated single URLs. |
+1. **Dual Directory Synchronization**:
+   - The repository maintains canonical skills in `skills/` and agent-visible copies in `.agents/skills/`. Any new agent file or skill edit must be written to both directories, or synchronized via `tests/sync_ecosystem.py`.
+2. **Read-Only Explorer Scope**:
+   - As an Explorer agent, I am presenting the complete, verified, drop-in designs within this report. The actual implementation edits must be applied by the designated Worker/Editor agent or during the orchestration phase.
+3. **Test Suite Scope**:
+   - When `poetry-qa-bot.md` is added, `tests/test_adversarial_challenger2.py` should be updated to include `"poetry-qa-bot.md"` in its `expected_agents` array (line 451) so that its schema is continuously protected by automated CI tests.
 
 ---
 
-### 3.2 Metatag Grammar & Inline Vocal Gestures Library
+## 4. Conclusion & Detailed Designs
 
-#### Structural & Arrangement Tags `[Square Brackets]` (Parsed as Silent Directives)
-- `[Intro]` / `[Atmospheric Synth Intro]`
-- `[Vocal Intro - dynamic acapella, dry and close]`
-- `[Beat Drop - heavy fuzz bass, punchy driving drums]`
-- `[Verse 1 - rhythmic, dry vocals, clean muted guitar]`
-- `[Pre-Chorus - building intensity, rising snare roll]`
-- `[Chorus - explosive, epic harmonies, wide stereo]`
-- `[Verse 2 - add driving tambourine, shaker, backing vocals]`
-- `[Post-Chorus - rhythmic vocal chops, synth arpeggio]`
-- `[Instrumental Break - gritty fuzz slide guitar solo]`
-- `[Bridge - acoustic, stripped-back, warm Rhodes chords]`
-- `[Breakdown - vocal and sub-bass only, intimate, dry]`
-- `[Mega-Chorus - maximum energy, layered harmonies, guitars clashing]`
-- `[Outro - fading out, solo analog synth, tape hiss]`
-- `[End]` / `[Cold End]` / `[Abrupt Cut]`
-- `[Tempo: 120 BPM]`, `[Dynamic: Crescendo]`, `[Acapella]`, `[Stripped Back]`
-
-#### Inline Vocal Gestures & Delivery Modifiers `(Round Parentheses)` (Vocalized / Performed by AI Vocalist)
-- `(whispered)` / `(whispered, intimate)` — Shifts vocal delivery to intimate close-mic whisper (verses, breakdown).
-- `(belted)` / `(belted, powerful)` — Demands open-throat chest voice belting on high emotional peaks (chorus climax).
-- `(falsetto)` — Triggers fragile, airy high-register vocal delivery.
-- `(screamed)` / `(growl)` — Triggers extreme harsh vocal expression (metalcore, post-punk peaks).
-- `(ad-lib)` / `(vocal runs)` — Directs background vocal improvisation and melodic ornamentation.
-- `(building intensity)` — Gradually increases vocal aggression, volume, and urgency.
-- `(key change)` — Signals melodic/harmonic tonal modulation into the climax.
-- `(half-time feel)` — Decelerates vocal phrasing rhythm by 50% relative to the underlying beat (fixes lyrical rushing).
-- `(harmonized)` / `(layered harmonies)` — Engages multi-part vocal polyphony on key hook words.
-- Backing vocal lyrics & stereo echoes: `(луна)`, `(ніколи знов)`, `(разом у темряві)`.
+Below are the complete, production-ready specifications and file contents ready for drop-in implementation.
 
 ---
 
-### 3.3 Audio Engineering & Distribution Technical Specification
+### Design 4.1: Complete Specification for `poetry-qa-bot.md`
+**Target Paths**:
+- `d:\poetry-skill\skills\ukrainian-poetry\agents\poetry-qa-bot.md`
+- `d:\poetry-skill\.agents\skills\ukrainian-poetry\agents\poetry-qa-bot.md`
 
-#### DAW Stem Post-Production Checklist
-1. **Stem Separation**: Split master audio into 4+ stems (Vocals, Bass, Drums, Other) via Moises Pro, RipX DAW, or LALAL.AI.
-2. **Phase Optimization**:
-   - Sum Kick and Bass stems to Mono.
-   - Flip Bass phase polarity ($180^\circ$); evaluate low-end sum. Select the polarity with maximum low-frequency power.
-   - Optional: Apply *Sound Radix Auto-Align* or *FUSER* to dynamically resolve phase interaction.
-3. **Dynamic Unmasking**:
-   - Insert dynamic EQ (*Trackspacer* at 10–25% or *iZotope Neutron 4 Unmask*) on Bass track.
-   - Route Kick drum into sidechain input to carve out 50–100 Hz space on every kick transient.
-4. **Bass Split Compression**:
-   - Duplicate Bass track into two parallel channels:
-     - **Sub-Bass Channel**: LPF at 200 Hz. Apply Brickwall Limiter (Pro-L2 / FabFilter) with 3–6 dB gain reduction to lock sub-energy into a solid foundation.
-     - **Mid-High Bass Channel**: HPF at 200 Hz. Apply analog saturation (*Soundtoys Decapitator* / *Saturn 2*) and dynamic musical compression (*1176* 4:1, fast attack/release) for string bite.
-5. **Tchad Blake Parallel Drum Distortion Routing**:
-   - Send drums to parallel auxiliary channel loaded with aggressive distortion (*SansAmp PSA-1*, *Soundtoys Devil-Loc*, or *Decapitator*).
-   - **Crucial Routing Rule**: Route the auxiliary output **directly to Master Fader**, bypassing the Drum Bus compressor to preserve mix headroom.
-6. **Dynamic Mid-Side Reverb Sidechaining**:
-   - Place stereo reverb (*Valhalla VintageVerb* / *FabFilter Pro-R*) on vocal aux bus.
-   - Insert dynamic compressor/EQ on reverb aux keyed to dry Lead Vocal.
-   - Configure sidechain in Mid-Side mode to attenuate Mid channel by 3–6 dB during singing, while leaving Side channels wide and intact.
+```markdown
+---
+name: poetry-qa-bot
+description: |
+  Autonomous Ukrainian poetry quality assurance auditor (Аудитор поетичної якості).
+  Conducts forensic scansion, audits compliance with the 6 Core Poetic Principles, applies the 100-point penalty rubric from references/rubric.md, and outputs an itemized scorecard with prioritized remediation recipes.
+  
+  <example>
+  orchestrator: dispatches poetry-qa-bot on a draft containing "випАдок", forced inversion "погляд свій сумний підвів", and cliché "кров-любов".
+  output: detects 3 defects, deducts 18 penalty points, outputs 7-dimension scorecard (82/100 FAIL), and delivers line-by-line remediation recipes with specialist routing.
+  </example>
 
-#### Mastering & Streaming Distribution Standards
-1. **True Peak Trap Elimination**:
-   - *Loud Masters (-6 to -8 LUFS)*: Disable True Peak limiting in master limiter; set ceiling to **-1 dBTP** (or -0.2 dB for maximum transient impact).
-   - *Standard Masters (-14 LUFS)*: Safe for -2 dBTP ceiling without inducing limiter distortion.
-2. **Spotify 2026 Algorithmic Thresholds**:
-   - **Skip Rate Targets by Genre**:
-     - *Pop*: $< 48\%$ (critical failure above 48%).
-     - *Hip-Hop*: $< 44\%$ (critical failure above 44%).
-     - *Electronic*: $< 37\%$ (critical failure above 37%).
-     - *Indie Rock*: $< 31\%$ (critical failure above 31%).
-     - *Universal Alarm Threshold*: $\ge 45\%$ across any genre terminates algorithmic playlisting (*Discover Weekly*, *Release Radar*, *Radio*).
-   - **Completion Rate**: Target $55–60\%+$ (song length optimized to 2:30–4:00 min; Outro $\le 20$s).
-   - **Save Rate**: $\ge 20\%$ triggers algorithmic playlist promotion.
-3. **Eliminating the Playlist Placement Trap**:
-   - Never direct paid ad traffic (Meta Ads / TikTok Ads) to an artist playlist.
-   - Direct cold ad traffic exclusively to single-track URLs.
-4. **Spotify Native Visual & Promo Ecosystem**:
-   - **Spotify Canvas**: 8-second 9:16 vertical looping video (+5% stream completion, +145% track shares).
-   - **Spotify Marquee**: Full-screen sponsored recommendations for high-intent audience conversion (15% intent rate).
-   - **Spotify Discovery Mode**: Algorithmic radio and autoplay promotion.
+  Do NOT use this agent for:
+  - Generating initial poetic drafts from scratch (use ukrainian-poetry or poetry-imagery-architect)
+  - Creative stanza expansion or artistic assembly (use poetry-form-synthesizer)
+  - Converting poems into AI music prompt styles or metatags (use skills/ukrainian-poetry-to-suno)
+  - DAW audio stem engineering and mastering audits (use music-daw-mastering-critic)
+model: gemini-2.5-pro
+temperature: 0.2
+max_output_tokens: 4096
+---
+
+# Poetry QA Bot (Аудитор поетичної якості)
+
+## 1. Role & Identity
+
+**Ukrainian Title**: Автономний аудитор поетичної якості та відповідності 6 принципам  
+**Core Mission**: Conduct an objective, forensic, and uncompromising quality audit of Ukrainian poetic texts against all **6 Core Poetic Principles**, apply the strict 100-point penalty rubric from `references/rubric.md`, calculate exact dimension scores and itemized penalty deductions, and deliver an actionable step-by-step remediation blueprint.  
+**Guiding Principles**: All 6 Core Principles:
+1. **Свіжа образність та метафоричність (Fresh Imagery & Metaphoricity)**
+2. **Емоційна глибина та щирість (Emotional Depth & Sincerity)**
+3. **Ритмічна та звукова гармонія (Rhythmic & Phonic Harmony)**
+4. **Лаконічність і вага слова (Conciseness & Word Weight)**
+5. **Оригінальність ракурсу (Originality of Perspective)**
+6. **Органічна єдність форми та змісту (Organic Unity of Form & Content)**
+
+Poetry QA Bot діє як безсторонній верховний контролер поетичної якості. На відміну від творчих агентів-генераторів, QA Bot не шукає естетичних компромісів: він виявляє найменші порушення орфоепії, приховані русизми, збої метра, штучні інверсії, баластні слова та фальшивий пафос, гарантуючи відповідність тексту найвищому рівню майстерності (Master-level $\ge 90/100$).
 
 ---
 
-## 4. File-by-File Required Changes Inventory
+## 2. Scope & Boundaries
 
-| Target File Path | Required Updates & Content Additions |
-| :--- | :--- |
-| `d:\poetry-skill\ukrainian-poetry-to-suno.md` & `skills/ukrainian-poetry-to-suno/references/full-guide.md` | - Add 6-step lifecycle architecture diagram.<br>- Add Step 1 (Reverse Engineering: Vocal Triple-Stack, Melodic Math, Key/Tension).<br>- Add Step 2 (AI-Optimized Lyrics: Spoken Prosody Test, Staccato vs Legato, 5-Second Rule, 50s Chorus Rule, Previews, Glue Hooks).<br>- Add Step 3 Multi-Platform specs (Suno v4.5/v5.5 Conversational & HookGenius Tag-Based, Udio v4 Context Length & Inpainting `*stars*`, Flow Music Lyria 3.5 Spaces/Turntable/Omni Flash).<br>- Add Step 4 (The AI Conductor: Seed, Extend, Vance Powell Verse 2, Breakdown & Mega-Chorus, Outro $\le$ 20s).<br>- Add Step 5 (DAW Post-Production: Split Compression, Phase, Unmasking, Tchad Blake parallel distortion to Master Fader, Mid-Side Reverb Sc).<br>- Add Step 6 (Mastering without True Peak trap, genre skip rates, Single-only ads, Spotify Canvas/Marquee/Discovery Mode).<br>- Add full 10 AI Quality Gates table. |
-| `d:\poetry-skill\lyrics-to-suno-template.md` & `skills/ukrainian-poetry-to-suno/references/lyrics-to-suno-template.md` | - Add complete table of inline vocal gestures in `(...)`: `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`.<br>- Add multi-platform Custom Mode templates for Suno v4.5/v5.5 (Conversational & Tag-Based), Udio v4 (with Context Length & Inpainting), and Google Flow Music (Conversational Agent).<br>- Update lyrics templates to demonstrate Vance Powell Verse 2 development and Breakdown/Mega-Chorus. |
-| `d:\poetry-skill\song-structure-pack.md` & `skills/ukrainian-poetry-to-suno/references/song-structure-pack.md` | - Clarify `*stars*` notation: forbidden in Suno/Flow lyrics, but standard syntax for **Udio v4 Inpainting** vocal regeneration.<br>- Add dedicated reference table for 9 inline vocal gestures in `(...)`.<br>- Add new structural metatags: `[Vocal Intro]`, `[Beat Drop]`, `[Post-Chorus]`, `[Breakdown]`, `[Mega-Chorus]`.<br>- Update the 8 genre structural templates to embed Vance Powell Verse 2 development and dynamic breakdowns. |
-| `d:\poetry-skill\suno-prompt-anti-patterns.md` & `skills/ukrainian-poetry-to-suno/references/suno-prompt-anti-patterns.md` | - Add Meta-Spec v8 Failure Modes: **Lyrics Rushing** (fix: 4–8 words/line, `(half-time feel)`), **Robotic/Sterile Vocals** (fix: Vocal Triple-Stack), **The Negation Trap** (fix: hyper-specific positive tags).<br>- Add **The Mastering True Peak Trap** (forcing -2 dBTP on loud masters).<br>- Add **The Playlist Placement Trap** (sending cold ad traffic to playlists). |
-| `d:\poetry-skill\ukrainian-poetry-skill.md` | - Add explicit cross-reference pointers to the 6-step AI music lifecycle, Spoken Prosody Test, Melodic Math, and 10 Quality Gates. |
-| `d:\poetry-skill\skills\ukrainian-poetry-to-suno\SKILL.md` | - Synchronize skill overview, core priorities, and output modes with the full 6-step lifecycle, multi-platform prompt matrix, and 10 Quality Gates. |
-| `d:\poetry-skill\skills\poetry-skill\SKILL.md` | - Update master routing table and directives to include Suno v4.5/v5.5, Udio v4, Flow Music Lyria 3.5, and DAW engineering standards. |
-| `d:\poetry-skill\AGENTS.md` & `d:\poetry-skill\GEMINI.md` | - Update operational directives with 6-step lifecycle summary, inline vocal gestures `(...)`, 10 AI Quality Gates, and DAW/Mastering standards. |
-| `d:\poetry-skill\tests\validator\metatag_validator.py` | - Add `vocal intro`, `beat drop`, `mega-chorus`, `mega chorus`, `мега-приспів`, `мегаприспів`, `вокальне інтро` to `STRUCTURAL_PREFIXES`.<br>- Add regex whitelist to permit valid inline vocal gestures in `(...)` while continuing to catch disallowed instrumental keywords in `(...)`. |
+### What This Agent Owns:
+- **Forensic Prosodic & Metric Scansion**: Auditing foot regularity, syllable count variance, ictus stability (iamb, trochee, dactyl, amphibrach, anapest, dolnik, taktovik, kolomyika, verlibre cadence), and natural pyrrhic distribution.
+- **Normative Stress & Accentuation Audit**: Detecting Russianized stress displacements (*випАдок*, *чорнозЕм*, *новИй*, *одИннадцять*, *листопАд*) and homograph confusion (*зАмок* vs *замОк*, *плАчу* vs *плачУ*).
+- **Acoustic Euphony & Phonotactics Check**: Enforcing alternation rules for `у/в`, `і/й`, `з/із/зі`, checking for hiatus (unpleasant vowel collisions), and flagging harsh consonant clumping.
+- **Rhyme Taxonomy & Clausula Audit**: Penalizing primitive verb-verb rhymes (*знати-кохати*), suffixal diminutives (*-очка/-енька*), blacklist cliché pairs (*кров-любов*, *доля-воля*), and monotonic clausula blocks (`ЖЖЖЖ`/`ЧЧЧЧ`).
+- **Syntax & Natural Word Order Audit**: Strictly identifying and penalizing artificial inversions created to force end-rhymes (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*).
+- **Conciseness & Padding Purge**: Detecting rhythmic filler pronouns (*я, мій, твій, цей, той, свій*), empty particles (*ось, от, то, ж*), and redundant adverbs (*вже, так, дуже*).
+- **Sensory Tactility & Anti-Abstraction Audit**: Detecting abstract emotional declarations (*«душа плаче»*, *«серце палає»*) and verifying physical "show-don't-tell" realia.
+- **Emotional Sincerity & Anti-Pathos Audit**: Excising theatrical melodrama, exclamation storms, and preachy/moralizing conclusions (*«і я збагнув, що треба жити»*).
+- **Anti-Sharovarshchyna & Kitsch Filter**: Purging tourist souvenir patriotism and pseudo-folk clichés.
+- **100-Point Scorecard Computation**: Calculating scores across all 7 dimensions and applying the 14-item deduction matrix.
+- **Remediation Routing Engine**: Providing exact line-by-line correction recipes and delegating fixes to specialized pipeline agents.
 
----
-
-## 5. Caveats
-- No direct code edits have been committed in this turn (exploration and survey phase only).
-- All 63 existing tests pass with 0 errors. The proposed validator and template updates must maintain 100% backward compatibility with existing tests.
-
----
-
-## 6. Conclusion
-The survey confirms that `ai-music-generation-meta-spec-v8.md` provides an exhaustive, mathematically and acoustically rigorous expansion of the audio prompt engineering ecosystem. The repository currently possesses solid fundamentals (8-genre taxonomy, Ukrainian stress capitalization, bracket/paren separation) but requires a comprehensive upgrade across all root files, skill definitions, templates, anti-pattern guides, and validator whitelists to incorporate the 6-step lifecycle, multi-platform matrices (Suno v4.5/v5.5, Udio v4, Flow Music Lyria 3.5), 10 AI Quality Gates, DAW post-production techniques, and mastering/distribution protocols.
+### What This Agent Does NOT Do (Boundaries):
+- Does NOT write original poems from scratch (delegated to `ukrainian-poetry` or specialist pipeline).
+- Does NOT rewrite the full poem arbitrarily; it suggests surgical line replacements while preserving the author's vision.
+- Does NOT construct music style prompts or exclude tags (delegated to `skills/ukrainian-poetry-to-suno`).
+- Does NOT audit post-generation audio stems, mixing phase, or mastering LUFS (delegated to `music-daw-mastering-critic`).
 
 ---
 
-## 7. Verification Method
-1. **File Consistency Check**: Inspect target files after edits using `view_file` to ensure all 6 steps, 10 Quality Gates, and metatags are represented without discrepancy.
-2. **Deterministic Test Execution**: Run the Python test suite:
+## 3. Input Contract
+
+```yaml
+poem_text: string            # Mandatory: Complete Ukrainian poetic text to audit
+target_form: string          # Optional: Expected form (regular | sonnet | blank-verse | kolomyika | dolnik | taktovik | verlibre)
+target_meter: string         # Optional: Expected meter (iamb | trochee | dactyl | amphibrach | anapest | dolnik | kolomyika | free)
+register: enum               # Optional: contemporary-urban | chamber-intimate | philosophical-neoclassical | baroque-cossack | folk-authentic | children-playful
+passing_threshold: integer   # Default: 90 (Master-level standard) or 85 (minimum acceptable)
+context_or_intent: string    # Optional: Original prompt or thematic brief for context verification
+```
+
+---
+
+## 4. Operational Rules & Heuristics
+
+### 4.1 Six-Principle Audit Matrix
+
+| Principle | Inspection Focus | Verification Standard | Failure Trigger |
+| :--- | :--- | :--- | :--- |
+| **П1: Свіжа образність** | Sensory anchors across 5 modalities; fresh authorial metaphors. | "Show, don't tell"; physical objects with weight, texture, temperature. | Abstract declarations (*«серце болить»*, *«душа плаче»*); worn tropes (*«море сліз»*). |
+| **П2: Емоційна глибина** | Sincerity, psychological nuance, understated dignity (*тиха лірика*). | Restrained empathy; actions speak for emotions; zero theatricality. | Melodrama, hysteria, exclamation marks (`!`, `!!!`), pedagogical moralizing. |
+| **П3: Звукова гармонія** | Metric foot consistency; orthoepic stresses; heterogeneous rhymes; euphony. | Verified stresses (*вИпадок*); cross-grammatical rhymes; balanced `у/в`, `і/й`. | Broken meter; Russianized stresses; verb-verb rhymes; hiatus; consonant clumping. |
+| **П4: Лаконічність і вага** | High semantic density; natural Ukrainian phrase melody; zero padding. | Inviolable natural word order; every word carries indispensable meaning. | Artificial inversions for rhyme; filler pronouns (*цей, той, свій*) to pad foot count. |
+| **П5: Оригінальність ракурсу** | Novel authorial angle; defamiliarization (*очуднення*); micro-focus. | Focus on revealing micro-details; open, lingering, or paradoxical endings. | Predictable cliches; panoramic banality; naive didactic conclusion (*«треба жити»*). |
+| **П6: Єдність форми й змісту**| Harmony between rhythm/stanza dynamics and psychological state. | Tempo, caesuras, and line breaks mirror the emotional tension. | Mismatched form (e.g. bouncy playful trochee with diminutives for tragic grief). |
+
+### 4.2 The 14-Category Penalty Deduction Matrix
+
+Every detected defect incurs an immutable deduction from the 100-point total:
+
+| Code | Defect Category | Detailed Description & Trigger | Deduction |
+| :--- | :--- | :--- | :--- |
+| **D01** | **Метричний збій** | Syllable drop/addition, broken foot skeleton, high variance in syllabo-tonics. | **-5 to -15 pts** |
+| **D02** | **Хибний наголос (Русизм)** | Orthoepic stress error (*випАдок*, *чорнозЕм*, *новИй*, *одИннадцять*, *листопАд*). | **-5 to -10 pts / each** |
+| **D03** | **Змішування омографів** | Accidental stress homograph confusion (*замОк* vs *зАмок*, *плАчу* vs *плачУ*). | **-5 pts** |
+| **D04** | **Однорідна дієслівна рима** | Grammatical verb-verb pairs (*знати-кохати*, *прийшла-розцвіла*, *летять-горять*).| **-3 to -8 pts** |
+| **D05** | **Пестливі суфікси в римі** | Diminutives used merely to force rhyme (*-очка/-ечка*, *-енька/-онька*). | **-4 pts** |
+| **D06** | **Банальна пара з блекліста** | Forbidden cliché rhymes (*любов-кров*, *доля-воля*, *серце-перце*, *день-пень*). | **-5 pts** |
+| **D07** | **Штучна синтаксична інверсія**| Unnatural distorted word order forced for rhyme (*«погляд свій сумний підвів»*). | **-3 to -6 pts** |
+| **D08** | **Займенники-заповнювачі** | Rhythmic padding words (*я, мій, цей, той, свій, вже, ось, то, ж*). | **-2 to -5 pts** |
+| **D09** | **Декларування емоцій** | Abstract telling instead of showing (*«моє серце розривається від болю»*). | **-3 to -6 pts** |
+| **D10** | **Фальшивий / гучний пафос** | Operatic declamation, emotional hysteria, poster slogans. | **-5 to -10 pts** |
+| **D11** | **Моралізаторський фінал** | Preachy, didactical conclusion (*«пам'ятай завжди»*, *«і я збагнув, що треба жити»*).| **-5 pts** |
+| **D12** | **Шароварщина та кітч** | Souvenir decorative pseudo-patriotism (*калина-гопак-сало* as kitsch decor). | **-10 pts** |
+| **D13** | **Синтаксична калька** | Structural Russianisms (*по вечорах*, *приймати участь*, *на протязі часу*). | **-5 to -15 pts** |
+| **D14** | **Монотонні клаузули** | 4-line blocks of unvaried line endings (`ЖЖЖЖ` or `ЧЧЧЧ`). | **-3 to -5 pts** |
+
+### 4.3 Deterministic Scansion Protocol
+1. **Syllabic Scansion**: Count vowels per line. Mark non-syllabic `й` and ignore soft signs (`ь`).
+2. **Stress Verification**: Compare against normative Ukrainian orthoepic dictionaries. Flag Russianized stresses immediately.
+3. **Ictus & Interval Scansion**:
+   - Syllabo-tonic: verify regular feet + valid pyrrhics (`U U`).
+   - Dolnik: ensure unstressed intervals between ictuses are strictly 1 or 2 syllables.
+   - Kolomyika: enforce `(4+4)+6` structure with mandatory caesura after syllable 8.
+4. **Euphony Verification**: Check alternating `у/в`, `і/й`, `з/із/зі`. Flag hiatus ($>1$ vowel clash at word boundary).
+5. **Rhyme & Clausula Classification**: Classify parts of speech in rhymes. Ensure alternating endings (`ЖЧЖЧ`).
+6. **Syntax & Lexical Density Check**: Flag inverted phrases and measure filler token density.
+7. **Score Calculation**: Subtract deductions from dimension ceilings; compute total score.
+
+### 4.4 Remediation Routing Engine
+When defects are detected, QA Bot assigns remediation tasks to the specialized subagents:
+- Metric or Stress Defects (`D01`, `D02`, `D03`, `D04`, `D14`) $\to$ Route to `poetry-prosody-phonics`.
+- Inversions and Filler Padding (`D07`, `D08`, `D13`) $\to$ Route to `poetry-conciseness-editor`.
+- Abstract Clichés & Telling (`D06`, `D09`, `D12`) $\to$ Route to `poetry-imagery-architect`.
+- Pathos & Didactic Conclusions (`D10`, `D11`) $\to$ Route to `poetry-emotional-critic`.
+- Global Architectural Re-assembly $\to$ Route to `poetry-form-synthesizer`.
+
+---
+
+## 5. Output Contract
+
+Poetry QA Bot outputs a structured, actionable markdown audit report:
+
+```markdown
+# 📋 Звіт контролю якості поетичного твору (Poetry QA Audit Report)
+
+### 1. Загальний вердикт (Executive Summary)
+- **Підсумковий бал**: [Score] / 100
+- **Статус**: [PASS (Master-level $\ge 90$) | CONDITIONAL PASS (85–89) | FAIL ($<85$)]
+- **Головний дефект / вузьке місце**: [One-line summary of key issue or "Жодних критичних дефектів не виявлено"]
+
+### 2. Оцінна відомість за 7 вимірами (Dimension Scorecard)
+======================================================
+ОЦІННА ВІДОМІСТЬ УКРАЇНСЬКОЇ ПОЕЗІЇ (6 ПРИНЦИПІВ)
+======================================================
+1. Природність мови, наголоси й синтаксис (П4): [X] / 25
+2. Образність, конкретика й показ (П1):         [X] / 20
+3. Ритм, рядкоподіл і єдність форми/змісту (П3/6): [X] / 15
+4. Рима, клаузули та звукопис/фоніка (П3):      [X] / 10
+5. Емоційна глибина, щирість і регістр (П2):    [X] / 10
+6. Оригінальність ракурсу та сила фіналу (П5):  [X] / 10
+7. Антиштампи, антишароварщина й самобутність (П1/5): [X] / 10
+------------------------------------------------------
+Проміжний бал:                                  [Subtotal] / 100
+Штрафні відрахування (дефекти):                -[Deductions] балів
+------------------------------------------------------
+ЗАГАЛЬНИЙ ПІДСУМКОВИЙ БАЛ:                      [Final Score] / 100
+======================================================
+Рівень якості: [Master-level (90-100) | Production-ready (80-89) | Needs Revision (<80)]
+
+### 3. Деталізований реєстр виявлених дефектів (Itemized Defect Log)
+- **[Code: DXX]** [Рядок X]: ❌ "[Quoted text]" — [Diagnosis: e.g. Хибний наголос / Штучна інверсія] (Штраф: -Y балів)
+- *(Або "Дефектів не виявлено — текст чистий")*
+
+### 4. Просодична карта та сканування (Scansion & Phonics Map)
+- Рядок 1: [Склади: X] | [Метрична схема: U — U — ...] | [Клаузула: Ж]
+- Рядок 2: [Склади: Y] | [Метрична схема: U — U — ...] | [Клаузула: Ч]
+- Схема римування: [e.g. ABAB (перехресне), пари: дієслово+іменник, опорні приголосні: ...]
+- Евфонія: [Аналіз чергування у/в, і/й, відсутність зяяння]
+
+### 5. Покроковий план виправлення (Prioritized Remediation Blueprint)
+1. **[Пріоритет 1 - Мова/Наголоси]**: Рядок X: ❌ "[Original]" ➔ ✅ "[Remediated Line]"
+   - *Пояснення*: [Чому запропонований варіант усуває дефект і зберігає метр]
+   - *Відповідальний сабагент*: `poetry-prosody-phonics`
+2. **[Пріоритет 2 - Синтаксис/Інверсії]**: Рядок Y: ❌ "[Original]" ➔ ✅ "[Remediated Line]"
+   - *Пояснення*: [Відновлення природного порядку слів]
+   - *Відповідальний сабагент*: `poetry-conciseness-editor`
+3. **[Пріоритет 3 - Образність/Антикліше]**: Рядок Z: ❌ "[Original]" ➔ ✅ "[Remediated Line]"
+   - *Пояснення*: [Заміна абстрактної декларації на тактильну деталь]
+   - *Відповідальний сабагент*: `poetry-imagery-architect`
+```
+
+---
+
+## 6. Edge-Case Handling
+
+1. **Верлібр (Free Verse)**:
+   - Не штрафувати за різну довжину рядків (`D01`), якщо дотримано синтагматичного дихання та змістової ваги анжамбеманів.
+   - Розділ «Рима» оцінювати за внутрішньою фонікою, алітераціями, асонансами та звукописною атмосферою.
+2. **Автентична коломийка та фольклорні метри**:
+   - Строго контролювати складову формулу `(4+4)+6` з обов'язковою цезурою після 8-го складу.
+   - Відрізняти автентичну народну мову від сувенірного лубка (`шароварщини`).
+3. **Історичні та барокові тексти**:
+   - Відрізняти навмисну барокову стилізацію (Сковорода, козацьке бароко: *«всякому городу нрав і права»*) від випадкових сучасних суржикізмів чи синтаксичних русизмів.
+4. **Тексти для музичної генерації (Lyrics Handshake)**:
+   - Якщо вірш призначено для Suno/Udio, ігнорувати структурні службові теги в дужках `[Verse]`, `[Chorus]` при підрахунку складів, проте суворо перевіряти наголоси слів у круглих дужках бек-вокалу `(луна)`.
+```
+
+---
+
+### Design 4.2: Updates for `openai.yaml`
+**Target Paths**:
+- `d:\poetry-skill\skills\ukrainian-poetry\agents\openai.yaml`
+- `d:\poetry-skill\.agents\skills\ukrainian-poetry\agents\openai.yaml`
+
+Add the `poetry-qa-bot` registration block under `agents:`:
+
+```yaml
+  poetry-qa-bot:
+    display_name: "Poetry QA Bot (Аудитор якості)"
+    short_description: "Autonomous quality audit against 6 core principles, 100-point rubric scoring, and remediation blueprint"
+    default_prompt: "Use $poetry-qa-bot to audit this Ukrainian poem against the 6 core principles, apply the 100-point deduction rubric, and output a detailed scorecard with step-by-step fixes."
+```
+
+Full updated `openai.yaml` content:
+
+```yaml
+interface:
+  display_name: "Ukrainian Poetry"
+  short_description: "Write, analyze, and refine authentic Ukrainian poetry with 6 core principles"
+  default_prompt: "Use $ukrainian-poetry to write a natural Ukrainian poem from this topic."
+
+agents:
+  poetry-imagery-architect:
+    display_name: "Poetry Imagery Architect (Образотворець)"
+    short_description: "Tactile imagery, sensory grounding, fresh metaphors, and anti-cliché audit"
+    default_prompt: "Use $poetry-imagery-architect to inject sensory tactility, eliminate abstract cliches, and ground this Ukrainian poetic draft in physical detail."
+
+  poetry-emotional-critic:
+    display_name: "Poetry Emotional Critic (Критик щирості)"
+    short_description: "Emotional sincerity audit, zero false pathos, anti-moralizing, and psychological depth"
+    default_prompt: "Use $poetry-emotional-critic to audit emotional sincerity, strip false melodrama and preachy didactics from this Ukrainian poetic draft."
+
+  poetry-prosody-phonics:
+    display_name: "Poetry Prosody & Phonics (Майстер фоніки та просодії)"
+    short_description: "Metric scansion, Ukrainian stress norms, euphony (у/в, і/й), and heterogeneous rhyming"
+    default_prompt: "Use $poetry-prosody-phonics to scan meter, verify orthoepic stresses, enforce euphony laws, and check heterogeneous rhymes in this Ukrainian poetic draft."
+
+  poetry-conciseness-editor:
+    display_name: "Poetry Conciseness Editor (Редактор лаконічності)"
+    short_description: "Semantic compression, filler word purge, and elimination of artificial inversions"
+    default_prompt: "Use $poetry-conciseness-editor to remove filler pronouns, eliminate artificial syntactic inversions, and restore natural Ukrainian word order."
+
+  poetry-form-synthesizer:
+    display_name: "Poetry Form Synthesizer (Архітектор форми та ракурсу)"
+    short_description: "Form-content harmony, defamiliarized perspective, resonant endings, pipeline arbitration, and 100-point rubric scoring"
+    default_prompt: "Use $poetry-form-synthesizer to harmonize form and content, craft a resonant non-moralizing ending, reconcile subagent edits, and score against the 100-point rubric."
+
+  poetry-qa-bot:
+    display_name: "Poetry QA Bot (Аудитор якості)"
+    short_description: "Autonomous quality audit against 6 core principles, 100-point rubric scoring, and remediation blueprint"
+    default_prompt: "Use $poetry-qa-bot to audit this Ukrainian poem against the 6 core principles, apply the 100-point deduction rubric, and output a detailed scorecard with step-by-step fixes."
+```
+
+---
+
+### Design 4.3: Specification for `## End-to-End Song Creation Pipeline` in `skills/poetry-skill/SKILL.md`
+**Target Paths**:
+- `d:\poetry-skill\skills\poetry-skill\SKILL.md`
+- `d:\poetry-skill\.agents\skills\poetry-skill\SKILL.md`
+
+Insert this comprehensive section directly between Section 2 (`## 2. Core Directives Summary`) and Section 3 (`## 3. Quick Reference`), and renumber Quick Reference to `## 4. Quick Reference`. Also update the routing table in Section 1.
+
+```markdown
+## 3. End-to-End Song Creation Pipeline
+
+The **End-to-End Song Creation Pipeline** is the unified master protocol connecting Ukrainian literary poetic creation with production-grade AI music generation across **Suno AI (v4.5/v5.5)**, **Udio AI (v4)**, and **Google Flow Music (Lyria 3.5)**, followed by engineering DAW stem post-production and True Peak streaming distribution.
+
+### 3.1 Unified Architecture Flowchart
+
+```text
+               ┌─────────────────────────────────────────────────────────┐
+               │              USER CREATIVE BRIEF / THEME                │
+               └───────────────────────────┬─────────────────────────────┘
+                                           │
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 1: Ukrainian Poetry Generation (skills/ukrainian-poetry)                         │
+│ • Subagents Pipeline: Imagery Architect ➔ Emotional Critic ➔ Prosody & Phonics ➔       │
+│   Conciseness Editor ➔ Form Synthesizer                                                │
+│ • Output: Authentic Ukrainian Poem grounded in 6 Core Poetic Principles                │
+└──────────────────────────────────────────┬─────────────────────────────────────────────┘
+                                           │ raw_poem
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 2: Autonomous Poetic Quality Audit (poetry-qa-bot)                               │
+│ • Forensic scan against 6 Principles + 14-Category Penalty Deduction Matrix            │
+│ • Mandatory Quality Gate: Score must be ≥ 90/100 (Master-level) or ≥ 85/100            │
+│ • [Loop if < 85/90]: Itemized remediation blueprint routed to specialist subagents     │
+└──────────────────────────────────────────┬─────────────────────────────────────────────┘
+                                           │ verified_poem (Score ≥ 90)
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 3: Lyrics Adaptation & Spoken Prosody Test (music-lyrics-architect)             │
+│ • Structural arrangement: [Intro], [Verse 1], [Pre-Chorus], [Chorus], [Outro]          │
+│ • Backing vocals / Delivery gestures strictly in (Round Parentheses)                   │
+│ • Syllable symmetry enforcement (8-8-8-8, 10-8-10-8) to prevent vocal rushing          │
+│ • Spoken Prosody Test + AI Stress Capitalization (вИпадок, дорОга, моЯ)                 │
+│ • Spatial Contrast: Verse Staccato (crisp) vs Chorus Legato (open soaring vowels)      │
+│ • 5-Second Rule ([Vocal Intro]) & 50-Second Chorus Rule                                │
+└──────────────────────────────────────────┬─────────────────────────────────────────────┘
+                                           │ optimized_lyrics + acoustic_dna
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 4: Platform Selection & Prompt Synthesis (music-prompt-synthesizer)              │
+│ • Western Genre Anchor (Post-Punk, Darkwave, Trip-Hop, Minimal Alt-Pop, Shoegaze, etc.)│
+│ • Multi-Platform Synthesized Prompts:                                                  │
+│   - Suno v4.5/v5.5: Method 1 (First 5 Words) & Method 2 (HookGenius 5-Module Matrix)   │
+│   - Udio v4: ≤ 250 chars prompt, 48 kHz stereo, inpainting *stars* syntax, Context Len │
+│   - Google Flow Music: Conversational Agent mode, Spaces, Section Replace, AI Cover    │
+│ • Anti-Local-Pop Exclude Vector & Complete De-identification (zero artist leaks)       │
+└──────────────────────────────────────────┬─────────────────────────────────────────────┘
+                                           │ audio_prompts + lyrics_box + extensions_roadmap
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 5: The 10 AI Quality Gates Verification                                          │
+│ • Gates 1–6 (Pre-Gen / Arrangement): Anti-Skip 5s, 50s Chorus, Spoken Prosody,        │
+│   Spatial Contrast, Vance Powell Verse 2 Expansion, Breakdown (15-20s) & Mega-Chorus   │
+│ • Gates 7–10 (DAW / Mastering / Ads): Low-End Split Bass, Tchad Blake Distortion to     │
+│   Master Fader, True Peak -1 dBTP / -14 LUFS, Single-Only Ad Traffic                   │
+└──────────────────────────────────────────┬─────────────────────────────────────────────┘
+                                           │ audio_generation + stem_exports
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 6: Professional DAW Stem Engineering & Mastering (music-daw-mastering-critic)    │
+│ • Step 5 Stem Mixing: Separation (Moises/RipX/LALAL), Kick/Bass phase alignment,       │
+│   surgical frequency unmasking (Trackspacer), Split Bass Compression (<200Hz brickwall │
+│   vs >200Hz saturated), Tchad Blake distortion to Master Fader, Mid-Side vocal ducking │
+│ • Step 6 Mastering: -1 dBTP with TP Limiting OFF for loud masters (-6..-8 LUFS);       │
+│   Genre Skip Rate monitoring (Pop >48%, Electronic >37%, Rock >31%, universal >45%);   │
+│   Single-only ad spend (no Playlist Placement Trap), Spotify Canvas / Discovery Mode   │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 3.2 Detailed Protocol Across the 6 Stages
+
+#### Stage 1: Thematic Inception to Authentic Ukrainian Verse
+- **Tool / Subagent**: `skills/ukrainian-poetry/SKILL.md` (and 5 specialized personas: `poetry-imagery-architect`, `poetry-emotional-critic`, `poetry-prosody-phonics`, `poetry-conciseness-editor`, `poetry-form-synthesizer`).
+- **Standard**: Strictly enforce the **6 Core Poetic Principles**:
+  1. *Fresh Imagery*: Concrete tactile details across 5 sensory channels; zero dead metaphors (*«кров-любов»*, *«серце палає»*).
+  2. *Emotional Sincerity*: Restrained psychological truth; zero theatrical pathos or didactic sermonizing.
+  3. *Prosodic Harmony*: Syllabo-tonic, dolnik, or kolomyika cadence; normative literary stresses (*вИпадок*); rich heterogeneous rhymes; balanced euphony (`у/в`, `і/й`, `з/із/зі`).
+  4. *Conciseness & Word Weight*: High semantic density; zero filler pronouns (*цей, той, свій*) or padding particles; **zero artificial syntactic inversions for rhyme**.
+  5. *Original Perspective*: Novel authorial angle; micro-detail focus; lingering, open, or paradoxical endings.
+  6. *Form-Content Unity*: Rhythm and stanza structure organically body forth the psychological state.
+
+#### Stage 2: Autonomous Quality Audit (Poetry QA Bot)
+- **Tool / Subagent**: `skills/ukrainian-poetry/agents/poetry-qa-bot.md`.
+- **Function**: Autonomous pre-flight audit before any musical resources are expended.
+- **Verification Standard**:
+  - Scans poem text against the 7 dimensions from `references/rubric.md` (Ceiling: 100 points).
+  - Evaluates against the 14-defect penalty deduction matrix:
+    - *Metric breakdown (`D01`)*: -5 to -15 pts
+    - *Russianized stress (`D02`)*: -5 to -10 pts per case
+    - *Homograph confusion (`D03`)*: -5 pts
+    - *Verb-verb rhymes (`D04`)*: -3 to -8 pts
+    - *Diminutive rhymes (`D05`)*: -4 pts
+    - *Blacklist cliché rhymes (`D06`)*: -5 pts
+    - *Artificial inversions (`D07`)*: -3 to -6 pts
+    - *Filler padding (`D08`)*: -2 to -5 pts
+    - *Abstract emotion telling (`D09`)*: -3 to -6 pts
+    - *Theatrical pathos (`D10`)*: -5 to -10 pts
+    - *Didactic moralizing ending (`D11`)*: -5 pts
+    - *Sharovarshchyna / kitsch (`D12`)*: -10 pts
+    - *Syntactic calques (`D13`)*: -5 to -15 pts
+    - *Monotonic clausulae (`D14`)*: -3 to -5 pts
+  - **Passing Gate**: Poem must score **$\ge 90/100$ (Master-level)** or at least **$\ge 85/100$**. If score is below threshold, execute the **Remediation Blueprint** before proceeding to Stage 3.
+
+#### Stage 3: Song Lyrics Adaptation & Prosodic Alignment
+- **Tool / Subagent**: `skills/ukrainian-poetry-to-suno/agents/music-lyrics-architect.md`.
+- **Arrangement Conventions**:
+  - `[Square Brackets]`: Silent structural and arrangement cues for audio models (`[Intro]`, `[Vocal Intro]`, `[Verse 1]`, `[Pre-Chorus]`, `[Chorus]`, `[Verse 2 - add driving tambourine, shaker]`, `[Breakdown]`, `[Mega-Chorus]`, `[Outro]`).
+  - `(Round Parentheses)`: Sung vocal delivery cues, backing vocals, and ad-libs `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`, `(луна)`. **Never place instrumental cues in parentheses.**
+- **Syllable Symmetry**: Standardize foot counts (e.g. 8-8-8-8 or 10-8-10-8) to eliminate AI vocal rushing or rhythmic stumbling.
+- **Spoken Prosody Test**: Read aloud at speaking cadence; if words stumble, rebalance syllable count.
+- **Ukrainian Stress Capitalization**: Mark stressed vowels in non-obvious words and homographs (`вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`).
+- **Spatial Contrast**: Staccato verses (consonant-rich, punchy rhythm) vs Legato chorus (open, soaring vowels `Ooooh, Aaah`).
+- **Timing Directives**: First 5 seconds must feature vocal presence or hook (`[Vocal Intro]`); first Chorus must land $\le 50$ seconds. Cognitive melody limit: $\le 3\text{--}4$ melodic themes per track.
+
+#### Stage 4: Platform Selection & Multi-Platform Prompt Synthesis
+- **Tool / Subagent**: `skills/ukrainian-poetry-to-suno/agents/music-prompt-synthesizer.md`.
+- **Western Genre Anchor**: All prompt design must target contemporary/classic Western genres (Post-Punk, Darkwave, Synthwave, Trip-Hop, Minimalist Alt-Pop, Shoegaze, Progressive Metalcore, Melodic Techno, Ambient).
+- **Platform Synthesizers**:
+  1. **Suno AI (v4.5 / v5.5)**:
+     - *Method 1 (Conversational Paragraph)*: Apply «First 5 Words» rule ($80\%$ model attention on opening descriptors).
+     - *Method 2 (HookGenius Tag Matrix)*: 5 modules (Genre, Mood, Vocal Triple-Stack, Instruments, Production/BPM). Style box: 80–180 characters.
+     - *Anti-Pattern Fixes*: Lyrics Rushing $\to$ `(half-time feel)` + 4–8 words/line; Sterile Vocals $\to$ Vocal Triple-Stack (**Character** + **Delivery** + **FX**); Negation Trap $\to$ Positive hyper-specificity.
+  2. **Udio AI (v4)**:
+     - 48 kHz stereo, up to 10 min continuous track, concise prompt $\le 250$ chars.
+     - Context Length management (10–15s for abrupt transitions vs max for continuity).
+     - Inpainting syntax `*stars*` for surgical line/word replacement.
+  3. **Google Flow Music (Lyria 3.5)**:
+     - Conversational Agent mode (`[Concept & Style] + [Artist/Vibe Ref] + [Instruments] + [Dynamics/Vocals]`).
+     - Spaces, Turntable, Section-level Replace editing, AI Cover, Gemini Omni Flash synced video clips.
+- **Exclude Vector**: Enforce universal anti-local-pop tokens (`cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs, muddy bass`).
+- **De-identification**: Zero artist names or copyrighted strings.
+
+#### Stage 5: 10 AI Quality Gates Verification
+Every song asset must pass the **10 AI Quality Gates Matrix** before publication:
+- **Gate 1 (Anti-Skip First 5s)**: Live human voice or hook present $\le 5$s.
+- **Gate 2 (50s Chorus Rule)**: Full chorus arrives $\le 50$s.
+- **Gate 3 (Spoken Prosody & Stress)**: Spoken Prosody test passes; capital accents (`вИпадок`, `дорОга`).
+- **Gate 4 (Spatial Contrast)**: Verse Staccato vs Chorus Legato.
+- **Gate 5 (Verse 2 Development)**: Vance Powell arrangement expansion (tambourine, shaker, backing vocals).
+- **Gate 6 (Breakdown & Climax)**: 15–20s energy drop (`[Breakdown]`) followed by `[Mega-Chorus]`.
+- **Gate 7 (Low-End Split Bass)**: Sub $<200\text{ Hz}$ brickwall mono vs Mid-High $>200\text{ Hz}$ dynamic saturated; Kick dynamic sidechain unmasking.
+- **Gate 8 (Tchad Blake Drum Distortion)**: Parallel crushed drum aux routed **directly to Master Fader** (bypassing Drum Bus).
+- **Gate 9 (Mastering True Peak)**: Loud masters ($-6\dots-8\text{ LUFS}$) set to $-1\text{ dBTP}$ with True Peak limiting OFF (or $-14\text{ LUFS}$ if $-2\text{ dBTP}$ is strictly mandatory).
+- **Gate 10 (Single-Only Ad Traffic)**: Ad spend directed strictly to target single (Abolishing Playlist Placement Trap).
+
+#### Stage 6: Professional DAW Stem Engineering & Mastering
+- **Tool / Subagent**: `skills/ukrainian-poetry-to-suno/agents/music-daw-mastering-critic.md`.
+- **Step 5 DAW Stem Engineering**:
+  - Stem extraction via Moises Pro, RipX DAW, or LALAL.AI.
+  - Mono Kick & Bass phase alignment / polarity inversion check.
+  - Surgical frequency unmasking via dynamic sidechain EQ (Trackspacer / Neutron Unmask) ducking bass 2–3 dB during kick hits.
+  - Split Bass Compression: Sub-bass $<200\text{ Hz}$ brickwall limited; Mid-High $>200\text{ Hz}$ dynamic saturated.
+  - Tchad Blake Parallel Drum Distortion: Routed directly to Master Fader to preserve Drum Bus headroom.
+  - Dynamic Mid-Side Vocal Reverb Sidechain: Reverb ducked 3–6 dB during active vocal presence in Mid channel only.
+- **Step 6 Mastering & Streaming Viability**:
+  - True Peak headroom protection ($-1\text{ dBTP}$).
+  - Skip Rate monitoring against Spotify 2026 thresholds (Pop $>48\%$, Hip-hop $>44\%$, Electronic $>37\%$, Indie rock $>31\%$, universal alarm $>45\%$).
+  - Target Completion Rate $>55\text{--}60\%$, Save Rate $\ge 20\%$.
+  - Single-only smart links, Spotify Canvas (8s visual loops), Marquee, Discovery Mode.
+
+---
+
+### 3.3 End-to-End Pipeline Data Contract
+
+```yaml
+# Unified Data Flow across the 6 Stages
+pipeline_execution:
+  stage_1_poetry:
+    input:
+      brief: string                      # Creative prompt, theme, emotional atmosphere
+      register: enum                    # contemporary-urban | chamber-intimate | neoclassical | folk | etc.
+      form: string                      # iamb | dolnik | kolomyika | verlibre | etc.
+    output:
+      raw_poem: string                  # Publication-grade poem adhering to 6 Principles
+
+  stage_2_audit:
+    input:
+      poem_text: stage_1.raw_poem
+      passing_threshold: 90
+    output:
+      total_score: float                # Target: ≥ 90/100
+      is_passing: boolean
+      deductions: list[string]          # Detailed defect list
+      remediation_plan: list[string]    # If not passing, step-by-step fix recipes
+
+  stage_3_lyrics:
+    input:
+      raw_poetry: stage_2.verified_poem
+      structure_template: "Verse-Chorus-Verse-Chorus-Bridge-MegaChorus-Outro"
+    output:
+      optimized_lyrics: string          # Syllable-symmetric lines with [Metatags] and (Gestures)
+      stress_capitalized: boolean       # Stressed vowels marked (вИпадок, дорОга)
+      spoken_prosody_passed: boolean
+
+  stage_4_prompts:
+    input:
+      lyrics: stage_3.optimized_lyrics
+      western_genre: string             # e.g., 'ukrainian darkwave post-punk'
+      target_platforms: ["suno", "udio", "flow_music"]
+    output:
+      suno_prompt:
+        style_box: string               # Method 1 or Method 2 (80-180 chars)
+        lyrics_box: string              # Full lyrics with metatags and vocal gestures
+        exclude_prompt: string          # Anti-local-pop and anti-artifact tokens
+      udio_prompt:
+        prompt_text: string             # ≤ 250 chars dense tags
+        inpainting_syntax: string       # *stars* markup
+      flow_music_prompt:
+        agent_command: string           # Natural language prompt for Lyria 3.5
+
+  stage_5_quality_gates:
+    input:
+      prompts: stage_4.prompts
+      lyrics: stage_3.optimized_lyrics
+    output:
+      gates_1_to_6_status: boolean      # Structural and prosodic pre-flight verification
+      gates_7_to_10_status: boolean     # Mixing and mastering pre-flight verification
+
+  stage_6_daw_mastering:
+    input:
+      generated_audio_stems: list[string]
+      target_loudness_lufs: float       # -6 to -8 LUFS (or -14 LUFS if mandatory)
+    output:
+      stem_mixing_checklist: object     # Low-end split, unmasking, Tchad Blake aux
+      mastering_spec: object            # -1 dBTP ceiling, True Peak limiter OFF
+      streaming_retention_plan: object  # Canvas, single-only campaigns, skip rate targets
+```
+```
+
+#### Updated Section 1 Routing Table in `skills/poetry-skill/SKILL.md`
+Update row 3 in the table of Section 1 to point to the new section:
+
+```markdown
+| Task Type | Trigger / Intent | Sub-Skill to Load |
+|---|---|---|
+| **Poetry & Versification** | Writing poems, sonnets, dolnik, taktovik, kolomyika, editing rhymes, stress scansion, Ukrainian lyrical texts | `skills/ukrainian-poetry/SKILL.md` |
+| **Multi-Platform AI Music Prompts** | Converting poems/briefs to Suno Custom Mode, Udio v4, Flow Music Lyria 3.5, style prompts, Western genre arrangements, metatags | `skills/ukrainian-poetry-to-suno/SKILL.md` |
+| **End-to-End Songwriting & Production** | Generating Ukrainian lyrics + creating matching multi-platform prompts + DAW stem engineering roadmap | Execute Section 3: **End-to-End Song Creation Pipeline** |
+```
+
+---
+
+## 5. Verification Method
+
+To independently verify the designs and ensure zero regressions across the codebase:
+
+1. **Automated Subagent Schema Test**:
+   Run the Challenger 2 test suite:
+   ```bash
+   py -3 -m unittest tests.test_adversarial_challenger2.TestChallenger2Robustness.test_20_subagent_files_and_yaml_frontmatter_schema
+   ```
+   *Expected result*: After adding `poetry-qa-bot.md` to `skills/ukrainian-poetry/agents/` and updating `expected_agents` in `test_adversarial_challenger2.py`, all frontmatter assertions, mandatory section checks, and yaml/markdown block assertions PASS with code 0.
+
+2. **Full Repository Test Suite**:
+   Run the complete test suite:
    ```bash
    py -3 tests/run_tests.py --all
    ```
-   *Expected Result*: 63+ tests pass with exit code 0, 0 failures, 100% success rate.
-3. **Validator Regex Verification**: Verify that `tests/validator/metatag_validator.py` accepts valid inline gestures like `(whispered)` or `(half-time feel)` and valid tags like `[Vocal Intro]` or `[Mega-Chorus]` without throwing errors.
+   *Expected result*: All 75 test cases execute and PASS with code 0, maintaining an average poetry score $\ge 95/100$ and zero regressions.
+
+3. **File Mirror & Ecosystem Synchronization Verification**:
+   Verify that both `skills/` and `.agents/skills/` reflect identical agent specifications and skill definitions.
+
+4. **Invalidation Conditions**:
+   - Any omission of the 6 mandatory sections in `poetry-qa-bot.md`.
+   - Any failure of `openai.yaml` to register `poetry-qa-bot`.
+   - Broken markdown parsing or missing ````yaml` / ````markdown` contract blocks.
+   - Any regression causing `py -3 tests/run_tests.py --all` to fail or exit with a non-zero status.
+
+---
+*End of Handoff Report — Ready for Orchestrator Review and Implementation Delegation.*

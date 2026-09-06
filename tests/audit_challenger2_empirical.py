@@ -87,11 +87,7 @@ class EmpiricalAuditChallenger2:
             
         # 3. Root markdown files
         root_md_names = [
-            "AGENTS.md", "GEMINI.md", "song-structure-pack.md",
-            "lyrics-to-suno-template.md", "suno-prompt-anti-patterns.md",
-            "prompt-builder.md", "reference-to-style-cheatsheet.md",
-            "mood-to-style-map.md", "ukrainian-poetry-to-suno.md",
-            "ukrainian-poetry-skill.md", "ai-music-generation-meta-spec-v8.md"
+            "AGENTS.md", "GEMINI.md"
         ]
         for name in root_md_names:
             p = PROJECT_ROOT / name
@@ -206,8 +202,6 @@ class EmpiricalAuditChallenger2:
             PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "references" / "full-guide.md",
             PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "references" / "prompt-builder.md",
             PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "SKILL.md",
-            PROJECT_ROOT / "song-structure-pack.md",
-            PROJECT_ROOT / "lyrics-to-suno-template.md",
         ]
 
         for tmpl_path in templates_to_test:

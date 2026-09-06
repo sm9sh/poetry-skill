@@ -1,111 +1,128 @@
-# Independent Quality & Adversarial Review Report — Milestone M3
+# Independent Quality & Adversarial Review Report: R2 & R3
 
-**Reviewer**: `reviewer_2` (Roles: reviewer, critic)  
-**Target Milestone**: Milestone M3 (Validator, Rubric Scorer, and Test Suite) in `poetry-skill`  
-**Date**: 2026-08-28  
+**Reviewer**: Reviewer 2 (`reviewer_2`)  
+**Roles**: Reviewer, Adversarial Critic  
+**Date**: 2026-09-06T13:02:00+03:00  
+**Target Scope**: 
+- R2: Autonomous Quality Auditor Subagent (`poetry-qa-bot.md`, registration in `openai.yaml`)
+- R3: Master Orchestrator End-to-End Song Creation Bridge (`skills/poetry-skill/SKILL.md` Section 3)
+- Verification & Test Suite: `tests/test_adversarial_challenger2.py`, `tests/run_tests.py --all`, `tests/audit_challenger2_empirical.py`
+
+---
+
+## 1. Executive Summary & Verdict
+
 **Verdict**: **APPROVE**  
+**Integrity Status**: **CLEAN (Zero Integrity Violations)**  
+- No hardcoded test assertions or dummy mocks.
+- No facade or placeholder implementations.
+- No bypasses or delegated shortcuts.
+- Real dynamic disk reads and deterministic test verification.
+- Both canonical (`skills/`) and mirror (`.agents/skills/`) repositories are 100% identical and synchronized.
 
 ---
 
-## 1. Executive Review Summary
+## 2. Quality Review (Reviewer Role)
 
-An exhaustive independent quality review, adversarial stress-testing, and forensic integrity audit was conducted for Milestone M3.
+### 2.1 Correctness & Specification Adherence
 
-### Review Verdict Matrix
-| Criterion | Status | Evidence / Observation |
-|---|---|---|
-| **Integrity Audit** | **PASS (Clean)** | Zero hardcoding, zero facade implementations, zero fake test fixtures. Real algorithmic implementations throughout. |
-| **New Validator Methods** | **PASS** | `check_artificial_inversions`, `check_filler_words_and_pronouns`, `check_cliche_rhymes`, `evaluate_sensory_grounding` fully implemented in pure Python 3 standard library (`re`, `typing`). |
-| **Rubric Calibration** | **PASS** | `RubricScorer.score_poetry` correctly scores all 7 dimensions (100 pts max), aligns with `skills/ukrainian-poetry/references/rubric.md`, enforces passing threshold (85/100) and bounds `[0.0, 100.0]`. |
-| **Register & Mode Handling** | **PASS** | Authentic folk (`folk`, `authentic_folk`), Baroque (`baroque`, `cossack_baroque`), and children (`children`) modes are properly handled without false positives. |
-| **Suno Pipeline Compatibility** | **PASS** | 100% backward compatibility maintained with `StyleValidator` and `MetatagValidator`. |
-| **Test Suite Execution** | **PASS** | `py -3 tests/run_tests.py --all` executes **62 test cases**: **62 passed (100%)**, **0 failures**, Average Poetry Score: **98.1 / 100** (target >= 95.0). |
+#### R2: Poetry QA Bot Subagent (`poetry-qa-bot.md`)
+- **YAML Frontmatter**:
+  - `name: poetry-qa-bot`: Valid.
+  - `description:` & `<example>` block: Demonstrates realistic failure detection (Russianized stress, forced inversion, cliché) and routing: Valid.
+  - `Do NOT use this agent for:` negative constraints: Clearly delineates boundaries against initial generation, creative stanza expansion, music prompt building, and DAW stem audits: Valid.
+  - Runtime configuration: `model: gemini-2.5-pro`, `temperature: 0.2` (optimal for neutral, repeatable audits), `max_output_tokens: 4096`: Valid.
+- **Mandatory 6 Sections**:
+  - `## 1. Role & Identity`: Establishes the agent as an objective, forensic supreme controller enforcing all 6 Core Poetic Principles.
+  - `## 2. Scope & Boundaries`: Defines precise ownership (prosodic scansion, stress norms, euphony laws, rhyme taxonomy, inversions, padding, sensory tactility, emotional sincerity, anti-sharovarshchyna, scorecard computation, remediation routing) and explicit non-ownership.
+  - `## 3. Input Contract`: Contains strict ````yaml` code block specifying `poem_text`, `target_form`, `target_meter`, `register`, `passing_threshold`, and `context_or_intent`.
+  - `## 4. Operational Rules & Heuristics`: Includes:
+    - 4.1 Six-Principle Audit Matrix (Inspection focus, verification standard, failure trigger).
+    - 4.2 The 14-Category Penalty Deduction Matrix (`D01` to `D14`) with exact deduction values matching `references/rubric.md`.
+    - 4.3 Deterministic Scansion Protocol (7-step procedure from syllable counting to score computation).
+    - 4.4 Remediation Routing Engine explicitly mapping defect codes to upstream specialist subagents (`poetry-prosody-phonics`, `poetry-conciseness-editor`, `poetry-imagery-architect`, `poetry-emotional-critic`, `poetry-form-synthesizer`).
+  - `## 5. Output Contract`: Contains strict ````markdown` block defining the structured report format (Executive summary, 7-dimension scorecard out of 100, itemized defect log with codes, scansion and phonics map, prioritized remediation blueprint).
+  - `## 6. Edge-Case Handling`: Comprehensive instructions for verlibre (free verse), authentic kolomyika `(4+4)+6`, historical/baroque texts (Skovoroda), and lyrics destined for Suno/Udio (handling bracketed tags vs round parentheses).
 
----
+#### R2: Registration in `openai.yaml`
+- Registered in `skills/ukrainian-poetry/agents/openai.yaml` and `.agents/skills/ukrainian-poetry/agents/openai.yaml`:
+  - Key: `poetry-qa-bot`
+  - Display Name: `Poetry QA Bot (Аудитор якості)`
+  - Short Description: Clear and accurate.
+  - Default Prompt: Standard invocation format.
+  - Byte-for-byte identical across canonical and mirror files (2,667 bytes).
 
-## 2. Detailed Technical Findings & Code Audit
-
-### 2.1 Pure Python Standard Library Validator Implementation (`tests/validator/poetic_validator.py`)
-- **Dependency Audit**: The file imports only `re` and standard `typing` symbols (`Dict`, `List`, `Optional`, `Tuple`, `Any`, `Set`). No third-party packages are required.
-- **`check_artificial_inversions(poem_text, mode)` (Lines 531–557)**:
-  - Detects forced end-of-line rhyme inversions via 3 structured pattern groups:
-    1. Verb + Postpositive Personal Pronoun at line end (`r"\b(...(?:в|ла|ло|ли|ю|єш|є|ємо|єте|ить|ять|уть|нув|нула|нуло|нули|тиме|тиму|тимеш|тимуть|всь|вся|лась|лося|лися))\s+(я|ти|він|вона|воно|ми|ви|вони)\s*[\.,!?;:—\-]*$"`)
-    2. Stranded conjunctions/particles at line end (`r"\b([а-яіїєґА-ЯІЇЄҐ]+)\s+(що|щоб|як|мов|немов|ніби|бо|але|хоч|хоча)\s*[\.,!?;:—\-]*$"`)
-    3. Inverted auxiliary verbs at line end (`r"\b(був|була|було|були|буде|будуть)\s+(я|ти|він|вона|воно|ми|ви|вони)\s*[\.,!?;:—\-]*$"`)
-  - Correctly excludes historical registers (`folk`, `historical_folk`, `authentic_folk`, `baroque`, `cossack_baroque`, `baroque_cossack`).
-- **`check_filler_words_and_pronouns(poem_text, mode)` (Lines 559–615)**:
-  - Scans for 12 pleonastic rhythmic cluster idioms (`і ось`, `ну от`, `але ж бо`, `та й ось`, `то ж бо`, `а я ось`, `вже ж бо`, `ну і ось`, `от і все`, `ну як же`, `ось і знов`, `та ось же`).
-  - Evaluates stanza-level density of 28 monosyllabic filler pronouns and particles (`я`, `ти`, `він`, `вона`, `воно`, `ми`, `ви`, `вони`, `мій`, `твій`, `свій`, `цей`, `той`, `ось`, `от`, `вже`, etc.), flagging stanzas where density >= 32% or token count >= 5.
-  - Appropriately exempts `folk` and `children` modes.
-- **`check_cliche_rhymes(poem_text)` (Lines 617–717)**:
-  - Validates end-words against `BANAL_RHYME_PAIRS` (23 blacklisted hackneyed pairs: *любов-кров*, *серце-перце*, *серце-дверці*, *доля-воля*, *сльози-грози*, *ніч-віч*, *ночі-очі*, *зорі-морі*, *небо-треба*, *жити-любити*, *знати-кохати*, *сон-дзвін*, etc.).
-  - Employs dedicated morphological stem matching (`_word_matches_stem`) handling case inflections, plural forms, and vowel alternations (e.g. *сліз/гріз*, *ночі/очі*, *долею/волею*).
-  - Inspects cross-line distances up to 3 lines (covering AABB, ABAB, ABBA).
-- **`evaluate_sensory_grounding(poem_text)` (Lines 719–772)**:
-  - Categorizes physical perception into 5 distinct sensory channels (`tactile`, `acoustic`, `visual`, `thermal`, `olfactory_gustatory`) across 140+ Ukrainian roots.
-  - Matches against abstract philosophical noise tokens (`ABSTRACT_LEXICON`: *душ*, *серц*, *дол*, *вічн*, *житт*, *кохан*, *почутт*, *мрій*, *наді*, etc.).
-  - Calculates grounding levels (`high`, `moderate`, `low`, `purely_abstract`) and computes sensory scoring.
-
-### 2.2 Rubric Calibration & Alignment (`tests/validator/rubric_scorer.py`)
-- `RubricScorer.score_poetry` implements 7 dimensions directly aligned with `skills/ukrainian-poetry/references/rubric.md`:
-  1. `linguistic_naturalness`: Max **25.0** (Surzhyk: -10 pts/ea; Inversions: -2 pts/ea).
-  2. `imagery_concreteness`: Max **20.0** (Line count < 4: -8 pts; purely abstract: -4 pts; low sensory: -2 pts).
-  3. `rhythm_line_breaks`: Max **15.0** (Syllable count variance > 4: -6 pts; filler padding: -2 pts/cluster).
-  4. `rhyme_sound_design`: Max **10.0** (Cheap grammatical rhymes: -2 pts/ea; free verse: 10.0 pts).
-  5. `tonal_integrity`: Max **10.0** (Register mismatch: -5 pts).
-  6. `ending_strength`: Max **10.0** (Moralizing/didactic endings via `DIDACTIC_ENDING_PATTERNS`: -6 pts).
-  7. `anti_cliche_guardrails`: Max **10.0** (Taboo words: -5 pts/ea; kitsch: -5 pts; cliché rhymes: -4 pts/pair).
-- Total maximum score is **100.0**, clamped with `max(0.0, dim_scores[k])` to prevent negative values.
-- Minimum passing threshold is programmatically enforced at **85.0 / 100**.
-
-### 2.3 Register & Historical Stylization Handling
-- **Folk & Carpathian Modes** (`mode in ("folk", "authentic_folk", "historical_folk")`):
-  - Kitsch/Sharovarshchyna filter is safely bypassed for authentic folkloric realia (*вівчар, полонина, смерека*).
-  - Traditional folkloric inversions and repetitions are preserved without false positive penalties.
-- **Baroque & Cossack Baroque Modes** (`mode in ("baroque", "cossack_baroque", "baroque_cossack")`):
-  - Skovorodian and 17th-18th century rhetorical syntactic inversions (*«Світ сей оманний мов ріка пливе»*, *«А совість чесна — то безцінний клад»*) are exempted from modern anti-inversion penalties.
-- **Children's Mode** (`mode="children"`):
-  - High-frequency playful pronouns and particles in trochaic nursery rhymes (*«Кіт надів рудий ковпак... Я калюжку подолав!»*) are correctly exempted from stanza density penalties.
-
-### 2.4 Suno AI Pipeline Compatibility
-- `StyleValidator` (`style_validator.py`) and `MetatagValidator` (`metatag_validator.py`) remain completely intact and compatible.
-- All 19 Suno-specific test cases across all tiers passed with an average Suno score of **99.9 / 100**.
+#### R3: End-to-End Song Creation Pipeline (`skills/poetry-skill/SKILL.md`)
+- **Section 1 Routing Table**: Row 3 properly routes "End-to-End Songwriting & Production" to `Execute Section 3: **End-to-End Song Creation Pipeline**`.
+- **Section 3.1 Flowchart**: Clear, comprehensive ASCII architecture flowchart mapping the 6 stages:
+  1. Brief ➔ Stage 1 Poetry Generation (`skills/ukrainian-poetry`)
+  2. Raw poem ➔ Stage 2 Autonomous Quality Audit (`poetry-qa-bot`)
+  3. Verified poem ($\ge 90/100$) ➔ Stage 3 Lyrics Adaptation & Spoken Prosody Test (`music-lyrics-architect`)
+  4. Optimized lyrics ➔ Stage 4 Platform Selection & Prompt Synthesis (`music-prompt-synthesizer`)
+  5. Audio prompts ➔ Stage 5 The 10 AI Quality Gates Verification
+  6. Generated audio stems ➔ Stage 6 Professional DAW Stem Engineering & Mastering (`music-daw-mastering-critic`)
+- **Section 3.2 Detailed Protocol**: Explains each stage in depth with explicit quality criteria, bracket rules (`[...]` for arrangement vs `(...)` for vocal delivery/ad-libs), timing rules (5s intro, 50s chorus), and True Peak mastering standards (-1 dBTP with TP limiting OFF).
+- **Section 3.3 Data Contracts**: Comprehensive YAML data contracts defining input/output schemas for all 6 stages.
+- **Section 4 Quick Reference**: Accurately renumbered and includes `poetry-qa-bot`.
+- Canonical and mirror files are byte-for-byte identical (27,177 bytes).
 
 ---
 
-## 3. Adversarial & Stress Testing
+## 3. Adversarial Stress-Testing & Attack Surface (Critic Role)
 
-### 3.1 Stress Scenarios Tested
-1. **Adversarial Input: Heavy Inversion Poem**
-   - Input: Forced inversion poem with line-ending pronouns and stranded conjunctions (*«...чув я», «...мовчала довго бо», «...пізнав він»*).
-   - Result: Correctly flagged 3 inversions; penalty deductions applied in `linguistic_naturalness`; overall score < 85/100 (`FAIL`).
-2. **Adversarial Input: Rhythmic Filler Stuffing**
-   - Input: Poem with high density of filler pronouns and padding clusters (*«І ось я знов...», «Ну от і я мій день свій відшукав...», «Але ж бо той же самий...»*).
-   - Result: Correctly detected 3 padding clusters and high-density stanza (50% density); deductions applied in `rhythm_line_breaks`.
-3. **Adversarial Input: Disguised Inflected Cliché Rhymes**
-   - Input: Rhymes with inflected endings (*«любов'ю»* - *«кров'ю»*, *«долею»* - *«волею»*, *«сліз»* - *«гріз»*).
-   - Result: Correctly caught by `_word_matches_stem` morphology engine.
-4. **Adversarial Input: Purely Abstract Emotional Noise**
-   - Input: Poem composed solely of abstract nouns (*«Душа моя страждає у вічності буття...»*).
-   - Result: Grounding level categorized as `purely_abstract`, resulting in -4 pts deduction in `imagery_concreteness`.
-5. **Adversarial Input: Didactic / Preachy Closures**
-   - Input: Poem concluding with *«І ти збагнеш, що треба жити»*.
-   - Result: Matched `DIDACTIC_ENDING_PATTERNS` and penalized -6 pts in `ending_strength`.
+### 3.1 Challenge 1: Subagent Schema Conformance & YAML Frontmatter Parsing
+- **Assumption**: The new agent `poetry-qa-bot.md` strictly adheres to the test harness requirements in `test_adversarial_challenger2.py`.
+- **Attack Scenario**: Missing required frontmatter tags, malformed markdown section headers, missing YAML or Markdown contract blocks, or registry omissions in `openai.yaml`.
+- **Stress-Test Execution**:
+  - Ran `py -3 -m unittest tests.test_adversarial_challenger2.TestChallenger2Robustness.test_20_subagent_files_and_yaml_frontmatter_schema`.
+  - Result: **PASSED (0.016s)**.
+  - Independent python script re-parsed frontmatter, verified delimiters, tested each mandatory section, and asserted code blocks across both `skills/` and `.agents/skills/`.
+  - Result: **PASSED**.
+
+### 3.2 Challenge 2: Scorecard Arithmetic & Defect Alignment
+- **Assumption**: Dimension point allocations sum up to exactly 100 points, and the 14 defect categories match `references/rubric.md`.
+- **Stress-Test**:
+  - Dimension 1 (Language, Stresses, Syntax): 25 pts
+  - Dimension 2 (Imagery, Concreteness, Action): 20 pts
+  - Dimension 3 (Rhythm, Line breaks, Form/Content Unity): 15 pts
+  - Dimension 4 (Rhyme, Clausulae, Phonics): 10 pts
+  - Dimension 5 (Emotional Depth, Sincerity, Register): 10 pts
+  - Dimension 6 (Originality of Angle, Ending Power): 10 pts
+  - Dimension 7 (Anti-Cliches, Anti-Kitsch): 10 pts
+  - **Sum**: $25 + 20 + 15 + 10 + 10 + 10 + 10 = 100$ pts. Exactly matches `rubric.md`.
+  - Defect deduction table (`D01` to `D14`) corresponds 1:1 with `rubric.md` Deduction Matrix (Section 2).
+
+### 3.3 Challenge 3: End-to-End Pipeline Cohesion & Bracket Rule Safety
+- **Assumption**: The 6-stage pipeline protocol preserves the strict boundary between square brackets `[...]` and round parentheses `(...)` so audio models do not verbalize stage directions.
+- **Stress-Test**:
+  - Verified Section 3.2 Stage 3: explicitly dictates `[Square Brackets]` for structural tags (`[Intro]`, `[Verse 1]`, `[Chorus]`, etc.) and `(Round Parentheses)` for sung backing vocals and vocal delivery gestures `(whispered)`, `(belted)`, `(falsetto)`, `(ad-lib)`.
+  - Tested empirical compliance using `tests/audit_challenger2_empirical.py`: 187 template blocks checked across 24 markdown files, with **0 bracket violations** and **0 metatag errors**.
+
+### 3.4 Challenge 4: Full System Regression
+- **Assumption**: Incorporating `poetry-qa-bot.md` and the Section 3 pipeline changes does not regress any existing tests in Tier 1 through Tier 4.
+- **Stress-Test Execution**:
+  - `py -3 tests/run_tests.py --all`
+  - Output: 78/78 tests passed (0 failures).
+  - Average poetry score: 98.3 / 100. Average Suno score: 99.7 / 100. Success rate: 100.0%.
 
 ---
 
-## 4. Integrity Violation Audit
+## 4. Minor Observations (Non-Blocking)
 
-| Integrity Check | Observation | Assessment |
-|---|---|---|
-| **Hardcoded Test Results** | Inspected `poetic_validator.py`, `rubric_scorer.py`, `run_tests.py`. No test IDs, names, or expected outputs are hardcoded in source. | **CLEAN** |
-| **Dummy / Facade Logic** | Inspected all algorithms. Real regular expressions, phonetic set operations, morphological stem matching, and density mathematics are executed. | **CLEAN** |
-| **Shortcut / Delegation** | No third-party web calls or external opaque binaries. 100% pure standard library Python. | **CLEAN** |
-| **Fabricated Logs / Reports** | Executed test runner live (`py -3 tests/run_tests.py --all`), generated `tests/reports/test_report.json`, verified output matches terminal execution verbatim. | **CLEAN** |
+1. In `tests/test_adversarial_challenger2.py` at line 447, the docstring reads:
+   `"""Verify all 5 subagent markdown files exist, parse valid YAML frontmatter, and contain required fields."""`
+   While the docstring mentions "all 5 subagent markdown files", `expected_agents` correctly contains all 6 files (including `poetry-qa-bot.md`). This is purely a cosmetic comment and has zero functional impact.
 
 ---
 
-## 5. Final Verdict
+## 5. Summary of Verified Claims
 
-**VERDICT: APPROVE**  
-Milestone M3 is fully complete, mathematically calibrated, and robustly verified against all interface contracts and project requirements.
+| Claim | Verification Method | Result |
+| :--- | :--- | :--- |
+| `poetry-qa-bot.md` contains valid YAML frontmatter and all 6 mandatory sections | Automated test `test_20_subagent_files_and_yaml_frontmatter_schema` + independent parsing script | **VERIFIED / PASS** |
+| `poetry-qa-bot` registered in `openai.yaml` | Independent regex/yaml inspection of canonical and mirror files | **VERIFIED / PASS** |
+| Section 3 in `SKILL.md` contains full 6-stage pipeline protocol, flowchart, and data contracts | Source verification and section-by-section line inspection | **VERIFIED / PASS** |
+| Parity between canonical `skills/` and agent runtime `.agents/skills/` | Python binary comparison (`read_bytes() == read_bytes()`) | **VERIFIED / PASS** |
+| 100% test pass rate across master suite | `py -3 tests/run_tests.py --all` (78 tests) | **VERIFIED / PASS** |
+| Zero empirical bracket or metatag errors | `py -3 tests/audit_challenger2_empirical.py` (24 files, 187 blocks) | **VERIFIED / PASS** |
+| Zero integrity violations (no cheats, fake mocks, or hardcoded answers) | Full code and test audit | **VERIFIED / PASS** |

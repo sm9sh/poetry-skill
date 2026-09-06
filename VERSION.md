@@ -1,5 +1,28 @@
 # Version History
 
+## v3.0.0 - 2026-09-06
+
+Multi-platform AI Music Generation Upgrade (Suno v4.5/v5.5, Udio v4, Google Flow Music Lyria 3.5), 6-Step Production Lifecycle Architecture, and 10 AI Quality Gates.
+
+### Added
+- **Multi-platform expansion**: Support for Suno v4.5/v5.5, Udio v4, and Google Flow Music Lyria 3.5.
+- **6-Step Production Lifecycle Architecture**.
+- **10 AI Quality Gates Matrix** for comprehensive quality control.
+- **Western Genre Anchor** with an updated 8-genre taxonomy.
+- **Vocal Triple-Stack** formula for complex vocal arrangements.
+- **AI Conductor extensions roadmap** (Seed → Extend → Breakdown → Mega-Chorus → Outro).
+- **DAW stem mixing checklist** (Split Bass, Tchad Blake distortion, Mid-Side reverb sidechain).
+- **Mastering guide** avoiding the True Peak trap (-1 dBTP for -6..-8 LUFS).
+- **Streaming distribution rules** (Skip Rate thresholds, Playlist Placement Trap elimination).
+- **4 new music production subagents** for Suno, Udio, and Flow Music.
+- **Udio + Flow Music validators** to ensure output quality.
+- **Metatag grammar**: Strict rules for brackets vs parentheses, 9 canonical inline vocal gestures.
+- **Suno Method 1 (Conversational) and Method 2 (HookGenius Tag Matrix)** workflow integration.
+- **AGENTS.md** established as the Single Source of Truth for system architecture.
+
+### Changed
+- Updated `README.md`, `README.en.md`, and `HOWTO.md` to reflect multi-platform ecosystem.
+
 ## v2.0.0 - 2026-08-26
 
 Major Architecture Overhaul, Complete Versification & Suno AI Engine Upgrade, and 4-Tier Automated E2E Test Suite.

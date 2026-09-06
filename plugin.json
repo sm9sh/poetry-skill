@@ -1,10 +1,10 @@
-﻿{
+{
   "name": "poetry-skill",
-  "version": "2.0.0",
-  "description": "Ukrainian Poetry generation, versification, and production-grade Suno AI / Flow Music prompt engineering system",
+  "version": "3.0.0",
+  "description": "Ukrainian Poetry generation, versification, and production-grade Suno AI / Udio / Flow Music prompt engineering system",
   "author": {
     "name": "sm9sh"
   },
   "license": "MIT",
-  "keywords": ["poetry", "ukrainian", "suno", "music", "versification", "lyrics"]
+  "keywords": ["poetry", "ukrainian", "suno", "udio", "flow-music", "multi-platform", "music", "versification", "lyrics"]
 }

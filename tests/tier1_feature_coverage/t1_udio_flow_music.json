@@ -1,0 +1,125 @@
+{
+  "suite": "Tier 1: Feature Coverage - Udio and Flow Music",
+  "category": "multi_platform",
+  "tests": [
+    {
+      "id": "TC_T1_UDIO_01_Valid",
+      "name": "Udio valid prompt",
+      "platform": "udio",
+      "prompt": "post-punk, coldwave, 1980s, melancholic baritone vocal, lo-fi nocturnal production, dry acoustic space, 128 bpm",
+      "context_length": 15,
+      "assertions": {
+        "is_valid": true
+      }
+    },
+    {
+      "id": "TC_T1_UDIO_02_Too_Long",
+      "name": "Udio prompt too long",
+      "platform": "udio",
+      "prompt": "post-punk, coldwave, 1980s, melancholic baritone vocal, lo-fi nocturnal production, dry acoustic space, 128 bpm, extra long text to exceed the two hundred and fifty characters limit, adding more and more text here to make sure it definitely fails the validation check for max length which is set to two hundred and fifty characters and we are almost there just a bit more text needed to pass the threshold and trigger the error",
+      "assertions": {
+        "is_valid": false,
+        "has_error": "exceeded limit"
+      }
+    },
+    {
+      "id": "TC_T1_UDIO_03_Artist_Name",
+      "name": "Udio prompt with artist name",
+      "platform": "udio",
+      "prompt": "post-punk, coldwave, 1980s, melancholic baritone vocal, like okean elzy, dry acoustic space, 128 bpm",
+      "assertions": {
+        "is_valid": false,
+        "has_error": "Artist/band name detected"
+      }
+    },
+    {
+      "id": "TC_T1_UDIO_04_Valid_Inpainting",
+      "name": "Udio valid inpainting",
+      "platform": "udio",
+      "prompt": "post-punk, coldwave, 1980s",
+      "inpainting_text": "we are *falling* down",
+      "assertions": {
+        "is_valid": true
+      }
+    },
+    {
+      "id": "TC_T1_UDIO_05_Invalid_Inpainting",
+      "name": "Udio inpainting without stars",
+      "platform": "udio",
+      "prompt": "post-punk, coldwave, 1980s",
+      "inpainting_text": "we are falling down",
+      "assertions": {
+        "is_valid": false,
+        "has_error": "No asterisks found"
+      }
+    },
+    {
+      "id": "TC_T1_FLOW_01_Valid",
+      "name": "Flow Music valid prompt",
+      "platform": "flow_music",
+      "prompt": "Create a modern cinematic ambient track with an emotive soaring cello and a warm felt upright piano. The track opens with an intimate whispered vocal, building a slow and atmospheric tension.",
+      "assertions": {
+        "is_valid": true
+      }
+    },
+    {
+      "id": "TC_T1_FLOW_02_Too_Short",
+      "name": "Flow Music prompt too short",
+      "platform": "flow_music",
+      "prompt": "Create a track.",
+      "assertions": {
+        "is_valid": false,
+        "has_error": "too short"
+      }
+    },
+    {
+      "id": "TC_T1_FLOW_03_Suno_Syntax",
+      "name": "Flow Music prompt with Suno syntax",
+      "platform": "flow_music",
+      "prompt": "Create a modern cinematic ambient track. [Verse] It features an emotive soaring cello. (whispered) The vocal is intimate.",
+      "assertions": {
+        "is_valid": false,
+        "has_error": "Suno-specific metatags"
+      }
+    },
+    {
+      "id": "TC_T1_FLOW_04_Artist_Name",
+      "name": "Flow Music prompt with artist name",
+      "platform": "flow_music",
+      "prompt": "Create a modern cinematic ambient track with an emotive soaring cello and a warm felt upright piano. Make it sound like DakhaBrakha with an intimate whispered vocal.",
+      "assertions": {
+        "is_valid": false,
+        "has_error": "Artist/band name detected"
+      }
+    },
+    {
+      "id": "TC_T1_MULTI_01_Suno",
+      "name": "Multi-platform Suno routing",
+      "platform": "suno",
+      "style_of_music": "indie rock, melancholic, raspy male vocals, intimate close-up delivery, dry mic, live drum kit, lo-fi tape hiss, 115 bpm",
+      "lyrics": "[Verse 1]\nХолОдний вІтер б'є в обличчя знов\nМетАлевий присмАк на кінчику язИка\nТрамвАй заплУтався у пАвутинні снІв\nІ мІсто дИхає — глибОко, напівдИко",
+      "assertions": {
+        "is_valid": true
+      }
+    },
+    {
+      "id": "TC_T1_MULTI_02_Udio",
+      "name": "Multi-platform Udio routing",
+      "platform": "udio",
+      "prompt": "trip-hop, downtempo, dusty vinyl breakbeat, warm rhodes piano, 85 bpm",
+      "context_length": 15,
+      "assertions": {
+        "is_valid": true
+      }
+    },
+    {
+      "id": "TC_T1_MULTI_03_Flow",
+      "name": "Multi-platform Flow Music routing",
+      "platform": "flow_music",
+      "prompt": "Create a modern melodic techno track with hypnotic analog synth arpeggios, a deep rolling sub bass, and atmospheric vocal chops over a four-on-the-floor drum beat.",
+      "assertions": {
+        "is_valid": true
+      }
+    }
+  ]
+}

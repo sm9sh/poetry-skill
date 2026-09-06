@@ -1,24 +1,35 @@
-## 2026-08-29T19:17:25Z
+# Task Assignment: Explorer Survey 2 (Poetry QA Bot & End-to-End Pipeline Analysis)
 
-You are Explorer 2 (Templates & Audio Engineering Survey).
-Your working directory is: d:\poetry-skill\.agents\explorer_survey_2
-Read ORIGINAL_REQUEST.md at: d:\poetry-skill\.agents\ORIGINAL_REQUEST.md
-Authoritative source specification: d:\poetry-skill\ai-music-generation-meta-spec-v8.md
+## Working Directory
+d:\poetry-skill\.agents\explorer_survey_2
 
-Your mission:
-1. Thoroughly read and analyze ai-music-generation-meta-spec-v8.md and ORIGINAL_REQUEST.md.
-2. Investigate all root files and reference templates in d:\poetry-skill:
-   - ukrainian-poetry-to-suno.md
-   - ukrainian-poetry-skill.md
-   - lyrics-to-suno-template.md
-   - song-structure-pack.md
-   - suno-prompt-anti-patterns.md
-   - prompt-matrix-v8-templates (or relevant files)
-3. Map all required updates for:
-   - Metatags library & inline vocal gestures in round parentheses: (whispered), (belted), (falsetto), (screamed), (ad-lib), (building intensity), (key change), (half-time feel), (harmonized) vs square brackets [...] for arrangements.
-   - 10 AI Quality Gates complete definitions and tables.
-   - Step 4 (The AI Conductor / Vance Powell Verse 2 development / Mega-Chorus / Outro <=20s).
-   - Step 5 (Engineering DAW Post-Production: Stem splitting, Phase optimization kick/bass, dynamic sidechain unmasking, Split Compression bass <200Hz brickwall vs >200Hz dynamic saturated, Tchad Blake parallel distortion directly on Master Fader bypassing Drum Bus, dynamic Mid-Side Reverb sidechaining).
-   - Step 6 (Mastering & Algorithmic Streaming Distribution: True Peak trap elimination -1 dBTP for -6..-8 LUFS without TP limiting or -14 LUFS for -2 dBTP, genre skip rate thresholds [Pop >48%, Hip-hop >44%, Electronic >37%, Indie rock >31%, alert >45%], Playlist Placement Trap elimination - single-only ads, Spotify Canvas/Marquee/Discovery Mode).
-4. Output a detailed report to d:\poetry-skill\.agents\explorer_survey_2\handoff.md.
-5. Send a completion message back to parent.
+## Context & Request
+- Read `d:\poetry-skill\ORIGINAL_REQUEST.md` (specifically section ## 2026-09-06T09:42:47Z).
+- Directives: `d:\poetry-skill\AGENTS.md`, `d:\poetry-skill\GEMINI.md`.
+
+## Mission
+Analyze R2 & R3:
+1. For R2 (Poetry QA Bot):
+   - Inspect existing subagents in `skills/ukrainian-poetry/agents/` and `.agents/skills/ukrainian-poetry/agents/` (e.g., `poetry-imagery-architect.md`, `poetry-emotional-critic.md`, `poetry-prosody-phonics.md`, `poetry-conciseness-editor.md`, `poetry-form-synthesizer.md`). Note their format: Role, Boundaries, Contracts, Heuristics, Output format, Edge cases.
+   - Inspect `skills/ukrainian-poetry/agents/openai.yaml` and `.agents/skills/ukrainian-poetry/agents/openai.yaml` to see how subagents are registered.
+   - Inspect `skills/ukrainian-poetry/references/rubric.md` and `AGENTS.md` (6 core poetic principles + 100-point penalty rubric).
+   - Define exact specification requirements for `poetry-qa-bot.md`.
+2. For R3 (End-to-End Song Creation Bridge):
+   - Inspect `skills/poetry-skill/SKILL.md` and `.agents/skills/poetry-skill/SKILL.md`.
+   - Determine how section `## End-to-End Song Creation Pipeline` should be structured and placed.
+   - Trace the pipeline stages: Idea / theme -> verse generation (ukrainian-poetry) -> quality audit (poetry-qa-bot) -> lyrics adaptation & Spoken Prosody Test (music-lyrics-architect) -> platform selection & prompt synthesis (music-prompt-synthesizer: Suno / Udio / Flow Music) -> 10 AI Quality Gates verification -> DAW stem mixing recommendations (music-daw-mastering-critic).
+
+## Output
+Write your comprehensive analysis report to `d:\poetry-skill\.agents\explorer_survey_2\handoff.md`.
+Report back when done with send_message.
+
+## 2026-09-06T09:44:14Z
+<USER_REQUEST>
+You are Explorer 2 investigating R2 (Poetry QA Bot) and R3 (End-to-End Song Creation Bridge).
+Your working directory is d:\poetry-skill\.agents\explorer_survey_2.
+Read your instructions in d:\poetry-skill\.agents\explorer_survey_2\DISPATCH.md.
+Also read d:\poetry-skill\ORIGINAL_REQUEST.md (specifically section ## 2026-09-06T09:42:47Z), AGENTS.md, and GEMINI.md.
+Investigate existing agents in skills/ukrainian-poetry/agents/ and .agents/skills/ukrainian-poetry/agents/, openai.yaml registration, rubric.md 100-point penalty rubric, and skills/poetry-skill/SKILL.md.
+Write a comprehensive report to d:\poetry-skill\.agents\explorer_survey_2\handoff.md with detailed designs for poetry-qa-bot.md, openai.yaml, and ## End-to-End Song Creation Pipeline.
+When done, notify orchestrator_3 via send_message.
+</USER_REQUEST>

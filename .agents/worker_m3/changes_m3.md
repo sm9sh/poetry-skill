@@ -46,9 +46,9 @@
 ## 2. Verification Results
 
 - Command: `py -3 tests/run_tests.py --all`
-- Total Test Cases: 63
-- Passed: 63 / 63 (100.0% success rate)
+- Total Test Cases: 78
+- Passed: 78 / 78 (100.0% success rate)
 - Failed: 0
-- Warnings: 32
-- Average Poetry Rubric Score: **98.2 / 100** (Passing target: >= 95.0)
-- Average Suno Rubric Score: **99.9 / 100** (100% backward compatible)
+- Warnings: 35
+- Average Poetry Rubric Score: **98.3 / 100** (Passing target: >= 95.0)
+- Average Suno Rubric Score: **99.7 / 100** (100% backward compatible)

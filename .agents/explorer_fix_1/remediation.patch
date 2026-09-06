@@ -1,0 +1,32 @@
+--- a/skills/ukrainian-poetry-to-suno/agents/music-lyrics-architect.md
++++ b/skills/ukrainian-poetry-to-suno/agents/music-lyrics-architect.md
+@@ -49,22 +49,21 @@
+-5. **Metatags & Gestures**: Use `[Verse]`, `[Chorus]`, `[Bridge]` for structure. Use `(sigh)`, `(whisper)`, `(breath)`, `(growl)`, `(cry)` for inline vocal gestures. Use 9 canonical inline gestures max per section.
++5. **Metatags & Gestures**: Use square brackets `[...]` for ALL structural, instrumentation, and arrangement instructions (e.g., `[Intro - ambient build]`, `[Verse 1 - rhythmic staccato]`, `[Chorus - soaring legato]`, `[Outro - fade out]`). Use round parentheses `(...)` EXCLUSIVELY for backing vocals, ad-libs, and vocal delivery gestures (e.g., `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`, `(луна)`). Never put instrumental or arrangement descriptions in parentheses because Suno AI and Google Flow Music will sing them out loud.
+ 
+ # Output Contract
+ ```markdown
+ ## 🎼 AI-Optimized Lyrics
+ 
+-[Intro]
+-(ambient build)
++[Intro - ambient build]
+ 
+-[Verse 1]
+-(staccato delivery)
++[Verse 1 - rhythmic staccato]
++(whispered)
+ Line one text hEre
+ Line two text hEre
+ 
+-[Chorus]
+-(legato, soaring)
++[Chorus - soaring legato]
++(belted)
+ Line one of chOrus
+ Line two of chOrus
+ 
+-[Outro]
+-(fade out)
++[Outro - fade out]
+ ```
