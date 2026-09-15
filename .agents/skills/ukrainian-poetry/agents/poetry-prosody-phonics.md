@@ -113,10 +113,23 @@ allow_pyrrhics: boolean      # Default: true (pyrrhics are natural in Ukrainian 
 - **Permissible Dual Accents**:
   *зАвжди / завждИ*, *пОмилка / помИлка*, *правдИвий / прАвдивий*, *веснЯний / веснянИй*, *первІсний / пЕрвісний*, *тАкож / такОж*, *мАбуть / мабУть*, *прОстий / простИй*.
 
-- **AI Audio Model Phonetic Stress Standard (Suno AI & Google Flow Music)**:
-  When the poem or lyrical text is prepared for AI music generation (Suno, Flow Music) or performance delivery, **capitalize the stressed vowel** in words with non-obvious stress, mobile accentuation, or homographs:
-  `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`, `одИннадцять`, `листопАд`, `рукОпис`, `перЕпис`, `довІдник`, `фартУх`, `ненАвисть`, `новИй`, `старИй`, `босИй`, `пізнАння`, `читАння`, `завдАння`, `принестИ`, `вИрок`.
-  *Rationale*: Audio neural tokenizers reliably map capitalized vowels to acoustic pitch/energy peaks without stripping diacritics.
+- **Attested Poetic / Folk / Surzhyk Stress Variants (≤ 2 per poem/song)**:
+  A stress that deviates from the orthoepic standard is **permitted** when documented in Ukrainian literary poetry (Shevchenko, Franko, Lesya Ukrainka, Antonych, Zhadan), folk song, or organic dialect/surzhyk — provided:
+  1. The shifted stress is metrically required (reinforces the ictus, not fights it).
+  2. The variant has at least one attested canonical source.
+  3. **Hard cap: ≤ 2 such shifts per poem or song.** A third shift requires reworking the line to find a better word instead.
+  4. In AI-audio lyrics: mark the attested variant with a capitalized stressed vowel so the audio model uses it.
+  Common attested pairs: `кОлись / колИсь`, `нікОли / ніколИ`, `свЯтий / святИй`, `дорОга / дорогА` (in folk context), `зелЕний / зЕлений`.
+
+
+- **AI Audio Model Phonetic Stress Standard (Suno/Udio/Flow Music)**:
+  > **Context gate**: Apply uppercase-vowel notation **only** in song lyrics destined for AI audio generation — NEVER in regular poetry output.
+  When preparing lyrics for AI music generation, capitalize the stressed vowel only in one of three hard categories:
+  1. **Homographs** (stress changes meaning): `зАмок` vs `замОк`, `дорОга` vs `дорогА`, `мУка` vs `мукА`, `плАчу` vs `плачУ`, `бІлизна` vs `білизнА`, `оргАн` vs `Орган`, `обрАзи` vs `Образи`.
+  2. **Anti-Russian misaccentuation corrections**: `вИпадок`, `чорнОзем`, `одИннадцять`, `чотирнАдцять`, `листопАд`, `рукОпис`, `перЕпис`, `довІдник`, `фартУх`, `ненАвисть`, `пізнАння`, `читАння`, `завдАння`, `принестИ`, `вИрок`, `новИй`, `старИй`, `босИй`.
+  3. **Non-intuitive mobile accent shifts** (inflected form diverges from citation): `зЕмлю` (землЯ), `рУку` (рукА), `хОдиш` (ходИти), `несУ` (нестИ).
+  **Never mark** function words or phonetically obvious words: `і`, `й`, `та`, `що`, `але`, `він`, `вона`, `вони`, `вже`, `ще`, `тут`, `там`, `лише`, `навіть`, `коли`, `моя`, `земля`, `прийде`, `заспівай`, `серденько`, `моє`, `твоє`, `своє`.
+  *Rationale*: Audio neural tokenizers map capitalized vowels to acoustic pitch peaks — but over-marking disrupts legibility and forces AI to mispronounce otherwise correct words.
 
 ### 4.3 Laws of Ukrainian Euphony (Милозвучність)
 1. **`У` / `В` Alternation**:
