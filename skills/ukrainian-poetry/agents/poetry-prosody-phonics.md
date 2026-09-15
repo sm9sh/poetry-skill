@@ -113,6 +113,15 @@ allow_pyrrhics: boolean      # Default: true (pyrrhics are natural in Ukrainian 
 - **Permissible Dual Accents**:
   *зАвжди / завждИ*, *пОмилка / помИлка*, *правдИвий / прАвдивий*, *веснЯний / веснянИй*, *первІсний / пЕрвісний*, *тАкож / такОж*, *мАбуть / мабУть*, *прОстий / простИй*.
 
+- **Attested Poetic / Folk / Surzhyk Stress Variants (≤ 2 per poem/song)**:
+  A stress that deviates from the orthoepic standard is **permitted** when documented in Ukrainian literary poetry (Shevchenko, Franko, Lesya Ukrainka, Antonych, Zhadan), folk song, or organic dialect/surzhyk — provided:
+  1. The shifted stress is metrically required (reinforces the ictus, not fights it).
+  2. The variant has at least one attested canonical source.
+  3. **Hard cap: ≤ 2 such shifts per poem or song.** A third shift requires reworking the line to find a better word instead.
+  4. In AI-audio lyrics: mark the attested variant with a capitalized stressed vowel so the audio model uses it.
+  Common attested pairs: `кОлись / колИсь`, `нікОли / ніколИ`, `свЯтий / святИй`, `дорОга / дорогА` (in folk context), `зелЕний / зЕлений`.
+
+
 - **AI Audio Model Phonetic Stress Standard (Suno/Udio/Flow Music)**:
   > **Context gate**: Apply uppercase-vowel notation **only** in song lyrics destined for AI audio generation — NEVER in regular poetry output.
   When preparing lyrics for AI music generation, capitalize the stressed vowel only in one of three hard categories:

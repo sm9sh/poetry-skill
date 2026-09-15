@@ -170,6 +170,32 @@ Strictly avoid stress calques from Russian:
 Legitimately utilize orthoepic double accents for metric elasticity:
 *зАвжди / завждИ*, *пОмилка / помИлка*, *правдИвий / прАвдивий*, *веснЯний / веснянИй*, *первІсний / пЕрвісний*, *тАкож / такОж*, *мАбуть / мабУть*, *прОстий / простИй*.
 
+### 4a. Attested Poetic / Folk / Surzhyk Stress Variants (Атестовані варіанти)
+A stress shift that deviates from the standard orthoepic norm is **permitted** when there exists documented precedent in Ukrainian literary poetry, folk song, or organic surzhyk usage (e.g., Shevchenko, Franko, Lesya Ukrainka, Antonych, Zhadan, Ukrainian folk songs, Hutsul dialects). Such variants give the poet metric flexibility while remaining within the living Ukrainian phonetic tradition.
+
+**Rule — Hard Cap: ≤ 2 attested stress variants per poem or song.**
+- Exceeding 2 destabilizes the listener's prosodic trust and signals metric incompetence rather than artistic license.
+- When using an attested variant, the word must land in a metrically natural position — the shifted stress must reinforce the ictus, not fight it.
+- In lyrics destined for AI audio (Suno/Udio/Flow Music), mark the used variant with a capitalized stressed vowel so the audio model respects the intended shift.
+
+**Examples of attested variants:**
+| Standard | Attested Variant | Source tradition |
+| :--- | :--- | :--- |
+| `дорОга` | `дорогА` | folk songs, oral tradition |
+| `кОлись` | `колИсь` | Shevchenko, folk |
+| `рікА` | `рЕка` (surzhyk metric) | avoided — surzhyk variants require extra care |
+| `зелЕний` | `зелЕний` / `зЕлений` | folk dumy, older poetry |
+| `нікОли` | `нікОли` / `ніколИ` | dual norm, both attested |
+| `свЯтий` | `святИй` | folk carol tradition |
+| `прАвда` | `правдА` | some folk variants |
+
+**How to apply:**
+1. Identify that the shifted stress is metrically required (the foot demands it).
+2. Verify the variant exists in at least one canonical source (poetry collection, folk song corpus, dialect dictionary).
+3. Use it — but count it against the 2-per-poem budget.
+4. Do **not** compound more than 2; if 3+ shifts are needed, rework the line to find a better word choice.
+
+
 ### 5. Laws of Ukrainian Euphony (Милозвучність)
 - **`У` / `В` Alternation**: Use `у` between consonants (*шумів у лісі*); use `в` after vowels before consonants (*жила в селі*).
 - **`І` / `Й` Alternation**: `і` adds a full syllable; `й` is a non-syllabic glide (*день і ніч* vs *сонце й місяць*).

@@ -64,6 +64,10 @@ All music generation, song architecture, prompt crafting, and post-production MU
     3. **Non-intuitive mobile accent shifts** that differ visibly from the citation form: `зЕмлю` (citation: `землЯ`), `рУку` (citation: `рукА`), `хОдиш` (citation: `ходИти`), `несУ` (citation: `нестИ`).
   - **Never mark**: prepositions, pronouns, conjunctions, or words with phonetically obvious stress: `і`, `й`, `та`, `що`, `але`, `він`, `вона`, `вони`, `моє`, `твоє`, `своє`, `тому`, `коли`, `якщо`, `вже`, `ще`, `тут`, `там`, `лише`, `навіть`, `навколо`, `перед`, `після`, `прийде`, `заспівай`, `моя`, `земля`, `серденько` (mark only when the AI will genuinely mispronounce).
   - **Context gate**: In pure poetry output (no audio generation intent), use acute accent `́` marks or leave unstressed — uppercase-vowel notation is **exclusively** for song lyrics going to Suno/Udio/Flow Music.
+- **Attested Poetic / Folk / Surzhyk Stress Variants** *(applies to both poetry and lyrics)*:
+  A stress shift deviating from the orthoepic standard is **permitted** when there is documented precedent in Ukrainian literary poetry (Shevchenko, Franko, Lesya Ukrainka, Antonych, Zhadan), folk song, Hutsul dialect, or organic surzhyk.
+  **Hard cap: ≤ 2 such attested variant shifts per poem or song.** If 3+ are needed, rework the line to find a better word.
+  Conditions: (1) the shift is metrically necessary (reinforces the ictus); (2) at least one canonical source exists for the variant; (3) in AI-audio lyrics, mark the shifted stress with the uppercase-vowel convention.
 - **Exclude Vector**: Anti-local-pop and anti-artifact suppression tokens (`cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs, muddy bass`).
 - **De-identification**: Never output direct artist names or copyright phrases (`in the style of...`).
 
