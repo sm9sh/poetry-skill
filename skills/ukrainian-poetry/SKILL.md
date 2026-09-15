@@ -177,9 +177,36 @@ Legitimately utilize orthoepic double accents for metric elasticity:
 - **Avoid Hiatus**: Prevent unpleasant vowel clashes (*прийшла ввечері*, not *прийшла у вечері*).
 
 ### 6. AI Audio Model Phonetic Stress Standard (Suno AI & Google Flow Music)
-Neural audio engines (Suno v3.5/v4, Google Flow Music) rely on text tokenization where Unicode acute accents (`\u0301`) can sometimes be stripped during normalization. To guarantee exact pronunciation:
-- **Capitalize the Stressed Vowel**: Capitalize the stressed vowel in all words with non-obvious stress, mobile accent paradigms, or homographs:
-  `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`, `одИннадцять`, `листопАд`, `рукОпис`, `перЕпис`, `довІдник`, `фартУх`, `ненАвисть`, `новИй`, `старИй`, `босИй`, `пізнАння`, `читАння`, `завдАння`, `принестИ`, `вИрок`.
+
+> **Context gate**: This notation is **exclusively for song lyrics** destined for Suno/Udio/Flow Music. In pure poetry output, use Unicode acute accent `́` marks or leave words unmarked. Never apply uppercase-vowel notation to regular poetic text.
+
+Neural audio engines (Suno v3.5/v4/v5.5, Udio v4, Google Flow Music Lyria 3.5) can strip Unicode diacritics during tokenization. To guarantee correct pronunciation, capitalize the stressed vowel — but **only** in words belonging to one of three hard categories:
+
+**Category A — Homographs** (stress determines meaning):
+- `зАмок` (castle/fortress) vs `замОк` (door lock)
+- `дорОга` (noun: road) vs `дорогА` (adj: precious)
+- `мУка` (torment) vs `мукА` (flour)
+- `плАчу` (I weep) vs `плачУ` (I pay)
+- `бІлизна` (whiteness/glare) vs `білизнА` (linen/textiles)
+- `нАголос` (accent mark) vs `наголОс` (conceptual emphasis)
+- `оргАн` (musical instrument) vs `Орган` (anatomical/state organ)
+- `Атлас` (map book) vs `атлАс` (silk fabric)
+- `обрАзи` (insults) vs `Образи` (sacred icons / poetic images)
+
+**Category B — Anti-Russian Misaccentuation** (words AI models habitually mispronounce using Russian stress):
+`вИпадок`, `чорнОзем`, `одИннадцять`, `чотирнАдцять`, `листопАд`, `рукОпис`, `перЕпис`, `довІдник`, `фартУх`, `ненАвисть`, `пізнАння`, `читАння`, `завдАння`, `принестИ`, `вИрок`, `новИй`, `старИй`, `босИй`.
+
+**Category C — Non-Intuitive Mobile Accent Shifts** (inflected form stress differs noticeably from citation form):
+- `зЕмлю`, `зЕмлі` (citation form: `землЯ`)
+- `рУку`, `рУки` (citation form: `рукА`)
+- `хОдиш`, `хОдять` (citation form: `ходИти`)
+- `несУ`, `несЕш` (citation form: `нестИ`)
+
+**Never mark** — these must remain lowercase, as their stress is phonetically obvious or they are function words:
+- All prepositions, conjunctions, particles: `і`, `й`, `та`, `що`, `але`, `або`, `як`, `за`, `на`, `до`, `від`, `при`, `без`, `під`, `над`, `між`, `через`, `перед`, `після`, `під`, `про`.
+- Common pronouns and adverbs with obvious stress: `він`, `вона`, `вони`, `воно`, `ми`, `ви`, `вже`, `ще`, `тут`, `там`, `лише`, `навіть`, `завжди`, `тоді`, `коли`.
+- Words where the capitalized-vowel form appeared in older examples but stress is obvious to native speakers: `моя`, `земля`, `прийде`, `заспівай`, `серденько`, `моє`, `твоє`, `своє`.
+
 - **Syllable Hyphenation for Fast Tempos**: Use hyphens (`за-спі-вай`, `не-по-втор-ний`) in rapid delivery (e.g. trap-folk recitative) to prevent slurred pronunciation.
 
 ---

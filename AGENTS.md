@@ -57,8 +57,13 @@ All music generation, song architecture, prompt crafting, and post-production MU
 - **Strict Parentheses vs Brackets Rule**:
   - `[Square Brackets]`: Used for ALL structural, instrumentation, and arrangement instructions. Models parse them as audio directing cues without singing them.
   - `(Round Parentheses)`: Used **EXCLUSIVELY for backing vocals, ad-libs, and vocal delivery gestures** `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`, `(луна)`, `(ніколи знов)`. Never put instrumental descriptions in parentheses because Google Flow Music and Suno will vocalize/sing them out loud!
-- **Ukrainian Stress Standard for Audio AI Models**:
-  - Capitalize the stressed vowel on non-obvious words, homographs, and mobile accents: `вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`, `одИннадцять`, `листопАд`.
+- **Ukrainian Stress Standard for Audio AI Models** *(lyrics destined for Suno/Udio/Flow Music only — NEVER in regular poetry output)*:
+  - Apply stressed-vowel capitalization **only** to words in one of three hard categories:
+    1. **Homographs** (meaning changes with stress): `зАмок` vs `замОк`, `дорОга` vs `дорогА`, `мУка` vs `мукА`, `плАчу` vs `плачУ`, `бІлизна` vs `білизнА`, `нАголос` vs `наголОс`, `оргАн` vs `Орган`.
+    2. **Anti-Russian misaccentuation corrections** (words AI models habitually mispronounce): `вИпадок`, `чорнОзем`, `одИннадцять`, `чотирнАдцять`, `листопАд`, `рукОпис`, `перЕпис`, `довІдник`, `фартУх`, `ненАвисть`, `пізнАння`, `читАння`, `завдАння`, `принестИ`, `вИрок`, `новИй`, `старИй`, `босИй`.
+    3. **Non-intuitive mobile accent shifts** that differ visibly from the citation form: `зЕмлю` (citation: `землЯ`), `рУку` (citation: `рукА`), `хОдиш` (citation: `ходИти`), `несУ` (citation: `нестИ`).
+  - **Never mark**: prepositions, pronouns, conjunctions, or words with phonetically obvious stress: `і`, `й`, `та`, `що`, `але`, `він`, `вона`, `вони`, `моє`, `твоє`, `своє`, `тому`, `коли`, `якщо`, `вже`, `ще`, `тут`, `там`, `лише`, `навіть`, `навколо`, `перед`, `після`, `прийде`, `заспівай`, `моя`, `земля`, `серденько` (mark only when the AI will genuinely mispronounce).
+  - **Context gate**: In pure poetry output (no audio generation intent), use acute accent `́` marks or leave unstressed — uppercase-vowel notation is **exclusively** for song lyrics going to Suno/Udio/Flow Music.
 - **Exclude Vector**: Anti-local-pop and anti-artifact suppression tokens (`cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, generic euro-pop, metallic highs, muddy bass`).
 - **De-identification**: Never output direct artist names or copyright phrases (`in the style of...`).
 

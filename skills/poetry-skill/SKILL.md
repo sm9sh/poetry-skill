@@ -45,7 +45,7 @@ Depending on the task, invoke the specialized sub-workflow:
 - **Metatags & Brackets vs Parentheses**:
   - `[Square Brackets]`: Silent structural and arrangement directions (`[Intro]`, `[Vocal Intro]`, `[Verse 1]`, `[Pre-Chorus]`, `[Chorus]`, `[Verse 2 - add driving tambourine, shaker]`, `[Breakdown]`, `[Mega-Chorus]`, `[Outro]`).
   - `(Round Parentheses)`: Sung backing vocals and inline vocal delivery gestures `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`, `(луна)`.
-- **Ukrainian Stress Standard**: Capitalize the stressed vowel in words with non-obvious stress, homographs, and mobile accents (`вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`).
+- **Ukrainian Stress Standard** *(song lyrics for Suno/Udio/Flow Music only — never in poetry)*: Capitalize the stressed vowel only in three hard categories: (A) **Homographs**: `зАмок` vs `замОк`, `дорОга` vs `дорогА`, `мУка` vs `мукА`, `плАчу` vs `плачУ`, `оргАн` vs `Орган`; (B) **Anti-Russian misaccentuation**: `вИпадок`, `чорнОзем`, `одИннадцять`, `листопАд`, `рукОпис`, `довІдник`, `фартУх`, `ненАвисть`, `пізнАння`, `завдАння`, `принестИ`, `вИрок`, `новИй`, `старИй`; (C) **Non-intuitive mobile shifts**: `зЕмлю` (← землЯ), `рУку` (← рукА), `хОдиш` (← ходИти). **Never mark** function words, obvious-stress words (`моя`, `земля`, `прийде`, `заспівай`, `серденько`), or prepositions/pronouns/conjunctions.
 - **10 AI Quality Gates**: Full verification across composition, prosody, prompt engineering, DAW mixing, and mastering.
 
 ---
