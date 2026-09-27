@@ -1,7 +1,7 @@
 ---
 name: music-prompt-synthesizer
 description: "Build ready-to-paste prompts for Suno v6-mini and Google Flow Music (Lyria 3.5) from Reference DNA + Optimized Lyrics. <example>Input: DNA + Lyrics / Output: Platform-specific prompts.</example>"
-model: gemini-2.5-pro
+model: inherit
 temperature: 0.3
 max_output_tokens: 4096
 ---
