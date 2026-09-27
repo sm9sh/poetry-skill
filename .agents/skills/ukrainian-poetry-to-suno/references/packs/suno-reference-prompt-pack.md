@@ -99,7 +99,7 @@
 ## 11. Nocturnal Indie Pop (131 символ)
 - **Style of music**:
   ```text
-  ukrainian indie pop, nocturnal city atmosphere, 110 bpm, intimate breathy female vocal, pulsing bass, muted drum machine, soft synths
+  indie pop, nocturnal city atmosphere, 110 bpm, intimate breathy female vocal, pulsing bass, muted drum machine, soft synths
   ```
 - **Exclude**: `edm drop, bombastic climax, heavy metal guitar, metallic highs, boomy bass`
 
@@ -126,7 +126,7 @@
 ## 14. Intimate Acoustic Bedroom Pop (131 символ)
 - **Style of music**:
   ```text
-  ukrainian indie pop, warm acoustic guitar strumming, soft piano accents, intimate close female vocal, gentle rounded bass, 85 bpm
+  indie pop, warm acoustic guitar strumming, soft piano accents, intimate close female vocal, gentle rounded bass, 85 bpm
   ```
 - **Exclude**: `loud drums, harsh distortion, dramatic belting, metallic highs, muddy sub-bass`
 

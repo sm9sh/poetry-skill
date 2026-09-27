@@ -139,6 +139,30 @@ class TestExamplesPlayground(unittest.TestCase):
         errors, warnings = check_lyrics.check(song)
         self.assertEqual((errors, warnings), ([], []), "Reference adaptation example must pass all craft checks")
 
+    def test_03c_check_lyrics_modes_and_lessons(self):
+        """English cues in (), V1/V2 syllable symmetry, --section, Lyria prompt checks, lessons journal."""
+        import importlib.util, tempfile, pathlib as pl
+        script = PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "scripts" / "check_lyrics.py"
+        spec = importlib.util.spec_from_file_location("check_lyrics", script)
+        cl = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cl)
+        errors, _ = cl.check("[Verse 1]\n(intimate)\nРядок пісні\n(ooh, yeah)\n", section=True)
+        self.assertEqual(len(errors), 1, errors)
+        errors, _ = cl.check("[Verse 1]\n(soft and low)\nРядок пісні\n", section=True)
+        self.assertTrue(any("English inside parentheses" in e for e in errors), errors)
+        song = "[Verse 1]\nМісто спить\nі мовчить\n[Chorus]\nМи тут\n[Verse 2]\nМісто спить під дощем у жовтні\nі мовчить\n"
+        _, warnings = cl.check(song)
+        self.assertTrue(any("syllable mismatch" in w for w in warnings), warnings)
+        _, warnings = cl.check("[Verse 1]\nОдин рядок тут\n", section=True)
+        self.assertEqual(warnings, [], "section mode must skip whole-song checks")
+        _, warnings = cl.check("[Chorus]\nМи тут\n", platform="lyria",
+                               prompt="ambient, piano, cello, pads, female vocal, slow, wide, reverb")
+        self.assertTrue(any("tag list" in w for w in warnings), warnings)
+        with tempfile.TemporaryDirectory() as d:
+            f = pl.Path(d) / "lessons.md"
+            f.write_text("## Слова\n- дзвониш -> дзвОниш — 2026-09-27, suno v6-mini\n<!-- - хата -> хАта -->\n", encoding="utf-8")
+            self.assertEqual(cl.load_lessons(f), ["дзвОниш"])
+
     # =========================================================================
     # 4. PLATFORM PROMPT LENGTH CONSTRAINTS
     # =========================================================================

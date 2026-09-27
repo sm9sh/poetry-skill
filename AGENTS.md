@@ -31,7 +31,8 @@ Load the relevant `SKILL.md` for the task. The end-to-end workflow — routing, 
 - **Attested poetic / folk stress variants**: at most 2 per poem or song, with a nameable source.
 - **Sound**: Western contemporary genres (post-punk, darkwave, synthwave, trip-hop, alt-pop, shoegaze, metalcore, melodic techno, ambient). Keep regional pop / schlager / sharovarshchyna out via genre anchors and Exclude.
 - **Style**: English tags, 80–200 chars, most important first; no negations (use Exclude); no artist names or song titles.
-- Run `python skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py` on lyrics before delivering.
+- Run `python skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py` on lyrics before delivering (`--platform lyria`, `--section`, `--syllables`); for metrical poems use `skills/ukrainian-poetry/scripts/scan_meter.py`.
+- Read `AUTHOR_PROFILE.md` first when it is filled; log real mispronunciations in `skills/ukrainian-poetry-to-suno/references/suno-lessons.md`.
 - Mixing, mastering and release advice only when asked (`references/post-production.md`).
 
 ## Repository

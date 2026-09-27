@@ -1,5 +1,25 @@
 # Version History
 
+## v4.1.0 - 2026-09-27
+
+Measured and improved: evals, trigger tuning, tooling, packaging.
+
+### Added
+- Eval iteration 1 (`evals/results/iteration-1/`): with-skill vs baseline, blind judge — skill wins 6/8 (avg 8.2 vs 7.4), all 4 song tasks.
+- Trigger evals (`evals/trigger/`); skill descriptions optimized with the skill-creator loop (held-out trigger rate: poetry 2/10 → 6/8, songs 4/10 → 7/8 on the test split).
+- `scripts/scan_meter.py` (poetry): syllables, stress pattern, best-fit meter, off-beat stresses, clausulae; optional `ukrainian-word-stress` dictionary.
+- `check_lyrics.py`: `--syllables`, V1/V2 syllable symmetry, `--platform lyria --prompt`, `--section`, English text in parentheses, reads `references/suno-lessons.md`.
+- `AUTHOR_PROFILE.md` template; `references/suno-lessons.md` journal.
+- Claude Code plugin manifest and marketplace (`.claude-plugin/`); GitHub Actions CI.
+
+### Changed
+- Second platform is named **Lyria 3.5** (Google Flow Music) throughout.
+- Example songs rewritten (darkwave «Ще горить», trip-hop «Прослухати знов», Lyria ambient «Між станціями»).
+- Eval-driven rules: rhyme-driven line breaks count as inversions; «покращ» means a genuinely better poem; keep-text mode vs song criteria; "marked but still mispronounced" in pipeline D; kolomyika and sonnet rhyme rules clarified; Lyria prompts in English.
+
+### Removed
+- Stale or duplicated references: poetry `-uk.md` / `-lite.md`; suno `full-guide.md`, `lyrics-to-suno-template.md`, `prompt-builder.md`; Method 1/2, HookGenius, Seed/Extend and Udio prompt advice.
+
 ## v4.0.0 - 2026-09-27
 
 Refocus on the core goal — quality Ukrainian poems and their adaptation into songs for **Suno v6-mini** and **Lyria 3.5**.

@@ -14,7 +14,7 @@
 - **Вокал**: Інтимний жіночий напівпошепки.
 - **Style of music (131 символ)**:
   ```text
-  ukrainian indie pop, nocturnal city atmosphere, 110 bpm, intimate breathy female vocal, pulsing bass, muted drum machine, soft synths
+  indie pop, nocturnal city atmosphere, 110 bpm, intimate breathy female vocal, pulsing bass, muted drum machine, soft synths
   ```
 - **Exclude**: `edm drop, bombastic climax, heavy metal guitar, metallic highs`
 
@@ -182,7 +182,7 @@
 - **Вокал**: Молодий відкритий дзвінкий голос.
 - **Style of music (135 символів)**:
   ```text
-  ukrainian indie rock, bright melodic guitars, punchy live drums, energetic driving bass, clear optimistic lead vocal, wide chorus, 130 bpm
+  indie rock, bright melodic guitars, punchy live drums, energetic driving bass, clear optimistic lead vocal, wide chorus, 130 bpm
   ```
 - **Exclude**: `dark depressive synths, heavy metal scream, muffled low frequencies`
 

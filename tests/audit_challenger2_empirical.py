@@ -209,7 +209,7 @@ class EmpiricalAuditChallenger2:
                 continue
             text = tmpl_path.read_text(encoding="utf-8")
             # Extract all code blocks
-            code_blocks = re.findall(r"```(?:text|markdown)?\n(.*?)```", text, re.DOTALL)
+            code_blocks = re.findall(r"```[\w-]*\n(.*?)```", text, re.DOTALL)
             for i, block in enumerate(code_blocks, 1):
                 # Skip ASCII diagrams
                 if any(c in block for c in "┌┐└┘├┤┬┴┼│─═║"):

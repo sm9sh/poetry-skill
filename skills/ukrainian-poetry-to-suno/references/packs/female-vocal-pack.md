@@ -72,7 +72,7 @@
 ## 8. Warm Soulful Indie-Pop Lead (131 символ)
 - **Style of music**:
   ```text
-  ukrainian indie pop, warm acoustic guitar strumming, soft piano accents, intimate close female vocal, gentle rounded bass, 85 bpm
+  indie pop, warm acoustic guitar strumming, soft piano accents, intimate close female vocal, gentle rounded bass, 85 bpm
   ```
 - **Exclude**: `loud drums, harsh distortion, dramatic belting, metallic highs, muddy sub-bass`
 

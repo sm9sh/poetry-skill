@@ -13,7 +13,7 @@
 Настрій: меланхолійний, теплий, спокійний.
 ```
 *Критерій проходження*:
-- `Style of music` містить 80–180 символів, англійські токени (`ukrainian indie pop, nocturnal city atmosphere, 110 bpm...`).
+- `Style of music` містить 80–180 символів, англійські токени (`indie pop, nocturnal city atmosphere, 110 bpm...`) — жанр першим, без «ukrainian» як першого тегу.
 - Відсутні службові поля `Language:` та `Theme:` у полі стилю.
 - `Lyrics` містить українські рядки з метатегами `[Intro]`, `[Verse]`, `[Chorus]`, `[Outro]`.
 - `Exclude` містить анти-артефакти та анти-кліше.
