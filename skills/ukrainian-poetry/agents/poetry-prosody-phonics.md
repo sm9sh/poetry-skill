@@ -156,6 +156,10 @@ allow_pyrrhics: boolean      # Default: true (pyrrhics are natural in Ukrainian 
   - ❌ Noun-Noun in identical case (*картина-стежина*, *долині-хвилині*).
   - ❌ Diminutive suffixes (*-очка/-ечка*, *-енька/-онька*).
   - ❌ Banal pairs (*любов-кров*, *доля-воля*, *серце-перце*, *жаль-печаль*, *зорі-морі*).
+  - ❌ **Invented pseudo-words (D18)** (*«до крихини»* замість *крихта*, *«любосте»*, *«глибинь»*). Non-dictionary word = instant disqualification.
+  - ❌ **Lexical Russianisms in rhyme (D19)** (*«шалений захват»* замість *захоплення*).
+  - ❌ **Archaic bookish filler rhymes (D20)** (*«стократ»*, *«воістину»* inserted solely to hit a rhyme ending).
+  - ❌ **Stress distortion for rhyme (D21)** (*«по всіх жилАх»* під *«жах»* замість нормативного *«по жИлах»*).
 
 ### 4.5 Clausula Patterns
 - Standard quatrains: `ЖЧЖЧ` (Feminine-Masculine) or `ЧЖЧЖ` (Masculine-Feminine).

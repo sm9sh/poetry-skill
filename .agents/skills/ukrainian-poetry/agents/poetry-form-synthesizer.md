@@ -89,6 +89,7 @@ music_mode: boolean              # Default: false (true when preparing lyrics fo
 
 ### 4.4 Multi-Agent Conflict Arbitration
 When subagents propose conflicting edits, the Synthesizer arbitrates using the **Hierarchy of Poetic Excellence**:
+0. **Gate 0: Semantic Sanity & Anti-Gibberish (Rank 0 - Non-negotiable Prerequisite)**: Absolute reality, physical causality, and psychological coherence check. Zero invented words (`D18`), zero Russianisms (`D19`), zero archaic fillers (`D20`), zero distorted stresses (`D21`), zero rhyme-forced hallucinations (`D15`, `D16`). If a line makes no sense, it cannot be accepted under any circumstance.
 1. **Linguistic Naturalness & Stress Norms (Rank 1)**: Orthoepic correctness, natural Ukrainian syntax and living, common vocabulary (no rare, archaic, dialect or invented words unless requested) override mechanical rhyme.
 2. **Sensory Concreteness & Sincerity (Rank 2)**: Physical show-don't-tell detail and zero false pathos override ornamental padding.
 3. **Metric & Phonic Harmony (Rank 3)**: Rhythmic flow and rich heterogeneous rhymes must be achieved without violating Rank 1 or Rank 2.
@@ -96,13 +97,16 @@ When subagents propose conflicting edits, the Synthesizer arbitrates using the *
 
 ### 4.5 100-Point Rubric Evaluation Engine
 The Synthesizer computes the final scorecard across the 7 dimensions defined in `references/rubric.md`:
-1. Linguistic Naturalness, Stress & Syntax (max 25 pts)
-2. Imagery, Concreteness & Show-Don't-Tell (max 20 pts)
+1. Linguistic Naturalness, Stress, Syntax & Logic (max 25 pts)
+2. Imagery, Concreteness & Show-Don't-Tell (Anti-Gibberish) (max 20 pts)
 3. Rhythm, Metric Discipline & Form/Content Unity (max 15 pts)
 4. Rhyme, Clausulae & Phonics (max 10 pts)
 5. Emotional Depth, Sincerity & Tone (max 10 pts)
 6. Originality of Perspective & Ending Strength (max 10 pts)
 7. Anti-Cliche, Anti-Sharovarshchyna & Autonomy (max 10 pts)
+
+**Deductions**: Subtracted according to the **21-Category Penalty Deduction Matrix (`D01`–`D21`)**.
+**Hard Gate 0 Stop-Rule**: If Gate 0 fails (e.g. `D15` semantic gibberish or `D18` invented pseudo-words like *«до крихини»*), the text is marked **CRITICAL FAIL** and the final score is strictly capped at $\le 60/100$, regardless of metric perfection.
 *Target: Score >= 95 / 100*.
 
 ---
@@ -130,10 +134,11 @@ The Synthesizer computes the final scorecard across the 7 dimensions defined in 
 
 ### 5. 100-Point Rubric Scorecard
 ======================================================
-ОЦІННА ВІДОМІСТЬ УКРАЇНСЬКОЇ ПОЕЗІЇ (6 ПРИНЦИПІВ)
+ОЦІННА ВІДОМІСТЬ УКРАЇНСЬКОЇ ПОЕЗІЇ (6 ПРИНЦИПІВ + GATE 0)
 ======================================================
-1. Природність мови, наголоси й синтаксис (П4): [X] / 25
-2. Образність, конкретика й показ (П1):         [X] / 20
+Gate 0 (Смислова логіка та антимаячня):          [PASS / CRITICAL FAIL]
+1. Природність мови, наголоси, синтаксис і логіка (П4): [X] / 25
+2. Образність, конкретика й показ (без маячні) (П1):  [X] / 20
 3. Ритм, рядкоподіл і єдність форми/змісту (П3/6): [X] / 15
 4. Рима, клаузули та звукопис/фоніка (П3):      [X] / 10
 5. Емоційна глибина, щирість і регістр (П2):    [X] / 10
@@ -141,11 +146,11 @@ The Synthesizer computes the final scorecard across the 7 dimensions defined in 
 7. Антиштампи, антишароварщина й самобутність (П1/5): [X] / 10
 ------------------------------------------------------
 Проміжний бал:                                  [Total] / 100
-Штрафні відрахування (дефекти):                -[Deductions]
+Штрафні відрахування (матриця D01–D21):         -[Deductions]
 ------------------------------------------------------
 ЗАГАЛЬНИЙ ПІДСУМКОВИЙ БАЛ:                      [Final Score] / 100
 ======================================================
-Рівень якості: Master-level (>=95/100)
+Рівень якості: Master-level (>=95/100) (Стеля ≤ 60/100 при провалі Gate 0)
 ```
 
 ---

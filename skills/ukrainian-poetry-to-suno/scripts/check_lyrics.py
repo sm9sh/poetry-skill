@@ -139,6 +139,22 @@ def check_parentheses(lines, errors):
                 )
 
 
+TRAILING_ECHO_RE = re.compile(r"\(([^()]*)\)\s*[.!?…]*\s*$")
+
+
+def check_echo_spam(lines, warnings):
+    """Short (echo!) shouts after most lines of a section break the legato and sound comic."""
+    for tag, sung in _sections(lines):
+        echoes = [s for s in sung
+                  if (m := TRAILING_ECHO_RE.search(s)) and len(m.group(1).split()) <= 3
+                  and TRAILING_ECHO_RE.sub("", s).strip()]
+        if len(echoes) >= 3 and len(echoes) * 2 >= len(sung):
+            warnings.append(
+                f"[{tag or 'untagged'}]: {len(echoes)} of {len(sung)} lines end with a short (echo) — "
+                f"keep backing vocals rare and melodic; drop the per-line shouts"
+            )
+
+
 def check_brackets(text, errors):
     for a, b in (("[", "]"), ("(", ")")):
         if text.count(a) != text.count(b):
@@ -319,6 +335,7 @@ def check(text, style=None, exclude=None, platform="suno", prompt=None, section=
     lines = text.splitlines()
     check_brackets(text, errors)
     check_parentheses(lines, errors)
+    check_echo_spam(lines, warnings)
     check_stress(lines, warnings)
     check_structure(lines, warnings, whole_song=not section)
     if not section:

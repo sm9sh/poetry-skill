@@ -10,9 +10,9 @@ agents:
     default_prompt: "Use $poetry-imagery-architect to inject sensory tactility, eliminate abstract cliches, and ground this Ukrainian poetic draft in physical detail."
 
   poetry-emotional-critic:
-    display_name: "Poetry Emotional Critic (Критик щирості)"
-    short_description: "Emotional sincerity audit, zero false pathos, anti-moralizing, and psychological depth"
-    default_prompt: "Use $poetry-emotional-critic to audit emotional sincerity, strip false melodrama and preachy didactics from this Ukrainian poetic draft."
+    display_name: "Poetry Emotional & Semantic Critic (Критик щирості та логіки)"
+    short_description: "Emotional sincerity, semantic sanity audit, zero false pathos, anti-gibberish, anti-moralizing, and narrative causality"
+    default_prompt: "Use $poetry-emotional-critic to audit emotional sincerity, verify semantic sanity and narrative logic, and strip false melodrama and rhyme-forced gibberish from this Ukrainian poetic draft."
 
   poetry-prosody-phonics:
     display_name: "Poetry Prosody & Phonics (Майстер фоніки та просодії)"
@@ -31,6 +31,6 @@ agents:
 
   poetry-qa-bot:
     display_name: "Poetry QA Bot (Аудитор якості)"
-    short_description: "Autonomous quality audit against 6 core principles, 100-point rubric scoring, and remediation blueprint"
-    default_prompt: "Use $poetry-qa-bot to audit this Ukrainian poem against the 6 core principles, apply the 100-point deduction rubric, and output a detailed scorecard with step-by-step fixes."
+    short_description: "Autonomous quality audit against Gate 0 (Semantic Sanity), 6 core principles, 100-point rubric scoring, and remediation blueprint"
+    default_prompt: "Use $poetry-qa-bot to audit this Ukrainian poem against Gate 0 (Semantic Sanity) and the 6 core principles, apply the 100-point deduction rubric, and output a detailed scorecard with step-by-step fixes."
 
