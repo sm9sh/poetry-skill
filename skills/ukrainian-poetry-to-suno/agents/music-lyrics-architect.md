@@ -1,7 +1,7 @@
 ---
 name: music-lyrics-architect
 description: "Transform raw Ukrainian poetry into AI-generation-optimized lyrics. <example>Input: raw poem / Output: structured lyrics with metatags and vocal gestures.</example>"
-model: gemini-2.5-pro
+model: inherit
 temperature: 0.4
 max_output_tokens: 4096
 ---

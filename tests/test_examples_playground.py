@@ -47,8 +47,8 @@ class TestExamplesPlayground(unittest.TestCase):
 
         cls.success_files = {
             "suno": cls.success_dir / "suno-darkwave-postpunk.md",
-            "udio": cls.success_dir / "udio-triphop-downtempo.md",
-            "flowmusic": cls.success_dir / "flowmusic-cinematic-ambient.md",
+            "triphop": cls.success_dir / "suno-triphop-downtempo.md",
+            "lyria": cls.success_dir / "lyria-cinematic-ambient.md",
         }
 
         cls.failure_files = {
@@ -111,7 +111,7 @@ class TestExamplesPlayground(unittest.TestCase):
         spec = importlib.util.spec_from_file_location("check_lyrics", script)
         check_lyrics = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(check_lyrics)
-        for path in [self.success_files["suno"], self.success_files["udio"], self.success_files["flowmusic"]]:
+        for path in [self.success_files["suno"], self.success_files["triphop"], self.success_files["lyria"]]:
             content = path.read_text(encoding="utf-8")
             blocks = [b for b in re.findall(r"```(?:text)?\n(.*?)```", content, re.DOTALL) if "[Verse" in b]
             self.assertTrue(blocks, f"No lyrics block found in {path.name}")
@@ -148,8 +148,8 @@ class TestExamplesPlayground(unittest.TestCase):
         content = self.success_files["suno"].read_text(encoding="utf-8")
 
         # Extract Method 2 prompt
-        m2_match = re.search(r"### Method 2: HookGenius Tag Matrix.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL)
-        self.assertIsNotNone(m2_match, "Method 2 HookGenius prompt block not found")
+        m2_match = re.search(r"### Style \(Suno v6-mini.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL)
+        self.assertIsNotNone(m2_match, "Style block not found")
         m2_prompt = m2_match.group(1).strip()
         self.assertLessEqual(len(m2_prompt), 180, f"Suno style prompt exceeds 180 chars: {len(m2_prompt)}")
         self.assertGreaterEqual(len(m2_prompt), 80, f"Suno style prompt below 80 chars: {len(m2_prompt)}")
@@ -184,57 +184,55 @@ class TestExamplesPlayground(unittest.TestCase):
         score_s = RubricScorer.score_suno_style(m2_prompt, lyrics, exclude_prompt, sv, mv)
         self.assertGreaterEqual(score_s.total_score, 88.0, f"Suno score below 88: {score_s.total_score}")
 
-    def test_05_udio_triphop_prompt_and_inpainting_constraints(self):
-        """Verify Udio Trip-Hop prompt is strictly <= 250 chars, uses *stars* inpainting, and lyrics pass."""
-        content = self.success_files["udio"].read_text(encoding="utf-8")
+    def _load_check_lyrics(self):
+        import importlib.util
+        script = PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "scripts" / "check_lyrics.py"
+        spec = importlib.util.spec_from_file_location("check_lyrics", script)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
 
-        # Extract Master Generation Prompt
-        p_match = re.search(r"### Master Generation Prompt.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL)
-        self.assertIsNotNone(p_match, "Udio Master Generation Prompt not found")
-        prompt = p_match.group(1).strip()
-        self.assertLessEqual(len(prompt), 250, f"Udio prompt exceeds 250 chars: {len(prompt)}")
-
-        # Inpainting asterisks
-        self.assertIn("*", prompt, "Udio prompt missing inpainting asterisks")
-        self.assertEqual(prompt.count("*") % 2, 0, "Udio prompt has unbalanced inpainting asterisks")
-
-        # Extract Lyrics Block
-        lyr_match = re.search(r"## 5\. Complete Ukrainian Lyrics & Arrangement Architecture.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL)
-        self.assertIsNotNone(lyr_match, "Udio lyrics block not found")
-        lyrics = lyr_match.group(1).strip()
-
+    def test_05_suno_triphop_style_and_lyrics(self):
+        """Trip-hop example: Style/Exclude within limits, lyrics pass validators and all craft checks."""
+        content = self.success_files["triphop"].read_text(encoding="utf-8")
+        style = re.search(r"### Style \(Suno v6-mini.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL).group(1).strip()
+        exclude = re.search(r"### Exclude\s*\n+```text\s*\n(.*?)\n```", content, re.DOTALL).group(1).strip()
+        self.assertTrue(80 <= len(style) <= 200, f"Style length {len(style)}")
+        self.assertFalse(style.lower().startswith("ukrainian"), "Style must lead with the genre, not 'ukrainian'")
+        lyrics = re.search(r"## 3\. Lyrics.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL).group(1).strip()
         mv = MetatagValidator.validate_lyrics_structure(lyrics)
-        self.assertTrue(mv.is_valid, f"Udio lyrics metatags invalid: {mv.errors}")
+        self.assertTrue(mv.is_valid, f"Trip-hop lyrics metatags invalid: {mv.errors}")
+        errors, warnings = self._load_check_lyrics().check(lyrics, style, exclude)
+        self.assertEqual((errors, warnings), ([], []))
 
-        pv = PoeticValidator.validate_poem(lyrics, min_lines=4, max_lines=60)
-        self.assertTrue(pv.is_valid, f"Udio lyrics poetic errors: {pv.errors}")
-
-    def test_06_flowmusic_cinematic_ambient_constraints(self):
-        """Verify Flow Music conversational prompt, 65 bpm, Spaces nodes, and free-verse lyrics."""
-        content = self.success_files["flowmusic"].read_text(encoding="utf-8")
-
-        # Extract Conversational Agent Prompt
-        p_match = re.search(r"## 2\. Lyria 3\.5 Conversational Agent Prompt.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL)
-        self.assertIsNotNone(p_match, "Flow Music Conversational Prompt not found")
-        prompt = p_match.group(1).strip()
-        self.assertIn("65 bpm", prompt.lower(), "Flow Music prompt missing 65 bpm anchor")
-        self.assertIn("ambient", prompt.lower(), "Flow Music prompt missing ambient descriptor")
-
-        # Spaces 3-node matrix
-        self.assertIn("Node 1: Ground", content, "Missing Node 1 in Flow Music space architecture")
-        self.assertIn("Node 2: Air", content, "Missing Node 2 in Flow Music space architecture")
-        self.assertIn("Node 3: Nature", content, "Missing Node 3 in Flow Music space architecture")
-
-        # Extract Lyrics Block
-        lyr_match = re.search(r"## 5\. Complete Spoken-Word Ukrainian Poetry Text.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL)
-        self.assertIsNotNone(lyr_match, "Flow Music lyrics block not found")
-        lyrics = lyr_match.group(1).strip()
-
+    def test_06_lyria_cinematic_ambient(self):
+        """Lyria 3.5 example: natural-language prompt with tempo and genre, compact structure, clean lyrics."""
+        content = self.success_files["lyria"].read_text(encoding="utf-8")
+        prompt = re.search(r"## 2\. Lyria 3\.5 Prompt.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL).group(1).strip()
+        self.assertIn("65 bpm", prompt.lower())
+        self.assertIn("ambient", prompt.lower())
+        self.assertNotIn("[", prompt, "Lyria prompt is natural language, not tags")
+        lyrics = re.search(r"## 3\. Lyrics.*?\n```text\s*\n(.*?)\n```", content, re.DOTALL).group(1).strip()
         mv = MetatagValidator.validate_lyrics_structure(lyrics)
-        self.assertTrue(mv.is_valid, f"Flow Music lyrics metatags invalid: {mv.errors}")
+        self.assertTrue(mv.is_valid, f"Lyria lyrics metatags invalid: {mv.errors}")
+        errors, warnings = self._load_check_lyrics().check(lyrics)
+        self.assertEqual(errors, [])
+        self.assertEqual([w for w in warnings if "repeats 3+" in w or "only one chorus" in w], [])
 
-        pv = PoeticValidator.validate_poem(lyrics, min_lines=4, max_lines=60, mode="free_verse")
-        self.assertTrue(pv.is_valid, f"Flow Music lyrics poetic errors: {pv.errors}")
+    def test_06b_scan_meter_detects_fixture_meters(self):
+        """scan_meter.py identifies each accented meter fixture as its declared meter with zero violations."""
+        import importlib.util, io, contextlib, json
+        script = PROJECT_ROOT / "skills" / "ukrainian-poetry" / "scripts" / "scan_meter.py"
+        spec = importlib.util.spec_from_file_location("scan_meter", script)
+        scan_meter = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(scan_meter)
+        suite = json.loads((PROJECT_ROOT / "tests" / "tier1_feature_coverage" / "test_meters.json").read_text(encoding="utf-8"))
+        for case in suite["tests"]:
+            lines = [scan_meter.scan_line(l, None) for l in case["poem"].splitlines() if l.strip()]
+            totals = {m: sum(len(scan_meter.meter_violations(s[1], m)) for s in lines) for m in scan_meter.METERS}
+            best = min(totals, key=totals.get)
+            self.assertEqual(best, case["expected_meter"], f"{case['id']}: detected {best}, totals {totals}")
+            self.assertEqual(totals[best], 0, f"{case['id']}: {totals[best]} violations")
 
     # =========================================================================
     # 5. PROGRAMMATIC CONTRAST TESTING FOR FAILURE SCENARIOS

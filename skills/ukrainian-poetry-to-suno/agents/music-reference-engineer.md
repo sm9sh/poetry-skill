@@ -1,7 +1,7 @@
 ---
 name: music-reference-engineer
 description: "Deconstruct artist/track references into safe acoustic DNA (Genre Hybrid, BPM, Key, Palette). <example>Input: Reference - DakhaBrakha / Output: Acoustic DNA without artist name.</example>"
-model: gemini-2.5-pro
+model: inherit
 temperature: 0.3
 max_output_tokens: 4096
 ---

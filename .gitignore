@@ -9,3 +9,6 @@ __pycache__/
 
 # Antigravity artifacts / scratch
 scratch/
+
+# Generated test reports
+tests/reports/

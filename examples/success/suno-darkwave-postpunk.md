@@ -13,27 +13,19 @@
 
 This scenario demonstrates a complete, production-ready release pipeline for an authentic Ukrainian coldwave/post-punk track engineered for Suno AI (v6-mini). The track adheres to Western contemporary indie-release standards (reminiscent of Joy Division, Lebanon Hanover, and modern Eastern European coldwave dynamics, completely de-identified), strictly rejecting provincial kitsch and post-Soviet schlager clichés.
 
-The lyrics strictly enforce the **6 Core Poetic Principles** of Ukrainian versification, utilizing concrete physical anchors ("мокрий асфальт", "шорстке вапно", "іржавий цвях"), natural Ukrainian word order without artificial rhyming inversions, rich heterogeneous rhymes, and capitalized stressed vowels for unambiguous AI phonetic synthesis.
+**Song «Ще горить».** Central idea: a light left on in an empty apartment is something that was never finished. Title-hook «Ще горить» opens the track a cappella and returns in every chorus. The lyrics use concrete anchors (empty metro, wet neon, keys on the table, a lamp like a beacon for planes), natural word order, heterogeneous rhymes (метро — ребро, пішла — тепла, давно — вікно), anapestic lines with matched syllable counts, and a turn in the breakdown («Я міг би піднятись і вимкнути сам. / Та поки горить — це ще не кінець»). No word needs a stress mark: none falls into the three risky categories.
 
 ---
 
 ## 2. Style Prompts & Exclude Vectors
 
-### Method 2: HookGenius Tag Matrix (Recommended)
-Optimal 5-module tag architecture balancing style definition, tempo anchoring, and timbre isolation within Suno's sweet spot (80–180 characters):
+### Style (Suno v6-mini, Variety: Off)
+Genre first, then vocal triple-stack, instruments, production, tempo — v6 weighs the earliest tags most. No "ukrainian" as the first tag: it pulls the model toward regional pop.
 
 ```text
-ukrainian post-punk, darkwave, 132 bpm, driving chorus bassline, melancholic baritone male vocal, sharp cutting telecaster, analog synths, lo-fi tape hiss
+british post-punk, darkwave, melancholic baritone male vocal, close-mic, driving chorus bassline, sharp clean guitar, analog synths, tape hiss, 132 bpm
 ```
-*Length: 153 characters | 8 core descriptors*
-
-### Method 1: Conversational Paragraph (First 5 Words Rule)
-Employs the «First 5 Words» rule, placing 80% of the model's stylistic attention onto the opening genre and vocal anchors:
-
-```text
-Ukrainian post-punk darkwave coldwave featuring driving chorus bassline, melancholic baritone male vocal, sharp cutting telecaster riff, vintage tape echo, lo-fi drum machine, 132 bpm
-```
-*Length: 180 characters | Conversational syntax*
+*Length: 151 characters*
 
 ### Exclude Vector (Negative Prompt)
 Suppresses regional pop artifacts, synthetic brass, and digital harshness:
@@ -61,66 +53,53 @@ cheesy pop brass, polished autotune pop, wedding accordion, bright acoustic stru
 > - `(Round Parentheses)`: Only words that should be sung as backing vocals or echoes. Delivery cues (`[Whispered]`, `[Belted]`) stay in square brackets — Suno sings anything in parentheses.
 
 ```text
-[Vocal Intro - dynamic acapella, dry and close]
-[Whispered]
-Тінь на стіні.
+[Vocal Intro - dry acapella, close-mic]
+Ще горить...
 
-[Verse 1 - cold driving chorus bassline, sparse 808 hi-hats]
-Блукаю в темряві нічній,
-Де мокрий блискає асфальт.
-Ліхтар тримає промінь свій,
-І холод криє цей базальт.
-Шорстке вапно німих споруд,
-(веди, дорОга)
-Забутий часу передзвін,
-І вИпадок змиває бруд
-З холодних цегляних голін.
+[Verse 1 - cold driving chorus bassline, sparse drum machine]
+Я виходжу з пустого метро,
+місто в мокрім неоні пливе,
+вітер холодом б'є під ребро,
+і ніхто не чекає мене.
 
-[Pre-Chorus - rising snare roll, building tension]
-[Building intensity]
-Крок у морок, крок назад,
-В жилах б'ється чорнОзем.
-[Half-time feel]
-Ніч ламає цей фасад,
-Ми під світлом оживем!
+[Pre-Chorus - rising snare roll, building intensity]
+Я звертаю у двір навпростець
+і дивлюсь, як завжди, догори.
 
-[Chorus - explosive open wide space, wall of chorus guitars]
-[Belted]
-Оооо-аааай, гори, палаючий неон!
-[Harmonized]
-Розбий мовчання сірих стін!
-Оооо-аааай, крізь цей засніжений бетон
-[Echo]
-Летить нічний тривожний дзвін!
+[Chorus - wide wall of chorus guitars, soaring baritone]
+Ще горить на дев'ятому поверсі
+у квартирі, де пусто давно.
+Ще горить — ти не вимкнула й досі,
+і я знизу дивлюсь на вікно.
+(ще горить)
 
 [Verse 2 - add driving tambourine, shaker, backing vocals]
-Іржавий цвях, затертий ключ,
-Тут прийде ранок без оман.
-(ніколи знов)
-Повз гострі зрізи темних круч
-Сповзає льодяний туман.
+Ти лишила ключі — і пішла,
+навіть світла не вимкнула там.
+І в квартирі не стало тепла —
+тільки лампа, як знак літакам.
+
+[Chorus - wide wall of chorus guitars, soaring baritone]
+Ще горить на дев'ятому поверсі
+у квартирі, де пусто давно.
+Ще горить — ти не вимкнула й досі,
+і я знизу дивлюсь на вікно.
+(ще горить)
 
 [Breakdown - vocal and pulsing sub-bass only, intimate dry space]
 [Whispered]
-Тільки бас.
-[Whispered]
-Тільки пульс.
-Серденько моє замре...
+Я міг би піднятись і вимкнути сам.
+Та поки горить — це ще не кінець.
 
-[Mega-Chorus - maximum energy, layered harmonies, guitars clashing]
-[Belted]
-Оооо-аааай, гори, палаючий неон!
-[Harmonized]
-Розбий мовчання сірих стін!
-Оооо-аааай, крізь цей засніжений бетон
-[Echo]
-Летить нічний тривожний дзвін!
+[Final Chorus - maximum energy, layered harmonies, guitars clashing]
+Ще горить на дев'ятому поверсі
+у квартирі, де пусто давно.
+Ще горить — і хай світить і досі,
+і я знизу дивлюсь на вікно.
+(ще горить, ще горить)
 
 [Outro - fading coldwave synth arpeggio, tape hiss]
-[Echo]
-Веди, дорОга...
-[Echo]
-Нічний тривожний дзвін...
+(ще горить)
 [Cold End]
 ```
 
@@ -130,10 +109,10 @@ cheesy pop brass, polished autotune pop, wedding accordion, bright acoustic stru
 
 | Gate # | Name & Scope | Standard Specification | Implementation in this Scenario | Verification Result |
 | :---: | :--- | :--- | :--- | :---: |
-| **Gate 1** | **Anti-Skip (First 5s)** | Live human voice or signature hook in first 5 seconds. | Starts with `[Vocal Intro - dynamic acapella, dry and close]` whispered line: *"Тінь на стіні"*. Zero instrumental dead air. | **PASS** |
-| **Gate 2** | **50s Chorus Rule** | First full chorus lands $\le 50$ seconds from track start. | Verse 1 is 8 lines (syllables 8-8-8-8), Pre-Chorus is 4 lines. At 132 BPM, Chorus 1 arrives at exactly 0:42. | **PASS** |
-| **Gate 3** | **Spoken Prosody & Stress** | Syllable symmetry, natural spoken prosody, capitalized non-obvious stresses. | Strict 8-8-8-8 iambic balance. Capitalized accents: `дорОга`, `вИпадок`, `чорнОзем`, `прИйде`, `сердЕнько`, `моЄ`. | **PASS** |
-| **Gate 4** | **Spatial Contrast** | Verse Staccato (dry, punchy, close) vs Chorus Legato (open soaring vowels). | Verse 1 uses dry close consonants; Chorus opens with vocalise `Оооо-аааай`, wide layered guitars, and belted delivery. | **PASS** |
+| **Gate 1** | **Anti-Skip (First 5s)** | Live human voice or signature hook in first 5 seconds. | Opens with the title-hook a cappella: *«Ще горить...»*. | **PASS** |
+| **Gate 2** | **50s Chorus Rule** | First full chorus lands $\le 50$ seconds from track start. | 4-line verse + 2-line pre-chorus (6 sung lines) before the chorus. | **PASS** |
+| **Gate 3** | **Spoken Prosody & Stress** | Syllable symmetry, natural spoken prosody, stress marks only where needed. | Anapest: verses 9-9-9-9, chorus 10-9-10-9, V1 and V2 matched. No stress marks needed. | **PASS** |
+| **Gate 4** | **Spatial Contrast** | Verse Staccato (dry, punchy, close) vs Chorus Legato (open soaring vowels). | Verses are dry, close, narrative; chorus opens up on long vowels (*давно, вікно*) with a wall of chorus guitars. | **PASS** |
 | **Gate 5** | **Verse 2 Development** | Vance Powell arrangement growth (new rhythm/harmonic layers). | `[Verse 2 - add driving tambourine, shaker, backing vocals]` introduces driving shaker, tambourine, and call-and-response vocal. | **PASS** |
 | **Gate 6** | **Breakdown & Climax** | 15–20s energy drop (`[Breakdown]`) before exploding into `[Mega-Chorus]`. | 16-bar `[Breakdown]` strips instrumentation to sub-bass and whispered vocals before launching `[Mega-Chorus]`. | **PASS** |
 | **Gate 7** | **Low-End Split Bass** | Sub $<200\text{ Hz}$ mono brickwall limited; Mid-High $>200\text{ Hz}$ saturated; Kick unmasked. | Bass split at 200 Hz in DAW; mono sub-bass; dynamic sidechain EQ keyed to kick drum (2.5 dB ducking at 65 Hz). | **PASS** |

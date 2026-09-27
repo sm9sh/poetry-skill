@@ -7,11 +7,19 @@
 ## 1. 🟣 Встановлення для Anthropic Claude
 
 ### 1.1. Claude Code (CLI)
-Claude Code автоматично знаходить скіли у робочій директорії:
+
+**Як плагін (рекомендовано)** — скіли, агенти й команди `/poetry-skill`, `/ukrainian-poetry`, `/ukrainian-poetry-to-suno` підключаються разом:
+```text
+/plugin marketplace add sm9sh/poetry-skill
+/plugin install poetry-skill@poetry-skill
+```
+Маніфести: `.claude-plugin/plugin.json` і `.claude-plugin/marketplace.json` (перевірка: `claude plugin validate .`).
+
+**Або локально** — Claude Code автоматично знаходить скіли у робочій директорії:
 1. Клонуйте або скопіюйте папку `skills/` у корінь вашого проєкту (або вкажіть шлях до `D:\poetry-skill\skills`).
 2. Скіли активуються автоматично за їхніми описами (description у `SKILL.md`):
    - `skills/ukrainian-poetry/SKILL.md` — для поезії;
-   - `skills/ukrainian-poetry-to-suno/SKILL.md` — для пісень (Suno v6-mini, Flow Music).
+   - `skills/ukrainian-poetry-to-suno/SKILL.md` — для пісень (Suno v6-mini, Lyria 3.5).
    Спільні правила — у [`AGENTS.md`](./AGENTS.md).
 
 ### 1.2. Claude.ai (Веб / Projects)

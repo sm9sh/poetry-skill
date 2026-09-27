@@ -2,17 +2,17 @@
 
 ## v4.0.0 - 2026-09-27
 
-Refocus on the core goal — quality Ukrainian poems and their adaptation into songs for **Suno v6-mini** and **Google Flow Music (Lyria 3.5)**.
+Refocus on the core goal — quality Ukrainian poems and their adaptation into songs for **Suno v6-mini** and **Lyria 3.5**.
 
 ### Added
 - `references/poem-to-song-adaptation.md` — poem → song workflow (keep vs adapt mode, hook, song form, syllable matching, singable vowels) with a full worked example.
-- `references/platforms.md` — dated platform facts: Suno v6 family (v6-mini default, Variety slider, limits), Flow Music (Lyria 3.5), Udio status.
+- `references/platforms.md` — dated platform facts: Suno v6 family (v6-mini default, Variety slider, limits), Lyria 3.5, Udio status.
 - `references/post-production.md` — DAW, mastering, release and Gates 7–10, now loaded only on request.
 - `scripts/check_lyrics.py` — stdlib pre-flight checker for lyrics / Style / Exclude.
 - `evals/` — real-prompt evals for with-skill vs without-skill comparison.
 
 ### Changed
-- Vocal delivery cues (`[Whispered]`, `[Key Change]`, `[Half-time feel]`…) moved from `( )` to `[ ]` everywhere: Suno and Flow Music sing parenthesized text. Validator now rejects cues in parentheses.
+- Vocal delivery cues (`[Whispered]`, `[Key Change]`, `[Half-time feel]`…) moved from `( )` to `[ ]` everywhere: Suno and Lyria 3.5 sing parenthesized text. Validator now rejects cues in parentheses.
 - Stress capitals limited to three categories in all examples and references; removed over-marking (`моЯ`, `прИйде`, …).
 - Fixed the attested stress-variant table (`колИсь`, `нікОли`, `святИй` are the norms; Russian `рЕка`, `такЖе` removed).
 - Suno target updated from v4.5/v5.5 (retired 2026-09-09) to v6-mini.
@@ -34,10 +34,10 @@ Refocus on the core goal — quality Ukrainian poems and their adaptation into s
 
 ## v3.0.0 - 2026-09-06
 
-Multi-platform AI Music Generation Upgrade (Suno v4.5/v5.5, Udio v4, Google Flow Music Lyria 3.5), 6-Step Production Lifecycle Architecture, and 10 AI Quality Gates.
+Multi-platform AI Music Generation Upgrade (Suno v4.5/v5.5, Udio v4, Lyria 3.5), 6-Step Production Lifecycle Architecture, and 10 AI Quality Gates.
 
 ### Added
-- **Multi-platform expansion**: Support for Suno v4.5/v5.5, Udio v4, and Google Flow Music Lyria 3.5.
+- **Multi-platform expansion**: Support for Suno v4.5/v5.5, Udio v4, and Lyria 3.5.
 - **6-Step Production Lifecycle Architecture**.
 - **10 AI Quality Gates Matrix** for comprehensive quality control.
 - **Western Genre Anchor** with an updated 8-genre taxonomy.
@@ -46,8 +46,8 @@ Multi-platform AI Music Generation Upgrade (Suno v4.5/v5.5, Udio v4, Google Flow
 - **DAW stem mixing checklist** (Split Bass, Tchad Blake distortion, Mid-Side reverb sidechain).
 - **Mastering guide** avoiding the True Peak trap (-1 dBTP for -6..-8 LUFS).
 - **Streaming distribution rules** (Skip Rate thresholds, Playlist Placement Trap elimination).
-- **4 new music production subagents** for Suno, Udio, and Flow Music.
-- **Udio + Flow Music validators** to ensure output quality.
+- **4 new music production subagents** for Suno, Udio, and Lyria 3.5.
+- **Udio + Lyria 3.5 validators** to ensure output quality.
 - **Metatag grammar**: Strict rules for brackets vs parentheses, 9 canonical inline vocal gestures.
 - **Suno Method 1 (Conversational) and Method 2 (HookGenius Tag Matrix)** workflow integration.
 - **AGENTS.md** established as the Single Source of Truth for system architecture.
@@ -106,7 +106,7 @@ Best-practice folder-based skill packaging.
 - `skills/ukrainian-poetry-to-suno/SKILL.md`
 - `skills/ukrainian-poetry-to-suno/agents/openai.yaml`
 - `skills/ukrainian-poetry-to-suno/references/`
-- `source/legacy-skills/` for archived single-file runtime entrypoints
+- (removed in v4.0.0) `source/legacy-skills/`
 
 ### Changed
 - canonical runtime entrypoints are now folder-based skills, not standalone `.md` files

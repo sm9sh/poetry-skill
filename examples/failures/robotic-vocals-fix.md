@@ -2,7 +2,7 @@
 
 **File**: `examples/failures/robotic-vocals-fix.md`  
 **Failure Mode**: Sterile, Synthetic, or Heavily Autotuned Vocals ("Пластмасовий вокал")  
-**Target Platforms**: Suno AI (v6-mini), Udio AI (v4), Google Flow Music (Lyria 3.5)  
+**Target Platforms**: Suno AI (v6-mini), Udio AI (v4), Lyria 3.5  
 **Severity**: High (Destroys human emotional resonance, flags the track immediately as cheap amateur AI generation)  
 
 ---
@@ -105,30 +105,28 @@ robotic autotune, metallic vocal sheen, harsh sibilance, midi plastic vocals, st
 
 **Lyrics Box**:
 ```text
-[Vocal Intro - dynamic acapella, dry and intimate]
-[Whispered]
-Чекаю тут...
+[Vocal Intro - dry acapella, close-mic, breathy]
+Ще горить...
 
-[Verse 1 - dry close-mic, unhurried phrasing]
-(intimate)
-Шорстке вапно тримає ніч,
-Холодний дощ стікає в сад.
+[Verse 1 - dry close-mic, unhurried phrasing, intimate]
+Я виходжу з пустого метро,
+місто в мокрім неоні пливе.
 [Pause]
-Вогонь згасає серед пліч,
-І нема більше вороття назад.
+Вітер холодом б'є під ребро,
+і ніхто не чекає мене.
 
-[Pre-Chorus - building emotional warmth]
-[Building intensity]
-Я чую крок, луна дзвенить...
+[Pre-Chorus - rising snare, building intensity]
+Я звертаю у двір навпростець
+і дивлюсь, як завжди, догори.
 
-[Chorus - explosive emotional release, layered harmonies]
+[Chorus - explosive release, layered harmonies, wide stereo]
 [Belted]
-Ооо-ааа, лети, мій болю, крізь туман!
+Ще горить на дев'ятому поверсі
+у квартирі, де пусто давно.
 [Harmonized]
-Розвій у попіл давній страх!
-Ооо-ааа, минає морок і обман,
-[Echo]
-І сонце сходить на стежках!
+Ще горить — ти не вимкнула й досі,
+і я знизу дивлюсь на вікно.
+(ще горить)
 ```
 
 **Auditory Result**:
