@@ -52,6 +52,13 @@ def sync_global_plugin():
             shutil.copy2(src, dest)
             print(f"  [OK] Copied {src.name} -> {dest}")
 
+    # Pipeline documentation referenced from the skills
+    pipeline_src = PROJECT_ROOT / "docs" / "PIPELINE.md"
+    if pipeline_src.exists():
+        (GLOBAL_PLUGIN_DIR / "docs").mkdir(exist_ok=True)
+        shutil.copy2(pipeline_src, GLOBAL_PLUGIN_DIR / "docs" / "PIPELINE.md")
+        print(f"  [OK] Copied docs/PIPELINE.md -> {GLOBAL_PLUGIN_DIR / 'docs'}")
+
     # Remove config files that no longer exist in the repository
     for stale in ("GEMINI.md", "CLAUDE.md"):
         stale_path = GLOBAL_PLUGIN_DIR / stale

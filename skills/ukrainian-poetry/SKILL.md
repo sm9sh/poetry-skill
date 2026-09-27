@@ -65,6 +65,8 @@ Test for every word you are unsure about: would an educated reader of modern Ukr
 
 ## Task Workflow
 
+This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is Pipeline C there. Order matters: concept before words, one voice, and no poem reaches the user without passing the Quality Checklist.
+
 1. **Extract/Infer Parameters**:
    - `topic`: thematic core
    - `form`: `free | sonnet | blank-verse | kolomyika | dolnik | taktovik | rondo | triolet | terza-rima | rubai | astrophic`
@@ -88,6 +90,7 @@ Test for every word you are unsure about: would an educated reader of modern Ukr
    image_density: balanced
    ending_strength: resonant
    ```
+2a. **Concept before words**: decide the **angle** (an unexpected way into the theme, a micro-detail instead of an abstraction), the **central image** (the objects or situation that will carry the emotion), the **turn** (where the poem will shift) and the **direction of the ending** (open or paradoxical, never a moral). Choose form and meter to fit the emotion. For important requests, consider 2–3 angles and take the strongest. Most weak poems fail here, not in the rhymes.
 3. **Draft with Scansion & Principle Awareness**:
    - Align meter and stanza architecture with emotional dynamics (**Principle 6: Form & Content**).
    - Ground themes in tactile sensory anchors, avoiding declarative statements and cliches (**Principle 1: Imagery** & **Principle 2: Sincerity**).
@@ -96,7 +99,7 @@ Test for every word you are unsure about: would an educated reader of modern Ukr
    - Prefer cross-grammatical rhymes, ideally with a matching pre-tonic consonant (**Principle 3: Phonics & Rhyme**).
    - Keep natural Ukrainian word order; if a rhyme needs an inversion, change the rhyme, not the syntax (**Principle 4: Conciseness & Syntax**).
    - Cleanse any filler pronouns (*цей, той, свій*) or rhythmic padding words.
-5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again. Do this silently: show the checklist only if the user asks; show only the poem that passed.
+5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again; if the failure is in the idea (no turn, no discovery), go back to step 2a. Do this silently: show the checklist only if the user asks; show only the poem that passed.
 6. **If the poem is meant as a song** (Suno / Flow Music): keep lines 6–10 syllables, give it a repeatable hook, and hand off to `ukrainian-poetry-to-suno` for song form and markup. In songs, repeating the hook is a device, not padding.
 
 ---

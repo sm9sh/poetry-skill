@@ -7,7 +7,7 @@ This repository holds two skills:
 | `ukrainian-poetry` | Writes, edits and scores Ukrainian poetry | `skills/ukrainian-poetry/SKILL.md` |
 | `ukrainian-poetry-to-suno` | Adapts poems into songs for **Suno v6-mini** (primary) and **Google Flow Music (Lyria 3.5)**: song form, markup, stress, Style / Exclude prompts | `skills/ukrainian-poetry-to-suno/SKILL.md` |
 
-Load the relevant `SKILL.md` for the task. The rules below are the non-negotiable core shared by both skills; details, examples and word lists live in the skills and their `references/`.
+Load the relevant `SKILL.md` for the task. The end-to-end workflow — routing, pipelines for poem / edit / song / generation fix, quality gates and conflict priorities — is in `docs/PIPELINE.md`. The rules below are the non-negotiable core shared by both skills; details, examples and word lists live in the skills and their `references/`.
 
 ## Poetry — 6 core principles
 

@@ -25,6 +25,8 @@ Refocus on the core goal — quality Ukrainian poems and their adaptation into s
 - Poetry Quality Checklist extended to 16 items from authoritative sources (Pound, Eliot, Frost, Kooser, Theune, Franko, Potebnja, Gasparov, Poetry Society): literal clarity, composition, the turn, discovery, subtext, line breaks, title; objective correlative and semantic halo of meter added to existing items; rubric deductions added — `references/quality-criteria.md`.
 - Rule: every poem and song lyric passes the Quality Checklist (6 principles + living vocabulary + language correctness + brief) before output.
 
+- `docs/PIPELINE.md`: end-to-end workflow — routing (poem / edit / song / generation fix / post-production / evaluation), stages with a concept step before drafting, quality gates P / S / M / Q, conflict priorities, agent map; both SKILL.md workflows aligned (concept step, post-generation iteration).
+
 ### Removed
 - `CLAUDE.md`, `GEMINI.md` (rules live in `AGENTS.md`).
 - `skills/poetry-skill` router skill (overlapped with the two real skills; `/poetry-skill` command kept).
