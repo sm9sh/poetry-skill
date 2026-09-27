@@ -19,7 +19,7 @@ Load the relevant `SKILL.md` for the task. The rules below are the non-negotiabl
 6. **Form = content** — meter, stanza, line breaks and tempo embody the feeling.
 
 - **Living vocabulary** — do not use rare, archaic, dialect or invented words unless the user explicitly asks for them. Every word should be understandable to a contemporary reader (or listener) without a dictionary; if a common word breaks the meter, rework the line.
-- **Mandatory quality check** — every poem and every song lyric is checked against the Quality Checklist in `skills/ukrainian-poetry/SKILL.md` (the 6 principles + living vocabulary + language correctness + the user's brief) before it is shown to the user. Anything that fails is fixed and re-checked first. No exceptions for short pieces or quick edits.
+- **Mandatory quality check** — every poem and every song lyric is checked against the 16-item Quality Checklist in `skills/ukrainian-poetry/SKILL.md` before it is shown to the user: the 6 principles, living vocabulary, language correctness, the user's brief, literal clarity, composition, the turn (1–12 mandatory), plus discovery, subtext, line breaks and title (13–16; line breaks mandatory in free verse). Rationale and sources: `skills/ukrainian-poetry/references/quality-criteria.md`. Anything that fails is fixed and re-checked first. No exceptions for short pieces or quick edits.
 
 ## Songs — core rules
 

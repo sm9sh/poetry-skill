@@ -282,22 +282,39 @@ Avoid these by default. They are the first thing an experienced reader notices, 
 
 ## Quality Checklist (обов'язково перед кожною видачею)
 
-Run this for **every** poem before output — no exceptions for quick drafts, small edits or revisions of the user's own text. A poem that fails any item is not ready: fix it and re-check. The checklist is internal; the user sees only the finished poem (unless they ask for the analysis).
+Run this for **every** poem before output — no exceptions for quick drafts, small edits or revisions of the user's own text. The checklist is internal; the user sees only the finished poem (unless they ask for the analysis).
+
+- **Items 1–12 are mandatory.** A poem that fails any of them is not ready: fix it and re-check.
+- **Items 13–16 raise the poem from correct to memorable.** If one fails, try to improve it before output. Item 15 is mandatory for free verse.
+
+Rationale and authoritative sources for every item (Pound, Eliot, Frost, Kooser, Theune, Franko, Potebnja, Gasparov, Poetry Society judges): `references/quality-criteria.md`.
+
+**Mandatory (1–12)**
 1. **Imagery & Sensory Anchor (Принцип 1)**: Is the poem grounded in concrete physical details and fresh metaphors ("show, don't tell")? Are abstract clichés (*душа, серце, доля, крила надії*) eliminated?
-2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions?
+2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions? Is the emotion evoked by a situation or chain of objects (Eliot's *objective correlative*) rather than named?
 3. **Prosody, Phonics & Euphony (Принцип 3)**: Does the rhythm breathe naturally with correct pyrrhics? Are stresses strictly literary (*вИпадок*, *чорнОзем*, *новИй*)? Are `у/в`, `і/й`, `з/із/зі` balanced? Is assonance/alliteration harmonized?
 4. **Conciseness, Natural Syntax & Anti-Inversion (Принцип 4)**: Is the poem compressed without filler pronouns (*цей, той, свій*) or rhythmic padding? Is the word order 100% natural without artificial inversions for rhyme?
 5. **Perspective & Paradoxical Ending (Принцип 5)**: Does the poem offer an unexpected angle on the topic? Does the final line leave a lingering sensory or philosophical resonance without preaching?
-6. **Form & Content Unity (Принцип 6)**: Does the metric structure, stanza pace, and line breaks organically match the emotional weight of the theme?
+6. **Form & Content Unity (Принцип 6)**: Does the metric structure, stanza pace, and line breaks organically match the emotional weight of the theme? Does the meter's cultural association (*семантичний ореол метру*: bouncy 4-foot trochee → song, childhood, folk; ternary meters → ballad, elegy) support the theme rather than fight it?
 7. **Living Vocabulary**: Is every word understandable to a contemporary reader without a dictionary? No archaisms, dialect, rare bookish or invented words — unless the user explicitly asked for them?
 8. **Language Correctness**: Is grammar clean (case endings, agreement, prepositions), free of Russianisms and calques (*приймати участь*, *по вечорах*), with every stress orthoepically correct?
 9. **Brief Fulfilled**: Does the poem match what the user asked for — topic, form, length, mood, audience?
+10. **Literal Clarity**: On a first reading, is it clear who speaks, where we are and what happens — even if the deeper meaning opens later? Obscurity is not depth.
+11. **Composition & Unity**: Is every stanza necessary (none can be cut without loss)? Does the order move somewhere — beginning, development, ending — instead of listing images?
+12. **The Turn**: Is there at least one turn — a shift of perspective, time, tone or meaning — that makes the poem an event rather than a static description? (Not only in sonnets.)
+
+**Excellence (13–16)**
+13. **Discovery**: Does the poem arrive at something not present in its first line — a detail, thought or feeling that surprises? If the ending is predictable from the title, the poem only illustrates a thesis. («No surprise for the writer, no surprise for the reader.»)
+14. **Suggestion & Subtext**: Does the poem say less than it means, so a concrete detail carries a second layer and the poem rewards re-reading?
+15. **Line & Line Break**: Does every line carry its own energy, and does every break or enjambment do something (hold, stress, pause, double meaning)? *Mandatory for free verse* — lines must not be prose chopped at random.
+16. **Title**: If the poem has a title, does it add information, angle or tension — not repeat the first line or name a generic theme («Осінь», «Любов»)?
 
 ---
 
 ## Output Format
 
 - Return **only the poem** unless the user explicitly requests commentary, scansion diagrams, alternative drafts, or rubric evaluations.
+- A title is optional; add one when it strengthens the poem (criterion 16), never a generic one.
 - When generating fixed forms (e.g. Sonnets), clearly structure stanzas according to the required architecture (`4+4+3+3` or `4+4+4+2`).
 - If a homograph is genuinely ambiguous, use the acute accent (`за́мок` / `замо́к`). Uppercase-vowel stress marks belong only in song lyrics for audio models.
 
@@ -338,6 +355,7 @@ notes: list               # critic notes: {line, issue, why, direction}
 | Ukrainian-Language Reference Guide | `references/ukrainian-poetry-skill-uk.md` |
 | Quick-Reference Cheat Sheet | `references/ukrainian-poetry-skill-lite.md` |
 | Structured Input Request Templates | `references/input-templates.md` |
+| Quality criteria: rationale and authoritative sources | `references/quality-criteria.md` |
 | 100-Point Evaluation & Scansion Rubric | `references/rubric.md` |
 | 5 Specialized Subagents Pipeline | `agents/` (`agents/openai.yaml`) |
 | Standardized Test Suite (27 Scenarios) | `references/tests.md` |

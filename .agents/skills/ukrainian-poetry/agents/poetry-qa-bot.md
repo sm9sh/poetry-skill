@@ -118,6 +118,7 @@ Every detected defect incurs an immutable deduction from the 100-point total:
 5. **Rhyme & Clausula Classification**: Classify parts of speech in rhymes. Ensure alternating endings (`ЖЧЖЧ`).
 6. **Syntax & Lexical Density Check**: Flag inverted phrases and measure filler token density.
 6a. **Living Vocabulary Check**: Flag every rare, archaic, dialect or invented word (*днесь, глас, плай, тишопад*) that the user did not explicitly ask for; each one is a deduction and must be replaced with a common word.
+6b. **Structure Check (criteria 10–16)**: literal clarity, every stanza necessary, at least one turn, discovery rather than thesis illustration, subtext, purposeful line breaks (mandatory in free verse), non-generic title. Rationale: `references/quality-criteria.md`.
 7. **Score Calculation**: Subtract deductions from dimension ceilings; compute total score.
 
 ### 4.4 Remediation Routing Engine

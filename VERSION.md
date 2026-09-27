@@ -22,6 +22,7 @@ Refocus on the core goal — quality Ukrainian poems and their adaptation into s
 
 - Rule: no rare, archaic, dialect or invented words unless the user explicitly asks (AGENTS.md, both skills, rubric deduction, agents).
 - Rule: every song for AI passes 12 world-class song criteria (research on chart hits, songwriting-competition standards, Berklee / Pattison prosody) — `references/world-class-song-criteria.md`; `check_lyrics.py` now flags a single chorus, a non-repeating hook and a copied Verse 2.
+- Poetry Quality Checklist extended to 16 items from authoritative sources (Pound, Eliot, Frost, Kooser, Theune, Franko, Potebnja, Gasparov, Poetry Society): literal clarity, composition, the turn, discovery, subtext, line breaks, title; objective correlative and semantic halo of meter added to existing items; rubric deductions added — `references/quality-criteria.md`.
 - Rule: every poem and song lyric passes the Quality Checklist (6 principles + living vocabulary + language correctness + brief) before output.
 
 ### Removed
