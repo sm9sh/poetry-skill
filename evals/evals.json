@@ -39,7 +39,7 @@
       "skill": "ukrainian-poetry-to-suno",
       "name": "poem-to-darkwave-suno",
       "prompt": "зроби з цього вірша пісню для суно, хочу щось як darkwave:\nГодинник на вокзалі поспішає на три хвилини.\nНіхто його не лагодить:\nтут усі давно звикли\nприходити раніше, ніж треба,\nі стояти з квитком у кишені,\nпоки поїзд ще можна не взяти.",
-      "expected_output": "Verse-libre adapted into song form (hook, verses with matched syllable counts, repeated chorus, bridge); Style in English, 80–200 chars, darkwave first, no artist names, no negations; Exclude present; all delivery cues in [brackets], only sung words in (parentheses); stress capitals only on homographs/Russian traps/mobile shifts; Variety=Off advice; short note on what changed.",
+      "expected_output": "Verse-libre adapted into song form (hook, verses with matched syllable counts, repeated chorus, bridge); Style in English, 80–200 chars, darkwave first, no artist names, no negations; Exclude present; all delivery cues in [brackets], only sung words in (parentheses); stress capitals only on homographs/Russian traps/mobile shifts; Variety=Off advice; short note on what changed. Song passes the 12 world-class criteria (title-hook repeated 3–4+ times, chorus by ~50s, verse/chorus contrast, Verse 2 adds new information).",
       "files": []
     },
     {
@@ -47,7 +47,7 @@
       "skill": "ukrainian-poetry-to-suno",
       "name": "brief-to-song-flow",
       "prompt": "Потрібна пісня для google flow music про бабусин сад, який продали. Спокійно, жіночий вокал, щось між trip-hop і ambient. Тексту немає",
-      "expected_output": "Original Ukrainian lyrics written in song form (≤ ~3 min structure), natural-language Flow Music prompt (2–4 sentences, no artist names), lyrics with [section] tags, no delivery cues in parentheses, no over-marked stresses.",
+      "expected_output": "Original Ukrainian lyrics written in song form (≤ ~3 min structure), natural-language Flow Music prompt (2–4 sentences, no artist names), lyrics with [section] tags, no delivery cues in parentheses, no over-marked stresses. Song passes the 12 world-class criteria (title-hook repeated 3–4+ times, chorus by ~50s, verse/chorus contrast, Verse 2 adds new information).",
       "files": []
     },
     {

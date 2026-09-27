@@ -121,6 +121,24 @@ class TestExamplesPlayground(unittest.TestCase):
                 over = [w for w in warnings if w.startswith("stress marked outside")]
                 self.assertEqual(over, [], f"{path.name}: {over}")
 
+    def test_03b_world_class_song_craft_checks(self):
+        """check_lyrics.py flags a single chorus, a non-repeating hook and a copied Verse 2."""
+        import importlib.util
+        script = PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "scripts" / "check_lyrics.py"
+        spec = importlib.util.spec_from_file_location("check_lyrics", script)
+        check_lyrics = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(check_lyrics)
+        weak = "[Verse 1]\nМісто спить під дощем\nі мовчить ліхтар\n[Chorus]\nМи не вернемось\nі не треба\n[Verse 2]\nМісто спить під дощем\nі мовчить ліхтар\n"
+        _, warnings = check_lyrics.check(weak)
+        joined = " | ".join(warnings)
+        self.assertIn("only one chorus", joined)
+        self.assertIn("repeats 3+ times", joined)
+        self.assertIn("Verse 2 largely repeats Verse 1", joined)
+        adaptation = (PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "references" / "poem-to-song-adaptation.md").read_text(encoding="utf-8")
+        song = [b for b in re.findall(r"```text\n(.*?)```", adaptation, re.DOTALL) if "[Chorus - open" in b][0]
+        errors, warnings = check_lyrics.check(song)
+        self.assertEqual((errors, warnings), ([], []), "Reference adaptation example must pass all craft checks")
+
     # =========================================================================
     # 4. PLATFORM PROMPT LENGTH CONSTRAINTS
     # =========================================================================

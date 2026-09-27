@@ -6,7 +6,8 @@ Catches the mechanical mistakes that silently ruin a generation:
   * delivery cues or instruments inside (parentheses) -> the model SINGS them;
   * over-marked stress (моЯ, прИйде) or unmarked risky words (випадок -> вИпадок);
   * lyrics too long for v6 (quality drops past ~3000 chars), long "rushing" lines;
-  * chorus arriving too late, unbalanced brackets;
+  * chorus arriving too late, a single chorus, a hook that never repeats, Verse 2 copying Verse 1;
+  * unbalanced brackets;
   * Style / Exclude fields over the limit, negations in Style ("no drums").
 
 Usage:
@@ -155,6 +156,50 @@ def check_structure(lines, warnings):
         )
 
 
+def _sections(lines):
+    """Split lyrics into [(tag_lower, [sung lines])] by standalone [Section] tags."""
+    sections, current = [], ("", [])
+    for line in lines:
+        m = SECTION_RE.match(line)
+        if m:
+            sections.append(current)
+            current = (m.group(1).lower(), [])
+            continue
+        sung = re.sub(r"\[[^\]]*\]", "", line).strip()
+        if sung:
+            current[1].append(sung)
+    sections.append(current)
+    return [s for s in sections if s[0] or s[1]]
+
+
+def _norm(line):
+    return re.sub(r"[^\w\s]", "", line.lower()).strip()
+
+
+def check_song_craft(lines, warnings):
+    """Measurable parts of the world-class song criteria (references/world-class-song-criteria.md)."""
+    sections = _sections(lines)
+    chorus_tags = [tag for tag, _ in sections if "chorus" in tag or "приспів" in tag]
+    if len(chorus_tags) == 1:
+        warnings.append("only one chorus — strong songs usually have 2–3 (criterion 2: the hook must return)")
+
+    counts = {}
+    for _, sung in sections:
+        for line in sung:
+            key = _norm(re.sub(r"\([^)]*\)", "", line))
+            if len(key.split()) >= 2:
+                counts[key] = counts.get(key, 0) + 1
+    if counts and max(counts.values()) < 3:
+        warnings.append("no lyric line repeats 3+ times — the hook/title may be too weak to stick (criterion 2)")
+
+    verses = [sung for tag, sung in sections if tag.startswith("verse") or tag.startswith("куплет")]
+    if len(verses) >= 2:
+        first = {_norm(l) for l in verses[0]}
+        repeated = [l for l in verses[1] if _norm(l) in first]
+        if len(repeated) >= max(2, len(verses[1]) // 2):
+            warnings.append("Verse 2 largely repeats Verse 1 — verses should move the story forward (criterion 5)")
+
+
 def check_lengths(text, style, exclude, errors, warnings):
     n = len(text)
     if n > LYRICS_HARD_LIMIT:
@@ -182,6 +227,7 @@ def check(text, style=None, exclude=None):
     check_parentheses(lines, errors)
     check_stress(lines, warnings)
     check_structure(lines, warnings)
+    check_song_craft(lines, warnings)
     check_lengths(text, style, exclude, errors, warnings)
     return errors, warnings
 

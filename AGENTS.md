@@ -24,6 +24,7 @@ Load the relevant `SKILL.md` for the task. The rules below are the non-negotiabl
 ## Songs — core rules
 
 - **Target Suno v6-mini** (the free v6 model; all pre-v6 Suno models were retired on 2026-09-09) unless the user names another platform. Platform facts: `skills/ukrainian-poetry-to-suno/references/platforms.md`.
+- **Mandatory world-class song check** — every song for AI, before it is shown to the user, passes the 12 world-class song criteria (`skills/ukrainian-poetry-to-suno/references/world-class-song-criteria.md`: central idea, title-hook, fast entry, verse/chorus contrast, verse development, specific-yet-relatable, easy on the ear, singability; plus compound hook, repetition with variation, stable/unstable form, fresh angle) and `check_lyrics.py`. Criteria 1–8 are mandatory; anything that fails is fixed and re-checked first.
 - **Adapt, don't paste**: a poem becomes a song via hook, song form, equal line lengths and singable vowels (`references/poem-to-song-adaptation.md`). In songs, repeating the hook is a device, not padding.
 - **Brackets**: `[Square]` for sections, instruments, dynamics **and vocal delivery** (`[Whispered]`, `[Key Change]`). `(Round)` only for words that should be **sung** as backing vocals / echoes — Suno and Flow Music sing whatever is in parentheses.
 - **Stress marks** (uppercase stressed vowel) only in song lyrics for audio models, and only for homographs (`замОк`), Russian-stress traps (`вИпадок`), and non-obvious mobile shifts (`рУку`). Never in regular poetry; never on obvious words (*моя, земля, прийде*).
