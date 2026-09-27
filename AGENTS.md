@@ -5,7 +5,7 @@ This repository holds two skills:
 | Skill | What it does | Entry |
 |---|---|---|
 | `ukrainian-poetry` | Writes, edits and scores Ukrainian poetry | `skills/ukrainian-poetry/SKILL.md` |
-| `ukrainian-poetry-to-suno` | Adapts poems into songs for **Suno v6-mini** (primary) and **Google Flow Music (Lyria 3.5)**: song form, markup, stress, Style / Exclude prompts | `skills/ukrainian-poetry-to-suno/SKILL.md` |
+| `ukrainian-poetry-to-suno` | Adapts poems into songs for **Suno v6-mini** (primary) and **Lyria 3.5** (Google Flow Music): song form, markup, stress, Style / Exclude prompts | `skills/ukrainian-poetry-to-suno/SKILL.md` |
 
 Load the relevant `SKILL.md` for the task. The end-to-end workflow — routing, pipelines for poem / edit / song / generation fix, quality gates and conflict priorities — is in `docs/PIPELINE.md`. The rules below are the non-negotiable core shared by both skills; details, examples and word lists live in the skills and their `references/`.
 
@@ -26,12 +26,13 @@ Load the relevant `SKILL.md` for the task. The end-to-end workflow — routing, 
 - **Target Suno v6-mini** (the free v6 model; all pre-v6 Suno models were retired on 2026-09-09) unless the user names another platform. Platform facts: `skills/ukrainian-poetry-to-suno/references/platforms.md`.
 - **Mandatory world-class song check** — every song for AI, before it is shown to the user, passes the 12 world-class song criteria (`skills/ukrainian-poetry-to-suno/references/world-class-song-criteria.md`: central idea, title-hook, fast entry, verse/chorus contrast, verse development, specific-yet-relatable, easy on the ear, singability; plus compound hook, repetition with variation, stable/unstable form, fresh angle) and `check_lyrics.py`. Criteria 1–8 are mandatory; anything that fails is fixed and re-checked first.
 - **Adapt, don't paste**: a poem becomes a song via hook, song form, equal line lengths and singable vowels (`references/poem-to-song-adaptation.md`). In songs, repeating the hook is a device, not padding.
-- **Brackets**: `[Square]` for sections, instruments, dynamics **and vocal delivery** (`[Whispered]`, `[Key Change]`). `(Round)` only for words that should be **sung** as backing vocals / echoes — Suno and Flow Music sing whatever is in parentheses.
+- **Brackets**: `[Square]` for sections, instruments, dynamics **and vocal delivery** (`[Whispered]`, `[Key Change]`). `(Round)` only for words that should be **sung** as backing vocals / echoes — Suno and Lyria 3.5 sing whatever is in parentheses.
 - **Stress marks** (uppercase stressed vowel) only in song lyrics for audio models, and only for homographs (`замОк`), Russian-stress traps (`вИпадок`), and non-obvious mobile shifts (`рУку`). Never in regular poetry; never on obvious words (*моя, земля, прийде*).
 - **Attested poetic / folk stress variants**: at most 2 per poem or song, with a nameable source.
 - **Sound**: Western contemporary genres (post-punk, darkwave, synthwave, trip-hop, alt-pop, shoegaze, metalcore, melodic techno, ambient). Keep regional pop / schlager / sharovarshchyna out via genre anchors and Exclude.
 - **Style**: English tags, 80–200 chars, most important first; no negations (use Exclude); no artist names or song titles.
-- Run `python skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py` on lyrics before delivering.
+- Run `python skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py` on lyrics before delivering (`--platform lyria`, `--section`, `--syllables`); for metrical poems use `skills/ukrainian-poetry/scripts/scan_meter.py`.
+- Read `AUTHOR_PROFILE.md` first when it is filled; log real mispronunciations in `skills/ukrainian-poetry-to-suno/references/suno-lessons.md`.
 - Mixing, mastering and release advice only when asked (`references/post-production.md`).
 
 ## Repository

@@ -1,0 +1,14 @@
+{
+  "name": "poetry-skill",
+  "owner": {
+    "name": "sm9sh"
+  },
+  "description": "Ukrainian poetry & AI song skills",
+  "plugins": [
+    {
+      "name": "poetry-skill",
+      "source": "./",
+      "description": "Ukrainian poetry writing and poem-to-song adaptation for Suno v6-mini and Lyria 3.5"
+    }
+  ]
+}

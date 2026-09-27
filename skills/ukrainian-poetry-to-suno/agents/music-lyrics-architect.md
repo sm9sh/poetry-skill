@@ -1,7 +1,7 @@
 ---
 name: music-lyrics-architect
 description: "Transform raw Ukrainian poetry into AI-generation-optimized lyrics. <example>Input: raw poem / Output: structured lyrics with metatags and vocal gestures.</example>"
-model: gemini-2.5-pro
+model: inherit
 temperature: 0.4
 max_output_tokens: 4096
 ---
@@ -46,7 +46,7 @@ required: [raw_poetry]
    - Deliver a clear hook or identifiable element within the first 5 seconds.
    - Ensure the Chorus hits by the 50-second mark to maintain listener retention.
 4. **AI-Optimized Stress Capitalization**: Capitalize the stressed vowel only in homographs (дорОга / дорогА), words audio models mispronounce with Russian stress (вИпадок, чорнОзем), and non-obvious inflected shifts (зЕмлю, рУку). Leave function words and obvious stresses (моя, твій, земля, прийде) unmarked — over-marking makes the vocal sound stilted.
-5. **Metatags & Gestures**: Use square brackets `[...]` for ALL structural, instrumentation, and arrangement instructions (e.g., `[Intro - ambient build]`, `[Verse 1 - rhythmic staccato]`, `[Chorus - soaring legato]`, `[Outro - fade out]`). Vocal delivery cues also go in square brackets (`[Whispered]`, `[Belted]`, `[Falsetto]`, `[Key Change]`, `[Half-time feel]`). Use round parentheses `(...)` only for words that should actually be sung as backing vocals or echoes (e.g., `(ніколи знов)`, `(о-о-о)`) — Suno AI and Google Flow Music sing whatever is inside parentheses.
+5. **Metatags & Gestures**: Use square brackets `[...]` for ALL structural, instrumentation, and arrangement instructions (e.g., `[Intro - ambient build]`, `[Verse 1 - rhythmic staccato]`, `[Chorus - soaring legato]`, `[Outro - fade out]`). Vocal delivery cues also go in square brackets (`[Whispered]`, `[Belted]`, `[Falsetto]`, `[Key Change]`, `[Half-time feel]`). Use round parentheses `(...)` only for words that should actually be sung as backing vocals or echoes (e.g., `(ніколи знов)`, `(о-о-о)`) — Suno AI and Lyria 3.5 sing whatever is inside parentheses.
 
 6. **Living Vocabulary**: No rare, archaic, dialect or invented words unless the user explicitly asks — a listener cannot re-read a line, and audio models mispronounce unfamiliar words.
 7. **Mandatory Quality Check**: Lyrics pass the `ukrainian-poetry` Quality Checklist (hook repetition excepted), the 12 world-class song criteria in `references/world-class-song-criteria.md` (1–8 mandatory), and `scripts/check_lyrics.py` before output.

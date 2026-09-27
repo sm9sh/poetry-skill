@@ -124,7 +124,7 @@ allow_pyrrhics: boolean      # Default: true (pyrrhics are natural in Ukrainian 
   Do not confuse attested variants with **dual norms** (`зАвжди / завждИ`, `пОмилка / помИлка`, `тАкож / такОж`, `мАбуть / мабУть`) — dual norms are fully standard and do not count toward the cap.
 
 
-- **AI Audio Model Phonetic Stress Standard (Suno/Udio/Flow Music)**:
+- **AI Audio Model Phonetic Stress Standard (Suno/Udio/Lyria 3.5)**:
   > **Context gate**: Apply uppercase-vowel notation **only** in song lyrics destined for AI audio generation — NEVER in regular poetry output.
   When preparing lyrics for AI music generation, capitalize the stressed vowel only in one of three hard categories:
   1. **Homographs** (stress changes meaning): `зАмок` vs `замОк`, `дорОга` vs `дорогА`, `мУка` vs `мукА`, `плАчу` vs `плачУ`, `бІлизна` vs `білизнА`, `оргАн` vs `Орган`, `обрАзи` vs `Образи`.

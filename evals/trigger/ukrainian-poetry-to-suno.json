@@ -1,0 +1,22 @@
+[
+  {"query": "зроби з цього вірша пісню для суно, хочу щось як darkwave:\nНа вокзалі годинник спішить,\nі ніхто не лагодить його", "should_trigger": true},
+  {"query": "потрібен промпт для suno v6-mini: пісня про маму, яка чекає на ґанку, жіночий вокал, trip-hop", "should_trigger": true},
+  {"query": "напиши текст пісні українською і стиль для flow music, щось між ambient і post-rock, про місто після блекауту", "should_trigger": true},
+  {"query": "suno співає у мене слова з дужок (whispered) і ставить наголос випАдок, як виправити текст?", "should_trigger": true},
+  {"query": "в мене є текст, слова не міняй, просто розміть під суно і дай стиль post-punk", "should_trigger": true},
+  {"query": "make me a Suno style prompt and tagged lyrics for a Ukrainian shoegaze track about summer in Odesa", "should_trigger": true},
+  {"query": "хочу трек як у Bring Me The Horizon але українською, про війну і втому, дай все для суно", "should_trigger": true},
+  {"query": "перероби мій вірш у пісню для google flow music, треба приспів і хук, зараз це просто верлібр", "should_trigger": true},
+  {"query": "згенерований у суно трек звучить як весільна попса, що змінити в стилі і exclude?", "should_trigger": true},
+  {"query": "як звести стеми з суно і зробити мастеринг під спотіфай для мого українського синглу?", "should_trigger": true},
+  {"query": "напиши вірш про першу любов, просто вірш, не пісню", "should_trigger": false},
+  {"query": "поясни різницю між мажором і мінором простими словами", "should_trigger": false},
+  {"query": "порадь 10 українських post-punk гуртів схожих на Молчат Дома", "should_trigger": false},
+  {"query": "як підключити MIDI-клавіатуру до Ableton на маку?", "should_trigger": false},
+  {"query": "напиши python скрипт, який качає мої пісні з suno через API", "should_trigger": false},
+  {"query": "скільки коштує підписка suno pro і чи є знижки для студентів?", "should_trigger": false},
+  {"query": "переклади текст пісні Океан Ельзи англійською для субтитрів", "should_trigger": false},
+  {"query": "яка тональність у пісні 'Обійми'? хочу зіграти на гітарі", "should_trigger": false},
+  {"query": "перевір наголоси в моєму вірші для конкурсу читців", "should_trigger": false},
+  {"query": "напиши сценарій кліпу на 2 хвилини для моєї пісні про осінь", "should_trigger": false}
+]

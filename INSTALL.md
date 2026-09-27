@@ -7,18 +7,26 @@
 ## 1. 🟣 Встановлення для Anthropic Claude
 
 ### 1.1. Claude Code (CLI)
-Claude Code автоматично знаходить скіли у робочій директорії:
+
+**Як плагін (рекомендовано)** — скіли, агенти й команди `/poetry-skill`, `/ukrainian-poetry`, `/ukrainian-poetry-to-suno` підключаються разом:
+```text
+/plugin marketplace add sm9sh/poetry-skill
+/plugin install poetry-skill@poetry-skill
+```
+Маніфести: `.claude-plugin/plugin.json` і `.claude-plugin/marketplace.json` (перевірка: `claude plugin validate .`).
+
+**Або локально** — Claude Code автоматично знаходить скіли у робочій директорії:
 1. Клонуйте або скопіюйте папку `skills/` у корінь вашого проєкту (або вкажіть шлях до `D:\poetry-skill\skills`).
 2. Скіли активуються автоматично за їхніми описами (description у `SKILL.md`):
    - `skills/ukrainian-poetry/SKILL.md` — для поезії;
-   - `skills/ukrainian-poetry-to-suno/SKILL.md` — для пісень (Suno v6-mini, Flow Music).
+   - `skills/ukrainian-poetry-to-suno/SKILL.md` — для пісень (Suno v6-mini, Lyria 3.5).
    Спільні правила — у [`AGENTS.md`](./AGENTS.md).
 
 ### 1.2. Claude.ai (Веб / Projects)
 1. Створіть новий проєкт у Claude.ai (**Projects**).
 2. У розділ **Project Knowledge** завантажте:
    - [`skills/ukrainian-poetry/references/full-guide.md`](./skills/ukrainian-poetry/references/full-guide.md) (повна поетична інструкція);
-   - [`skills/ukrainian-poetry-to-suno/references/full-guide.md`](./skills/ukrainian-poetry-to-suno/references/full-guide.md) (повна музична інструкція);
+   - [`skills/ukrainian-poetry-to-suno/SKILL.md`](./skills/ukrainian-poetry-to-suno/SKILL.md) і [`docs/PIPELINE.md`](./docs/PIPELINE.md) (пісенна інструкція та пайплайн);
    - [`skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`](./skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md) (таблиця референсів).
 3. У поле **Project Instructions** скопіюйте текст із [`AGENTS.md`](./AGENTS.md).
 

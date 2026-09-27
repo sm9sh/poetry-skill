@@ -1,0 +1,30 @@
+{
+  "name": "poetry-skill",
+  "version": "4.1.0",
+  "description": "Ukrainian poetry writing and poem-to-song adaptation for Suno v6-mini and Lyria 3.5",
+  "author": {
+    "name": "sm9sh"
+  },
+  "repository": "https://github.com/sm9sh/poetry-skill",
+  "license": "MIT",
+  "keywords": [
+    "poetry",
+    "ukrainian",
+    "suno",
+    "lyria",
+    "lyrics",
+    "songwriting"
+  ],
+  "agents": [
+    "./skills/ukrainian-poetry-to-suno/agents/music-daw-mastering-critic.md",
+    "./skills/ukrainian-poetry-to-suno/agents/music-lyrics-architect.md",
+    "./skills/ukrainian-poetry-to-suno/agents/music-prompt-synthesizer.md",
+    "./skills/ukrainian-poetry-to-suno/agents/music-reference-engineer.md",
+    "./skills/ukrainian-poetry/agents/poetry-conciseness-editor.md",
+    "./skills/ukrainian-poetry/agents/poetry-emotional-critic.md",
+    "./skills/ukrainian-poetry/agents/poetry-form-synthesizer.md",
+    "./skills/ukrainian-poetry/agents/poetry-imagery-architect.md",
+    "./skills/ukrainian-poetry/agents/poetry-prosody-phonics.md",
+    "./skills/ukrainian-poetry/agents/poetry-qa-bot.md"
+  ]
+}

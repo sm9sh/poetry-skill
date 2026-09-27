@@ -1,11 +1,11 @@
 ---
 name: ukrainian-poetry-to-suno
-description: "Turns Ukrainian poems, lyrics, song ideas, moods or references into ready-to-paste songs for Suno v6-mini (also v6 / v6-wild) and Google Flow Music (Lyria 3.5): adapts a poem into singable song form, marks tricky stresses, writes the Style / Exclude prompt and the tagged lyrics sheet. Use it whenever the user wants a song, track, Suno or Flow Music prompt, or says things like «зроби з цього вірша пісню», «пісня для суно», «текст пісні», «стиль для suno», «промпт для flow music», «хочу трек у стилі darkwave», even if they don't name the platform. Also covers fixing a generation (wrong stress, rushed vocals, sung instructions) and, on request, stem mixing, mastering and release."
+description: "Use this skill for ANY request to create, format or fix a song for an AI music generator — Suno (v6-mini, v6) or Lyria 3.5 (Google Flow Music) — when the lyrics are or will be in Ukrainian, even if the request looks simple. It applies whether the user brings a finished poem (\"don't change the words, just tag it\", «розміть під суно»), only a theme, mood, genre or reference artist (\"like Bring Me The Horizon but in Ukrainian\"), or asks for everything for Suno: Style / Exclude prompt, tagged lyrics sheet, vocal and genre tags, BPM. The skill has platform rules Claude does not know by default: which brackets get sung, how to mark the Ukrainian stresses the model mispronounces, tag order for v6-mini, how to adapt a poem into a singable song, and how to avoid a regional-pop sound. It also covers fixing bad generations (wrong stress, rushed vocals, sung instructions) and, on request, stem mixing, mastering and release. Do not use it for plain poems, translation, music theory, chords or video scripts."
 ---
 
-# Ukrainian Poetry → Song (Suno v6-mini & Google Flow Music)
+# Ukrainian Poetry → Song (Suno v6-mini & Lyria 3.5)
 
-Цей скіл перетворює український вірш або ідею на пісню, яку можна одразу вставити в Suno чи Flow Music: лірику з розміткою, Style та Exclude. Основна ціль — **Suno v6-mini**. Для **Flow Music (Lyria 3.5)** вихід інший, див. нижче.
+Цей скіл перетворює український вірш або ідею на пісню, яку можна одразу вставити в Suno чи Lyria 3.5: лірику з розміткою, Style та Exclude. Основна ціль — **Suno v6-mini**. Для **Lyria 3.5** (модель Google DeepMind у застосунку Google Flow Music) вихід інший, див. нижче.
 
 **Звучання — західний сучасний продакшн** (post-punk, darkwave, synthwave, trip-hop, alt-pop, shoegaze, indie rock, metalcore, melodic techno, cinematic ambient). Українська лірика звучить найсильніше, коли музика — рівня світового релізу, а не регіональної попси, шансону чи туристичного фольку (шароварщини). Модель тягне в цей бік, щойно бачить «українське», тож жанр, інструменти й Exclude мають її від цього відводити.
 
@@ -15,6 +15,7 @@ description: "Turns Ukrainian poems, lyrics, song ideas, moods or references int
 
 Це пайплайн B з `docs/PIPELINE.md` (там же — маршрутизація, пайплайн D для виправлення генерації та зведена таблиця контрольних точок).
 
+0. **Профіль автора.** Якщо в корені репозиторію / плагіна є заповнений `AUTHOR_PROFILE.md` — прочитай його першим: жанри, вокал, темп, Exclude, тариф (чи потрібні комерційні права). Явний запит у чаті важить більше за профіль.
 1. **Зрозумій запит.** Визнач:
    - платформу (за замовчуванням Suno v6-mini);
    - жанр і настрій, референс (опиши звук, без імен артистів);
@@ -27,14 +28,18 @@ description: "Turns Ukrainian poems, lyrics, song ideas, moods or references int
    - **Лексика — жива й зрозуміла на слух.** Без архаїзмів, діалектизмів, рідковживаних і вигаданих слів, якщо користувач прямо про них не просить. У пісні це ще важливіше, ніж у вірші: слухач не може перечитати рядок, а модель погано вимовляє незнайомі слова.
 4. **Розмітка.** Секції та всі вказівки — у `[...]`, співаний бек-вокал — у `(...)` (див. нижче).
 5. **Наголоси** — останнім проходом, лише три категорії.
-6. **Промпт.** Для Suno — Style (англ. теги) + Exclude. Для Flow Music — промпт природною мовою.
+6. **Промпт.** Для Suno — Style (англ. теги) + Exclude. Для Lyria 3.5 — промпт природною мовою.
 7. **Обов'язкова перевірка перед видачею** — для кожної пісні, без винятків:
    1. **Як вірш:** лірика проходить Quality Checklist зі скілу `ukrainian-poetry` (усі 16 пунктів; для пісні обов'язкові 1–12). Пісенний виняток один: повтор хука й приспіву — прийом, а не «вода».
    2. **Як пісня світового рівня:** 12 критеріїв з розділу «Пісня світового рівня» нижче. Критерії 1–8 обов'язкові.
+      - *Режим «зберегти текст»:* явний запит «слова не міняй» важить більше (див. пріоритети в `docs/PIPELINE.md`). Виконуй критерії лише перестановкою й повтором рядків користувача (приспів — з його найсильнішого рядка, V1 і V2 — з різних рядків). Якщо критерій так не виконати — не змінюй слова мовчки: коротко скажи, чого бракує, і запропонуй 1–2 нові рядки окремо, на вибір.
    3. **Механіка:** скрипт — виправ усі ERROR, переглянь WARNING:
       ```bash
-      python scripts/check_lyrics.py lyrics.txt --style "<style>" --exclude "<exclude>"
+      python scripts/check_lyrics.py lyrics.txt --style "<style>" --exclude "<exclude>" --syllables
+      python scripts/check_lyrics.py lyrics.txt --platform lyria --prompt "<Lyria prompt>"   # для Lyria 3.5
+      python scripts/check_lyrics.py fragment.txt --section                                # одна виправлена секція
       ```
+      `--syllables` друкує склади кожного рядка — так швидко видно, чи збігаються рядки V1 і V2. Скрипт сам порівнює куплети і читає журнал `references/suno-lessons.md` (слова, які модель уже вимовляла неправильно).
    4. **Уголос:** прочитай текст у темпі пісні. Рядок, який важко вимовити, модель теж зіпсує.
    Якщо будь-який пункт не пройдено — виправ і перевір знову. Перевірка тиха: користувач бачить лише пісню, що пройшла (чекліст — на прохання).
 8. **Видай результат** у форматі з розділу «Формат відповіді».
@@ -42,7 +47,7 @@ description: "Turns Ukrainian poems, lyrics, song ideas, moods or references int
 
 ## Дужки: що співається, а що ні
 
-Suno v6 і Flow Music **співають усе, що в круглих дужках**. Це найчастіша причина, чому у треку раптом звучить «half-time feel» чи «guitar solo».
+Suno v6 і Lyria 3.5 **співають усе, що в круглих дужках**. Це найчастіша причина, чому у треку раптом звучить «half-time feel» чи «guitar solo».
 
 | Синтаксис | Що робить модель | Приклади |
 |---|---|---|
@@ -53,7 +58,7 @@ Suno v6 і Flow Music **співають усе, що в круглих дужк
 
 ## Наголоси для аудіомоделі
 
-Велика літера на наголошеній голосній — **тільки в ліриці для Suno/Flow** (у звичайних віршах — знак наголосу ́ або нічого) і **тільки в трьох категоріях**:
+Велика літера на наголошеній голосній — **тільки в ліриці для Suno/Lyria** (у звичайних віршах — знак наголосу ́ або нічого) і **тільки в трьох категоріях**:
 
 1. **Омографи**: `зАмок / замОк`, `дорОга / дорогА`, `мУка / мукА`, `плАчу / плачУ`, `Орган / оргАн`.
 2. **«Російські пастки»** — модель вимовляє по-російськи: `вИпадок`, `чорнОзем`, `листопАд`, `одИннадцять`, `фартУх`, `ненАвисть`, `новИй`, `вИрок`, `завдАння`.
@@ -85,9 +90,9 @@ Suno v6 і Flow Music **співають усе, що в круглих дужк
 | Melodic techno | `melodic techno, hypnotic, airy vocal chops, analog arpeggios, rolling sub bass, four-on-the-floor, 124 bpm` |
 | Cinematic ambient | `cinematic ambient, neoclassical, intimate whispered vocal, felt piano, soaring cello, tape warmth, 70 bpm` |
 
-## Flow Music (Lyria 3.5)
+## Lyria 3.5
 
-- **Промпт — природною мовою**, 2–4 речення: концепт і жанр → атмосфера (без імен артистів) → інструменти → динаміка й вокал, плюс тривалість.
+- **Промпт — англійською, природною мовою**, 2–4 речення (лірика лишається українською): концепт і жанр → атмосфера (без імен артистів) → інструменти → динаміка й вокал, плюс тривалість.
 - **Треки до ~3 хв.** Структура компактніша, ніж для Suno: V1 → C → V2 → C → Bridge → C.
 - Лірику з тими ж `[секціями]` вставляй у поле тексту. Правило круглих дужок те саме.
 - Проблемну секцію виправляй через Replace, а не перегенеруй весь трек.
@@ -116,7 +121,7 @@ Suno v6 і Flow Music **співають усе, що в круглих дужк
 
 **Тест референсу:** уяви пісню в плейлисті поруч із 2–3 сильними треками цього жанру. Якщо вона вибивається — назви, чого бракує (хука? конкретики? контрасту?), і виправ.
 
-Орієнтири форми: ~2:30–3:30, 2–3 приспіви (останній — найповніший). Для Flow Music (до ~3 хв) — компактніше. Для ембієнту, неокласики, пост-року критерії 2–3 пом'якшуються.
+Орієнтири форми: ~2:30–3:30, 2–3 приспіви (останній — найповніший). Для Lyria 3.5 (до ~3 хв) — компактніше. Для ембієнту, неокласики, пост-року критерії 2–3 пом'якшуються.
 
 Gates 7–10 (зведення, мастеринг, реклама) — у `references/post-production.md`. Відкривай його лише на прохання користувача.
 
@@ -127,6 +132,7 @@ Gates 7–10 (зведення, мастеринг, реклама) — у `refe
 | Вокал тараторить | Довгі рядки, забагато тексту (>3000 символів), швидкий BPM | Рядки по 4–8 слів, `[Half-time feel]` у тезі секції, повільніший BPM |
 | Модель проспівала вказівку | Вказівка в `( )` | Перенести в `[ ]` |
 | Неправильний наголос | Слово з трьох категорій без позначки, або надмаркування навколо | Позначити лише це слово й перегенерувати секцію (редагування секції / Replace) |
+| Наголос позначено правильно, а модель усе одно співає неправильно | Мелодія ставить сильну долю на інший склад; довкола «шум» (надмаркування, співані вказівки) | 1) прибрати шум; 2) переставити слова, щоб наголошений склад падав на сильну долю (часто — перенести слово в кінець рядка); 3) замінити слово синонімом з очевидним наголосом; 4) записати слово в `references/suno-lessons.md` — скрипт далі попереджатиме про нього |
 | Звучить як регіональна попса | Слабкий жанровий якір, немає Exclude, «ukrainian» першим тегом | Західний жанр першим; Exclude; прибрати «ukrainian folk», якщо фольк не потрібен |
 | Style «поплив» від генерації до генерації | Variety вище Off | Variety = Off |
 | Приспів не повторюється як треба | Приспів у тексті різний або немає тегу `[Chorus]` | Повторити приспів дослівно з тим самим тегом |
@@ -160,9 +166,9 @@ Gates 7–10 (зведення, мастеринг, реклама) — у `refe
 ```
 ````
 
-**Flow Music:** блок **Prompt** (2–4 речення природною мовою) + блок **Lyrics**.
+**Lyria 3.5:** блок **Prompt** (2–4 речення природною мовою) + блок **Lyrics**.
 
-Після блоків додай 1–3 рядки: що змінено у вірші й чому (якщо адаптував) і що підкрутити, якщо перша генерація не влучить. Без довгих лекцій про теорію — лише якщо користувач просить.
+Після блоків додай коротку примітку (до 5 рядків): що змінено у вірші й чому (якщо адаптував) і що підкрутити, якщо перша генерація не влучить. Без довгих лекцій про теорію — лише якщо користувач просить.
 
 ## Довідники
 
@@ -174,11 +180,10 @@ Gates 7–10 (зведення, мастеринг, реклама) — у `refe
 | Підбір жанру під настрій | `references/mood-to-style-map.md` |
 | Користувач назвав артиста чи трек як референс | `references/reference-to-style-cheatsheet.md`, `references/reference-breakdown-examples.md` |
 | Структури пісень і каталог метатегів | `references/song-structure-pack.md` |
-| Шаблони лірики | `references/lyrics-to-suno-template.md` |
 | Готові промпт-паки за настроєм / вокалом | `references/packs/README.md` |
 | Українські пісенні сценарії (весілля, колискова, гімн, військова тощо) | `references/ukrainian-song-scenarios.md` |
 | Типові помилки й антипатерни | `references/suno-prompt-anti-patterns.md` |
 | Оцінювання (100-бальна рубрика) | `references/rubric.md` |
 | Зведення, мастеринг, реліз — лише на запит | `references/post-production.md` |
-| Розширена теорія (шестикроковий цикл, Melodic Math) | `references/full-guide.md` |
-| Механічна перевірка лірики та Style | `scripts/check_lyrics.py` |
+| Механічна перевірка лірики, Style і промпту Lyria | `scripts/check_lyrics.py` |
+| Журнал реальних генерацій (слова з неправильною вимовою, вдалі Style) | `references/suno-lessons.md` |

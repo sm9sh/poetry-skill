@@ -1,6 +1,6 @@
 # AI Music Prompt Anti-Patterns & Engineering Failure Modes (v8)
 
-Повний посібник із типових помилок промптингу, генераційних збоїв та аудіо-артефактів у **Suno AI (v6-mini)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**, а також інженерні пастки у DAW-зведенні та алгоритмічному мастерингу.
+Повний посібник із типових помилок промптингу, генераційних збоїв та аудіо-артефактів у **Suno AI (v6-mini)** та **Lyria 3.5**, а також інженерні пастки у DAW-зведенні та алгоритмічному мастерингу.
 
 ---
 
@@ -13,9 +13,9 @@
   ```text
   A very beautiful deeply emotional epic atmospheric dark nocturnal melodic cinematic indie pop song with huge wide guitars, warm gentle piano accents, deep bass, punchy live drums, soft airy vocal, wonderful reverb, and dramatic buildup into an unbelievable stadium chorus with lots of synth layers and nice feeling.
   ```
-- **Добре (135 символів)**:
+- **Добре (127 символів)**:
   ```text
-  ukrainian indie pop, dark nocturnal atmosphere, 110 bpm, intimate airy female vocal, pulsing bass, muted drum machine, soft analog synths
+  indie pop, dark nocturnal atmosphere, 110 bpm, intimate airy female vocal, pulsing bass, muted drum machine, soft analog synths
   ```
 
 ---
@@ -29,7 +29,7 @@
   ```
 - **Добре**:
   ```text
-  ukrainian indie pop, melancholic nocturnal atmosphere, 115 bpm, intimate female vocal, warm bass, muted drums, rainy street mood
+  indie pop, melancholic nocturnal atmosphere, 115 bpm, intimate female vocal, warm bass, muted drums, rainy street mood
   ```
 
 ---
@@ -47,7 +47,7 @@
   [Intro]
   (Staccato cutting telecaster riff, driving bassline, punchy drum buildup)
   ```
-- **Чому це ламає генерацію**: У `Google Flow Music` та `Suno AI` круглі дужки `( )` у полі `Lyrics` інтерпретуються як **бек-вокал, ехо або вокальні жести**. Вокальний синтезатор буквально прочитає або заспіває текст вголос («Staccato cutting telecaster riff...»)!
+- **Чому це ламає генерацію**: У `Lyria 3.5` та `Suno AI` круглі дужки `( )` у полі `Lyrics` інтерпретуються як **бек-вокал, ехо або вокальні жести**. Вокальний синтезатор буквально прочитає або заспіває текст вголос («Staccato cutting telecaster riff...»)!
 - **Добре**: Усі інструментальні та аранжувальні вказівки слід розміщувати **виключно у квадратних дужках `[ ... ]`**:
   ```text
   [Intro - Staccato cutting telecaster riff, driving bassline, punchy drum buildup]
@@ -91,7 +91,7 @@
 
 ### 9. Прямий неймінг артистів (Copyright Filter & Distortion)
 - **Помилка**: Вживання прямих імен артистів або назв треків (`in the style of DakhaBrakha`, `sound like Jinjer`).
-- **Чому це ламає трек**: Suno, Udio та Flow Music блокують генерацію або спотворюють аудіо через фільтри копірайту.
+- **Чому це ламає трек**: Suno та Lyria 3.5 блокують генерацію або спотворюють аудіо через фільтри копірайту.
 - **Добре**: Використовувати деперсоналізований звуковий ДНК (див. `reference-to-style-cheatsheet.md`).
 
 ---
@@ -107,13 +107,6 @@
 - **Помилка**: Спрямування платного рекламного трафіку (Meta Ads / TikTok Ads) на власний плейлист артиста замість конкретного синглу.
 - **Чому це ламає трек**: Якщо холодний слухач скіпає перший трек у плейлісті, він швидко прогортає наступні пісні, що генерує каскад швидких скіпів і **руйнує алгоритмічний рейтинг усього каталогу артиста** в рекомендаціях Spotify.
 - **Добре**: Завжди спрямовувати рекламний трафік **виключно на смарт-посилання цільового синглу**.
-
----
-
-### 12. Некоректне керування контекстом в Udio v4 (Context Length Trap)
-- **Помилка**: Залишення максимального контексту (Context Length) під час різкої зміни стилю, мови чи темпу в наступній секції (Extend).
-- **Чому це ламає трек**: Модель намагається зберегти попередній акустичний стан і ігнорує нові інструкції промпту.
-- **Добре**: Зменшувати Context Length до **10–15 секунд** для контрастних переходів і тримати на максимумі для збереження вокального тембру.
 
 ---
 

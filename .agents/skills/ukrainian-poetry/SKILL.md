@@ -1,6 +1,6 @@
 ---
 name: ukrainian-poetry
-description: "Writes, edits, critiques and scores Ukrainian poetry that sounds natively Ukrainian: fresh imagery, sincere tone, correct stress and euphony, rich non-grammatical rhymes, natural word order, form that fits the feeling. Use it whenever the user asks (in Ukrainian or English) for a вірш, поезію, римування, строфу, сонет, верлібр, коломийку, дитячий чи привітальний вірш, to fix rhymes or meter, check наголоси, or turn prose or notes into a poem — even if they only say «напиши щось про…» or paste a draft. If the poem is meant to become a song for Suno or Flow Music, write it here and then continue with ukrainian-poetry-to-suno."
+description: "Ukrainian poem craft studio. Use this skill every time a Ukrainian-language poem is to be written or improved, however short or casual the request: a poem on any theme (people, memory, loss, a city, the seasons), a kids' rhyme, a greeting-card verse, free verse, a sonnet or a kolomyika, whether the user asks in Ukrainian («напиши вірш / віршик про…») or in English (\"a poem in Ukrainian\"). Also use it when the user pastes Ukrainian lines and wants the meter, stress (наголоси), rhymes or wording checked, fixed, critiqued or scored, or wants prose notes turned into verse. Do not rely on instinct here: the skill holds the stress rules, rhyme blacklist, anti-calque list, living-vocabulary rule and the mandatory quality checklist that a natively sounding Ukrainian poem needs. Skip it for poems in other languages, literal translations of foreign poems, explaining poetry theory, and prose copy. To turn a finished poem into a song for Suno or Lyria 3.5, continue with ukrainian-poetry-to-suno."
 ---
 
 # Ukrainian Poetry
@@ -32,7 +32,7 @@ These six principles are what separates a living poem from a rhymed statement. A
 
 4. **Лаконічність і вага слова (Conciseness & Word Weight)**:
    - *Rule*: High semantic compression («словам тісно, думкам просторо»). Every noun, verb, and epithet must carry irreplaceable weight.
-   - *Anti-patterns*: Rhythmic padding ("водичка"), filler pronouns (*я, мій, твій, цей, той, свій, вже, ось, то, ж*) used merely to pad syllable counts; **artificial syntactic inversions** (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч темну»*) forced for rhyme. Natural Ukrainian word order is mandatory.
+   - *Anti-patterns*: Rhythmic padding ("водичка"), filler pronouns (*я, мій, твій, цей, той, свій, вже, ось, то, ж*) used merely to pad syllable counts — a pronoun is filler only when it carries no meaning (*«за моїм велосипедом»* can be meaningful: it marks the speaker's absence); **artificial syntactic inversions** (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч темну»*) forced for rhyme. Natural Ukrainian word order is mandatory.
    - *Example*: ❌ *«І от уже цей мій сумний і темний вечір прийшов до мене у моє вікно знов.»* ➔ ✅ *«Сутінки осідають на підвіконня. Ліхтарі вмикаються за секунду до темряви.»*
 
 5. **Оригінальність ракурсу (Originality of Perspective)**:
@@ -65,8 +65,9 @@ Test for every word you are unsure about: would an educated reader of modern Ukr
 
 ## Task Workflow
 
-This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is Pipeline C there. Order matters: concept before words, one voice, and no poem reaches the user without passing the Quality Checklist.
+This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is Pipeline C there. When the user asks to *improve* («покращ») their poem, treat it as a request for a genuinely better poem in their voice — not a cosmetic pass: a clean fix that still ends on a declared abstraction is not done. Order matters: concept before words, one voice, and no poem reaches the user without passing the Quality Checklist.
 
+0. **Author profile**: if `AUTHOR_PROFILE.md` exists at the repository / plugin root and has filled fields, read it first and use it for defaults (themes, voice, register, favourite and banned words, forms). An explicit request in the chat always wins over the profile.
 1. **Extract/Infer Parameters**:
    - `topic`: thematic core
    - `form`: `free | sonnet | blank-verse | kolomyika | dolnik | taktovik | rondo | triolet | terza-rima | rubai | astrophic`
@@ -99,8 +100,9 @@ This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is 
    - Prefer cross-grammatical rhymes, ideally with a matching pre-tonic consonant (**Principle 3: Phonics & Rhyme**).
    - Keep natural Ukrainian word order; if a rhyme needs an inversion, change the rhyme, not the syntax (**Principle 4: Conciseness & Syntax**).
    - Cleanse any filler pronouns (*цей, той, свій*) or rhythmic padding words.
+4a. **Scan the meter when the form is metrical**: mark stresses (acute) in a scratch copy and run `python scripts/scan_meter.py poem.txt` (add `--auto-stress` if `ukrainian-word-stress` is installed: `pip install --no-deps ukrainian-word-stress marisa-trie`). It prints syllables, the stress pattern, the best-fit meter, off-beat stresses and clausulae per stanza — fix the flagged lines. Skip for free verse.
 5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again; if the failure is in the idea (no turn, no discovery), go back to step 2a. Do this silently: show the checklist only if the user asks; show only the poem that passed.
-6. **If the poem is meant as a song** (Suno / Flow Music): keep lines 6–10 syllables, give it a repeatable hook, and hand off to `ukrainian-poetry-to-suno` for song form and markup. In songs, repeating the hook is a device, not padding.
+6. **If the poem is meant as a song** (Suno / Lyria 3.5): keep lines 6–10 syllables, give it a repeatable hook, and hand off to `ukrainian-poetry-to-suno` for song form and markup. In songs, repeating the hook is a device, not padding.
 
 ---
 
@@ -117,7 +119,7 @@ This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is 
 - **Dolnik (Дольник)**: Equal number of ictuses (stresses) per line (e.g. 3 or 4 stresses), with the unstressed syllable interval between ictuses varying strictly between **1 and 2 syllables**. Crucial for modern rock/urban lyrics and 20th-century modernism (Tychyna, Antonych).
 - **Taktovik (Тактовик)**: ictic verse with unstressed intervals varying between **1 and 3 syllables**.
 - **Accentual Verse (Чисто тонічний / акцентний вірш)**: Regulated by a fixed count of heavy phrasal stresses per line, with flexible unstressed intervals.
-- **Kolomyika Meter (Коломийковий вірш)**: The premier Ukrainian folk-metric form. 14 syllables organized as `(4 + 4) + 6` (or couplets of `8 + 6` syllables: `4+4 // 4+2`) with a mandatory caesura after the 8th syllable. Trochaic baseline with primary accents on syllables 3, 7, 11, and 13.
+- **Kolomyika Meter (Коломийковий вірш)**: The premier Ukrainian folk-metric form. 14 syllables organized as `(4 + 4) + 6` (or couplets of `8 + 6` syllables: `4+4 // 4+2`) with a mandatory caesura after the 8th syllable. What is fixed: the syllable count (4 + 4 + 6), the caesura, and a feminine ending of the 6-syllable half (stress on syllable 13). Stresses on 3 and 7 are typical but vary in real folk lines — do not force them. Folk forms tolerate simpler rhymes than literary verse (paired rhymes on the 6-syllable halves); still prefer heterogeneous pairs and avoid more than one grammatical pair per poem.
 - **Cossack Duma Recitative (Думний нерівноскладний вірш)**: Astrophic recitative of unequal line lengths (4 to 16+ syllables), bound by syntactic parallelism and extended feminine/dactylic monorhymes.
 
 ### 3. Blank Verse (Білий вірш) vs Free Verse (Верлібр)
@@ -126,6 +128,7 @@ This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is 
 
 ### 4. Fixed Poetic Forms (Тверді форми)
 - **Sonnet (Сонет)**: 14 lines in iambic pentameter/hexameter.
+  - Rhyme exactness: the *a*-rhyme of the octave should be exact; *b* may be approximate as long as all four words clearly chime. Heterogeneous rhymes still apply.
   - Italian/Petrarchan (`abba abba cdc dcd` or `cde cde`) or English/Shakespearean (`abab cdcd efef gg`).
   - **Volta (Злам)**: Mandatory psychological/philosophical turn between line 8 (octave) and line 9 (sestet).
 - **Rondo / Rondel (Рондо / Рондель)**: Refrain-based form on two rhymes with cyclical return of initial phrases.
@@ -198,7 +201,7 @@ A stress that deviates from the orthoepic norm is allowed when it has documented
 Conditions for each variant:
 1. The shift is metrically needed and lands on the ictus (it reinforces the beat, not fights it).
 2. You can name the source: a dictionary label (поет., нар.-поет., діал.) in «Словник наголосів» / goroh.pp.ua, or a specific poem or folk song. If you cannot name one, treat the stress as an error.
-3. In lyrics for Suno / Flow Music, mark it with the uppercase stressed vowel so the audio model follows it.
+3. In lyrics for Suno / Lyria 3.5, mark it with the uppercase stressed vowel so the audio model follows it.
 
 Know the norms first — these are standard, not variants: `колИсь`, `нікОли`, `святИй`, `дорОга` (noun), `рікА`. Dual norms (§4) are fully standard and do not count toward the cap. Russian forms (`рЕка`, `ніколИ`) are errors, not variants.
 
@@ -210,7 +213,7 @@ Know the norms first — these are standard, not variants: `колИсь`, `ні
 
 ### 6. Stress Notation in the Output
 - **Poetry**: leave words unmarked, or use the combining acute accent (`за́мок`) only where a homograph is genuinely ambiguous.
-- **Song lyrics for Suno / Flow Music**: uppercase stressed vowels in three categories only (homographs, Russian-stress traps, non-obvious mobile shifts). The full rule and word lists live in `ukrainian-poetry-to-suno`; never use uppercase-vowel notation in regular poetry.
+- **Song lyrics for Suno / Lyria 3.5**: uppercase stressed vowels in three categories only (homographs, Russian-stress traps, non-obvious mobile shifts). The full rule and word lists live in `ukrainian-poetry-to-suno`; never use uppercase-vowel notation in regular poetry.
 
 ---
 
@@ -296,7 +299,7 @@ Rationale and authoritative sources for every item (Pound, Eliot, Frost, Kooser,
 1. **Imagery & Sensory Anchor (Принцип 1)**: Is the poem grounded in concrete physical details and fresh metaphors ("show, don't tell")? Are abstract clichés (*душа, серце, доля, крила надії*) eliminated?
 2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions? Is the emotion evoked by a situation or chain of objects (Eliot's *objective correlative*) rather than named?
 3. **Prosody, Phonics & Euphony (Принцип 3)**: Does the rhythm breathe naturally with correct pyrrhics? Are stresses strictly literary (*вИпадок*, *чорнОзем*, *новИй*)? Are `у/в`, `і/й`, `з/із/зі` balanced? Is assonance/alliteration harmonized?
-4. **Conciseness, Natural Syntax & Anti-Inversion (Принцип 4)**: Is the poem compressed without filler pronouns (*цей, той, свій*) or rhythmic padding? Is the word order 100% natural without artificial inversions for rhyme?
+4. **Conciseness, Natural Syntax & Anti-Inversion (Принцип 4)**: Is the poem compressed without filler pronouns (*цей, той, свій*) or rhythmic padding? Is the word order 100% natural without artificial inversions for rhyme? Are there no **rhyme-driven line breaks** — a phrase split only to put the rhyme word at the line end (*«клацає багато / разів»*, *«— так, / що…»*)? That is an inversion by other means: change the rhyme instead.
 5. **Perspective & Paradoxical Ending (Принцип 5)**: Does the poem offer an unexpected angle on the topic? Does the final line leave a lingering sensory or philosophical resonance without preaching?
 6. **Form & Content Unity (Принцип 6)**: Does the metric structure, stanza pace, and line breaks organically match the emotional weight of the theme? Does the meter's cultural association (*семантичний ореол метру*: bouncy 4-foot trochee → song, childhood, folk; ternary meters → ballad, elegy) support the theme rather than fight it?
 7. **Living Vocabulary**: Is every word understandable to a contemporary reader without a dictionary? No archaisms, dialect, rare bookish or invented words — unless the user explicitly asked for them?
@@ -355,11 +358,10 @@ notes: list               # critic notes: {line, issue, why, direction}
 | Need | Reference |
 | :--- | :--- |
 | Full Theoretical & Operational Guide | `references/full-guide.md` |
-| Ukrainian-Language Reference Guide | `references/ukrainian-poetry-skill-uk.md` |
-| Quick-Reference Cheat Sheet | `references/ukrainian-poetry-skill-lite.md` |
 | Structured Input Request Templates | `references/input-templates.md` |
 | Quality criteria: rationale and authoritative sources | `references/quality-criteria.md` |
 | 100-Point Evaluation & Scansion Rubric | `references/rubric.md` |
+| Meter scanner (syllables, stress pattern, best-fit meter, clausulae) | `scripts/scan_meter.py` |
 | 5 Specialized Subagents Pipeline | `agents/` (`agents/openai.yaml`) |
 | Standardized Test Suite (27 Scenarios) | `references/tests.md` |
 | Hardened Stress & Edge-Case Suite | `references/stress-tests.md` |

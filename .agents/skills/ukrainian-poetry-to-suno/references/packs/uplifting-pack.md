@@ -54,7 +54,7 @@
 ## 6. Forward-Moving Indie Rock (135 символів)
 - **Style of music**:
   ```text
-  ukrainian indie rock, bright melodic guitars, punchy live drums, energetic driving bass, clear optimistic lead vocal, wide chorus, 130 bpm
+  indie rock, bright melodic guitars, punchy live drums, energetic driving bass, clear optimistic lead vocal, wide chorus, 130 bpm
   ```
 - **Exclude**: `dark depressive synths, heavy metal scream, muffled low frequencies`
 

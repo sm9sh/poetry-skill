@@ -1,10 +1,10 @@
 {
   "name": "poetry-skill",
-  "version": "4.0.0",
-  "description": "Ukrainian poetry writing and poem-to-song adaptation for Suno v6-mini and Google Flow Music",
+  "version": "4.1.0",
+  "description": "Ukrainian poetry writing and poem-to-song adaptation for Suno v6-mini and Lyria 3.5",
   "author": {
     "name": "sm9sh"
   },
   "license": "MIT",
-  "keywords": ["poetry", "ukrainian", "suno", "udio", "flow-music", "multi-platform", "music", "versification", "lyrics"]
+  "keywords": ["poetry", "ukrainian", "suno", "udio", "lyria", "multi-platform", "music", "versification", "lyrics"]
 }

@@ -1,0 +1,30 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run test suites
+        run: python tests/run_tests.py --all
+      - name: Lyrics checker passes on the reference example
+        run: |
+          python - <<'PY'
+          import re, subprocess, sys, pathlib
+          text = pathlib.Path("skills/ukrainian-poetry-to-suno/references/poem-to-song-adaptation.md").read_text(encoding="utf-8")
+          song = [b for b in re.findall(r"```text\n(.*?)```", text, re.S) if "[Chorus - open" in b][0]
+          pathlib.Path("example_lyrics.txt").write_text(song, encoding="utf-8")
+          sys.exit(subprocess.call([sys.executable, "skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py", "example_lyrics.txt"]))
+          PY
+      - name: Mirror is in sync
+        run: |
+          python tests/sync_ecosystem.py
+          git diff --exit-code -- .agents/skills || (echo "::error::.agents/skills is out of date — run python tests/sync_ecosystem.py" && exit 1)

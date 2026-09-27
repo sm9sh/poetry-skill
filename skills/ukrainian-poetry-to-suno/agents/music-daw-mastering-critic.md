@@ -1,7 +1,7 @@
 ---
 name: music-daw-mastering-critic
 description: "Audit generated tracks against professional mixing and mastering standards. <example>Input: Stem mixing plan / Output: DAW Audit Report.</example>"
-model: gemini-2.5-pro
+model: inherit
 temperature: 0.2
 max_output_tokens: 4096
 ---

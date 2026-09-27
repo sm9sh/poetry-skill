@@ -31,7 +31,7 @@ class MetatagValidator:
     STRUCTURAL_PREFIXES = [
         # English structural markers
         "vocal intro", "intro", "verse", "pre-chorus", "pre chorus", "chorus",
-        "mega-chorus", "mega chorus", "post-chorus", "post chorus", "bridge",
+        "mega-chorus", "mega chorus", "final chorus", "last chorus", "post-chorus", "post chorus", "bridge",
         "drop", "beat drop", "build-up", "buildup", "build", "breakdown", "break",
         "instrumental", "instrumental break", "instrumental solo", "short instrumental fill",
         "instrumental fill", "fill", "guitar solo",

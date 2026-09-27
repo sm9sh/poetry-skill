@@ -2,7 +2,7 @@
 
 **File**: `examples/failures/lyrics-rushing-fix.md`  
 **Failure Mode**: Rapid Vocal Delivery / Auctioneer Syndrome ("Вокальна скоромовка")  
-**Target Platforms**: Suno AI (v6-mini), Udio AI (v4), Google Flow Music (Lyria 3.5)  
+**Target Platforms**: Suno AI (v6-mini), Udio AI (v4), Lyria 3.5  
 **Severity**: High (Renders lyrics unintelligible, triggers unnatural syllable slurring and rhythmic desynchronization)  
 
 ---
@@ -34,7 +34,7 @@ Neural audio generation models (transformers and diffusion acoustic decoders) ca
 
 ## 3. The Deterministic 4-Step Remediation Protocol
 
-To permanently resolve vocal rushing across Suno, Udio, and Google Flow Music, execute these four corrective steps:
+To permanently resolve vocal rushing across Suno, Udio, and Lyria 3.5, execute these four corrective steps:
 
 ### Step 1: Enforce the 4–8 Word & 8–10 Syllable Hard Ceiling
 Every line in verses and pre-choruses must be strictly capped at **4 to 8 words** and **8 to 10 syllables**. If an idea takes 16 syllables, divide it across two distinct lines.
@@ -69,22 +69,19 @@ In the Style Box / Prompt, reduce the BPM anchor or specify a halftime rhythmic 
 
 ### The Remediated Input (Pristine Rhythmic Cadence)
 ```text
-[Verse 1 - cold driving chorus bassline, sparse 808 hi-hats]
+[Verse 1 - cold driving chorus bassline, sparse drum machine]
 [Half-time feel]
-Блукаю в темряві нічній,
-Де мокрий блискає асфальт.
+Я виходжу з пустого метро,
+місто в мокрім неоні пливе.
 [Pause]
-Ліхтар тримає промінь свій,
-І холод криє цей базальт.
+Вітер холодом б'є під ребро,
+і ніхто не чекає мене.
 
 [Short Instrumental Fill - 2 bars]
 
 [Half-time feel]
-Шорстке вапно німих споруд,
-Забутий часу передзвін.
-[Pause]
-І вИпадок змиває бруд
-З холодних цегляних голін.
+Я звертаю у двір навпростець
+і дивлюсь, як завжди, догори.
 ```
 - **Word Count**: 4–5 words per line.
 - **Syllable Count**: Strict 8-8-8-8 iambic balance.
