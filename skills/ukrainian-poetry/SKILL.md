@@ -16,8 +16,8 @@ Prefer a finished poem over explanation unless the user explicitly asks for scan
 These six principles are what separates a living poem from a rhymed statement. Apply them in every draft and every critique. Where a rule below sounds absolute, the reason matters more than the letter: break a default only when the result is clearly stronger and you can say why.
 
 1. **Свіжа образність та метафоричність (Fresh Imagery & Metaphoricity)**:
-   - *Rule*: "Show, don't tell". Anchor emotions in tangible sensory details (tactile, visual, acoustic, olfactory, temperature), physical actions, and unexpected authorial metaphors.
-   - *Anti-patterns*: Clichéd tropes (*«кров — любов»*, *«серце палає»*, *«душа плаче»*, *«море сліз»*, *«крила надії»*), declarative abstract statements without physical embodiment.
+   - *Rule*: "Show, don't tell". Anchor emotions in tangible sensory details (tactile, visual, acoustic, olfactory, temperature), physical actions, and unexpected authorial metaphors. **Кожна метафора повинна мати розшифровуваний фізичний або психологічний сенс, а не бути абстрактною шизофазією чи випадковим набором красивих слів.**
+   - *Anti-patterns*: **Смислова маячня та псевдопоетичне марення** (*«вузол не почуть»*, *«хвиля рве метал до борта»* у спальні, *«тіло тримає вивірений захват»*); clichéd tropes (*«кров — любов»*, *«серце палає»*, *«душа плаче»*, *«море сліз»*, *«крила надії»*), declarative abstract statements without physical embodiment.
    - *Example*: ❌ *«Моє серце розривається від болю в холодній самотності.»* ➔ ✅ *«Холодна застібка куртки торкається підборіддя. На дні кишені — квиток на потяг, якого більше немає в розкладі.»*
 
 2. **Емоційна глибина та щирість (Emotional Depth & Sincerity)**:
@@ -31,8 +31,8 @@ These six principles are what separates a living poem from a rhymed statement. A
    - *Example*: ❌ *«Я іду у поле і шукаю волю, щоб знайти у ньому свою кращу долю.»* ➔ ✅ *«Колючий вітер вистудив траву́, / І перша паморозь лягла без зву́ку. / Я цим осіннім вечором живу́, / В кишеню заховавши змерзлу ру́ку.»*
 
 4. **Лаконічність і вага слова (Conciseness & Word Weight)**:
-   - *Rule*: High semantic compression («словам тісно, думкам просторо»). Every noun, verb, and epithet must carry irreplaceable weight.
-   - *Anti-patterns*: Rhythmic padding ("водичка"), filler pronouns (*я, мій, твій, цей, той, свій, вже, ось, то, ж*) used merely to pad syllable counts — a pronoun is filler only when it carries no meaning (*«за моїм велосипедом»* can be meaningful: it marks the speaker's absence); **artificial syntactic inversions** (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч темну»*) forced for rhyme. Natural Ukrainian word order is mandatory.
+   - *Rule*: High semantic compression («словам тісно, думкам просторо»). Every noun, verb, and epithet must carry irreplaceable weight. **ЗАЛІЗНИЙ ЗАКОН СМИСЛОВОЇ ЛОГІКИ: Рима та метр НІКОЛИ не виправдовують безглуздя. Другий рядок римованої пари не має права бути маячнею, вигаданою суто заради співзвуччя з першим.**
+   - *Anti-patterns*: **«Риболовля рим ціною змісту»** (коли фраза притягнута штучно заради рими); rhythmic padding ("водичка"), filler pronouns (*я, мій, твій, цей, той, свій, вже, ось, то, ж*) used merely to pad syllable counts — a pronoun is filler only when it carries no meaning (*«за моїм велосипедом»* can be meaningful: it marks the speaker's absence); **artificial syntactic inversions** (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч темну»*) forced for rhyme. Natural Ukrainian word order is mandatory.
    - *Example*: ❌ *«І от уже цей мій сумний і темний вечір прийшов до мене у моє вікно знов.»* ➔ ✅ *«Сутінки осідають на підвіконня. Ліхтарі вмикаються за секунду до темряви.»*
 
 5. **Оригінальність ракурсу (Originality of Perspective)**:
@@ -44,6 +44,16 @@ These six principles are what separates a living poem from a rhymed statement. A
    - *Rule*: External architecture (meter, stanza structure, speed, line breaks, caesuras, enjambments) must intrinsically embody the psychological state and theme.
    - *Anti-patterns*: Mismatched form and tone (e.g. expressing tragic grief via a cheerful, bouncy 4-foot trochee with diminutive suffixes).
    - *Example*: An urban panic or anxiety expressed through an abrupt, irregular dolnik or syncopated verlibre rather than an ornate, rigid classical stanza.
+
+> [!CAUTION]
+> **СУВОРИЙ ЗАХИСТ ВІД БЕЗЗМІСТОВНОЇ МАЯЧНІ ТА ШИЗОФАЗІЇ (GATE 0: ANTI-GIBBERISH FILTER)**:
+> Нейромережі схильні римувати випадкові слова, створюючи граматично правильний, але абсолютно беззмістовний "поетичний шум". Критик і аудитор зобов'язані безжально відкидати будь-який рядок, який втрачає логіку, причинно-наслідковий зв'язок або ситуативний контекст:
+> 1. **Нуль вигаданих слів (D18)**: Категорично заборонено ліпити морфологічні покручі суто під риму (*«до крихини»* замість *крихти*). Слово має бути в словнику СУМ.
+> 2. **Нуль лексичних русизмів (D19)**: Категорично заборонено кальки (*«шалений захват»* у значенні «бешеный восторг», *«напір»*). В українській мові це *захоплення* або *тиск*.
+> 3. **Нуль мертвих затичок (D20)**: Заборонено архаїчні штампи під риму (*«стократ»*, *«воістину»*).
+> 4. **Нуль спотворених наголосів (D21)**: Заборонено ламати нормативні наголоси заради рими (*«по всіх жилАх»* під «жах» замість словникового *«по жИлах»*).
+> 
+> Жодна технічна бездоганність форми (метр, клаузули, рідкісні рими) не рятує текст, якщо в ньому є хоча б один безглуздий чи фальшивий рядок. Порушення Gate 0 = негайна оцінка $\le 60/100$ (FAIL).
 
 ---
 
@@ -101,7 +111,7 @@ This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is 
    - Keep natural Ukrainian word order; if a rhyme needs an inversion, change the rhyme, not the syntax (**Principle 4: Conciseness & Syntax**).
    - Cleanse any filler pronouns (*цей, той, свій*) or rhythmic padding words.
 4a. **Scan the meter when the form is metrical**: mark stresses (acute) in a scratch copy and run `python scripts/scan_meter.py poem.txt` (add `--auto-stress` if `ukrainian-word-stress` is installed: `pip install --no-deps ukrainian-word-stress marisa-trie`). It prints syllables, the stress pattern, the best-fit meter, off-beat stresses and clausulae per stanza — fix the flagged lines. Skip for free verse.
-5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again; if the failure is in the idea (no turn, no discovery), go back to step 2a. Do this silently: show the checklist only if the user asks; show only the poem that passed.
+5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through **Gate 0** (every line makes literal or clearly decodable sense; nothing exists only because it rhymes) and then the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again; if the failure is in the idea (no turn, no discovery), go back to step 2a. Do this silently: show the checklist only if the user asks; show only the poem that passed.
 6. **If the poem is meant as a song** (Suno / Lyria 3.5): keep lines 6–10 syllables, give it a repeatable hook, and hand off to `ukrainian-poetry-to-suno` for song form and markup. In songs, repeating the hook is a device, not padding.
 
 ---
@@ -296,6 +306,7 @@ Run this for **every** poem before output — no exceptions for quick drafts, sm
 Rationale and authoritative sources for every item (Pound, Eliot, Frost, Kooser, Theune, Franko, Potebnja, Gasparov, Poetry Society judges): `references/quality-criteria.md`.
 
 **Mandatory (1–12)**
+0. **Gate 0 — Semantic Sanity**: Does every line have a clear literal or decodable meaning, connected to the lines around it? Is nothing there only for the rhyme? No invented words, lexical Russianisms, archaic rhyme fillers or stress broken for a rhyme (D15–D21). A failure here caps the poem at 60/100 and must be fixed before anything else.
 1. **Imagery & Sensory Anchor (Принцип 1)**: Is the poem grounded in concrete physical details and fresh metaphors ("show, don't tell")? Are abstract clichés (*душа, серце, доля, крила надії*) eliminated?
 2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions? Is the emotion evoked by a situation or chain of objects (Eliot's *objective correlative*) rather than named?
 3. **Prosody, Phonics & Euphony (Принцип 3)**: Does the rhythm breathe naturally with correct pyrrhics? Are stresses strictly literary (*вИпадок*, *чорнОзем*, *новИй*)? Are `у/в`, `і/й`, `з/із/зі` balanced? Is assonance/alliteration harmonized?
