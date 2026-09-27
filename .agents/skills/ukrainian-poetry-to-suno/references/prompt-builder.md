@@ -1,6 +1,6 @@
-# Multi-Platform AI Music Prompt Builder (Suno v4.5/v5.5, Udio v4, Flow Music Lyria 3.5)
+# Multi-Platform AI Music Prompt Builder (Suno v6-mini, Udio v4, Flow Music Lyria 3.5)
 
-Швидкий конструктор високоточних запитів для сучасних аудіомоделей **Suno AI (v4.5 / v5.5)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**.
+Швидкий конструктор високоточних запитів для сучасних аудіомоделей **Suno AI (v6-mini)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**.
 
 ---
 
@@ -9,7 +9,7 @@
 1. **Ліво-право пріоритет (Positional Priority & «First 5 Words» Rule)**: Перші 4–5 слів забирають 80% уваги нейромережі. Домінантний західний жанр, темпоритм та вокальний тембр завжди розміщуються на початку.
 2. **Орієнтація на західні жанри**: Базовий стиль формується із західних жанрів (Post-Punk, Darkwave, Synthwave, Trip-Hop, Alt-Pop, Shoegaze, Metalcore, Melodic Techno, Cinematic Ambient) для уникнення провінційної попси та шароварщини.
 3. **Бюджет символів**:
-   - **Suno v4.5/v5.5**: Суворо **80–180 символів** (оптимально 80–150 символів або 8–15 точкових тегів; максимальний технічний ліміт поля — 1000 символів).
+   - **Suno v6-mini**: Суворо **80–180 символів** (оптимально 80–150 символів або 8–15 точкових тегів; максимальний технічний ліміт поля — 1000 символів).
    - **Udio v4**: До **250 символів** (оптимально 100–200 символів).
    - **Flow Music (Lyria 3.5)**: Розмовний абзац на 150–300 слів для AI-агента.
 4. **Чистота полів (Zero Metadata Leakage)**: У полі `Style of music` суворо заборонено писати службові мітки (`Language: Ukrainian`, `Theme: ...`, `Mood: ...`, `BPM: 120`). Мова задається текстом у `Lyrics`, темп — токеном `120 bpm`.
@@ -19,7 +19,7 @@
 
 ## 2. Формули створення промптів за платформами
 
-### 2.1 Suno AI (v4.5 / v5.5)
+### 2.1 Suno AI (v6-mini)
 
 #### Метод 1: «Conversational Paragraph» (Правило «First 5 Words»)
 Цілісний опис стилю англійським абзацом, де перші 4–5 слів визначають жанр та вокал:
@@ -44,6 +44,7 @@ indie rock, melancholic, raspy male vocals, intimate close-up delivery, dry mic,
 ---
 
 ### 2.2 Udio AI (v4)
+> Udio зараз не дозволяє завантажувати треки (див. `platforms.md`). Використовуй цей розділ лише якщо користувач свідомо працює в Udio.
 ```text
 [Main Genre], [Sub-Genre], [Year/Era], [Vocal Timbre & Character], [Analog Production Style], [Acoustic Space, BPM]
 ```
@@ -132,7 +133,7 @@ Create a contemporary dark synthwave track with deep analog Moog bass pulse and 
 
 1. **Lyrics Rushing (вокальна скоромовка)**:
    - *Причина*: Занадто довгі рядки або перенасичений текст при швидкому темпі.
-   - *Виправлення*: Розбивати текст на рядки по 4–8 слів, знизити BPM на 10–15 пунктів, додати інлайн-команду `(half-time feel)`.
+   - *Виправлення*: Розбивати текст на рядки по 4–8 слів, знизити BPM на 10–15 пунктів, додати інлайн-команду `[Half-time feel]`.
 2. **Robotic / Sterile Vocals (бездушний вокал)**:
    - *Причина*: Однослівний опис вокалу ("male vocal").
    - *Виправлення*: Застосувати повний Vocal Triple-Stack: `raw passionate male tenor, intimate dry conversational delivery, subtle tape warmth`.
@@ -141,7 +142,7 @@ Create a contemporary dark synthwave track with deep analog Moog bass pulse and 
    - *Виправлення*: Використовувати позитивну гіперспецифічність: `purely acoustic, solo piano, isolated vocals, sparse arrangement, unaccompanied`.
 4. **Instrumental Parentheses Hallucination (співання інструментів)**:
    - *Причина*: Написання `(guitar solo)` у круглих дужках у полі лірики.
-   - *Виправлення*: Перенести в квадратні дужки `[Guitar Solo]`. Круглі дужки `(...)` залишити виключно для бек-вокалу `(луна)` та вокальних жестів `(whispered)`, `(belted)`.
+   - *Виправлення*: Перенести в квадратні дужки `[Guitar Solo]`. Круглі дужки `(...)` залишити тільки для співаного бек-вокалу та ехо (`(ніколи знов)`); вказівки подачі теж у квадратних: `[Whispered]`, `[Belted]`.
 
 ---
 

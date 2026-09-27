@@ -1,7 +1,7 @@
-# Production Scenario: Ukrainian Darkwave / Post-Punk (Suno AI v4.5 / v5.5)
+# Production Scenario: Ukrainian Darkwave / Post-Punk (Suno AI v6-mini)
 
 **File**: `examples/success/suno-darkwave-postpunk.md`  
-**Platform**: Suno AI (v4.5 / v5.5) — Custom Mode  
+**Platform**: Suno AI (v6-mini) — Custom Mode  
 **Genre Anchor**: Western Coldwave / Darkwave / Post-Punk  
 **Tempo & Key**: 132 BPM, D minor  
 **Vocal Profile**: Melancholic Raspy Male Baritone, Close-Mic Intimate Phrasing  
@@ -11,7 +11,7 @@
 
 ## 1. Executive Summary & Creative Brief
 
-This scenario demonstrates a complete, production-ready release pipeline for an authentic Ukrainian coldwave/post-punk track engineered for Suno AI (v4.5/v5.5). The track adheres to Western contemporary indie-release standards (reminiscent of Joy Division, Lebanon Hanover, and modern Eastern European coldwave dynamics, completely de-identified), strictly rejecting provincial kitsch and post-Soviet schlager clichés.
+This scenario demonstrates a complete, production-ready release pipeline for an authentic Ukrainian coldwave/post-punk track engineered for Suno AI (v6-mini). The track adheres to Western contemporary indie-release standards (reminiscent of Joy Division, Lebanon Hanover, and modern Eastern European coldwave dynamics, completely de-identified), strictly rejecting provincial kitsch and post-Soviet schlager clichés.
 
 The lyrics strictly enforce the **6 Core Poetic Principles** of Ukrainian versification, utilizing concrete physical anchors ("мокрий асфальт", "шорстке вапно", "іржавий цвях"), natural Ukrainian word order without artificial rhyming inversions, rich heterogeneous rhymes, and capitalized stressed vowels for unambiguous AI phonetic synthesis.
 
@@ -58,68 +58,68 @@ cheesy pop brass, polished autotune pop, wedding accordion, bright acoustic stru
 
 > **Metatag Discipline**:
 > - `[Square Brackets]`: Reserved exclusively for structural, instrumental, and arrangement directives.
-> - `(Round Parentheses)`: Reserved exclusively for vocal delivery gestures, ad-libs, and backing harmonies.
+> - `(Round Parentheses)`: Only words that should be sung as backing vocals or echoes. Delivery cues (`[Whispered]`, `[Belted]`) stay in square brackets — Suno sings anything in parentheses.
 
 ```text
 [Vocal Intro - dynamic acapella, dry and close]
-(whispered)
+[Whispered]
 Тінь на стіні.
 
 [Verse 1 - cold driving chorus bassline, sparse 808 hi-hats]
-БлукАю в тЕмряві нічнІй,
-Де мОкрий блИскає асфАльт.
-ЛіхтАр тримАє прОмінь свій,
-І хОлод крИє цей базАльт.
-ШорсткЕ вапнО німИх спорУд,
+Блукаю в темряві нічній,
+Де мокрий блискає асфальт.
+Ліхтар тримає промінь свій,
+І холод криє цей базальт.
+Шорстке вапно німих споруд,
 (веди, дорОга)
-ЗабУтий чАсу передзвІн,
-І вИпадок змивАє бруд
-З холодних цеглянИх голІн.
+Забутий часу передзвін,
+І вИпадок змиває бруд
+З холодних цегляних голін.
 
 [Pre-Chorus - rising snare roll, building tension]
-(building intensity)
+[Building intensity]
 Крок у морок, крок назад,
 В жилах б'ється чорнОзем.
-(half-time feel)
+[Half-time feel]
 Ніч ламає цей фасад,
 Ми під світлом оживем!
 
 [Chorus - explosive open wide space, wall of chorus guitars]
-(belted)
+[Belted]
 Оооо-аааай, гори, палаючий неон!
-(harmonized)
+[Harmonized]
 Розбий мовчання сірих стін!
 Оооо-аааай, крізь цей засніжений бетон
-(луна)
+[Echo]
 Летить нічний тривожний дзвін!
 
 [Verse 2 - add driving tambourine, shaker, backing vocals]
-ІржАвий цвях, затЕртий ключ,
-Тут прИйде ранок без оман.
+Іржавий цвях, затертий ключ,
+Тут прийде ранок без оман.
 (ніколи знов)
 Повз гострі зрізи темних круч
-Сповзає льодянИй туман.
+Сповзає льодяний туман.
 
 [Breakdown - vocal and pulsing sub-bass only, intimate dry space]
-(whispered)
+[Whispered]
 Тільки бас.
-(whispered)
+[Whispered]
 Тільки пульс.
-СердЕнько моЄ замре...
+Серденько моє замре...
 
 [Mega-Chorus - maximum energy, layered harmonies, guitars clashing]
-(belted)
+[Belted]
 Оооо-аааай, гори, палаючий неон!
-(harmonized)
+[Harmonized]
 Розбий мовчання сірих стін!
 Оооо-аааай, крізь цей засніжений бетон
-(луна)
+[Echo]
 Летить нічний тривожний дзвін!
 
 [Outro - fading coldwave synth arpeggio, tape hiss]
-(луна)
+[Echo]
 Веди, дорОга...
-(луна)
+[Echo]
 Нічний тривожний дзвін...
 [Cold End]
 ```

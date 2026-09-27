@@ -1,12 +1,12 @@
 # Lyrics To Suno, Udio & Google Flow Music Custom Mode Templates (v8)
 
-Універсальні шаблони для перетворення українських віршів, пісенних текстів, референсів та творчих брифів у готові конфігурації для **Suno AI (v4.5 / v5.5)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**.
+Універсальні шаблони для перетворення українських віршів, пісенних текстів, референсів та творчих брифів у готові конфігурації для **Suno AI (v6-mini)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**.
 
 > [!IMPORTANT]
 > **Золоте правило синтаксису дужок та наголосів**:
 > - **Квадратні дужки `[ ... ]`**: призначені виключно для метатегів, структури, звукових ефектів та інструментальних вказівок (`[Vocal Intro - dynamic acapella, dry]`, `[Beat Drop]`, `[Verse 2 - add driving tambourine, shaker]`, `[Breakdown]`, `[Mega-Chorus]`, `[Outro]`). Аудіомоделі обробляють їх як німі музичні команди!
-> - **Круглі дужки `( ... )`**: призначені **виключно для бек-вокалу, ехо та інлайн вокальних жестів** `(whispered)`, `(belted)`, `(falsetto)`, `(screamed)`, `(ad-lib)`, `(building intensity)`, `(key change)`, `(half-time feel)`, `(harmonized)`, `(луна)`, `(ніколи знов)`. **Ніколи не пишіть інструменти в круглих дужках** — Google Flow Music і Suno прочитають або заспівають їх вголос!
-> - **Наголоси у тексті (`вИпадок`, `дорОга`)**: щоб запобігти зсуву наголосу моделлю при генерації вокалу, виділяйте наголошену голосну **великою літерою** у словах з неочевидним наголосом чи омографах (`вИпадок`, `чорнОзем`, `прИйде`, `заспівАй`, `моЯ`, `землЯ`, `зЕмлю`, `дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`, `сердЕнько`).
+> - **Круглі дужки `( ... )`**: тільки те, що має **прозвучати голосом** — бек-вокал та ехо слів (`(ніколи знов)`, `(о-о-о)`). Suno та Flow Music співають усе, що в круглих дужках, тому вказівки подачі (`[Whispered]`, `[Belted]`, `[Falsetto]`, `[Key Change]`, `[Half-time feel]`) і будь-які інструменти пишуться лише в квадратних дужках.
+> - **Наголоси у тексті (`вИпадок`, `дорОга`)**: щоб запобігти зсуву наголосу моделлю при генерації вокалу, виділяйте наголошену голосну **великою літерою** лише у трьох категоріях: омографи (`дорОга` vs `дорогА`, `зАмок` vs `замОк`, `плАчу` vs `плачУ`), слова, які модель вимовляє по-російськи (`вИпадок`, `чорнОзем`, `листопАд`), та неочевидні зсуви у відмінках (`зЕмлю`, `рУку`). Службові й очевидні слова (`моя`, `земля`, `прийде`, `заспівай`) не позначайте.
 > - **Udio Inpainting `*stars*`**: для точкової заміни слів у Udio v4 використовуйте зірочки (`*static sky*`).
 
 ---
@@ -14,7 +14,7 @@
 ## 1. Головний мультиплатформний шаблон (Master Copy-Paste Template)
 
 ```text
-======================= SUNO AI (v4.5 / v5.5) =======================
+======================= SUNO AI (v6-mini) =======================
 Style of music (Method 1 - Conversational):
 <Genre & Subgenre>, <Vocal Triple-Stack>, <Key Instruments>, <Mood/Energy>, <Aesthetic & BPM> (80-180 chars)
 
@@ -23,37 +23,37 @@ Style of music (Method 2 - HookGenius Tag Matrix):
 
 Lyrics:
 [Vocal Intro - dynamic acapella, dry and close]
-(Почуй цей шУм у нАших вЕнах...)
+(Почуй цей шум у наших венах...)
 [Beat Drop - heavy fuzz bass, punchy driving drums]
 
 [Verse 1 - rhythmic staccato, intimate delivery]
-<Рядки першого куплету з великими літерами на наголосах: моЯ, вИпадок, дорОга>
-(whispered) <інтимний шепіт>
-(луна у тИші)
+<Рядки першого куплету; великі літери лише в омографах / пастках / зсувах: вИпадок, дорОга, зЕмлю>
+[Whispered] <інтимний шепіт>
+(у тиші)
 
 [Pre-Chorus - building intensity, rising snare roll]
 <Передприспів: наростання напруги>
-(building intensity)
+[Building intensity]
 
 [Chorus - explosive open wide space, soaring vocal]
 <Широкі відкриті голосні legato: Оооо, Аааа>
-(belted) <потужний відкритий вокал>
-(layered harmonies)
+[Belted] <потужний відкритий вокал>
+[Layered harmonies]
 
 [Verse 2 - add driving tambourine, syncopated backing, sharp guitars]
 <Розвиток аранжування другого куплету за Венсом Пауеллом>
-(half-time feel)
+[Half-time feel]
 
 [Chorus]
 <Приспів>
 
 [Breakdown - vocal and sub-bass only, intimate, dry]
-(whispered) <15-20 секунд спаду енергії>
+[Whispered] <15-20 секунд спаду енергії>
 
 [Mega-Chorus - maximum energy, layered harmonies, guitars clashing]
-(key change) <Кульмінаційний вибух>
-(belted, powerful)
-(layered harmonies)
+[Key Change] <Кульмінаційний вибух>
+[Belted, powerful]
+[Layered harmonies]
 
 [Outro - dynamic fading vocal, tape hiss]
 [End]
@@ -96,7 +96,7 @@ Create a modern <Western Genre> song with <Vocal Triple-Stack> inspired by <West
 ├────────────────────────────────────────────────────────────────────────────────────────┤
 │ Крок 4: Extend 3 — Breakdown & Mega-Chorus (2:10 - 3:15)                               │
 │ ─ Скидання інструментальної енергії на 15–20 секунд: [Breakdown - vocal and bass only].│
-│ ─ Вибух у кульмінаційний [Mega-Chorus] з модуляцією (key change) та багатоголоссям.    │
+│ ─ Вибух у кульмінаційний [Mega-Chorus] з модуляцією [Key Change] та багатоголоссям.    │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
 │ Крок 5: Extend 4 — Лаконічне Outro (3:15 - 3:35)                                       │
 │ ─ Коротка кода [Outro] тривалістю <= 20 секунд для збереження глибини дослуховування.  │
@@ -109,7 +109,7 @@ Create a modern <Western Genre> song with <Vocal Triple-Stack> inspired by <West
 
 ### Шаблон А: З готового українського вірша
 ```text
-Перетвори цей український вірш у мультиплатформенний пакет (Suno v4.5/v5.5, Udio v4, Flow Music Lyria 3.5).
+Перетвори цей український вірш у мультиплатформенний пакет (Suno v6-mini, Udio v4, Flow Music Lyria 3.5).
 
 Параметри:
 - Бажаний західний жанр: <Post-Punk | Dark Synthwave | Trip-Hop | Alt-Pop | Metalcore | Shoegaze | Techno | Ambient>
@@ -135,7 +135,7 @@ Create a modern <Western Genre> song with <Vocal Triple-Stack> inspired by <West
 
 Поверни:
 1. Деконструкцію референсу (BPM, тональність, хуки).
-2. Suno v4.5/v5.5 Prompts (Method 1 Conversational & Method 2 HookGenius Tag Matrix).
+2. Suno v6-mini Prompts (Method 1 Conversational & Method 2 HookGenius Tag Matrix).
 3. Udio v4 Prompt (з Context Length & Inpainting).
 4. Google Flow Music Prompt (Lyria 3.5).
 5. Lyrics Sheet з розміткою [] та інлайн-жестами ().

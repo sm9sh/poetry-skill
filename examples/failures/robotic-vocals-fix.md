@@ -2,7 +2,7 @@
 
 **File**: `examples/failures/robotic-vocals-fix.md`  
 **Failure Mode**: Sterile, Synthetic, or Heavily Autotuned Vocals ("Пластмасовий вокал")  
-**Target Platforms**: Suno AI (v4.5 / v5.5), Udio AI (v4), Google Flow Music (Lyria 3.5)  
+**Target Platforms**: Suno AI (v6-mini), Udio AI (v4), Google Flow Music (Lyria 3.5)  
 **Severity**: High (Destroys human emotional resonance, flags the track immediately as cheap amateur AI generation)  
 
 ---
@@ -51,10 +51,10 @@ Replace single-word vocal tags with a 3-dimensional vocal specification across a
    - `vintage tape slap delay`, `mild tube saturation`, `dry room acoustics`, `warm analog pre-amp`.
 
 ### Step 2: Inject Dynamic Inline Vocal Gestures
-Instruct the model on vocal inflection section by section using round parentheses `(...)`:
-- Verse: `(whispered)`, `(spoken)`, `(breathy delivery)`
-- Chorus: `(belted)`, `(falsetto)`, `(harmonized)`, `(soaring vocalise)`
-- Transitions: `(building intensity)`, `(ad-lib)`, `(луна)`
+Instruct the model on vocal inflection section by section using square-bracket cues (round parentheses would be sung):
+- Verse: `[Whispered]`, `[Spoken]`, `[Breathy delivery]`
+- Chorus: `[Belted]`, `[Falsetto]`, `[Harmonized]`, `[Soaring vocalise]`
+- Transitions: `[Building intensity]`, `[Ad-lib]`, `[Echo]`
 
 ### Step 3: Enforce Spatial Contrast (Quality Gate 4)
 - **Verse**: Intimate, dry, centered, and physically close to the listener's ear (`dry close vocal`).
@@ -106,28 +106,28 @@ robotic autotune, metallic vocal sheen, harsh sibilance, midi plastic vocals, st
 **Lyrics Box**:
 ```text
 [Vocal Intro - dynamic acapella, dry and intimate]
-(whispered)
+[Whispered]
 Чекаю тут...
 
 [Verse 1 - dry close-mic, unhurried phrasing]
 (intimate)
-ШорсткЕ вапнО тримАє ніч,
-Холодний дОщ стікАє в сад.
-(pause)
-Вогонь згасАє серед пліч,
-І нЕма бІльше вороття назАд.
+Шорстке вапно тримає ніч,
+Холодний дощ стікає в сад.
+[Pause]
+Вогонь згасає серед пліч,
+І нема більше вороття назад.
 
 [Pre-Chorus - building emotional warmth]
-(building intensity)
-Я чую крок, лунА дзвенить...
+[Building intensity]
+Я чую крок, луна дзвенить...
 
 [Chorus - explosive emotional release, layered harmonies]
-(belted)
-Ооо-ааа, лети, мій бОлю, крізь туман!
-(harmonized)
+[Belted]
+Ооо-ааа, лети, мій болю, крізь туман!
+[Harmonized]
 Розвій у попіл давній страх!
 Ооо-ааа, минає морок і обман,
-(луна)
+[Echo]
 І сонце сходить на стежках!
 ```
 

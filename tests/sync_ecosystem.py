@@ -40,8 +40,6 @@ def sync_global_plugin():
     config_files = [
         ("plugin.json", PROJECT_ROOT / "plugin.json"),
         ("AGENTS.md", PROJECT_ROOT / "AGENTS.md"),
-        ("GEMINI.md", PROJECT_ROOT / "GEMINI.md"),
-        ("CLAUDE.md", PROJECT_ROOT / "CLAUDE.md"),
         ("INSTALL.md", PROJECT_ROOT / "INSTALL.md"),
         ("README.md", PROJECT_ROOT / "README.md"),
         ("ai-music-generation-meta-spec-v8.md", PROJECT_ROOT / "source" / "upstream" / "ai-music-generation-meta-spec-v8.md"),
@@ -53,6 +51,20 @@ def sync_global_plugin():
             dest = GLOBAL_PLUGIN_DIR / filename
             shutil.copy2(src, dest)
             print(f"  [OK] Copied {src.name} -> {dest}")
+
+    # Pipeline documentation referenced from the skills
+    pipeline_src = PROJECT_ROOT / "docs" / "PIPELINE.md"
+    if pipeline_src.exists():
+        (GLOBAL_PLUGIN_DIR / "docs").mkdir(exist_ok=True)
+        shutil.copy2(pipeline_src, GLOBAL_PLUGIN_DIR / "docs" / "PIPELINE.md")
+        print(f"  [OK] Copied docs/PIPELINE.md -> {GLOBAL_PLUGIN_DIR / 'docs'}")
+
+    # Remove config files that no longer exist in the repository
+    for stale in ("GEMINI.md", "CLAUDE.md"):
+        stale_path = GLOBAL_PLUGIN_DIR / stale
+        if stale_path.exists():
+            stale_path.unlink()
+            print(f"  [OK] Removed stale {stale_path}")
 
     # 3. Copy commands
     commands_dir = PROJECT_ROOT / "commands"
@@ -109,7 +121,10 @@ def verify_root_cleanliness() -> bool:
 
 if __name__ == "__main__":
     sync_agents_skills()
-    sync_global_plugin()
+    if os.name == "nt":
+        sync_global_plugin()
+    else:
+        print("\n=== Skipping Global Plugin Sync (Windows-only path) ===")
     clean = verify_root_cleanliness()
     if not clean:
         sys.exit(1)

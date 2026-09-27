@@ -1,7 +1,7 @@
 {
   "name": "poetry-skill",
-  "version": "3.0.0",
-  "description": "Ukrainian Poetry generation, versification, and production-grade Suno AI / Udio / Flow Music prompt engineering system",
+  "version": "4.0.0",
+  "description": "Ukrainian poetry writing and poem-to-song adaptation for Suno v6-mini and Google Flow Music",
   "author": {
     "name": "sm9sh"
   },

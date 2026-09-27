@@ -1,6 +1,6 @@
 # Western & Ukrainian Reference-to-Style Cheatsheet (v8)
 
-Шпаргалка для безпечного перетворення референсів у легальні `safe style prompts` для **Suno AI (v4.5 / v5.5)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)** з **пріоритетом західних музичних жанрів, вокального Triple-Stack та стандартів продакшну**, що гарантує фірмове західне звучання треку без шароварщини та дешевої локальної попси.
+Шпаргалка для безпечного перетворення референсів у легальні `safe style prompts` для **Suno AI (v6-mini)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)** з **пріоритетом західних музичних жанрів, вокального Triple-Stack та стандартів продакшну**, що гарантує фірмове західне звучання треку без шароварщини та дешевої локальної попси.
 
 ---
 
@@ -55,7 +55,7 @@
 ### 3. Massive Attack / Portishead / Morcheeba Archetype (Trip-Hop / Bristol Sound)
 - **Звуковий ДНК**: Вініловий даунтемпо-брейкбіт, теплий Rhodes, глибокий саб-бас 808, димчастий жіночий напівшепіт, плівкове насичення.
 - **Vocal Triple-Stack**: `breathy smoky female vocal, intimate whispered delivery, subtle tape warmth`.
-- **Melodic Math**: 5-секундний вокальний шепіт `(whispered)`, мінімалістичний 808 біт-дроп `[Beat Drop]`, 3 когнітивні мелодії.
+- **Melodic Math**: 5-секундний вокальний шепіт `[Whispered]`, мінімалістичний 808 біт-дроп `[Beat Drop]`, 3 когнітивні мелодії.
 - **Suno Safe Style (Method 1 - 145 симв.)**:
   ```text
   Bristol trip-hop, breathy smoky female vocal, dusty vinyl breakbeat, warm rhodes piano, deep 808 sub bass, dark melancholic tape warmth, 85 BPM.
@@ -73,7 +73,7 @@
 ### 4. Billie Eilish / Lorde / Banks Archetype (Minimalist Dark Alt-Pop)
 - **Звуковий ДНК**: Мінімалістичний 808 саб, інтимний ASMR-вокал (близький мікрофон), органічний перкусійний фолі-шум, просторовий мікс.
 - **Vocal Triple-Stack**: `close-mic breathy female vocal, ASMR vocal texture, fragile whisper, dry upfront mix`.
-- **Melodic Math**: Інлайн-жести `(whispered)` у куплетах, вибуховий `(belted)` приспів із розширенням `[Chorus - explosive open wide space]`.
+- **Melodic Math**: Інлайн-жести `[Whispered]` у куплетах, вибуховий `[Belted]` приспів із розширенням `[Chorus - explosive open wide space]`.
 - **Suno Safe Style (Method 1 - 131 симв.)**:
   ```text
   Minimalist alt-pop, intimate breathy female vocal, heavy 808 sub bass, organic foley percussions, dark spatial production, 100 BPM.
@@ -91,7 +91,7 @@
 ### 5. Bring Me The Horizon / Spiritbox / Architects Archetype (Modern Metalcore / Djent)
 - **Звуковий ДНК**: Дроп-тюнінг, низькі джент-рифи, щільні панчеві барабани, контраст брутального гроулу та епічного чистого приспіву.
 - **Vocal Triple-Stack**: `brutal guttural scream alternating soaring ethereal clean melodic vocal`.
-- **Melodic Math**: Вибуховий `[Mega-Chorus]` після 15-секундного `[Breakdown]`, модульований фінал `(key change)`.
+- **Melodic Math**: Вибуховий `[Mega-Chorus]` після 15-секундного `[Breakdown]`, модульований фінал `[Key Change]`.
 - **Suno Safe Style (Method 1 - 143 симв.)**:
   ```text
   Progressive metalcore, brutal screaming alternating soaring clean vocal, drop-tuned djent riffs, punchy drums, aggressive dark mood, 150 BPM.
@@ -109,7 +109,7 @@
 ### 6. Slowdive / Beach House / Arctic Monkeys Archetype (Shoegaze / Dream Pop / Indie)
 - **Звуковий ДНК**: Стіна реверберованих гітар, вінтажний хорус, теплий аналоговий грув, повітряний вокал у просторі.
 - **Vocal Triple-Stack**: `whispered breathy vocal, delicate airy high register, lush vintage chorus`.
-- **Melodic Math**: Повільне наростання напруги `(building intensity)` у пре-приспіві, гітарний сольний хук `[Instrumental Break]`.
+- **Melodic Math**: Повільне наростання напруги `[Building intensity]` у пре-приспіві, гітарний сольний хук `[Instrumental Break]`.
 - **Suno Safe Style (Method 1 - 143 симв.)**:
   ```text
   Shoegaze dream pop, whispered breathy vocal, wall of sound reverb guitars, jangly indie groove, lush vintage chorus, atmospheric mood, 90 BPM.

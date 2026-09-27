@@ -76,7 +76,7 @@
       "id": "TC_T1_FLOW_03_Suno_Syntax",
       "name": "Flow Music prompt with Suno syntax",
       "platform": "flow_music",
-      "prompt": "Create a modern cinematic ambient track. [Verse] It features an emotive soaring cello. (whispered) The vocal is intimate.",
+      "prompt": "Create a modern cinematic ambient track. [Verse] It features an emotive soaring cello. [Whispered] The vocal is intimate.",
       "assertions": {
         "is_valid": false,
         "has_error": "Suno-specific metatags"
@@ -97,7 +97,7 @@
       "name": "Multi-platform Suno routing",
       "platform": "suno",
       "style_of_music": "indie rock, melancholic, raspy male vocals, intimate close-up delivery, dry mic, live drum kit, lo-fi tape hiss, 115 bpm",
-      "lyrics": "[Verse 1]\nХолОдний вІтер б'є в обличчя знов\nМетАлевий присмАк на кінчику язИка\nТрамвАй заплУтався у пАвутинні снІв\nІ мІсто дИхає — глибОко, напівдИко",
+      "lyrics": "[Verse 1]\nХолодний вітер б'є в обличчя знов\nМеталевий присмак на кінчику язика\nТрамвай заплутався у павутинні снів\nІ місто дихає — глибоко, напівдико",
       "assertions": {
         "is_valid": true
       }

@@ -118,7 +118,7 @@
       "feature": "F9",
       "style_of_music": "ukrainian indie rock, post-punk, 125 bpm, driving bassline, chorus telecaster riffs, melancholic male vocal, punchy drums",
       "exclude": "cheesy regional pop, post-soviet schlager, wedding synth brass, cheap accordion, metallic highs",
-      "lyrics": "[Intro - Staccato cutting telecaster riff, driving bassline, punchy drum buildup]\n\n[Verse 1 - Intimate breathy vocal, muted guitar]\nЦей дивний вИпадок змінИв моє життЯ,\nВеди́, дорОга, крізь тумАн і забуттЯ.\n(моЯ дорОга)\nТам чорнОзем приймає перші крОки,\nДе ми шукАли відповідь крізь рОки.\n\n[Chorus - Explosive wall of sound, energetic vocal belting]\nЗаспівАй про тих, хто не згас у пітьмі,\nМи лишаємо слід на холодній землі!\n(заспівАй знов!)\n\n[Instrumental Break - Melodic bandura solo with warm analog distortion]\n\n[Outro - Slow fade out, solo cello]\n[End]",
+      "lyrics": "[Intro - Staccato cutting telecaster riff, driving bassline, punchy drum buildup]\n\n[Verse 1 - Intimate breathy vocal, muted guitar]\nЦей дивний вИпадок змінив моє життя,\nВеди́, дорОга, крізь туман і забуття.\n(моя дорОга)\nТам чорнОзем приймає перші кроки,\nДе ми шукали відповідь крізь роки.\n\n[Chorus - Explosive wall of sound, energetic vocal belting]\nЗаспівай про тих, хто не згас у пітьмі,\nМи лишаємо слід на холодній землі!\n(заспівай знов!)\n\n[Instrumental Break - Melodic bandura solo with warm analog distortion]\n\n[Outro - Slow fade out, solo cello]\n[End]",
       "assertions": {
         "min_lines": 6,
         "max_style_chars": 180,

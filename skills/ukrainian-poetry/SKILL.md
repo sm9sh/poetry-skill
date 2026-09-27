@@ -1,6 +1,6 @@
 ---
 name: ukrainian-poetry
-description: "Use when Codex needs to write, rewrite, edit, critique, or evaluate Ukrainian poetry, Ukrainian verse, rhymed poems, free verse, blank verse, sonnets, kolomyika, dactylic/ternary meters, dolnik, folk songs, children's poems, patriotic poems, lyrical poems, or prose-to-poem transformations."
+description: "Writes, edits, critiques and scores Ukrainian poetry that sounds natively Ukrainian: fresh imagery, sincere tone, correct stress and euphony, rich non-grammatical rhymes, natural word order, form that fits the feeling. Use it whenever the user asks (in Ukrainian or English) for a вірш, поезію, римування, строфу, сонет, верлібр, коломийку, дитячий чи привітальний вірш, to fix rhymes or meter, check наголоси, or turn prose or notes into a poem — even if they only say «напиши щось про…» or paste a draft. If the poem is meant to become a song for Suno or Flow Music, write it here and then continue with ukrainian-poetry-to-suno."
 ---
 
 # Ukrainian Poetry
@@ -13,7 +13,7 @@ Prefer a finished poem over explanation unless the user explicitly asks for scan
 
 ## 6 Core Poetic Principles (Фундаментальні принципи майстерності)
 
-Prioritize these 6 inviolable quality standards across all generations and audits:
+These six principles are what separates a living poem from a rhymed statement. Apply them in every draft and every critique. Where a rule below sounds absolute, the reason matters more than the letter: break a default only when the result is clearly stronger and you can say why.
 
 1. **Свіжа образність та метафоричність (Fresh Imagery & Metaphoricity)**:
    - *Rule*: "Show, don't tell". Anchor emotions in tangible sensory details (tactile, visual, acoustic, olfactory, temperature), physical actions, and unexpected authorial metaphors.
@@ -47,7 +47,25 @@ Prioritize these 6 inviolable quality standards across all generations and audit
 
 ---
 
+## Living Vocabulary (Жива, зрозуміла лексика)
+
+Use words a contemporary Ukrainian reader knows — words you could hear in real speech or read in a modern book. **Do not use rare, archaic, dialect or invented words unless the user explicitly asks for them** (e.g. «стилізуй під бароко», «гуцульською говіркою», «з неологізмами», «архаїчною мовою»).
+
+Why: an unfamiliar word stops the reader mid-line and moves attention from the image to the dictionary. It also usually signals that the word was picked to fill a meter or a rhyme, not for its meaning. Language models are prone to pseudo-Ukrainian coinages that sound plausible but do not exist. In songs it is worse still: a listener cannot re-read the line, and the audio model mispronounces unfamiliar words.
+
+Avoid unless asked:
+- **Archaisms and Church-Slavonic forms**: *днесь, глас, перст, чело, ланіти, отрок, зріти, благий*.
+- **Dialect or narrowly regional words** outside a requested dialect voice: *ґражда, плай, файний, бесідувати*.
+- **Rare bookish words** when a plain word says the same thing — if you would have to explain the word, it does not belong.
+- **Invented words and made-up compounds**: *тишопад, сумоцвіт, світлоплин, зорепадіння*.
+
+Test for every word you are unsure about: would an educated reader of modern Ukrainian understand it without a dictionary? If not, replace it — and if the replacement breaks the meter or rhyme, rework the line, not the vocabulary. Concrete everyday nouns of the poem's world (*перон, стерня, ґанок, кватирка*) are living language and are welcome when the scene needs them.
+
+---
+
 ## Task Workflow
+
+This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is Pipeline C there. Order matters: concept before words, one voice, and no poem reaches the user without passing the Quality Checklist.
 
 1. **Extract/Infer Parameters**:
    - `topic`: thematic core
@@ -72,15 +90,17 @@ Prioritize these 6 inviolable quality standards across all generations and audit
    image_density: balanced
    ending_strength: resonant
    ```
+2a. **Concept before words**: decide the **angle** (an unexpected way into the theme, a micro-detail instead of an abstraction), the **central image** (the objects or situation that will carry the emotion), the **turn** (where the poem will shift) and the **direction of the ending** (open or paradoxical, never a moral). Choose form and meter to fit the emotion. For important requests, consider 2–3 angles and take the strongest. Most weak poems fail here, not in the rhymes.
 3. **Draft with Scansion & Principle Awareness**:
    - Align meter and stanza architecture with emotional dynamics (**Principle 6: Form & Content**).
    - Ground themes in tactile sensory anchors, avoiding declarative statements and cliches (**Principle 1: Imagery** & **Principle 2: Sincerity**).
    - Ensure stress placement respects Ukrainian orthoepy; avoid Russianized stress shifts (*вИпадок*, not *випАдок*).
 4. **Apply Heterogeneous Rhyming, Phonics & Natural Syntax**:
-   - Mandate cross-grammatical rhymes with pre-tonic supporting consonants (**Principle 3: Phonics & Rhyme**).
-   - Enforce natural Ukrainian word order: strictly prohibit artificial inversions created to force end-rhymes (**Principle 4: Conciseness & Syntax**).
+   - Prefer cross-grammatical rhymes, ideally with a matching pre-tonic consonant (**Principle 3: Phonics & Rhyme**).
+   - Keep natural Ukrainian word order; if a rhyme needs an inversion, change the rhyme, not the syntax (**Principle 4: Conciseness & Syntax**).
    - Cleanse any filler pronouns (*цей, той, свій*) or rhythmic padding words.
-5. **Run Silent Self-Edit**: Scan for filler lines, forced inversions, banal rhymes, declarative emotions, and sharovarshchyna clichés before emitting output.
+5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again; if the failure is in the idea (no turn, no discovery), go back to step 2a. Do this silently: show the checklist only if the user asks; show only the poem that passed.
+6. **If the poem is meant as a song** (Suno / Flow Music): keep lines 6–10 syllables, give it a repeatable hook, and hand off to `ukrainian-poetry-to-suno` for song form and markup. In songs, repeating the hook is a device, not padding.
 
 ---
 
@@ -126,7 +146,7 @@ Avoid acoustic monotony by deliberately managing line endings:
 - `ЖЧЖЧ` (Feminine-Masculine): The canonical Ukrainian classical quatrain.
 - `ЧЖЧЖ` (Masculine-Feminine): Assertive, energetic opening with resonant cadence.
 - `ЖЖЧЖ` / `ДЧДЧ`: Folk and ballad variations.
-- *Strict Rule*: Do not generate 4-line blocks of uniform clausulae (`ЖЖЖЖ` or `ЧЧЧЧ`) unless explicitly modeling an archaic monorhyme.
+- *Default*: avoid 4-line blocks of uniform clausulae (`ЖЖЖЖ` or `ЧЧЧЧ`) — they sound monotonous — unless deliberately modeling an archaic monorhyme or a chant.
 
 ---
 
@@ -168,33 +188,19 @@ Strictly avoid stress calques from Russian:
 
 ### 4. Permissible Dual Accents (Подвійний наголос)
 Legitimately utilize orthoepic double accents for metric elasticity:
-*зАвжди / завждИ*, *пОмилка / помИлка*, *правдИвий / прАвдивий*, *веснЯний / веснянИй*, *первІсний / пЕрвісний*, *тАкож / такОж*, *мАбуть / мабУть*, *прОстий / простИй*.
+*зАвжди / завждИ*, *пОмилка / помИлка*, *правдИвий / прАвдивий*, *веснЯний / веснянИй*, *первІсний / пЕрвісний*, *тАкож / такОж*, *мАбуть / мабУть*.
 
 ### 4a. Attested Poetic / Folk / Surzhyk Stress Variants (Атестовані варіанти)
-A stress shift that deviates from the standard orthoepic norm is **permitted** when there exists documented precedent in Ukrainian literary poetry, folk song, or organic surzhyk usage (e.g., Shevchenko, Franko, Lesya Ukrainka, Antonych, Zhadan, Ukrainian folk songs, Hutsul dialects). Such variants give the poet metric flexibility while remaining within the living Ukrainian phonetic tradition.
+A stress that deviates from the orthoepic norm is allowed when it has documented precedent in Ukrainian literary poetry (Shevchenko, Franko, Lesya Ukrainka, Antonych, Zhadan), folk song, dialect (e.g. Hutsul), or organic surzhyk speech. It gives metric flexibility while staying inside the living tradition.
 
-**Rule — Hard Cap: ≤ 2 attested stress variants per poem or song.**
-- Exceeding 2 destabilizes the listener's prosodic trust and signals metric incompetence rather than artistic license.
-- When using an attested variant, the word must land in a metrically natural position — the shifted stress must reinforce the ictus, not fight it.
-- In lyrics destined for AI audio (Suno/Udio/Flow Music), mark the used variant with a capitalized stressed vowel so the audio model respects the intended shift.
+**Cap: at most 2 attested variants per poem or song.** More than that stops sounding like licence and starts sounding like the poet could not find the right word; if a third is needed, rework the line.
 
-**Examples of attested variants:**
-| Standard | Attested Variant | Source tradition |
-| :--- | :--- | :--- |
-| `дорОга` | `дорогА` | folk songs, oral tradition |
-| `кОлись` | `колИсь` | Shevchenko, folk |
-| `рікА` | `рЕка` (surzhyk metric) | avoided — surzhyk variants require extra care |
-| `зелЕний` | `зелЕний` / `зЕлений` | folk dumy, older poetry |
-| `нікОли` | `нікОли` / `ніколИ` | dual norm, both attested |
-| `свЯтий` | `святИй` | folk carol tradition |
-| `прАвда` | `правдА` | some folk variants |
+Conditions for each variant:
+1. The shift is metrically needed and lands on the ictus (it reinforces the beat, not fights it).
+2. You can name the source: a dictionary label (поет., нар.-поет., діал.) in «Словник наголосів» / goroh.pp.ua, or a specific poem or folk song. If you cannot name one, treat the stress as an error.
+3. In lyrics for Suno / Flow Music, mark it with the uppercase stressed vowel so the audio model follows it.
 
-**How to apply:**
-1. Identify that the shifted stress is metrically required (the foot demands it).
-2. Verify the variant exists in at least one canonical source (poetry collection, folk song corpus, dialect dictionary).
-3. Use it — but count it against the 2-per-poem budget.
-4. Do **not** compound more than 2; if 3+ shifts are needed, rework the line to find a better word choice.
-
+Know the norms first — these are standard, not variants: `колИсь`, `нікОли`, `святИй`, `дорОга` (noun), `рікА`. Dual norms (§4) are fully standard and do not count toward the cap. Russian forms (`рЕка`, `ніколИ`) are errors, not variants.
 
 ### 5. Laws of Ukrainian Euphony (Милозвучність)
 - **`У` / `В` Alternation**: Use `у` between consonants (*шумів у лісі*); use `в` after vowels before consonants (*жила в селі*).
@@ -202,45 +208,16 @@ A stress shift that deviates from the standard orthoepic norm is **permitted** w
 - **Preposition Alternations**: `з / із / зі / зо` (*зі скелі*, *із шовку*, *зо два дні*).
 - **Avoid Hiatus**: Prevent unpleasant vowel clashes (*прийшла ввечері*, not *прийшла у вечері*).
 
-### 6. AI Audio Model Phonetic Stress Standard (Suno AI & Google Flow Music)
-
-> **Context gate**: This notation is **exclusively for song lyrics** destined for Suno/Udio/Flow Music. In pure poetry output, use Unicode acute accent `́` marks or leave words unmarked. Never apply uppercase-vowel notation to regular poetic text.
-
-Neural audio engines (Suno v3.5/v4/v5.5, Udio v4, Google Flow Music Lyria 3.5) can strip Unicode diacritics during tokenization. To guarantee correct pronunciation, capitalize the stressed vowel — but **only** in words belonging to one of three hard categories:
-
-**Category A — Homographs** (stress determines meaning):
-- `зАмок` (castle/fortress) vs `замОк` (door lock)
-- `дорОга` (noun: road) vs `дорогА` (adj: precious)
-- `мУка` (torment) vs `мукА` (flour)
-- `плАчу` (I weep) vs `плачУ` (I pay)
-- `бІлизна` (whiteness/glare) vs `білизнА` (linen/textiles)
-- `нАголос` (accent mark) vs `наголОс` (conceptual emphasis)
-- `оргАн` (musical instrument) vs `Орган` (anatomical/state organ)
-- `Атлас` (map book) vs `атлАс` (silk fabric)
-- `обрАзи` (insults) vs `Образи` (sacred icons / poetic images)
-
-**Category B — Anti-Russian Misaccentuation** (words AI models habitually mispronounce using Russian stress):
-`вИпадок`, `чорнОзем`, `одИннадцять`, `чотирнАдцять`, `листопАд`, `рукОпис`, `перЕпис`, `довІдник`, `фартУх`, `ненАвисть`, `пізнАння`, `читАння`, `завдАння`, `принестИ`, `вИрок`, `новИй`, `старИй`, `босИй`.
-
-**Category C — Non-Intuitive Mobile Accent Shifts** (inflected form stress differs noticeably from citation form):
-- `зЕмлю`, `зЕмлі` (citation form: `землЯ`)
-- `рУку`, `рУки` (citation form: `рукА`)
-- `хОдиш`, `хОдять` (citation form: `ходИти`)
-- `несУ`, `несЕш` (citation form: `нестИ`)
-
-**Never mark** — these must remain lowercase, as their stress is phonetically obvious or they are function words:
-- All prepositions, conjunctions, particles: `і`, `й`, `та`, `що`, `але`, `або`, `як`, `за`, `на`, `до`, `від`, `при`, `без`, `під`, `над`, `між`, `через`, `перед`, `після`, `під`, `про`.
-- Common pronouns and adverbs with obvious stress: `він`, `вона`, `вони`, `воно`, `ми`, `ви`, `вже`, `ще`, `тут`, `там`, `лише`, `навіть`, `завжди`, `тоді`, `коли`.
-- Words where the capitalized-vowel form appeared in older examples but stress is obvious to native speakers: `моя`, `земля`, `прийде`, `заспівай`, `серденько`, `моє`, `твоє`, `своє`.
-
-- **Syllable Hyphenation for Fast Tempos**: Use hyphens (`за-спі-вай`, `не-по-втор-ний`) in rapid delivery (e.g. trap-folk recitative) to prevent slurred pronunciation.
+### 6. Stress Notation in the Output
+- **Poetry**: leave words unmarked, or use the combining acute accent (`за́мок`) only where a homograph is genuinely ambiguous.
+- **Song lyrics for Suno / Flow Music**: uppercase stressed vowels in three categories only (homographs, Russian-stress traps, non-obvious mobile shifts). The full rule and word lists live in `ukrainian-poetry-to-suno`; never use uppercase-vowel notation in regular poetry.
 
 ---
 
 ## Rhyme Architecture & Anti-Banal Guardrails
 
 ### 1. Heterogeneous Rhyme Requirement (Різнорідні рими)
-Mandate cross-grammatical rhyming to ensure intellectual and acoustic depth:
+Rhyme different parts of speech (or at least different grammatical forms). Same-suffix rhymes are free — the grammar supplies them — so the ear registers them as effortless and predictable; a verb landing on a noun creates surprise and meaning:
 - **Verb + Noun**: *сві́тить — ві́тер*, *гори́ть — мить*, *зна́ю — кра́ю*, *мовча́ти — но́чі*
 - **Noun + Adverb**: *мо́ву — зно́ву*, *стіна́ — сповна́*, *рука́ — здалека́*
 - **Adjective + Noun/Pronoun**: *те́мно — даре́мно*, *живи́й — ти*, *про́стий — го́сті*
@@ -250,8 +227,8 @@ Mandate cross-grammatical rhyming to ensure intellectual and acoustic depth:
 Elevate acoustic richness with matching pre-tonic consonants:
 *т**р**ава́ — т**р**ива́*, *к**р**и́ло — вк**р**и́ло*, *п**л**о́мінь — п**р**о́мінь*, *д**з**ві́н — на**з**догі́н*.
 
-### 3. Strict Rhyme Blacklist
-Reject the following categories completely:
+### 3. Rhyme Blacklist
+Avoid these by default. They are the first thing an experienced reader notices, and they signal that the rhyme chose the words instead of the poet. A rare exception is fine when the rhyme is deliberately flat for effect (irony, childlike voice) and the rest of the poem earns it:
 - **Same-part-of-speech suffixes**:
   - Verb-Verb: *знати-кохати*, *прийшла-розцвіла*, *летять-горять*, *жити-любити*
   - Noun-Noun in identical case: *картина-стежина*, *життя-буття*, *долині-хвилині*
@@ -261,7 +238,7 @@ Reject the following categories completely:
   `любов — кров`, `доля — воля`, `серце — перце`, `день — пень`, `ніч — очі / віч-на-віч`, `зорі — морі`, `жаль — печаль`, `квіти — діти`, `вік — чоловік`, `сльози — морози`, `хмара — пара`, `осінь — просинь`, `тиша — колише`.
 
 ### 4. Natural Syntax & Anti-Inversion Prohibition (Заборона штучних інверсій)
-- **Natural Word Order**: Ukrainian syntax is flexible, but poetic phrasing must remain natural and organic. Never invert word order artificially merely to force a rhyme word to the end of a line (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч»*).
+- **Natural Word Order**: Ukrainian syntax is flexible, but readers instantly hear when a word was moved only to put the rhyme at the end of the line (*«сонце ясне зійшло»*, *«погляд свій сумний підвів»*, *«іду я в ніч»*). That audible seam breaks trust in the whole poem, so do not invert word order just to force a rhyme. Inversion for emphasis that a native speaker would actually say is fine.
 - **Rule**: If maintaining a strict rhyme requires breaking natural syntax or inserting filler pronouns (*цей, той, свій*), **rephrase the entire line or change the rhyme scheme**. Linguistic naturalness takes precedence over mechanical form.
 
 ### 5. Phonics, Soundscapes & Euphony (Фоніка та звукопис)
@@ -277,8 +254,8 @@ Reject the following categories completely:
 | `contemporary-urban` | Living urban Ukrainian, unforced syntax, raw concrete/railway/balcony/siren imagery, digital and post-industrial texture. | Zhadan, Andrukhovych, Izdryk, Kalytko |
 | `chamber-intimate` (*тиха лірика*) | Whispered, sensory, psychological nuance, domestic objects, zero theatrical pathos. | Rylsky, Vinhranovsky, Kyselov, Holoborodko |
 | `philosophical-neoclassical` | High intellectual density, antique/mythological subtexts, flawless metric discipline, sculptural imagery. | Zerov, Rylsky, Klen, Stus, Svidzinsky |
-| `baroque-cossack` (17th–18th c.) | Authentic Early Modern Ukrainian vocabulary (*днесь, воістину, суєта, глас, клейноди, корогва, ратище*), existential gravity. | Skovoroda, Mazepa, Shevchenko (historical), Antonych |
-| `folk-authentic` | Archaic ritual depth (колядки, щедрівки, голосіння, замовляння), mythological animism (ліс, вода, земля, полин). | Authentic ritual song, Hutsul lore |
+| `baroque-cossack` (17th–18th c.) — **only when the user explicitly asks for this stylization** | Authentic Early Modern Ukrainian vocabulary (*днесь, воістину, суєта, глас, клейноди, корогва, ратище*), existential gravity. | Skovoroda, Mazepa, Shevchenko (historical), Antonych |
+| `folk-authentic` | Ritual depth (колядки, щедрівки, голосіння, замовляння), mythological animism (ліс, вода, земля, полин). Archaic or dialect words only if the user asks for them. | Authentic ritual song, Hutsul lore |
 | `children-playful` | Alliterative tongue-twisters, joyful onomatopoeia, bouncing rhythm, absurdity without condescension. | Falkovych, Malkovych, Skiba |
 
 ### Anti-Sharovarshchyna Guardrails (Антишароварщина)
@@ -306,103 +283,70 @@ Reject the following categories completely:
 
 ---
 
-## Self-Edit Checklist
+## Quality Checklist (обов'язково перед кожною видачею)
 
-Before presenting the final poem, silently verify all 6 Poetic Principles:
+Run this for **every** poem before output — no exceptions for quick drafts, small edits or revisions of the user's own text. The checklist is internal; the user sees only the finished poem (unless they ask for the analysis).
+
+- **Items 1–12 are mandatory.** A poem that fails any of them is not ready: fix it and re-check.
+- **Items 13–16 raise the poem from correct to memorable.** If one fails, try to improve it before output. Item 15 is mandatory for free verse.
+
+Rationale and authoritative sources for every item (Pound, Eliot, Frost, Kooser, Theune, Franko, Potebnja, Gasparov, Poetry Society judges): `references/quality-criteria.md`.
+
+**Mandatory (1–12)**
 1. **Imagery & Sensory Anchor (Принцип 1)**: Is the poem grounded in concrete physical details and fresh metaphors ("show, don't tell")? Are abstract clichés (*душа, серце, доля, крила надії*) eliminated?
-2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions?
+2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions? Is the emotion evoked by a situation or chain of objects (Eliot's *objective correlative*) rather than named?
 3. **Prosody, Phonics & Euphony (Принцип 3)**: Does the rhythm breathe naturally with correct pyrrhics? Are stresses strictly literary (*вИпадок*, *чорнОзем*, *новИй*)? Are `у/в`, `і/й`, `з/із/зі` balanced? Is assonance/alliteration harmonized?
 4. **Conciseness, Natural Syntax & Anti-Inversion (Принцип 4)**: Is the poem compressed without filler pronouns (*цей, той, свій*) or rhythmic padding? Is the word order 100% natural without artificial inversions for rhyme?
 5. **Perspective & Paradoxical Ending (Принцип 5)**: Does the poem offer an unexpected angle on the topic? Does the final line leave a lingering sensory or philosophical resonance without preaching?
-6. **Form & Content Unity (Принцип 6)**: Does the metric structure, stanza pace, and line breaks organically match the emotional weight of the theme?
+6. **Form & Content Unity (Принцип 6)**: Does the metric structure, stanza pace, and line breaks organically match the emotional weight of the theme? Does the meter's cultural association (*семантичний ореол метру*: bouncy 4-foot trochee → song, childhood, folk; ternary meters → ballad, elegy) support the theme rather than fight it?
+7. **Living Vocabulary**: Is every word understandable to a contemporary reader without a dictionary? No archaisms, dialect, rare bookish or invented words — unless the user explicitly asked for them?
+8. **Language Correctness**: Is grammar clean (case endings, agreement, prepositions), free of Russianisms and calques (*приймати участь*, *по вечорах*), with every stress orthoepically correct?
+9. **Brief Fulfilled**: Does the poem match what the user asked for — topic, form, length, mood, audience?
+10. **Literal Clarity**: On a first reading, is it clear who speaks, where we are and what happens — even if the deeper meaning opens later? Obscurity is not depth.
+11. **Composition & Unity**: Is every stanza necessary (none can be cut without loss)? Does the order move somewhere — beginning, development, ending — instead of listing images?
+12. **The Turn**: Is there at least one turn — a shift of perspective, time, tone or meaning — that makes the poem an event rather than a static description? (Not only in sonnets.)
+
+**Excellence (13–16)**
+13. **Discovery**: Does the poem arrive at something not present in its first line — a detail, thought or feeling that surprises? If the ending is predictable from the title, the poem only illustrates a thesis. («No surprise for the writer, no surprise for the reader.»)
+14. **Suggestion & Subtext**: Does the poem say less than it means, so a concrete detail carries a second layer and the poem rewards re-reading?
+15. **Line & Line Break**: Does every line carry its own energy, and does every break or enjambment do something (hold, stress, pause, double meaning)? *Mandatory for free verse* — lines must not be prose chopped at random.
+16. **Title**: If the poem has a title, does it add information, angle or tension — not repeat the first line or name a generic theme («Осінь», «Любов»)?
 
 ---
 
 ## Output Format
 
 - Return **only the poem** unless the user explicitly requests commentary, scansion diagrams, alternative drafts, or rubric evaluations.
+- A title is optional; add one when it strengthens the poem (criterion 16), never a generic one.
 - When generating fixed forms (e.g. Sonnets), clearly structure stanzas according to the required architecture (`4+4+3+3` or `4+4+4+2`).
-- If homographs require disambiguation in performance texts, use capitalized stressed vowels or acute accent marks (e.g. `зАмок` vs `замОк`).
+- If a homograph is genuinely ambiguous, use the acute accent (`за́мок` / `замо́к`). Uppercase-vowel stress marks belong only in song lyrics for audio models.
 
 ---
 
-## Pipeline Orchestration (5 Subagents Sequential Flow)
+## Deep Refinement with the Specialist Agents
 
-When performing a multi-agent deep refinement (e.g., the user requests a "refined" or "production-grade" poem, or the orchestrator deems the draft requires full pipeline treatment), execute the 5 subagents in sequence:
+For most requests, write the poem yourself with the checklist above — that is fastest and keeps one coherent voice. Use the specialist agents in `agents/` when the user asks for a "refined" / "production-grade" poem, a 100-point evaluation, or a targeted fix.
 
-```text
-User Input (topic, draft, or brief)
-         │
-         ▼
-┌──────────────────────────────────────┐
-│ 1. poetry-imagery-architect          │
-│    (Образотворець)                   │
-│    → Sensory grounding, anti-cliché  │
-│    → Output: Enhanced draft +        │
-│      Sensory Map + Imagery Score     │
-└─────────────┬────────────────────────┘
-              │ draft + sensory_map
-              ▼
-┌──────────────────────────────────────┐
-│ 2. poetry-emotional-critic           │
-│    (Критик щирості)                  │
-│    → Sincerity audit, anti-pathos    │
-│    → Output: Emotional Audit Report  │
-│      + Revised draft                 │
-└─────────────┬────────────────────────┘
-              │ draft + emotional_audit
-              ▼
-┌──────────────────────────────────────┐
-│ 3. poetry-prosody-phonics            │
-│    (Майстер фоніки та просодії)      │
-│    → Meter scansion, stress check,   │
-│      euphony, rhyme heterogeneity    │
-│    → Output: Scansion Diagram +      │
-│      Phonics Report + Revised draft  │
-└─────────────┬────────────────────────┘
-              │ draft + scansion + phonics
-              ▼
-┌──────────────────────────────────────┐
-│ 4. poetry-conciseness-editor         │
-│    (Редактор лаконічності)           │
-│    → Filler purge, anti-inversion    │
-│    → Output: Compression Report +    │
-│      Lean draft                      │
-└─────────────┬────────────────────────┘
-              │ lean_draft + all_reports
-              ▼
-┌──────────────────────────────────────┐
-│ 5. poetry-form-synthesizer           │
-│    (Архітектор форми та ракурсу)      │
-│    → Form-content harmony, voltas,   │
-│      conflict arbitration, 100-pt    │
-│      rubric scoring                  │
-│    → Output: FINAL POEM + Scorecard  │
-└──────────────────────────────────────┘
-```
+Recommended flow (it avoids the "committee poem" effect, where five sequential rewrites sand the voice flat):
 
-### Data Flow Contract
+1. **Draft** — write 2–3 short drafts from genuinely different angles (Principle 5) and pick the strongest, or take the user's draft.
+2. **Critique, don't rewrite** — run the relevant critics on the chosen draft. Each returns *notes* only: line, problem, why, suggested direction.
+   - `poetry-imagery-architect` — clichés, abstract statements, missing sensory anchors
+   - `poetry-emotional-critic` — pathos, moralizing, false notes
+   - `poetry-prosody-phonics` — meter, stress, euphony, rhyme quality
+   - `poetry-conciseness-editor` — filler words, inversions, padding
+3. **One revision** — `poetry-form-synthesizer` (or you) applies the notes in a single pass, resolving conflicts between critics (e.g. a richer image vs. syllable count) in favour of the poem's heart.
+4. **Optional QA** — `poetry-qa-bot` scores the result against `references/rubric.md`.
 
-Each agent receives:
+For a targeted request ("fix the rhymes", "check the meter"), call only the matching specialist. Skip critics whose area the draft already handles well.
+
+Data passed between steps:
 ```yaml
-draft_text: string       # Current draft (output from previous agent)
-register: enum           # Passed through from user request
-mode: enum               # Passed through from user request
-previous_reports: list    # Accumulated reports from prior agents
+draft_text: string        # current draft
+register: enum            # from the request
+mode: enum                # from the request
+notes: list               # critic notes: {line, issue, why, direction}
 ```
-
-Each agent outputs:
-```yaml
-revised_draft: string    # Updated draft text
-report: object           # Agent-specific audit report
-score_impact: object     # Estimated rubric dimension scores
-```
-
-### When to Use Full Pipeline vs Single Agent
-
-- **Full pipeline**: New poem from scratch, "production quality" request, 100-point rubric evaluation
-- **Single agent**: Targeted editing ("fix the rhymes", "remove clichés", "check meter"), where only the relevant specialist is invoked
-- **Partial pipeline**: Skip agents whose domain the draft already satisfies (e.g., skip imagery-architect if the draft is already sensory-rich)
 
 ---
 
@@ -414,6 +358,7 @@ score_impact: object     # Estimated rubric dimension scores
 | Ukrainian-Language Reference Guide | `references/ukrainian-poetry-skill-uk.md` |
 | Quick-Reference Cheat Sheet | `references/ukrainian-poetry-skill-lite.md` |
 | Structured Input Request Templates | `references/input-templates.md` |
+| Quality criteria: rationale and authoritative sources | `references/quality-criteria.md` |
 | 100-Point Evaluation & Scansion Rubric | `references/rubric.md` |
 | 5 Specialized Subagents Pipeline | `agents/` (`agents/openai.yaml`) |
 | Standardized Test Suite (27 Scenarios) | `references/tests.md` |

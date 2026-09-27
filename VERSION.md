@@ -1,5 +1,37 @@
 # Version History
 
+## v4.0.0 - 2026-09-27
+
+Refocus on the core goal — quality Ukrainian poems and their adaptation into songs for **Suno v6-mini** and **Google Flow Music (Lyria 3.5)**.
+
+### Added
+- `references/poem-to-song-adaptation.md` — poem → song workflow (keep vs adapt mode, hook, song form, syllable matching, singable vowels) with a full worked example.
+- `references/platforms.md` — dated platform facts: Suno v6 family (v6-mini default, Variety slider, limits), Flow Music (Lyria 3.5), Udio status.
+- `references/post-production.md` — DAW, mastering, release and Gates 7–10, now loaded only on request.
+- `scripts/check_lyrics.py` — stdlib pre-flight checker for lyrics / Style / Exclude.
+- `evals/` — real-prompt evals for with-skill vs without-skill comparison.
+
+### Changed
+- Vocal delivery cues (`[Whispered]`, `[Key Change]`, `[Half-time feel]`…) moved from `( )` to `[ ]` everywhere: Suno and Flow Music sing parenthesized text. Validator now rejects cues in parentheses.
+- Stress capitals limited to three categories in all examples and references; removed over-marking (`моЯ`, `прИйде`, …).
+- Fixed the attested stress-variant table (`колИсь`, `нікОли`, `святИй` are the norms; Russian `рЕка`, `такЖе` removed).
+- Suno target updated from v4.5/v5.5 (retired 2026-09-09) to v6-mini.
+- Skill descriptions rewritten with Ukrainian trigger phrases; poetry agent pipeline changed to drafts → critic notes → single revision.
+- `AGENTS.md` condensed to core rules (was ~15 KB loaded into every session).
+- Meter fixtures rewritten to follow the skill's own rules.
+
+- Rule: no rare, archaic, dialect or invented words unless the user explicitly asks (AGENTS.md, both skills, rubric deduction, agents).
+- Rule: every song for AI passes 12 world-class song criteria (research on chart hits, songwriting-competition standards, Berklee / Pattison prosody) — `references/world-class-song-criteria.md`; `check_lyrics.py` now flags a single chorus, a non-repeating hook and a copied Verse 2.
+- Poetry Quality Checklist extended to 16 items from authoritative sources (Pound, Eliot, Frost, Kooser, Theune, Franko, Potebnja, Gasparov, Poetry Society): literal clarity, composition, the turn, discovery, subtext, line breaks, title; objective correlative and semantic halo of meter added to existing items; rubric deductions added — `references/quality-criteria.md`.
+- Rule: every poem and song lyric passes the Quality Checklist (6 principles + living vocabulary + language correctness + brief) before output.
+
+- `docs/PIPELINE.md`: end-to-end workflow — routing (poem / edit / song / generation fix / post-production / evaluation), stages with a concept step before drafting, quality gates P / S / M / Q, conflict priorities, agent map; both SKILL.md workflows aligned (concept step, post-generation iteration).
+
+### Removed
+- `CLAUDE.md`, `GEMINI.md` (rules live in `AGENTS.md`).
+- `skills/poetry-skill` router skill (overlapped with the two real skills; `/poetry-skill` command kept).
+- Agent work artifacts under `.agents/` (handoffs, audits, surveys); `.agents/skills/` mirror kept.
+
 ## v3.0.0 - 2026-09-06
 
 Multi-platform AI Music Generation Upgrade (Suno v4.5/v5.5, Udio v4, Google Flow Music Lyria 3.5), 6-Step Production Lifecycle Architecture, and 10 AI Quality Gates.

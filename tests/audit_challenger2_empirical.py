@@ -87,7 +87,7 @@ class EmpiricalAuditChallenger2:
             
         # 3. Root markdown files
         root_md_names = [
-            "AGENTS.md", "GEMINI.md"
+            "AGENTS.md",
         ]
         for name in root_md_names:
             p = PROJECT_ROOT / name

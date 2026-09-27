@@ -117,6 +117,8 @@ Every detected defect incurs an immutable deduction from the 100-point total:
 4. **Euphony Verification**: Check alternating `у/в`, `і/й`, `з/із/зі`. Flag hiatus ($>1$ vowel clash at word boundary).
 5. **Rhyme & Clausula Classification**: Classify parts of speech in rhymes. Ensure alternating endings (`ЖЧЖЧ`).
 6. **Syntax & Lexical Density Check**: Flag inverted phrases and measure filler token density.
+6a. **Living Vocabulary Check**: Flag every rare, archaic, dialect or invented word (*днесь, глас, плай, тишопад*) that the user did not explicitly ask for; each one is a deduction and must be replaced with a common word.
+6b. **Structure Check (criteria 10–16)**: literal clarity, every stanza necessary, at least one turn, discovery rather than thesis illustration, subtext, purposeful line breaks (mandatory in free verse), non-generic title. Rationale: `references/quality-criteria.md`.
 7. **Score Calculation**: Subtract deductions from dimension ceilings; compute total score.
 
 ### 4.4 Remediation Routing Engine
@@ -195,4 +197,4 @@ Poetry QA Bot outputs a structured, actionable markdown audit report:
 3. **Історичні та барокові тексти**:
    - Відрізняти навмисну барокову стилізацію (Сковорода, козацьке бароко: *«всякому городу нрав і права»*) від випадкових сучасних суржикізмів чи синтаксичних русизмів.
 4. **Тексти для музичної генерації (Lyrics Handshake)**:
-   - Якщо вірш призначено для Suno/Udio, ігнорувати структурні службові теги в дужках `[Verse]`, `[Chorus]` при підрахунку складів, проте суворо перевіряти наголоси слів у круглих дужках бек-вокалу `(луна)`.
+   - Якщо вірш призначено для Suno / Flow Music, ігнорувати теги в квадратних дужках (`[Verse]`, `[Chorus]`, `[Whispered]`) при підрахунку складів, але перевіряти наголоси слів у круглих дужках — це співаний бек-вокал (`(ніколи знов)`).

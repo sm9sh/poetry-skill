@@ -1,5 +1,7 @@
 # Production Scenario: Ukrainian Cinematic Ambient / Spoken-Word (Google Flow Music Lyria 3.5)
 
+> **Примітка (2026-09):** Розділи про Turntable і Gemini Omni Flash засновані на неперевірених описах. Перевірені функції Flow Music (Lyria 3.5): треки до ~3 хв, Replace / Extend / Cover. Див. `skills/ukrainian-poetry-to-suno/references/platforms.md`.
+
 **File**: `examples/success/flowmusic-cinematic-ambient.md`  
 **Platform**: Google Flow Music (DeepMind Lyria 3.5 Engine)  
 **Acoustic Standard**: High-Fidelity Neural Audio Generation with Conversational Steering  
@@ -63,39 +65,39 @@ The **Turntable** module in Flow Music provides real-time dual-deck blending:
 > **Prosodic Directives**:
 > - Lines follow an organic accentual rhythm (dolnik/taktovik) designed for spoken delivery.
 > - Accented vowels are capitalized on mobile stress syllables to ensure correct Ukrainian pronunciation by speech synthesis models.
-> - Instrumental descriptions are kept strictly in `[Square Brackets]`; vocal directions in `(Round Parentheses)`.
+> - Instrumental descriptions are kept strictly in `[Square Brackets]`; vocal directions in `[Square Brackets]` too; `(Round Parentheses)` only for sung backing words.
 
 ```text
 [Intro - spoken intimate close-mic recitative over low cello drone]
-(spoken)
-ХолОдний мох...
-ВолОга глИця під ногАми.
-(pause)
-В КарпАтах нІч спускАється з вершин,
-НемОв тумАн між тЕмними дубАми.
+[Spoken]
+Холодний мох...
+Волога глиця під ногами.
+[Pause]
+В Карпатах ніч спускається з вершин,
+Немов туман між темними дубами.
 
 [Verse 1 - shimmering analog synth pads, sopilka]
-СтоЮ німИй.
+Стою німий.
 ДорОга в морок в'ється,
-(луна)
-Повз дАвній скЕльний монолІт.
-Тут чАсу нЕмає —
-СЕрце б'ється
-В такт прАдавніх рОків і століть.
+[Echo]
+Повз давній скельний моноліт.
+Тут часу немає —
+Серце б'ється
+В такт прадавніх років і століть.
 
 [Verse 2 - cello swells, wide resonant soundscape]
-(whispered)
-ПлАчуть смЕреки смолОю,
-ВІтер колИше трАви глухІ.
-(pause)
-Світ залишається за спинОю,
-Тут розчинЯються всі гріхИ.
+[Whispered]
+Плачуть смереки смолою,
+Вітер колише трави глухі.
+[Pause]
+Світ залишається за спиною,
+Тут розчиняються всі гріхи.
 
 [Interlude - delicate acoustic bandura harmonics, slow decay]
-СпокІй.
+Спокій.
 Тільки вітер і ніч.
-(fading out)
-ЗемлЯ моЯ спить.
+[Fade Out]
+Земля моя спить.
 [Silence]
 ```
 

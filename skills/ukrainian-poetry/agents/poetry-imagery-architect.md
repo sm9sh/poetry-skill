@@ -95,6 +95,7 @@ Strictly detect and eliminate the following categories of poetic deadweight:
 | *«тягар розлуки / темрява ночі»* | Abstract padding | Heavy wet suitcase handle, sodium lamp buzzing over empty crossing. |
 
 ### 4.4 Fresh Metaphor Construction (Авторська несподіваність)
+Freshness comes from an unexpected *combination* of common words, not from rare ones. Do not reach for archaisms, dialect words or invented compounds (*сумоцвіт, світлоплин*) unless the user explicitly asked for them.
 - Combine semantic fields with significant cognitive distance:
   - Architecture + Organic anatomy (*«ребра недобудованого мосту»*, *«хребет сходової клітки»*).
   - Industrial/Urban texture + Intimate memory (*«іржавий цвях телефонного дзвінка»*, *«асфальт, вичовганий старими підошвами»*).
