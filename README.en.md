@@ -1,76 +1,25 @@
-# Ukrainian Poetry & Multi-Platform AI Music Generation Ecosystem (v3.0.0)
+# Ukrainian Poetry & AI Songs (v4.0.0)
 
-A comprehensive AI skill ecosystem for generating, auditing, verifying, and transforming authentic Ukrainian poetry into production-grade prompts for **Suno AI v4.5/v5.5**, **Udio AI v4**, and **Google Flow Music Lyria 3.5**.
+Two skills for AI agents (Claude Code, Gemini / Antigravity, Cursor, Codex):
 
-The Single Source of Truth for system architecture is `AGENTS.md`.
+| Skill | What it does |
+|---|---|
+| `skills/ukrainian-poetry/` | Writes, edits and scores Ukrainian poetry: fresh imagery, sincerity, correct stress and euphony, cross-grammatical rhymes, natural word order, form that fits the feeling. |
+| `skills/ukrainian-poetry-to-suno/` | Turns a poem or idea into a song for **Suno v6-mini** (primary) and **Google Flow Music (Lyria 3.5)**: song form and hook, `[...]` / `(...)` markup, stress marks, Style and Exclude. |
 
----
+Shared rules: `AGENTS.md`.
 
-## 1. System Architecture (6-Step Production Lifecycle)
+## Quick start
+- "Write a poem about …" → poetry skill.
+- "Turn this poem into a darkwave song for Suno" → the poem is adapted and you get Style / Exclude / Lyrics blocks. In Suno set **Variety = Off** so your Style is used verbatim.
+- Check lyrics manually:
+  ```bash
+  python skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py lyrics.txt --style "darkwave, ..." --exclude "cheesy pop, ..."
+  ```
 
-The architecture is built on a 6-Step Production Lifecycle connecting specialized AI skills with a shared reference foundation:
+Key rule: Suno and Flow Music **sing** anything in `(parentheses)`; all cues (`[Whispered]`, `[Key Change]`) go in `[square brackets]`.
 
-```text
-                  [User Input / Creative Brief]
-                                │
-                                ▼
-               ┌─────────────────────────────────┐
-               │     ukrainian-poetry Skill      │
-               │  - Syllabo-Tonic & Dolnik       │
-               │  - Mobile Stress & Homographs   │
-               │  - 5 poetry subagents           │
-               └────────────────┬────────────────┘
-                                │ (Structured Lyrics + Prosodic Metatags)
-                                ▼
-               ┌─────────────────────────────────┐
-               │   Music Prompting Engine        │
-               │  - 4 music subagents            │
-               │  - 8-Genre Western Anchor       │
-               │  - Vocal Triple-Stack           │
-               └────┬───────────┬───────────┬────┘
-                    │           │           │
-                    ▼           ▼           ▼
-             [Suno AI]      [Udio AI]  [Flow Music]
-```
-
----
-
-## 2. Repository Structure
-
-### 2.1 Canonical Skills (Runtime-Ready in `.agents/skills/`)
-Core agents and prompts are located in `.agents/skills/`.
-- **5 poetry subagents** for text generation and auditing.
-- **4 new music production subagents** for Suno, Udio, and Flow Music.
-
-### 2.2 Automated E2E Test Infrastructure
-- Master test runner covers Tiers 1-4.
-- **Udio + Flow Music validators** to ensure output quality.
-- Metric, style, and metatag validation.
-
----
-
-## 3. Key Features & 10 AI Quality Gates
-
-The system implements a matrix of **10 AI Quality Gates** for end-to-end quality control.
-
-### 3.1 Music Production & AI Conductor
-- **Western Genre Anchor**: Updated 8-genre taxonomy.
-- **Vocal Triple-Stack**: Formula for complex vocal arrangements.
-- **AI Conductor extensions roadmap**: Generation sequence (Seed → Extend → Breakdown → Mega-Chorus → Outro).
-- **Metatag Grammar**: Strict rules for brackets `[]` vs parentheses `()`, and 9 canonical inline vocal gestures.
-
-### 3.2 Post-Production and Distribution
-- **DAW stem mixing checklist**: Split Bass, Tchad Blake distortion, Mid-Side reverb sidechain.
-- **Mastering**: Avoiding the True Peak trap (-1 dBTP for -6..-8 LUFS).
-- **Streaming distribution**: Skip Rate thresholds, Playlist Placement Trap elimination.
-
----
-
-## 4. Quick Start
-
-### Poetry Generation & Multi-Platform Prompting
-1. Generate authentic Ukrainian lyrics using `skills/ukrainian-poetry/`.
-2. Use **Method 1 (Conversational)** or **Method 2 (HookGenius Tag Matrix)** for Suno, or specific formulas for Udio and Flow Music.
-3. Obtain production-ready prompts for your target platform.
-
-See `HOWTO.md` for more details.
+## Layout
+- `skills/` — source of truth; `.agents/skills/` — runtime mirror (`python tests/sync_ecosystem.py`).
+- `skills/ukrainian-poetry-to-suno/references/platforms.md` — dated platform facts.
+- `examples/`, `tests/` (`python tests/run_tests.py --all`), `evals/` (real-prompt quality evals).

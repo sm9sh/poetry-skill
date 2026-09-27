@@ -1,5 +1,7 @@
 # Production Scenario: Ukrainian Trip-Hop / Downtempo (Udio AI v4)
 
+> **Статус (2026-09):** Udio вимкнув завантаження після угоди з UMG (жовтень 2025). Приклад лишається як зразок промпту й лірики; для релізу використовуй Suno v6-mini або Flow Music (див. `skills/ukrainian-poetry-to-suno/references/platforms.md`).
+
 **File**: `examples/success/udio-triphop-downtempo.md`  
 **Platform**: Udio AI (v4) — Pro Subscription Mode  
 **Acoustic Standard**: 48 kHz / 24-bit Stereo Native Generation  
@@ -77,40 +79,40 @@ The model sang this with generic pop phrasing, lacking breath and tactile presen
 [Intro - vinyl crackle, solo muted Fender Rhodes chords, 82 bpm]
 
 [Verse 1 - intimate close-mic, syncopated dusty breakbeat]
-ШорсткИй вельвЕт, осІнній дим над склом,
-Гаряча кАва, зАпах полинУ.
-Холодний дОщ стікАє за вікнОм,
-Я тихо мікрофОн свій увімкнУ.
+Шорсткий вельвет, осінній дим над склом,
+Гаряча кава, запах полину.
+Холодний дощ стікає за вікном,
+Я тихо мікрофон свій увімкну.
 *Шукаю спокій, чую теплий шепіт*,
-(шепіт)
-В калюжах тОне блИск ліхтарів.
-Ніч розливАє свій спокІйний трепет,
-Без зайвих жестів і фальшИвих слів.
+[Whispered]
+В калюжах тоне блиск ліхтарів.
+Ніч розливає свій спокійний трепет,
+Без зайвих жестів і фальшивих слів.
 
 [Chorus - deep dub sub-bass, lush stereo tape delay]
 (breathy alto)
 Ооо-ооо, падає крапля на граніт,
-(harmonized)
+[Harmonized]
 Світить імла крізь німий політ.
 Ооо-ооо, змито сліди тривожних літ,
 Тут зупинився втомлений світ.
 
 [Verse 2 - add subtle acoustic cello and shaker]
-(half-time feel)
-Торкнусь долОні, срібна темрятА,
-(луна)
-В моїй кімнАті затишок нічнИй.
-МовчАть удвох спокІйні ворота,
-І вітер дИше, лагідний, живИй.
+[Half-time feel]
+Торкнусь долоні, срібна темрята,
+[Echo]
+В моїй кімнаті затишок нічний.
+Мовчать удвох спокійні ворота,
+І вітер дише, лагідний, живий.
 
 [Breakdown - vinyl crackle and isolated Rhodes solo]
-(whispered)
+[Whispered]
 Тільки дим.
-(whispered)
+[Whispered]
 Тільки звук.
 
 [Outro - slow tape delay fade out]
-(луна)
+[Echo]
 Падає крапля на граніт...
 [End]
 ```

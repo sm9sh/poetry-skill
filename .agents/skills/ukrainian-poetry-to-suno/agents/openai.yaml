@@ -1,6 +1,6 @@
 interface:
-  display_name: "Ukrainian Poetry to Multi-Platform AI Music"
-  short_description: "Transforms Ukrainian poetry into production-ready multi-platform AI music tracks (Suno, Udio, Lyria)."
+  display_name: "Ukrainian Poetry to Song (Suno / Flow Music)"
+  short_description: "Turns Ukrainian poems into ready-to-paste songs for Suno v6-mini and Google Flow Music."
   default_prompt: "Convert this Ukrainian poem into a structured song and generate AI music prompts."
 
 agents:
@@ -16,8 +16,8 @@ agents:
 
   music-prompt-synthesizer:
     display_name: "Синтезатор мультиплатформенних промптів (Prompt Synthesizer)"
-    short_description: "Builds production-ready prompts for Suno, Udio, and Google Lyria from Reference DNA and Lyrics."
-    default_prompt: "Create prompts for Suno, Udio, and Lyria based on this DNA and lyrics."
+    short_description: "Builds Style / Exclude for Suno v6-mini and prompts for Flow Music from Reference DNA and Lyrics."
+    default_prompt: "Create a Suno v6-mini Style and Exclude (and a Flow Music prompt if asked) from this DNA and lyrics."
 
   music-daw-mastering-critic:
     display_name: "Критик DAW-зведення та мастерингу (DAW Mastering Critic)"

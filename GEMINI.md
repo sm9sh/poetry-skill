@@ -1,9 +1,9 @@
 # GEMINI.md — Antigravity & Gemini Agent Configuration
 
-Please read and strictly follow @AGENTS.md for all operational directives, Ukrainian poetry generation, versification, multi-platform AI music prompt engineering (Suno v4.5/v5.5, Udio v4, Google Flow Music Lyria 3.5), DAW stem post-production, True Peak mastering standards, and the 10 AI Quality Gates.
+Read and follow @AGENTS.md.
 
 ## Rules
 - Apply `skills/ukrainian-poetry/SKILL.md` for poetry and versification tasks.
-- Apply `skills/ukrainian-poetry-to-suno/SKILL.md` for multi-platform AI music generation prompts (Suno, Udio, Flow Music).
-- Apply `skills/poetry-skill/SKILL.md` for end-to-end unified song creation pipelines.
+- Apply `skills/ukrainian-poetry-to-suno/SKILL.md` for songs: adapting poems for Suno v6-mini / Google Flow Music, lyrics markup, Style / Exclude prompts.
+- For a full song from scratch, write the lyrics with `ukrainian-poetry`, then continue with `ukrainian-poetry-to-suno`.
 - Verify work via deterministic test suites: `py -3 tests/run_tests.py --all`

@@ -3,8 +3,8 @@
     "total": 78,
     "passed": 78,
     "failed": 0,
-    "warnings": 35,
-    "avg_poetry_score": 98.26865671641791,
+    "warnings": 34,
+    "avg_poetry_score": 98.41791044776119,
     "avg_suno_score": 99.71052631578948
   },
   "results": [
@@ -307,19 +307,21 @@
       "warnings": [],
       "scores": {
         "poetry_rubric": {
-          "total_score": 100.0,
+          "total_score": 98.0,
           "max_score": 100.0,
           "is_passing": true,
           "dimension_scores": {
             "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 20.0,
+            "imagery_concreteness": 18.0,
             "rhythm_line_breaks": 15.0,
             "rhyme_sound_design": 10.0,
             "tonal_integrity": 10.0,
             "ending_strength": 10.0,
             "anti_cliche_guardrails": 10.0
           },
-          "deductions": []
+          "deductions": [
+            "[-2 pts] Low sensory grounding and scarce physical realia."
+          ]
         }
       }
     },
@@ -330,29 +332,24 @@
       "passed": true,
       "errors": [],
       "warnings": [
-        "Potential cheap grammatical/verb rhyme detected: 'повіває' - 'пригинає'.",
-        "Potential cheap grammatical/verb rhyme detected: 'повіває' - 'відкриває'.",
-        "Potential cheap grammatical/verb rhyme detected: 'пригинає' - 'відкриває'.",
-        "Potential cheap grammatical/verb rhyme detected: 'пригинає' - 'наступає'.",
-        "Potential cheap grammatical/verb rhyme detected: 'відкриває' - 'наступає'."
+        "Potential cheap grammatical/verb rhyme detected: 'полами' - 'нами'."
       ],
       "scores": {
         "poetry_rubric": {
-          "total_score": 92.0,
+          "total_score": 98.0,
           "max_score": 100.0,
           "is_passing": true,
           "dimension_scores": {
             "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 18.0,
+            "imagery_concreteness": 20.0,
             "rhythm_line_breaks": 15.0,
-            "rhyme_sound_design": 4.0,
+            "rhyme_sound_design": 8.0,
             "tonal_integrity": 10.0,
             "ending_strength": 10.0,
             "anti_cliche_guardrails": 10.0
           },
           "deductions": [
-            "[-2 pts] Low sensory grounding and scarce physical realia.",
-            "[-6.0 pts] 5 potential cheap grammatical/verb rhyme(s)."
+            "[-2.0 pts] 1 potential cheap grammatical/verb rhyme(s)."
           ]
         }
       }
@@ -360,39 +357,6 @@
     {
       "id": "TC_T1_MET_03_Dactyl",
       "name": "Pure 3-Foot Dactyl with Ternary Rhythm",
-      "tier": "Tier 1",
-      "passed": true,
-      "errors": [],
-      "warnings": [
-        "Potential cheap grammatical/verb rhyme detected: 'опускається' - 'котиться'.",
-        "Potential cheap grammatical/verb rhyme detected: 'опускається' - 'розсипається'.",
-        "Potential cheap grammatical/verb rhyme detected: 'котиться' - 'розсипається'.",
-        "Potential cheap grammatical/verb rhyme detected: 'котиться' - 'вдивляється'.",
-        "Potential cheap grammatical/verb rhyme detected: 'розсипається' - 'вдивляється'."
-      ],
-      "scores": {
-        "poetry_rubric": {
-          "total_score": 94.0,
-          "max_score": 100.0,
-          "is_passing": true,
-          "dimension_scores": {
-            "linguistic_naturalness": 25.0,
-            "imagery_concreteness": 20.0,
-            "rhythm_line_breaks": 15.0,
-            "rhyme_sound_design": 4.0,
-            "tonal_integrity": 10.0,
-            "ending_strength": 10.0,
-            "anti_cliche_guardrails": 10.0
-          },
-          "deductions": [
-            "[-6.0 pts] 5 potential cheap grammatical/verb rhyme(s)."
-          ]
-        }
-      }
-    },
-    {
-      "id": "TC_T1_MET_04_Amphibrach",
-      "name": "Pure 3-Foot Amphibrach with Soft Cadence",
       "tier": "Tier 1",
       "passed": true,
       "errors": [],
@@ -418,13 +382,38 @@
       }
     },
     {
+      "id": "TC_T1_MET_04_Amphibrach",
+      "name": "Pure 3-Foot Amphibrach with Soft Cadence",
+      "tier": "Tier 1",
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "scores": {
+        "poetry_rubric": {
+          "total_score": 100.0,
+          "max_score": 100.0,
+          "is_passing": true,
+          "dimension_scores": {
+            "linguistic_naturalness": 25.0,
+            "imagery_concreteness": 20.0,
+            "rhythm_line_breaks": 15.0,
+            "rhyme_sound_design": 10.0,
+            "tonal_integrity": 10.0,
+            "ending_strength": 10.0,
+            "anti_cliche_guardrails": 10.0
+          },
+          "deductions": []
+        }
+      }
+    },
+    {
       "id": "TC_T1_MET_05_Anapest",
       "name": "Strict 3-Foot Anapest with Energetic Rising Meter",
       "tier": "Tier 1",
       "passed": true,
       "errors": [],
       "warnings": [
-        "Stanza starting line 1 has irregular clausula cadence: 'MMFM'"
+        "Stanza starting line 1 has irregular clausula cadence: 'MFFF'"
       ],
       "scores": {
         "poetry_rubric": {
@@ -1503,7 +1492,7 @@
     },
     {
       "id": "TC_T1_VOC_04_Extreme_Vocals",
-      "name": "Extreme Vocals (Growl / Harsh Screams with Clean Melodic Chorus)",
+      "name": "Extreme Vocals [Growl / Harsh Screams with Clean Melodic Chorus]",
       "tier": "Tier 1",
       "passed": true,
       "errors": [],
@@ -2407,16 +2396,12 @@
       "passed": true,
       "errors": [],
       "warnings": [
-        "Poem is long: 45 lines (max expected: 40).",
-        "Stanza starting line 1 has irregular clausula cadence: 'UFMM'",
-        "Stanza starting line 9 has irregular clausula cadence: 'FMMU'",
-        "Stanza starting line 13 has irregular clausula cadence: 'FFUF'",
-        "Stanza starting line 17 has irregular clausula cadence: 'FUMU'",
-        "Stanza starting line 21 has irregular clausula cadence: 'MMFM'",
-        "Stanza starting line 29 has irregular clausula cadence: 'MUMU'",
-        "Stanza starting line 33 has irregular clausula cadence: 'MFUM'",
-        "Stanza starting line 37 has irregular clausula cadence: 'UMMF'",
-        "Stanza starting line 41 has irregular clausula cadence: 'MFFF'",
+        "Stanza starting line 1 has irregular clausula cadence: 'FMMM'",
+        "Stanza starting line 5 has irregular clausula cadence: 'MFFF'",
+        "Stanza starting line 17 has irregular clausula cadence: 'MFMM'",
+        "Stanza starting line 25 has irregular clausula cadence: 'MMFM'",
+        "Stanza starting line 29 has irregular clausula cadence: 'MMFM'",
+        "Stanza starting line 33 has irregular clausula cadence: 'FFFM'",
         "Style field length (154 chars) outside optimal range (80-150 chars)."
       ],
       "scores": {
@@ -2462,11 +2447,9 @@
       "passed": true,
       "errors": [],
       "warnings": [
-        "Stanza starting line 5 has irregular clausula cadence: 'MMFM'",
-        "Stanza starting line 9 has irregular clausula cadence: 'MUMU'",
-        "Stanza starting line 13 has irregular clausula cadence: 'MMMU'",
-        "Stanza starting line 17 has irregular clausula cadence: 'FFMF'",
-        "Stanza starting line 21 has irregular clausula cadence: 'MUMU'",
+        "Stanza starting line 5 has irregular clausula cadence: 'MFMM'",
+        "Stanza starting line 9 has irregular clausula cadence: 'UMMM'",
+        "Stanza starting line 17 has irregular clausula cadence: 'FMMM'",
         "Potential cheap grammatical/verb rhyme detected: 'ліхтарів' - 'слів'."
       ],
       "scores": {
@@ -2512,9 +2495,9 @@
       "passed": true,
       "errors": [],
       "warnings": [
-        "Stanza starting line 1 has irregular clausula cadence: 'UMFU'",
-        "Stanza starting line 13 has irregular clausula cadence: 'FUFF'",
-        "Stanza starting line 17 has irregular clausula cadence: 'UFFM'"
+        "Stanza starting line 5 has irregular clausula cadence: 'MFFF'",
+        "Stanza starting line 13 has irregular clausula cadence: 'FFFM'",
+        "Potential cheap grammatical/verb rhyme detected: 'ногами' - 'дубами'."
       ],
       "scores": {
         "poetry_rubric": {

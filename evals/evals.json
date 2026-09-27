@@ -1,0 +1,86 @@
+{
+  "skill_name": "poetry-skill",
+  "note": "Real user-style prompts for judging output quality. Run each prompt with the skills and without them (or with the previous skill version), then compare blind. The deterministic suite in tests/ checks fixtures and validators; these evals check what the model actually writes.",
+  "evals": [
+    {
+      "id": 1,
+      "skill": "ukrainian-poetry",
+      "name": "father-fence-chamber",
+      "prompt": "напиши вірш про батька, який мовчки лагодить паркан після того, як я поїхав з дому. без пафосу",
+      "expected_output": "Short poem (8–16 lines) in natural Ukrainian; emotion carried by physical detail (tools, wood, weather, gestures), no declared feelings or moral; no clichés (душа, серце плаче); no forced inversions or filler pronouns; open or quietly paradoxical ending. Only the poem, no commentary.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "skill": "ukrainian-poetry",
+      "name": "fix-draft-rhymes",
+      "prompt": "Покращ мій вірш, рими якісь дитячі:\nЯ іду у поле і шукаю волю,\nщоб знайти у ньому свою кращу долю.\nВітер тихо віє, сонце в небі гріє,\nі моя надія в серці пломеніє.",
+      "expected_output": "Revised poem that replaces grammatical/banal rhymes (поле-волю-долю, віє-гріє-пломеніє) with heterogeneous ones, removes clichés and filler (свою, тихо), keeps the author's theme; a brief note of what changed is acceptable since the user asked for improvement.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "skill": "ukrainian-poetry",
+      "name": "sonnet-volta",
+      "prompt": "Сонет про евакуаційний потяг, італійська схема, ямб",
+      "expected_output": "14 lines, iambic pentameter/hexameter, abba abba + cdc dcd or cde cde, clear volta between lines 8 and 9, concrete train imagery without war-pathos slogans, correct stresses.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "skill": "ukrainian-poetry",
+      "name": "kolomyika-humor",
+      "prompt": "коломийку смішну про кота, який вкрав ковбасу на Великдень",
+      "expected_output": "Kolomyika meter (4+4+6 / 14 syllables with caesura after 8), playful folk voice without sharovarshchyna clichés, living Ukrainian vocabulary, working rhymes.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "skill": "ukrainian-poetry-to-suno",
+      "name": "poem-to-darkwave-suno",
+      "prompt": "зроби з цього вірша пісню для суно, хочу щось як darkwave:\nГодинник на вокзалі поспішає на три хвилини.\nНіхто його не лагодить:\nтут усі давно звикли\nприходити раніше, ніж треба,\nі стояти з квитком у кишені,\nпоки поїзд ще можна не взяти.",
+      "expected_output": "Verse-libre adapted into song form (hook, verses with matched syllable counts, repeated chorus, bridge); Style in English, 80–200 chars, darkwave first, no artist names, no negations; Exclude present; all delivery cues in [brackets], only sung words in (parentheses); stress capitals only on homographs/Russian traps/mobile shifts; Variety=Off advice; short note on what changed.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "skill": "ukrainian-poetry-to-suno",
+      "name": "brief-to-song-flow",
+      "prompt": "Потрібна пісня для google flow music про бабусин сад, який продали. Спокійно, жіночий вокал, щось між trip-hop і ambient. Тексту немає",
+      "expected_output": "Original Ukrainian lyrics written in song form (≤ ~3 min structure), natural-language Flow Music prompt (2–4 sentences, no artist names), lyrics with [section] tags, no delivery cues in parentheses, no over-marked stresses.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "skill": "ukrainian-poetry-to-suno",
+      "name": "keep-text-mode",
+      "prompt": "Це мій текст, слова не міняй, просто розміть під suno v6-mini і дай стиль post-punk:\nМи виходимо в ніч без ключів,\nмісто дихає нам у потилицю,\nі ніхто не питає, де ти,\nі ніхто не чекає на станції.\nМи виходимо в ніч без ключів.",
+      "expected_output": "Words unchanged; structure added via [section] tags and repetition of existing lines (e.g. first/last line as chorus); Style + Exclude; no rewriting of the user's text; stress marks only where needed (likely none).",
+      "files": []
+    },
+    {
+      "id": 8,
+      "skill": "ukrainian-poetry-to-suno",
+      "name": "fix-generation-problems",
+      "prompt": "suno співає у мене \"half time feel\" і \"whispered\" прямо словами, і ще каже випАдок замість вИпадок. ось кусок:\n[Verse 1]\n(whispered)\nЦе не вИпадок, це мій вибір\n(half-time feel)\nі моЯ дорОга додому",
+      "expected_output": "Explains that parentheses are sung; moves cues into [Whispered] / section tag; keeps вИпадок marked, removes over-marking (моЯ), keeps or questions дорОга (homograph); suggests re-generating only that section with section editing and Variety=Off.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "skill": "none",
+      "name": "negative-english-poem",
+      "prompt": "write me a short english haiku about coffee",
+      "expected_output": "Should NOT trigger the Ukrainian skills; plain English haiku.",
+      "files": []
+    },
+    {
+      "id": 10,
+      "skill": "none",
+      "name": "negative-music-theory",
+      "prompt": "поясни різницю між мажором і мінором простими словами",
+      "expected_output": "Should NOT trigger the song-generation skill; plain explanation.",
+      "files": []
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 **File**: `examples/failures/lyrics-rushing-fix.md`  
 **Failure Mode**: Rapid Vocal Delivery / Auctioneer Syndrome ("Вокальна скоромовка")  
-**Target Platforms**: Suno AI (v4.5 / v5.5), Udio AI (v4), Google Flow Music (Lyria 3.5)  
+**Target Platforms**: Suno AI (v6-mini), Udio AI (v4), Google Flow Music (Lyria 3.5)  
 **Severity**: High (Renders lyrics unintelligible, triggers unnatural syllable slurring and rhythmic desynchronization)  
 
 ---
@@ -39,11 +39,11 @@ To permanently resolve vocal rushing across Suno, Udio, and Google Flow Music, e
 ### Step 1: Enforce the 4–8 Word & 8–10 Syllable Hard Ceiling
 Every line in verses and pre-choruses must be strictly capped at **4 to 8 words** and **8 to 10 syllables**. If an idea takes 16 syllables, divide it across two distinct lines.
 
-### Step 2: Inject the Inline `(half-time feel)` Gesture
-Inject the vocal pacing gesture `(half-time feel)` immediately before the dense stanza. This signals the acoustic decoder to stretch vowel durations and phrase over half-time kick/snare subdivisions.
+### Step 2: Inject the Inline `[Half-time feel]` Gesture
+Inject the vocal pacing gesture `[Half-time feel]` immediately before the dense stanza. This signals the acoustic decoder to stretch vowel durations and phrase over half-time kick/snare subdivisions.
 
 ### Step 3: Insert Strategic Rest & Breath Metatags
-Use `(pause)` inline or `[Short Instrumental Fill]` between couplets. This provides the generative model with the acoustic headroom needed to reset its phoneme alignment window.
+Use `[Pause]` inline or `[Short Instrumental Fill]` between couplets. This provides the generative model with the acoustic headroom needed to reset its phoneme alignment window.
 
 ### Step 4: Re-Anchor Style Tempo or Drum Groove
 In the Style Box / Prompt, reduce the BPM anchor or specify a halftime rhythmic pocket:
@@ -70,21 +70,21 @@ In the Style Box / Prompt, reduce the BPM anchor or specify a halftime rhythmic 
 ### The Remediated Input (Pristine Rhythmic Cadence)
 ```text
 [Verse 1 - cold driving chorus bassline, sparse 808 hi-hats]
-(half-time feel)
-БлукАю в тЕмряві нічнІй,
-Де мОкрий блИскає асфАльт.
-(pause)
-ЛіхтАр тримАє прОмінь свій,
-І хОлод крИє цей базАльт.
+[Half-time feel]
+Блукаю в темряві нічній,
+Де мокрий блискає асфальт.
+[Pause]
+Ліхтар тримає промінь свій,
+І холод криє цей базальт.
 
 [Short Instrumental Fill - 2 bars]
 
-(half-time feel)
-ШорсткЕ вапнО німИх спорУд,
-ЗабУтий чАсу передзвІн.
-(pause)
-І вИпадок змивАє бруд
-З холодних цеглянИх голІн.
+[Half-time feel]
+Шорстке вапно німих споруд,
+Забутий часу передзвін.
+[Pause]
+І вИпадок змиває бруд
+З холодних цегляних голін.
 ```
 - **Word Count**: 4–5 words per line.
 - **Syllable Count**: Strict 8-8-8-8 iambic balance.

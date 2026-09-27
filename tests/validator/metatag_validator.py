@@ -1,9 +1,9 @@
 """
 Suno AI & Multi-Platform Audio Metatag and Song Structure Validation Engine.
 Validates standard bracketed metatags ([Verse], [Chorus], [Vocal Intro], [Beat Drop], [Mega-Chorus], etc.),
-detects descriptive prose hallucinations inside brackets, and verifies parenthetical backing notation
-and inline vocal delivery gestures ((whispered), (belted), (falsetto), (screamed), (ad-lib), (building intensity),
-(key change), (half-time feel), (harmonized)).
+detects descriptive prose hallucinations inside brackets, and verifies that round parentheses hold only
+singable backing vocals / echoes. Delivery cues ([Whispered], [Belted], [Key Change], [Half-time feel])
+must live in square brackets because Suno and Google Flow Music sing anything inside parentheses.
 """
 
 import re
@@ -54,16 +54,17 @@ class MetatagValidator:
         "затихання", "кульмінація", "пауза", "тиша", "темп", "динаміка"
     ]
 
-    # Whitelisted inline vocal delivery gestures & ad-libs in round parentheses ()
-    WHITELISTED_VOCAL_GESTURES = [
+    # Vocal delivery / arrangement cues. Suno (v6 family) and Google Flow Music SING whatever
+    # is inside round parentheses, so these cues are only valid inside square brackets:
+    # [Whispered], [Belted], [Key Change], [Verse 1 - whispered, half-time feel].
+    DELIVERY_CUES_REQUIRE_BRACKETS = [
         "whispered", "belted", "falsetto", "screamed", "ad-lib", "ad lib",
         "building intensity", "key change", "half-time feel", "half time feel",
         "harmonized", "growl", "guttural scream", "vocal runs", "layered harmonies",
-        "backing vocals", "backing", "harmony", "harmonies", "shout", "chant",
-        "spoken", "acapella", "whisper", "echo", "melisma",
+        "spoken", "spoken word", "acapella", "whisper", "melisma", "pause",
+        "breathy delivery", "soaring vocalise", "stripped back", "fading out",
         # Ukrainian equivalents
-        "шепіт", "прошепотіти", "фальцет", "скрім", "гроул", "гармонія",
-        "бек-вокал", "бек вокал", "луна", "вигук", "ад-ліб", "хор", "білий голос"
+        "шепіт", "прошепотіти", "фальцет", "скрім", "гроул", "речитатив", "пауза",
     ]
 
     # Instrumental and arrangement keywords that MUST NEVER appear alone inside round parentheses ()
@@ -95,21 +96,30 @@ class MetatagValidator:
         return re.findall(r"\((.*?)\)", lyrics_text)
 
     @classmethod
+    def is_delivery_cue(cls, paren_content: str) -> bool:
+        """True if the text is a delivery/arrangement cue that belongs in [brackets], not (parentheses)."""
+        cleaned = paren_content.strip().lower().rstrip(".!")
+        for cue in cls.DELIVERY_CUES_REQUIRE_BRACKETS:
+            if cleaned == cue:
+                return True
+            # English cues may carry modifiers: "(whispered, intimate)", "(belted powerful)".
+            # Ukrainian nouns like "шепіт" can be real sung lyrics ("(шепіт дощу)"), so exact match only.
+            if cue.isascii() and (cleaned.startswith(cue + ",") or cleaned.startswith(cue + " ")):
+                return True
+        return False
+
+    @classmethod
     def is_valid_vocal_gesture_or_backing(cls, paren_content: str) -> bool:
         """
-        Returns True if parenthetical text is an allowed vocal gesture, ad-lib, or backing lyric.
+        Returns True if parenthetical text is singable backing-vocal / echo lyric text
+        (e.g. (ніколи знов), (о-о-о)). Delivery cues and instrument descriptions are rejected,
+        because the audio model would sing them out loud.
         """
         cleaned = paren_content.strip().lower()
         if not cleaned:
             return True
-            
-        # 1. Direct match or startswith with whitelisted vocal gestures
-        for gesture in cls.WHITELISTED_VOCAL_GESTURES:
-            if gesture in cleaned or cleaned.startswith(gesture):
-                return True
-                
-        # 2. Check if it's natural Ukrainian backing lyrics (e.g. (луна), (ніколи знов), (веди, дорОга))
-        # If it has NO pure instrumental keywords, it is treated as backing lyrics text
+        if cls.is_delivery_cue(cleaned):
+            return False
         has_inst = any(
             re.search(r"\b" + re.escape(kw) + r"\b", cleaned)
             for kw in cls.INSTRUMENTAL_KEYWORDS_IN_PARENS
@@ -192,10 +202,8 @@ class MetatagValidator:
     ) -> MetatagValidationResult:
         """
         Validates lyrics structure, checking all bracketed tags and parenthetical notations.
-        Ensures instrumental descriptors are inside square brackets `[...]` and NEVER in `(...)`.
-        Whitelists 9 canonical inline vocal gestures:
-        (whispered), (belted), (falsetto), (screamed), (ad-lib), (building intensity),
-        (key change), (half-time feel), (harmonized).
+        Ensures instrumental descriptors and vocal delivery cues are inside square brackets `[...]`
+        and NEVER in `(...)`; parentheses may only contain singable backing vocals / echoes.
         """
         errors = []
         warnings = []
@@ -225,6 +233,14 @@ class MetatagValidator:
             if cls.is_valid_vocal_gesture_or_backing(paren_clean):
                 continue
                 
+            if cls.is_delivery_cue(paren_clean):
+                errors.append(
+                    f"Delivery cue '({paren})' found in parentheses. Suno and Google Flow Music sing text in '()'. "
+                    f"Move it to square brackets: '[{paren.strip().capitalize()}]' or into the section tag "
+                    f"('[Verse 1 - {paren.strip()}]')."
+                )
+                continue
+
             # Check if paren contains typical forbidden instrumental/arrangement descriptors
             matched_inst = [
                 kw for kw in cls.INSTRUMENTAL_KEYWORDS_IN_PARENS

@@ -1,6 +1,6 @@
 # Suno AI, Udio & Google Flow Music Song Structure & Metatag Pack (v8)
 
-Повний каталог структурних шаблонів, стандартного синтаксису метатегів та інлайн вокальних жестів для **Suno AI (v4.5 / v5.5)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**.
+Повний каталог структурних шаблонів, стандартного синтаксису метатегів та інлайн вокальних жестів для **Suno AI (v6-mini)**, **Udio AI (v4)** та **Google Flow Music (Lyria 3.5)**.
 
 ---
 
@@ -13,11 +13,11 @@
 │ [Квадратні дужки]       │ Неспіваний метатег / звукова вказівка    │ [Vocal Intro - dynamic acapella, dry and close],       │
 │                         │ (структура, інструменти, динаміка, темп) │ [Beat Drop - heavy fuzz bass], [Verse 2], [Mega-Chorus]│
 ├─────────────────────────┼──────────────────────────────────────────┼────────────────────────────────────────────────────────┤
-│ (Круглі дужки)          │ Співаний бек-вокал / вокальні жести      │ (whispered), (belted), (falsetto), (screamed),         │
-│                         │ УВАГА: Flow Music та Suno співають ()!   │ (ad-lib), (building intensity), (key change),          │
-│                         │                                          │ (half-time feel), (harmonized), (луна), (ніколи знов)  │
+│ (Круглі дужки)          │ Співаний бек-вокал / вокальні жести      │ [Whispered], [Belted], [Falsetto], [Screamed],         │
+│                         │ УВАГА: Flow Music та Suno співають ()!   │ [Ad-lib], [Building intensity], [Key Change],          │
+│                         │                                          │ [Half-time feel], [Harmonized], (луна), (ніколи знов)  │
 ├─────────────────────────┼──────────────────────────────────────────┼────────────────────────────────────────────────────────┤
-│ ВЕЛИКІ ЛІТЕРИ ГОЛОСНИХ  │ Фіксація точного наголосу для ШІ-вокалу  │ вИпадок, чорнОзем, прИйде, заспівАй, моЯ, дорОга       │
+│ ВЕЛИКІ ЛІТЕРИ ГОЛОСНИХ  │ Фіксація точного наголосу для ШІ-вокалу  │ вИпадок, чорнОзем, листопАд, зЕмлю, дорОга/дорогА      │
 ├─────────────────────────┼──────────────────────────────────────────┼────────────────────────────────────────────────────────┤
 │ *Зірочки*               │ Udio Inpainting синтаксис заміни слів    │ *static sky* (офіційний синтаксис Udio v4 Inpainting;  │
 │                         │                                          │ уникати в текстах для Suno та Flow Music)              │
@@ -55,21 +55,21 @@
 
 ---
 
-## 3. Повний довідник інлайн вокальних жестів `(Round Parentheses)`
+## 3. Повний довідник вокальних вказівок `[Square Brackets]`
 
-Ці команди впроваджуються **всередині** ліричних рядків, безпосередньо перед або після потрібного слова, щоб керувати емоціями та динамікою вокаліста ШІ:
+Вказівки подачі ставляться в **квадратних дужках** окремим рядком перед фразою (або в тезі секції: `[Verse 1 - whispered]`). У круглих дужках модель їх заспіває, тому `( )` лишаються тільки для співаного бек-вокалу та ехо (`(ніколи знов)`, `(о-о-о)`).
 
 | Інлайн вокальний жест | Характер впливу на вокал ШІ | Рекомендована позиція у треку |
 |---|---|---|
-| **`(whispered)`** / **`(whispered, intimate)`** | Перехід на інтимний шепіт або близький ASMR-вокал | `[Verse 1]`, `[Breakdown]` |
-| **`(belted)`** / **`(belted, powerful)`** | Вимога потужного, відкритого грудного вокалу на високій ноті | `[Chorus]`, `[Mega-Chorus]` |
-| **`(falsetto)`** | Перехід на фальцет для створення емоційної крихкості | `[Pre-Chorus]`, `[Bridge]` |
-| **`(screamed)`** / **`(growl)`** | Перехід на агресивний вокал у рок- чи метал-генераціях | `[Verse 2]`, `[Bridge]` |
-| **`(ad-lib)`** / **`(vocal runs)`** | Вокальні мелізми та фонова імпровізація | `[Post-Chorus]`, `[Outro]` |
-| **`(building intensity)`** | Плавне підвищення гучності та агресії вокалу | `[Pre-Chorus]` |
-| **`(key change)`** | Провокація ШІ на тональну модуляцію (за Венсом Пауеллом) | Перед `[Mega-Chorus]` |
-| **`(half-time feel)`** | Уповільнення ритмічного відчуття вокалу вдвічі (лікує скоромовку) | Швидкі куплети |
-| **`(harmonized)`** / **`(layered harmonies)`** | Вимога увімкнути багатоголосся на ключовому слові хука | Кульмінаційні фрази приспіву |
+| **`[Whispered]`** / **`[Whispered, intimate]`** | Перехід на інтимний шепіт або близький ASMR-вокал | `[Verse 1]`, `[Breakdown]` |
+| **`[Belted]`** / **`[Belted, powerful]`** | Вимога потужного, відкритого грудного вокалу на високій ноті | `[Chorus]`, `[Mega-Chorus]` |
+| **`[Falsetto]`** | Перехід на фальцет для створення емоційної крихкості | `[Pre-Chorus]`, `[Bridge]` |
+| **`[Screamed]`** / **`[Growl]`** | Перехід на агресивний вокал у рок- чи метал-генераціях | `[Verse 2]`, `[Bridge]` |
+| **`[Ad-lib]`** / **`[Vocal runs]`** | Вокальні мелізми та фонова імпровізація | `[Post-Chorus]`, `[Outro]` |
+| **`[Building intensity]`** | Плавне підвищення гучності та агресії вокалу | `[Pre-Chorus]` |
+| **`[Key Change]`** | Провокація ШІ на тональну модуляцію (за Венсом Пауеллом) | Перед `[Mega-Chorus]` |
+| **`[Half-time feel]`** | Уповільнення ритмічного відчуття вокалу вдвічі (лікує скоромовку) | Швидкі куплети |
+| **`[Harmonized]`** / **`[Layered harmonies]`** | Вимога увімкнути багатоголосся на ключовому слові хука | Кульмінаційні фрази приспіву |
 
 ---
 
@@ -78,44 +78,44 @@
 ### Шаблон 1: British Post-Punk / Darkwave
 ```text
 [Vocal Intro - dynamic baritone acapella, dry]
-(Порожній проспект ковтає ліхтарІ...)
+(Порожній проспект ковтає ліхтарі...)
 [Beat Drop - driving chorus bassline, 80s drum machine]
 
 [Verse 1 - rhythmic staccato, deadpan baritone]
-Холодний дощ стікає по вікнІ,
-Ми знОву чужІ у цьому дворІ,
-(у цьому дворІ)
-Де пам'ять згорАє на самому днІ.
+Холодний дощ стікає по вікні,
+Ми знову чужі у цьому дворі,
+(у цьому дворі)
+Де пам'ять згорає на самому дні.
 
 [Pre-Chorus - rising snare roll, building tension]
-(building intensity)
-І крОки відлунюють в темну імлУ...
+[Building intensity]
+І кроки відлунюють в темну імлу...
 
 [Chorus - explosive, wide chorus guitars, wall of sound]
-(belted)
-Нічний трамвай іржАвим колесОм,
-(layered harmonies)
-ВезЕ мій сум за тЕмний горизОнт!
+[Belted]
+Нічний трамвай іржавим колесом,
+[Layered harmonies]
+Везе мій сум за темний горизонт!
 
 [Verse 2 - add driving tambourine, syncopated backing, sharp stereo guitars]
-Сліди на асфАльті змивАє водА,
+Сліди на асфальті змиває вода,
 (луна стін)
-І нІч непомІтно повз нАс пропливА.
+І ніч непомітно повз нас проплива.
 
 [Chorus - wide stereo, high energy]
-Нічний трамвай іржАвим колесОм,
-ВезЕ мій сум за тЕмний горизОнт!
+Нічний трамвай іржавим колесом,
+Везе мій сум за темний горизонт!
 
 [Breakdown - vocal and bassline only, intimate, dry]
-(whispered)
-Лиш вікна, що світять в унісОн...
+[Whispered]
+Лиш вікна, що світять в унісон...
 
 [Mega-Chorus - maximum energy, soaring layered harmonies, clashing guitars]
-(key change)
-(belted, powerful)
-Нічний трамвай іржАвим колесОм,
-(layered harmonies)
-ВезЕ мій сум за тЕмний горизОнт!
+[Key Change]
+[Belted, powerful]
+Нічний трамвай іржавим колесом,
+[Layered harmonies]
+Везе мій сум за темний горизонт!
 
 [Outro - fading out, solo analog synth, tape hiss]
 [End]
@@ -129,38 +129,38 @@
 [Beat Drop - aggressive moog bass pulse, gated 80s snare]
 
 [Verse 1 - monotone male recitative, dry close-mic]
-ЕкрАни пульсують неОновим склом,
-(холодний неОн)
-МістО засинає під мЕртвим крилОм.
+Екрани пульсують неоновим склом,
+(холодний неон)
+Місто засинає під мертвим крилом.
 
 [Pre-Chorus - rising electronic arpeggios]
-(building intensity)
-СигнАли зникАють у мОрі датчИків...
+[Building intensity]
+Сигнали зникають у морі датчиків...
 
 [Chorus - explosive analog synth lead, wide stereo]
-(belted)
-Кібер-ніч розчинЯє моЮ тінь,
-(layered harmonies)
-Крізь дроти у безкІнечну глибИнь!
+[Belted]
+Кібер-ніч розчиняє мою тінь,
+[Layered harmonies]
+Крізь дроти у безкінечну глибинь!
 
 [Verse 2 - add driving electronic percussion, syncopated vocal chops]
-Комп'ютерний шум заспокОює бІль,
-(нуль і одИн)
-І пам'ять стирАє останню з подІй.
+Комп'ютерний шум заспокоює біль,
+(нуль і один)
+І пам'ять стирає останню з подій.
 
 [Chorus - full synthesizer energy]
-Кібер-ніч розчинЯє моЮ тінь,
-Крізь дроти у безкІнечну глибИнь!
+Кібер-ніч розчиняє мою тінь,
+Крізь дроти у безкінечну глибинь!
 
 [Breakdown - monotone vocal and sub-bass pulse only]
-(whispered)
+[Whispered]
 Тільки струм у змерзлих пальцях...
 
 [Mega-Chorus - maximum synth wall of sound, heavy gated drums]
-(layered harmonies)
-(belted, powerful)
-Кібер-ніч розчинЯє моЮ тінь,
-Крізь дроти у безкІнечну глибИнь!
+[Layered harmonies]
+[Belted, powerful]
+Кібер-ніч розчиняє мою тінь,
+Крізь дроти у безкінечну глибинь!
 
 [Outro - pulsing synth decay, fast cutoff filter fade]
 [End]
@@ -171,37 +171,37 @@
 ### Шаблон 3: Bristol Trip-Hop / Downtempo
 ```text
 [Vocal Intro - breathy smoky female acapella, dry]
-(Дим опускАється на мокрий брук...)
+(Дим опускається на мокрий брук...)
 [Beat Drop - dusty vinyl breakbeat, warm rhodes, deep 808 sub]
 
 [Verse 1 - intimate close-mic whisper, slow groove]
-(whispered)
-У шАфі холОдній сховАвся мій жАль,
-(тихий жАль)
-За склом пропливАє розмИта печАль.
+[Whispered]
+У шафі холодній сховався мій жаль,
+(тихий жаль)
+За склом пропливає розмита печаль.
 
 [Chorus - soaring melodic vocal, smoky room reverb]
-(falsetto)
-Ооооой, не клич мене в темряву знОву,
-(луна)
-Залиш мені тІльки розмОву...
+[Falsetto]
+Ооооой, не клич мене в темряву знову,
+[Echo]
+Залиш мені тільки розмову...
 
 [Verse 2 - add organic shaker, vinyl crackle, subtle muted trumpet]
-КраплІ водИ відбивають ліхтар,
-І нІч розгортАє безмЕрний товАр.
+Краплі води відбивають ліхтар,
+І ніч розгортає безмерний товар.
 
 [Chorus]
-Ооооой, не клич мене в темряву знОву,
-Залиш мені тІльки розмОву...
+Ооооой, не клич мене в темряву знову,
+Залиш мені тільки розмову...
 
 [Breakdown - vocal and warm rhodes only]
-(whispered, intimate)
-Лиш тИша між нами...
+[Whispered, intimate]
+Лиш тиша між нами...
 
 [Mega-Chorus - full vinyl warmth, layered vocal harmonies]
-(layered harmonies)
-Ооооой, не клич мене в темряву знОву,
-Залиш мені тІльки розмОву!
+[Layered harmonies]
+Ооооой, не клич мене в темряву знову,
+Залиш мені тільки розмову!
 
 [Outro - slow fading breakbeat, vinyl runout groove]
 [End]
@@ -212,43 +212,43 @@
 ### Шаблон 4: Minimalist Dark Alt-Pop
 ```text
 [Vocal Intro - solo close-mic ASMR breathy vocal]
-(ЧУєш, як б'ється пульс...)
+(Чуєш, як б'ється пульс...)
 [Beat Drop - heavy 808 sub bass, organic foley snaps]
 
 [Verse 1 - staccato whispers, intimate dry mix]
-(whispered)
-Тіні на стінах танцюють без слІв,
+[Whispered]
+Тіні на стінах танцюють без слів,
 (без слів)
-ХОлод кімнати розрІзав мій гнів.
+Холод кімнати розрізав мій гнів.
 
 [Pre-Chorus - rising foley clicks]
-(building intensity)
+[Building intensity]
 Я рахую до трьох...
 
 [Chorus - explosive wide open space, deep 808 glide]
-(belted)
-Оооох, ми згорАємо в цьОму вогнІ,
-(layered harmonies)
+[Belted]
+Оооох, ми згораємо в цьому вогні,
+[Layered harmonies]
 Лиш попіл лишився мені!
 
 [Verse 2 - add syncopated acoustic foley, vocal chops, stereo shaker]
-Пальці торкАються мерзлого скла,
+Пальці торкаються мерзлого скла,
 (холод скла)
-Втрачена ніжність навік утеклА.
+Втрачена ніжність навік утекла.
 
 [Chorus]
-Оооох, ми згорАємо в цьОму вогнІ,
+Оооох, ми згораємо в цьому вогні,
 Лиш попіл лишився мені!
 
 [Breakdown - isolated breathy vocal and sub-bass swell only]
-(whispered)
-Нічого не бІйся...
+[Whispered]
+Нічого не бійся...
 
 [Mega-Chorus - maximum 808 power, multi-layered soaring vocal stack]
-(key change)
-(belted, powerful)
-Оооох, ми згорАємо в цьОму вогнІ,
-(layered harmonies)
+[Key Change]
+[Belted, powerful]
+Оооох, ми згораємо в цьому вогні,
+[Layered harmonies]
 Лиш попіл лишився мені!
 
 [Outro - intimate whispered fade out]
@@ -264,42 +264,42 @@
 [Beat Drop - low-tuned djent riff, double-bass drum barrage, sub drop]
 
 [Verse 1 - aggressive rhythmic growl, heavy palm-muted groove]
-(screamed)
-ЗемлЯ розколОлась під нАшим тяжкИм крОком!
-(тяжкИм крОком)
-СтінА піднімАється перед сліпИм Оком!
+[Screamed]
+Земля розкололась під нашим тяжким кроком!
+(тяжким кроком)
+Стіна піднімається перед сліпим Оком!
 
 [Pre-Chorus - rising clean vocal, building tempo]
-(building intensity)
-(falsetto)
-І крізь темряву я бАчу світло...
+[Building intensity]
+[Falsetto]
+І крізь темряву я бачу світло...
 
 [Chorus - epic soaring clean vocal, massive wall of sound]
-(belted)
-Ми піднІмемось знОву з руЇн і золИ,
-(layered harmonies)
-Хоч би як нас вітрИ не гнулИ!
+[Belted]
+Ми піднімемось знову з руїн і золи,
+[Layered harmonies]
+Хоч би як нас вітри не гнули!
 
 [Verse 2 - add syncopated double-kick patterns, harsh scream backing]
-(screamed)
-Кров на камінні застИгла сталлю,
+[Screamed]
+Кров на камінні застигла сталлю,
 (сталлю!)
 Ми не заплачемо перед печаллю!
 
 [Chorus]
-Ми піднІмемось знОву з руЇн і золИ,
-Хоч би як нас вітрИ не гнулИ!
+Ми піднімемось знову з руїн і золи,
+Хоч би як нас вітри не гнули!
 
 [Breakdown - massive half-time djent breakdown, brutal guttural screams, sub drop]
-(screamed)
+[Screamed]
 ЛАМАЙ! ЗНИЩУЙ КОРДОНИ!
 
 [Mega-Chorus - ultimate climax, soaring clean vocal layered with harsh scream]
-(key change)
-(belted, powerful)
-(layered harmonies)
-Ми піднІмемось знОву з руЇн і золИ,
-Хоч би як нас вітрИ не гнулИ!
+[Key Change]
+[Belted, powerful]
+[Layered harmonies]
+Ми піднімемось знову з руїн і золи,
+Хоч би як нас вітри не гнули!
 
 [Outro - heavy fading djent guitar feedback, final abrupt snare cut]
 [Cold End]
@@ -311,35 +311,35 @@
 ```text
 [Intro - shimmering reverb guitar swell, lush vintage chorus]
 [Verse 1 - whispered breathy vocal, floating guitar textures]
-(whispered)
-ХмАри пливУть над сріблЯстим ліскОм,
-(над ліскОм)
-Вітер торкАється хвИль язикОм.
+[Whispered]
+Хмари пливуть над сріблястим ліском,
+(над ліском)
+Вітер торкається хвиль язиком.
 
 [Chorus - wall of sound guitars, soaring ethereal vocal]
-(falsetto)
-Ооооо-ааааа, засинає ріка у тумАні,
-(layered harmonies)
-Всі тривОги лишились в остогОні...
+[Falsetto]
+Ооооо-ааааа, засинає ріка у тумані,
+[Layered harmonies]
+Всі тривоги лишились в остогоні...
 
 [Verse 2 - add jangly rhythm guitar, soft tambourine, stereo arpeggios]
-ЗОрі випАли на мокру травУ,
-(на травУ)
-Я уві сні цим повітрям живУ.
+Зорі випали на мокру траву,
+(на траву)
+Я уві сні цим повітрям живу.
 
 [Chorus]
-Ооооо-ааааа, засинає ріка у тумАні,
-Всі тривОги лишились в остогОні...
+Ооооо-ааааа, засинає ріка у тумані,
+Всі тривоги лишились в остогоні...
 
 [Breakdown - delicate whispered vocal and solo chorus guitar only]
-(whispered, intimate)
+[Whispered, intimate]
 Тільки спокій...
 
 [Mega-Chorus - maximum reverb saturation, epic soaring harmonies]
-(belted)
-(layered harmonies)
-Ооооо-ааааа, засинає ріка у тумАні,
-Всі тривОги лишились в остогОні!
+[Belted]
+[Layered harmonies]
+Ооооо-ааааа, засинає ріка у тумані,
+Всі тривоги лишились в остогоні!
 
 [Outro - slow ambient guitar decay, tape hiss fade]
 [End]
@@ -353,38 +353,38 @@
 [Beat Drop - four-on-the-floor kick, rolling sub-bass]
 
 [Verse 1 - rhythmic spoken recitative, dry upfront]
-Ритм у віскАх відрахОвує крОк,
+Ритм у вісках відраховує крок,
 (один-два)
-Ніч розливАє густИй свій ковтОк.
+Ніч розливає густий свій ковток.
 
 [Pre-Chorus - rising snare roll, opening filter]
-(building intensity)
+[Building intensity]
 Час зупинився...
 
 [Chorus - euphoric melodic drop, wide vocal chops]
-(layered harmonies)
-Світло неОну у наших очах,
+[Layered harmonies]
+Світло неону у наших очах,
 (у очах)
-РозчинЯється темний наш страх!
+Розчиняється темний наш страх!
 
 [Verse 2 - add syncopated hi-hats, modular acid synth lead]
-Шум автомагістралі звучить як струнА,
-(як струнА)
-Нас огортАє нічнА глибинА.
+Шум автомагістралі звучить як струна,
+(як струна)
+Нас огортає нічна глибина.
 
 [Chorus]
-Світло неОну у наших очах,
-РозчинЯється темний наш страх!
+Світло неону у наших очах,
+Розчиняється темний наш страх!
 
 [Breakdown - kick mute, atmospheric pad and vocal chops only]
-(whispered)
+[Whispered]
 Відчуй цей пульс...
 
 [Mega-Chorus - full drop with rolling sub-bass and layered anthemic lead]
-(ad-lib)
-(layered harmonies)
-Світло неОну у наших очах,
-РозчинЯється темний наш страх!
+[Ad-lib]
+[Layered harmonies]
+Світло неону у наших очах,
+Розчиняється темний наш страх!
 
 [Outro - filtered synth arpeggio decay, four-bar kick fade]
 [End]
@@ -396,35 +396,35 @@
 ```text
 [Intro - felt upright piano arpeggios, emotive cello drone]
 [Verse 1 - intimate whispered female soprano, close-mic]
-(whispered)
-Сніг опадАє на стАрі дахИ,
-(на дахИ)
-Сплять у дібрОвах знеможені птахИ.
+[Whispered]
+Сніг опадає на старі дахи,
+(на дахи)
+Сплять у дібровах знеможені птахи.
 
 [Chorus - soaring emotive cello, rich hall space]
-(falsetto)
-Ооооой, збережи цю мовчАнку святу,
-(луна)
-Крізь негодУ й нічну самотУ...
+[Falsetto]
+Ооооой, збережи цю мовчанку святу,
+[Echo]
+Крізь негоду й нічну самоту...
 
 [Verse 2 - add solo acoustic bandura plucking, warm string quartet]
-Пам'ять торкАється білих сторІнок,
-(білих сторІнок)
+Пам'ять торкається білих сторінок,
+(білих сторінок)
 Сонце малює на склі візерунок.
 
 [Chorus]
-Ооооой, збережи цю мовчАнку святу,
-Крізь негодУ й нічну самотУ...
+Ооооой, збережи цю мовчанку святу,
+Крізь негоду й нічну самоту...
 
 [Breakdown - solo bandura and whispered vocal only]
-(whispered, intimate)
+[Whispered, intimate]
 Лиш тиша і світло...
 
 [Mega-Chorus - full symphonic string swell, soaring expressive belting]
-(belted, powerful)
-(layered harmonies)
-Ооооой, збережи цю мовчАнку святу,
-Крізь негодУ й нічну самотУ!
+[Belted, powerful]
+[Layered harmonies]
+Ооооой, збережи цю мовчанку святу,
+Крізь негоду й нічну самоту!
 
 [Outro - solo felt piano chord decay, ambient silence]
 [Cold End]

@@ -153,6 +153,6 @@ The Synthesizer computes the final scorecard across the 7 dimensions defined in 
 1. **Fixed Classical Forms (Sonnets, Terza Rima, Triolets)**:
    - Enforce exact stanza breaks (`4+4+3+3` or `4+4+4+2` for Sonnets), canonical rhyme schemes, and ensure the Volta strictly occurs between octave and sestet.
 2. **Suno AI Music Handshake**:
-   - If `music_mode: true`, format stanzas with standard square brackets (`[Verse 1]`, `[Chorus]`, `[Verse 2]`, `[Bridge]`, `[Outro]`) and parenthetical backing vocal cues `(луна)`, ready for downstream ingestion by `skills/ukrainian-poetry-to-suno`.
+   - If `music_mode: true`, format stanzas with standard square brackets (`[Verse 1]`, `[Chorus]`, `[Verse 2]`, `[Bridge]`, `[Outro]`) keep a repeatable hook for the chorus, and leave all further markup (delivery cues in `[...]`, sung backing vocals in `(...)`, stress marks) to `skills/ukrainian-poetry-to-suno`.
 3. **Low Initial Score Remediation (Iterative Loop)**:
    - If rubric score is `< 95`, the Synthesizer identifies the weakest dimension and routes the specific flawed stanza back to the relevant specialist (Prosody for meter, Imagery for clichés, Conciseness for inversions) before final assembly.

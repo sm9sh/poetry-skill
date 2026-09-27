@@ -63,36 +63,43 @@ class TestMetatagValidator(unittest.TestCase):
             is_valid, err = MetatagValidator.is_valid_tag(tag)
             self.assertTrue(is_valid, f"Expected compound tag '[{tag}]' to be valid, but got: {err}")
 
-    def test_nine_inline_vocal_gestures_in_parentheses(self):
-        """Tests that all 9 canonical vocal delivery gestures in () are accepted."""
-        lyrics_with_gestures = """[Vocal Intro - dynamic acapella]
-(whispered)
+    def test_nine_vocal_delivery_cues_in_brackets(self):
+        """Tests that the 9 canonical vocal delivery cues are accepted in [] and backing lyrics in ()."""
+        lyrics_with_cues = """[Vocal Intro - dynamic acapella]
+[Whispered]
 Тихий крок у порожнечі,
-(belted)
+[Belted]
 Голос розтинає морок!
 [Verse 1]
-(falsetto)
+[Falsetto]
 Ніч торкається плечей,
-(screamed)
+[Screamed]
 Біль спалює дощенту!
 [Pre-Chorus]
-(building intensity)
+[Building intensity]
 Наростає гул у серці,
-(key change)
+[Key Change]
 Світло змінює орбіти.
-[Chorus]
-(harmonized)
+[Chorus - harmonized, half-time feel]
 Ми стоїмо на зламі епох,
-(ad-lib)
-(half-time feel)
+[Ad-lib]
 [Outro]
-(луна)
+[Echo]
 (ніколи знов)
 [Cold End]"""
 
-        res = MetatagValidator.validate_lyrics_structure(lyrics_with_gestures)
-        self.assertTrue(res.is_valid, f"Expected lyrics with 9 vocal gestures to pass, but got errors: {res.errors}")
+        res = MetatagValidator.validate_lyrics_structure(lyrics_with_cues)
+        self.assertTrue(res.is_valid, f"Expected lyrics with bracketed vocal cues to pass, but got errors: {res.errors}")
         self.assertEqual(len(res.errors), 0)
+
+    def test_rejection_of_delivery_cues_in_parentheses(self):
+        """Delivery cues in () are sung by Suno v6 / Flow Music, so they must be rejected."""
+        for cue in ["whispered", "belted, powerful", "key change", "half-time feel", "building intensity", "шепіт"]:
+            res = MetatagValidator.validate_lyrics_structure(f"[Verse 1]\n({cue})\nРядок пісні")
+            self.assertFalse(res.is_valid, f"Expected '({cue})' to be rejected")
+            self.assertTrue(any("square brackets" in err for err in res.errors), res.errors)
+        ok = MetatagValidator.validate_lyrics_structure("[Chorus]\nМи ще тут (ще тут)\n(о-о-о)")
+        self.assertTrue(ok.is_valid, f"Singable backing vocals in () must pass: {ok.errors}")
 
     def test_rejection_of_instrumental_descriptors_in_parentheses(self):
         """Tests that instrumental arrangements inside () are rejected with clear errors."""

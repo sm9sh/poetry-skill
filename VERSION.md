@@ -1,5 +1,29 @@
 # Version History
 
+## v4.0.0 - 2026-09-27
+
+Refocus on the core goal — quality Ukrainian poems and their adaptation into songs for **Suno v6-mini** and **Google Flow Music (Lyria 3.5)**.
+
+### Added
+- `references/poem-to-song-adaptation.md` — poem → song workflow (keep vs adapt mode, hook, song form, syllable matching, singable vowels) with a full worked example.
+- `references/platforms.md` — dated platform facts: Suno v6 family (v6-mini default, Variety slider, limits), Flow Music (Lyria 3.5), Udio status.
+- `references/post-production.md` — DAW, mastering, release and Gates 7–10, now loaded only on request.
+- `scripts/check_lyrics.py` — stdlib pre-flight checker for lyrics / Style / Exclude.
+- `evals/` — real-prompt evals for with-skill vs without-skill comparison.
+
+### Changed
+- Vocal delivery cues (`[Whispered]`, `[Key Change]`, `[Half-time feel]`…) moved from `( )` to `[ ]` everywhere: Suno and Flow Music sing parenthesized text. Validator now rejects cues in parentheses.
+- Stress capitals limited to three categories in all examples and references; removed over-marking (`моЯ`, `прИйде`, …).
+- Fixed the attested stress-variant table (`колИсь`, `нікОли`, `святИй` are the norms; Russian `рЕка`, `такЖе` removed).
+- Suno target updated from v4.5/v5.5 (retired 2026-09-09) to v6-mini.
+- Skill descriptions rewritten with Ukrainian trigger phrases; poetry agent pipeline changed to drafts → critic notes → single revision.
+- `AGENTS.md` condensed to core rules (was ~15 KB loaded into every session).
+- Meter fixtures rewritten to follow the skill's own rules.
+
+### Removed
+- `skills/poetry-skill` router skill (overlapped with the two real skills; `/poetry-skill` command kept).
+- Agent work artifacts under `.agents/` (handoffs, audits, surveys); `.agents/skills/` mirror kept.
+
 ## v3.0.0 - 2026-09-06
 
 Multi-platform AI Music Generation Upgrade (Suno v4.5/v5.5, Udio v4, Google Flow Music Lyria 3.5), 6-Step Production Lifecycle Architecture, and 10 AI Quality Gates.

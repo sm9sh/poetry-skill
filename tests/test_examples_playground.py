@@ -105,18 +105,21 @@ class TestExamplesPlayground(unittest.TestCase):
     # =========================================================================
 
     def test_03_ukrainian_stress_capitalization_in_lyrics(self):
-        """Verify that lyrics in success scenarios and failure fixes contain capitalized stressed vowels."""
-        ukr_vowels = set("АЕЄИІЇОУЮЯ")
+        """Stress marks in example lyrics must stay within the 3 allowed categories (no over-marking)."""
+        import importlib.util
+        script = PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "scripts" / "check_lyrics.py"
+        spec = importlib.util.spec_from_file_location("check_lyrics", script)
+        check_lyrics = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(check_lyrics)
         for path in [self.success_files["suno"], self.success_files["udio"], self.success_files["flowmusic"]]:
             content = path.read_text(encoding="utf-8")
-            words_with_stress = [
-                w for w in re.findall(r"\b\w+\b", content)
-                if any(c in ukr_vowels for c in w[1:])
-            ]
-            self.assertGreaterEqual(
-                len(words_with_stress), 10,
-                f"Expected at least 10 capitalized stress vowels in {path.name}, found: {len(words_with_stress)}"
-            )
+            blocks = [b for b in re.findall(r"```(?:text)?\n(.*?)```", content, re.DOTALL) if "[Verse" in b]
+            self.assertTrue(blocks, f"No lyrics block found in {path.name}")
+            for block in blocks:
+                errors, warnings = check_lyrics.check(block)
+                self.assertEqual(errors, [], f"{path.name}: {errors}")
+                over = [w for w in warnings if w.startswith("stress marked outside")]
+                self.assertEqual(over, [], f"{path.name}: {over}")
 
     # =========================================================================
     # 4. PLATFORM PROMPT LENGTH CONSTRAINTS
@@ -243,9 +246,9 @@ class TestExamplesPlayground(unittest.TestCase):
             words = len(line.split())
             self.assertTrue(3 <= words <= 8, f"Expected fixed line to have 3-8 words, got {words}: '{line}'")
 
-        # Fixed text must include (half-time feel) and (pause)
-        self.assertIn("(half-time feel)", fixed_text)
-        self.assertIn("(pause)", fixed_text)
+        # Fixed text must include [Half-time feel] and [Pause]
+        self.assertIn("[Half-time feel]", fixed_text)
+        self.assertIn("[Pause]", fixed_text)
 
         # Fixed lyrics metatags must be valid
         mv = MetatagValidator.validate_lyrics_structure(fixed_text)

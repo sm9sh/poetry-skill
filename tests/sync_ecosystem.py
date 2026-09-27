@@ -109,7 +109,10 @@ def verify_root_cleanliness() -> bool:
 
 if __name__ == "__main__":
     sync_agents_skills()
-    sync_global_plugin()
+    if os.name == "nt":
+        sync_global_plugin()
+    else:
+        print("\n=== Skipping Global Plugin Sync (Windows-only path) ===")
     clean = verify_root_cleanliness()
     if not clean:
         sys.exit(1)

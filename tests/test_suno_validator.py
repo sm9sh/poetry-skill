@@ -105,7 +105,7 @@ class TestSunoValidator(unittest.TestCase):
         """Tests full custom mode payload validation and 100-point rubric score."""
         payload = {
             "style_of_music": "ukrainian post-punk, coldwave, 130 bpm, driving chorus bassline, melancholic baritone male vocal, lo-fi tape hiss",
-            "lyrics": "[Vocal Intro - dynamic acapella, dry and close]\n(whispered)\nМісто мовчить у темряві.\n[Verse 1]\nКроки лунають на мокрому бруку,\n(луна)\n[Chorus - explosive chorus guitars]\nМи шукаємо світло в руЇнах!\n[Cold End]",
+            "lyrics": "[Vocal Intro - dynamic acapella, dry and close]\n[Whispered]\nМісто мовчить у темряві.\n[Verse 1]\nКроки лунають на мокрому бруку,\n(луна)\n[Chorus - explosive chorus guitars]\nМи шукаємо світло в руЇнах!\n[Cold End]",
             "exclude": "cheesy brass, metallic treble, muddy bass, generic pop"
         }
         val_res = SunoValidator.validate_custom_mode_payload(payload)

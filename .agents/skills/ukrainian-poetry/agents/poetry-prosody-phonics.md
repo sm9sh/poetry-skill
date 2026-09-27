@@ -111,7 +111,7 @@ allow_pyrrhics: boolean      # Default: true (pyrrhics are natural in Ukrainian 
   - `плАчу` (I weep) vs `плачУ` (I pay)
 
 - **Permissible Dual Accents**:
-  *зАвжди / завждИ*, *пОмилка / помИлка*, *правдИвий / прАвдивий*, *веснЯний / веснянИй*, *первІсний / пЕрвісний*, *тАкож / такОж*, *мАбуть / мабУть*, *прОстий / простИй*.
+  *зАвжди / завждИ*, *пОмилка / помИлка*, *правдИвий / прАвдивий*, *веснЯний / веснянИй*, *первІсний / пЕрвісний*, *тАкож / такОж*, *мАбуть / мабУть*.
 
 - **Attested Poetic / Folk / Surzhyk Stress Variants (≤ 2 per poem/song)**:
   A stress that deviates from the orthoepic standard is **permitted** when documented in Ukrainian literary poetry (Shevchenko, Franko, Lesya Ukrainka, Antonych, Zhadan), folk song, or organic dialect/surzhyk — provided:
@@ -119,7 +119,9 @@ allow_pyrrhics: boolean      # Default: true (pyrrhics are natural in Ukrainian 
   2. The variant has at least one attested canonical source.
   3. **Hard cap: ≤ 2 such shifts per poem or song.** A third shift requires reworking the line to find a better word instead.
   4. In AI-audio lyrics: mark the attested variant with a capitalized stressed vowel so the audio model uses it.
-  Common attested pairs: `кОлись / колИсь`, `нікОли / ніколИ`, `свЯтий / святИй`, `дорОга / дорогА` (in folk context), `зелЕний / зЕлений`.
+  Norms to remember (these are the *standard*, not variants): `колИсь`, `нікОли`, `святИй`, `дорОга` (noun).
+  Before using any variant, confirm it in an orthoepic dictionary (e.g. «Словник наголосів» / goroh.pp.ua) or a named poetic/folk source. If you cannot name the source, treat the variant as an error and rework the line.
+  Do not confuse attested variants with **dual norms** (`зАвжди / завждИ`, `пОмилка / помИлка`, `тАкож / такОж`, `мАбуть / мабУть`) — dual norms are fully standard and do not count toward the cap.
 
 
 - **AI Audio Model Phonetic Stress Standard (Suno/Udio/Flow Music)**:
