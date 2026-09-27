@@ -86,6 +86,7 @@ allow_stanza_compression: boolean # Default: true (allows collapsing 4 diluted l
      ➔ ✅ *«Учора я зайшов у темний ліс / й знайшов високе дерево»*.
 
 ### 4.3 Semantic Compression & Lexical Weight («Словам тісно, думкам просторо»)
+Weight comes from precise common words. Replace rare, archaic, dialect or invented words with living ones unless the user explicitly asked for them.
 - When an entire quatrain contains only one weak thought wrapped in descriptive filler, compress it into 2 muscular lines.
 - Replace chains of weak words (adverb + weak verb) with a single precise, heavy verb:
   - ❌ *«дуже швидко побіг»* ➔ ✅ *«майнув / рвонув / кинувся»*.
@@ -133,7 +134,7 @@ allow_stanza_compression: boolean # Default: true (allows collapsing 4 diluted l
 1. **Fixed Syllabo-Tonic Meters (Iamb, Trochee, Amphibrach)**:
    - When purging a 2-syllable filler like *«уже»* or *«цей мій»*, replace it with a 2-syllable concrete modifier (*«глухий»*, *«іржавий»*, *«зверху»*) to preserve foot count seamlessly.
 2. **Baroque / Historical Registers (17th–18th c.)**:
-   - Authentic rhetorical inversions of the Ukrainian Baroque (Skovoroda / Cossack epistles) are permitted ONLY when historically authentic, but must never be confused with clumsy amateur rhyme-inversions.
+   - Only when the user explicitly asked for a Baroque / historical stylization: authentic rhetorical inversions of the Ukrainian Baroque (Skovoroda / Cossack epistles) are permitted when historically authentic, but must never be confused with clumsy amateur rhyme-inversions.
 3. **Song Lyrics / Spoken-Word**:
    - Maximum punchiness: every line must be immediate and memorable for vocal delivery, eliminating any conversational clutter.
 4. **Verlibre (Free Verse)**:

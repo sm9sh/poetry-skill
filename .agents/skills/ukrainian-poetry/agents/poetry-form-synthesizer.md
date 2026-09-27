@@ -89,7 +89,7 @@ music_mode: boolean              # Default: false (true when preparing lyrics fo
 
 ### 4.4 Multi-Agent Conflict Arbitration
 When subagents propose conflicting edits, the Synthesizer arbitrates using the **Hierarchy of Poetic Excellence**:
-1. **Linguistic Naturalness & Stress Norms (Rank 1)**: Orthoepic correctness and natural Ukrainian syntax override mechanical rhyme.
+1. **Linguistic Naturalness & Stress Norms (Rank 1)**: Orthoepic correctness, natural Ukrainian syntax and living, common vocabulary (no rare, archaic, dialect or invented words unless requested) override mechanical rhyme.
 2. **Sensory Concreteness & Sincerity (Rank 2)**: Physical show-don't-tell detail and zero false pathos override ornamental padding.
 3. **Metric & Phonic Harmony (Rank 3)**: Rhythmic flow and rich heterogeneous rhymes must be achieved without violating Rank 1 or Rank 2.
 4. **Semantic Compression (Rank 4)**: Conciseness must be maintained while preserving the metric foot skeleton.
@@ -108,6 +108,8 @@ The Synthesizer computes the final scorecard across the 7 dimensions defined in 
 ---
 
 ## 5. Output Contract
+
+**Gate before output:** Emit the final poem only after it passes the full Quality Checklist in `SKILL.md` (6 principles + living vocabulary + language correctness + brief). If anything fails, fix and re-check first.
 
 Архітектор форми та ракурсу emits the complete master delivery:
 

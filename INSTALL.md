@@ -9,9 +9,10 @@
 ### 1.1. Claude Code (CLI)
 Claude Code автоматично знаходить скіли у робочій директорії:
 1. Клонуйте або скопіюйте папку `skills/` у корінь вашого проєкту (або вкажіть шлях до `D:\poetry-skill\skills`).
-2. Завдяки наявності [`CLAUDE.md`](./CLAUDE.md) Claude Code автоматично зчитуватиме правила та активуватиме скіли:
+2. Скіли активуються автоматично за їхніми описами (description у `SKILL.md`):
    - `skills/ukrainian-poetry/SKILL.md` — для поезії;
-   - `skills/ukrainian-poetry-to-suno/SKILL.md` — для музичних промптів Suno AI.
+   - `skills/ukrainian-poetry-to-suno/SKILL.md` — для пісень (Suno v6-mini, Flow Music).
+   Спільні правила — у [`AGENTS.md`](./AGENTS.md).
 
 ### 1.2. Claude.ai (Веб / Projects)
 1. Створіть новий проєкт у Claude.ai (**Projects**).
@@ -19,7 +20,7 @@ Claude Code автоматично знаходить скіли у робочі
    - [`skills/ukrainian-poetry/references/full-guide.md`](./skills/ukrainian-poetry/references/full-guide.md) (повна поетична інструкція);
    - [`skills/ukrainian-poetry-to-suno/references/full-guide.md`](./skills/ukrainian-poetry-to-suno/references/full-guide.md) (повна музична інструкція);
    - [`skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md`](./skills/ukrainian-poetry-to-suno/references/reference-to-style-cheatsheet.md) (таблиця референсів).
-3. У поле **Project Instructions** скопіюйте текст із [`CLAUDE.md`](./CLAUDE.md).
+3. У поле **Project Instructions** скопіюйте текст із [`AGENTS.md`](./AGENTS.md).
 
 ---
 
@@ -59,7 +60,7 @@ Claude Code автоматично знаходить скіли у робочі
 ```
 
 ### 3.2. Локальний проєкт
-Antigravity автоматично підтягує скіли з поточної робочої директорії через `GEMINI.md` та `skills/`.
+Antigravity автоматично підтягує скіли з поточної робочої директорії через `AGENTS.md` та `skills/`.
 
 ---
 

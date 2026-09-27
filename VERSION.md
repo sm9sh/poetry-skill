@@ -20,7 +20,11 @@ Refocus on the core goal — quality Ukrainian poems and their adaptation into s
 - `AGENTS.md` condensed to core rules (was ~15 KB loaded into every session).
 - Meter fixtures rewritten to follow the skill's own rules.
 
+- Rule: no rare, archaic, dialect or invented words unless the user explicitly asks (AGENTS.md, both skills, rubric deduction, agents).
+- Rule: every poem and song lyric passes the Quality Checklist (6 principles + living vocabulary + language correctness + brief) before output.
+
 ### Removed
+- `CLAUDE.md`, `GEMINI.md` (rules live in `AGENTS.md`).
 - `skills/poetry-skill` router skill (overlapped with the two real skills; `/poetry-skill` command kept).
 - Agent work artifacts under `.agents/` (handoffs, audits, surveys); `.agents/skills/` mirror kept.
 

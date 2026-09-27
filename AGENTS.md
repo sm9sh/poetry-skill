@@ -18,6 +18,9 @@ Load the relevant `SKILL.md` for the task. The rules below are the non-negotiabl
 5. **Original angle** — micro-detail over macro-abstraction; open or paradoxical endings, not morals.
 6. **Form = content** — meter, stanza, line breaks and tempo embody the feeling.
 
+- **Living vocabulary** — do not use rare, archaic, dialect or invented words unless the user explicitly asks for them. Every word should be understandable to a contemporary reader (or listener) without a dictionary; if a common word breaks the meter, rework the line.
+- **Mandatory quality check** — every poem and every song lyric is checked against the Quality Checklist in `skills/ukrainian-poetry/SKILL.md` (the 6 principles + living vocabulary + language correctness + the user's brief) before it is shown to the user. Anything that fails is fixed and re-checked first. No exceptions for short pieces or quick edits.
+
 ## Songs — core rules
 
 - **Target Suno v6-mini** (the free v6 model; all pre-v6 Suno models were retired on 2026-09-09) unless the user names another platform. Platform facts: `skills/ukrainian-poetry-to-suno/references/platforms.md`.

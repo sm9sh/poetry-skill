@@ -117,6 +117,7 @@ Every detected defect incurs an immutable deduction from the 100-point total:
 4. **Euphony Verification**: Check alternating `у/в`, `і/й`, `з/із/зі`. Flag hiatus ($>1$ vowel clash at word boundary).
 5. **Rhyme & Clausula Classification**: Classify parts of speech in rhymes. Ensure alternating endings (`ЖЧЖЧ`).
 6. **Syntax & Lexical Density Check**: Flag inverted phrases and measure filler token density.
+6a. **Living Vocabulary Check**: Flag every rare, archaic, dialect or invented word (*днесь, глас, плай, тишопад*) that the user did not explicitly ask for; each one is a deduction and must be replaced with a common word.
 7. **Score Calculation**: Subtract deductions from dimension ceilings; compute total score.
 
 ### 4.4 Remediation Routing Engine

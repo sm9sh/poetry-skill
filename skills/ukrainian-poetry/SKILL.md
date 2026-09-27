@@ -47,6 +47,22 @@ These six principles are what separates a living poem from a rhymed statement. A
 
 ---
 
+## Living Vocabulary (Жива, зрозуміла лексика)
+
+Use words a contemporary Ukrainian reader knows — words you could hear in real speech or read in a modern book. **Do not use rare, archaic, dialect or invented words unless the user explicitly asks for them** (e.g. «стилізуй під бароко», «гуцульською говіркою», «з неологізмами», «архаїчною мовою»).
+
+Why: an unfamiliar word stops the reader mid-line and moves attention from the image to the dictionary. It also usually signals that the word was picked to fill a meter or a rhyme, not for its meaning. Language models are prone to pseudo-Ukrainian coinages that sound plausible but do not exist. In songs it is worse still: a listener cannot re-read the line, and the audio model mispronounces unfamiliar words.
+
+Avoid unless asked:
+- **Archaisms and Church-Slavonic forms**: *днесь, глас, перст, чело, ланіти, отрок, зріти, благий*.
+- **Dialect or narrowly regional words** outside a requested dialect voice: *ґражда, плай, файний, бесідувати*.
+- **Rare bookish words** when a plain word says the same thing — if you would have to explain the word, it does not belong.
+- **Invented words and made-up compounds**: *тишопад, сумоцвіт, світлоплин, зорепадіння*.
+
+Test for every word you are unsure about: would an educated reader of modern Ukrainian understand it without a dictionary? If not, replace it — and if the replacement breaks the meter or rhyme, rework the line, not the vocabulary. Concrete everyday nouns of the poem's world (*перон, стерня, ґанок, кватирка*) are living language and are welcome when the scene needs them.
+
+---
+
 ## Task Workflow
 
 1. **Extract/Infer Parameters**:
@@ -80,7 +96,7 @@ These six principles are what separates a living poem from a rhymed statement. A
    - Prefer cross-grammatical rhymes, ideally with a matching pre-tonic consonant (**Principle 3: Phonics & Rhyme**).
    - Keep natural Ukrainian word order; if a rhyme needs an inversion, change the rhyme, not the syntax (**Principle 4: Conciseness & Syntax**).
    - Cleanse any filler pronouns (*цей, той, свій*) or rhythmic padding words.
-5. **Run Silent Self-Edit**: Scan for filler lines, forced inversions, banal rhymes, declarative emotions, and sharovarshchyna clichés before emitting output.
+5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again. Do this silently: show the checklist only if the user asks; show only the poem that passed.
 6. **If the poem is meant as a song** (Suno / Flow Music): keep lines 6–10 syllables, give it a repeatable hook, and hand off to `ukrainian-poetry-to-suno` for song form and markup. In songs, repeating the hook is a device, not padding.
 
 ---
@@ -235,8 +251,8 @@ Avoid these by default. They are the first thing an experienced reader notices, 
 | `contemporary-urban` | Living urban Ukrainian, unforced syntax, raw concrete/railway/balcony/siren imagery, digital and post-industrial texture. | Zhadan, Andrukhovych, Izdryk, Kalytko |
 | `chamber-intimate` (*тиха лірика*) | Whispered, sensory, psychological nuance, domestic objects, zero theatrical pathos. | Rylsky, Vinhranovsky, Kyselov, Holoborodko |
 | `philosophical-neoclassical` | High intellectual density, antique/mythological subtexts, flawless metric discipline, sculptural imagery. | Zerov, Rylsky, Klen, Stus, Svidzinsky |
-| `baroque-cossack` (17th–18th c.) | Authentic Early Modern Ukrainian vocabulary (*днесь, воістину, суєта, глас, клейноди, корогва, ратище*), existential gravity. | Skovoroda, Mazepa, Shevchenko (historical), Antonych |
-| `folk-authentic` | Archaic ritual depth (колядки, щедрівки, голосіння, замовляння), mythological animism (ліс, вода, земля, полин). | Authentic ritual song, Hutsul lore |
+| `baroque-cossack` (17th–18th c.) — **only when the user explicitly asks for this stylization** | Authentic Early Modern Ukrainian vocabulary (*днесь, воістину, суєта, глас, клейноди, корогва, ратище*), existential gravity. | Skovoroda, Mazepa, Shevchenko (historical), Antonych |
+| `folk-authentic` | Ritual depth (колядки, щедрівки, голосіння, замовляння), mythological animism (ліс, вода, земля, полин). Archaic or dialect words only if the user asks for them. | Authentic ritual song, Hutsul lore |
 | `children-playful` | Alliterative tongue-twisters, joyful onomatopoeia, bouncing rhythm, absurdity without condescension. | Falkovych, Malkovych, Skiba |
 
 ### Anti-Sharovarshchyna Guardrails (Антишароварщина)
@@ -264,15 +280,18 @@ Avoid these by default. They are the first thing an experienced reader notices, 
 
 ---
 
-## Self-Edit Checklist
+## Quality Checklist (обов'язково перед кожною видачею)
 
-Before presenting the final poem, silently verify all 6 Poetic Principles:
+Run this for **every** poem before output — no exceptions for quick drafts, small edits or revisions of the user's own text. A poem that fails any item is not ready: fix it and re-check. The checklist is internal; the user sees only the finished poem (unless they ask for the analysis).
 1. **Imagery & Sensory Anchor (Принцип 1)**: Is the poem grounded in concrete physical details and fresh metaphors ("show, don't tell")? Are abstract clichés (*душа, серце, доля, крила надії*) eliminated?
 2. **Sincerity & Zero Pathos (Принцип 2)**: Is the tone psychologically genuine? Is the text free from theatrical pathos, loud declarations, and moralizing conclusions?
 3. **Prosody, Phonics & Euphony (Принцип 3)**: Does the rhythm breathe naturally with correct pyrrhics? Are stresses strictly literary (*вИпадок*, *чорнОзем*, *новИй*)? Are `у/в`, `і/й`, `з/із/зі` balanced? Is assonance/alliteration harmonized?
 4. **Conciseness, Natural Syntax & Anti-Inversion (Принцип 4)**: Is the poem compressed without filler pronouns (*цей, той, свій*) or rhythmic padding? Is the word order 100% natural without artificial inversions for rhyme?
 5. **Perspective & Paradoxical Ending (Принцип 5)**: Does the poem offer an unexpected angle on the topic? Does the final line leave a lingering sensory or philosophical resonance without preaching?
 6. **Form & Content Unity (Принцип 6)**: Does the metric structure, stanza pace, and line breaks organically match the emotional weight of the theme?
+7. **Living Vocabulary**: Is every word understandable to a contemporary reader without a dictionary? No archaisms, dialect, rare bookish or invented words — unless the user explicitly asked for them?
+8. **Language Correctness**: Is grammar clean (case endings, agreement, prepositions), free of Russianisms and calques (*приймати участь*, *по вечорах*), with every stress orthoepically correct?
+9. **Brief Fulfilled**: Does the poem match what the user asked for — topic, form, length, mood, audience?
 
 ---
 
