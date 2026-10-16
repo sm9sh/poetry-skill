@@ -1,0 +1,127 @@
+{
+ "1": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ]
+  },
+  "baseline": {
+   "skills": []
+  }
+ },
+ "2": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ]
+  },
+  "baseline": {
+   "skills": []
+  }
+ },
+ "3": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ]
+  },
+  "baseline": {
+   "skills": []
+  }
+ },
+ "4": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ]
+  },
+  "baseline": {
+   "skills": []
+  }
+ },
+ "5": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "baseline": {
+   "skills": [],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  }
+ },
+ "6": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "baseline": {
+   "skills": [],
+   "lyrics_blocks": 0,
+   "errors": [],
+   "warnings": []
+  }
+ },
+ "7": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "baseline": {
+   "skills": [],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": [
+    "only one chorus — strong songs usually have 2–3 (criterion 2: the hook must return)",
+    "no lyric line repeats 3+ times — the hook/title may be too weak to stick (criterion 2)"
+   ]
+  }
+ },
+ "8": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "baseline": {
+   "skills": [],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": [
+    "stress marked outside the 3 categories (homograph / Russian-stress trap / mobile shift) — lowercase these: моЯ (line 6)"
+   ]
+  }
+ },
+ "9": {
+  "with_skill": {
+   "skills": []
+  },
+  "baseline": {
+   "skills": []
+  }
+ },
+ "10": {
+  "with_skill": {
+   "skills": []
+  },
+  "baseline": {
+   "skills": []
+  }
+ }
+}

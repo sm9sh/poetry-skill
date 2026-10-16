@@ -1,0 +1,361 @@
+{
+ "1": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 7.0,
+   "baseline": 7.75
+  },
+  "winner": "baseline",
+  "verdicts": [
+   {
+    "score_a": 7.0,
+    "score_b": 8.0,
+    "winner": "B",
+    "reasons": [
+     "B is compact and built on specific physical detail: \"цвяхи тримає в зубах, як тоді, коли вчив мене рівняти по шнуру\" ties the father's gestures to the past without naming a feeling.",
+     "B's ending, \"Хитку дошку край груші він не чіпав. / Крізь неї я вилазив уночі.\", is quietly paradoxical. He fixes everything except the one gap, and the reader works out why. The ending stays with you and has no moral.",
+     "B's \"Лише раз спитав у мами, чи я доїхав\" shows the father's care in one indirect, unemphatic gesture. This is the restraint the brief asks for.",
+     "A has good concrete details (\"Підпер плечем, вибрав дошку, приміряв, зняв, приміряв ще раз\", \"на розпал\"). But it runs to about 22 lines, well over the 8–16 target, and it has a title that gives away the premise.",
+     "A's ending explains itself: \"глянув на дорогу — / просто так, мабуть, —\". The look at the road states the longing directly, and the hedge \"мабуть\" underlines it. \"Не хитається.\" is a good line, but the finale is more telegraphed than B's.",
+     "B's first line, \"Мама каже по телефону: батько з ранку коло паркана\", is slightly prosaic and long. At 7 lines it is also shorter than the requested 8–16."
+    ],
+    "flaw_a": "It is too long (about 22 lines) and ends with the explicit gesture \"глянув на дорогу — просто так, мабуть\". That spells out the longing, and the filler \"мабуть\" weakens the ending.",
+    "flaw_b": "It has only 7 lines, below the 8–16 range, and the opening line is flat and prose-like. The poem reads more like a compressed anecdote than a developed piece.",
+    "cost_usd": 0.03994
+   },
+   {
+    "score_a": 6.0,
+    "score_b": 8.5,
+    "winner": "B",
+    "reasons": [
+     "B carries the emotion through physical action: \"приміряв, зняв, приміряв ще раз\", \"поклав окремо — на розпал\", \"добив останній цвях / і перевірив, чи не хитається\".",
+     "B's ending stays with the reader. \"Не хитається.\" is a flat line that reads as both craft and absence, and \"глянув на дорогу — / просто так, мабуть, —\" shows the longing without naming it.",
+     "B is about 22 lines, well over the 8–16 asked for, and the stanzas could be tightened. \"Радіо в сараї бубоніло про погоду\" is good texture. \"мабуть\" is a slight nudge at the end.",
+     "A's closing image is strong: \"Хитку дошку край груші він не чіпав. / Крізь неї я вилазив уночі.\" The loose board he leaves alone is a quiet, paradoxical gesture and fits the brief well.",
+     "A is prose-like and its lines are uneven: \"Мама каже по телефону: батько з ранку коло паркана.\" It loses rhythm, and \"цвяхи тримає в зубах, як тоді, коли вчив мене рівняти по шнуру\" is an explanatory flashback. \"Лише раз спитав у мами, чи я доїхав\" is a bit on the nose, though it is a decent detail."
+    ],
+    "flaw_a": "It reads as chopped prose with no rhythm, and the explanatory line about teaching the narrator to level by the string works as telling. The best image comes only in the last two lines.",
+    "flaw_b": "At about 22 lines it is well over the requested 8–16. The quiet glance at the road, \"просто так, мабуть\", edges toward explaining the feeling.",
+    "cost_usd": 0.03442
+   }
+  ],
+  "cost_usd": 0.07436000000000001
+ },
+ "2": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 7.0,
+   "baseline": 2.75
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 3.0,
+    "score_b": 7.0,
+    "winner": "B",
+    "reasons": [
+     "A is a messy stream of consciousness: four drafts, 'Я не зовсім вдоволений двома останніми, бо в них рими кульгають' — the user has to pick through it to find the actual result.",
+     "A's final rhymes are still banal and partly forced: 'хмари/кари', 'пробилось/ожилось' (verb-verb grammatical rhyme, the very thing the user complained about), and 'воля, що не знає кари' is a cliché stretch.",
+     "A's earlier drafts break meaning and metre: 'Тепло лягає сонце на гори' is ungrammatical, 'ясної зорі' is a stock phrase, and 'вітер ... вмитий' do not rhyme properly; A also claims 'усі рядки — 11 складів', which is false.",
+     "B delivers one concrete poem with real images: 'Шурхоче під кедами стерня', 'а кава в термосі холоне' — it shows instead of declaring, and the ending 'гукне?' stays with the reader.",
+     "B drifts from the author's theme: the hopeful search for freedom becomes wanting not to be called, and the rhyme 'стерня — вогня' is a loose one. The note on changes is clear and honest."
+    ],
+    "flaw_a": "Presents several abandoned drafts and self-criticism instead of one polished poem; the final version keeps verbal rhymes (пробилось/ожилось) and clichés, and the 11-syllable claim is untrue.",
+    "flaw_b": "Rewrites the poem so heavily that the author's hopeful search for freedom is lost, and the lines 'Я так хотів, щоб не кликали мене' and 'стерня — вогня' are a little forced.",
+    "cost_usd": 0.04376
+   },
+   {
+    "score_a": 7.0,
+    "score_b": 2.5,
+    "winner": "A",
+    "reasons": [
+     "A delivers one clean poem with concrete images (\"Шурхоче під кедами стерня\", \"кава в термосі холоне\") instead of declared feelings, and an ending that stays: \"і ось стою, прислухаюсь: гукне?\"",
+     "A's rhymes are non-grammatical and varied (долоні/холоне, мене/гукне), though \"стерня/вогня\" is only a loose assonance and the closing couplet's rhythm is uneven.",
+     "A changes the theme: the search for freedom becomes freedom as being left alone, and the author's \"воля/доля\" and hope are lost. It is bold, but it drifts from \"keep the theme\".",
+     "B gives four drafts and admits mid-answer that the earlier ones fail (\"рими кульгають\"). That is messy and not a usable answer.",
+     "B's rhymes are weak and its language is broken: \"вітри безкраї/серце знає\" doesn't rhyme, \"літа/колосся\" doesn't rhyme, and \"кароокий\" is forced. The final \"хмари/кари\" is a clichéd pair, and \"воля, що не знає кари\" is nonsense.",
+     "B's final text keeps the clichés (\"в серці щось забуте ожилось\"). It also claims \"11 складів\" in every line, which is false, and calls хмари/кари \"іменникові\" when they are the same grammatical form."
+    ],
+    "flaw_a": "It drops the author's theme of seeking воля/доля and hope, replacing it with a different meaning. The rhyme \"стерня/вогня\" is loose and the last two lines are metrically uneven.",
+    "flaw_b": "It is a pile of four drafts, several with non-rhymes, and the self-corrections show it is unfinished. The final version has a forced cliché rhyme (хмари/кари), a vague \"щось забуте ожилось\", and a false claim about syllable counts.",
+    "cost_usd": 0.039458
+   }
+  ],
+  "cost_usd": 0.083218
+ },
+ "4": {
+  "order": {
+   "A": "with_skill",
+   "B": "baseline"
+  },
+  "scores": {
+   "with_skill": 4.5,
+   "baseline": 3.75
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 4.0,
+    "score_b": 4.5,
+    "winner": "B",
+    "reasons": [
+     "A is a single 4-line quatrain with 14–15 syllable lines but no 8|6 caesura; lines read like 'Поки піп святить у дворі, кіт підкрався тихо' (6+8) — closer to a long line than a kolomyika, and the AABB structure is not truly kolomyika.",
+     "A's last line 'А кіт — на дах і там сидить, не хоче віддати' is clumsy and overlong; 'хап ковбасу' is a vivid but rough fragment; the story does end on a mini-scene (cat on roof), which is a decent image.",
+     "B misstates the form: 'цезура після 6-го' contradicts the expected 8|6 and the lines mostly don't hold 14 syllables ('Кіт на Великдень пробрався до кошика' = 12 with no caesura).",
+     "B's lines break meaning: 'сповідається в сметанну хвилину' is nonsense, 'не по-котячи' is a non-word, and 'Хрістос воскрес — кіт воскрес' is a cheap, possibly irreverent gag.",
+     "B at least offers several variants with working rhymes (кошика/пика, скаче/котячи) and more humor ('хитра пика', 'господар аж почервонів'), but it adds meta-chatter and a closing offer that earn nothing."
+    ],
+    "flaw_a": "Not true kolomyika meter (no 8+6 caesura), overlong lines and a clumsy final line, with only a mild joke.",
+    "flaw_b": "Wrong stated meter and several nonsensical or invented phrases ('сметанну хвилину', 'не по-котячи'), plus a tacky Easter-greeting gag.",
+    "cost_usd": 0.038793999999999995
+   },
+   {
+    "score_a": 3.0,
+    "score_b": 5.0,
+    "winner": "B",
+    "reasons": [
+     "A states the wrong meter itself: \"цезура після 6-го\", where the brief says after 8. Its lines run 16–17 syllables, so they aren't kolomyika.",
+     "A's jokes don't work: \"Тепер сповідається в сметанну хвилину\" is nonsense, and \"Хрістос воскрес — кіт воскрес, бо поїв ковбаси\" is a clumsy, borderline irreverent pun.",
+     "A's rhymes are weak or forced: \"кошика/пика\", \"не по-котячи\" is an invented word, and \"ковбасину\" is odd. It also stacks several variants with filler and an offer at the end.",
+     "B tells a coherent story with concrete images: the priest blessing the baskets in the yard, \"Баба Галя з рушником вибігла із хати\", and the cat on the roof refusing to give the sausage back. Rhymes are workable: \"тихо/лихо\", \"хати/віддати\".",
+     "B is still not true kolomyika: the lines are 15–16 syllables with no caesura after 8, the humour is mild, and the ending \"не хоче віддати\" is flat. \"Хап ковбасу з кошика\" is also slightly awkward."
+    ],
+    "flaw_a": "The meter is stated wrongly and the lines are too long. The humour is muddled by nonsense phrases like \"сметанну хвилину\" and the invented \"не по-котячи\". It also gives several variants instead of one finished poem.",
+    "flaw_b": "The lines are not 14-syllable kolomyika: they run 15–16 syllables with no clear 8+6 caesura. The joke is mild and the ending is flat. \"Хап ковбасу з кошика\" is awkward syntax.",
+    "cost_usd": 0.033898
+   }
+  ],
+  "cost_usd": 0.07269199999999999
+ },
+ "5": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 6.5,
+   "baseline": 5.5
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 6.0,
+    "score_b": 6.5,
+    "winner": "B",
+    "reasons": [
+     "A keeps the poem's words nearly verbatim (\"Мій дід ремонтував годинники... Які вже нікуди не підходять\"). But its Style tag is overlong, and the note suggests adding \"Sisters of Mercy, Joy Division\", which breaks the no-artist-names rule. The Style also lists \"Ukrainian\" and the Exclude field is thin.",
+     "A has no syllable matching. The verses are uneven, e.g. \"Пінцет, лупа, лампа на столі\" followed by \"Кожен гвинтик — чиясь година\". Verse 2 has bland lines and a weak ending: \"Я не вмію їх склеїти знову, Тільки слухаю, як вони сплять\". The chorus is the poem's own lines plus the filler \"Тихий метал, мертвий час\".",
+     "A's bridge \"Ще шукаю, куди мене загвинтити\" is a forced, awkward metaphor. \"Може, я теж один із них\" is a declared feeling, which is a cliché.",
+     "B's chorus hook \"Дощ у бляшанці, дощ у бляшанці\" is placed well and recurs. The final chorus turns \"це він іще лічить час\", which gives a real shift. The bridge \"Нікуди не підходять — і саме тому вони звучать\" is a strong development of the poem.",
+     "B's Verse 2 is clumsy and partly broken: \"Дістав його старИй годинник — жоден гвинтик не став на місце\". The syntax is garbled and \"Знав, де у годиннику серце\" is weaker. The stress marks on \"рУки\" and \"старИй\" are unnecessary, and \"Дістав\" has no clear subject. Its cue tags are put inside the section brackets, which suits Suno. Its Style (no artist names, Variety Off, a concrete Exclude) is much better steered than A's."
+    ],
+    "flaw_a": "The structure is bloated with filler (the pre-chorus and the \"Тихий метал, мертвий час\" lines) and has no syllable discipline. It also suggests artist names, and the invented bridge image \"куди мене загвинтити\" is forced.",
+    "flaw_b": "Verse 2 is syntactically muddled (\"Дістав його старИй годинник — жоден гвинтик не став на місце\"), and the stress marks on \"рУки\" and \"старИй\" were added without need.",
+    "cost_usd": 0.045302
+   },
+   {
+    "score_a": 6.5,
+    "score_b": 5.0,
+    "winner": "A",
+    "reasons": [
+     "A has a real hook and a tighter form: \"Дощ у бляшанці, / дощ у бляшанці\" closes every chorus and the line is carried over from the source. Verse 2 adds a new action, taking down the grandfather's watch: \"жоден гвинтик не став на місце\".",
+     "A's final chorus changes the meaning: \"це він іще лічить час\" turns the rain in the tin into the grandfather still counting time. That is an ending that stays with the reader.",
+     "A's Style and Exclude are specific and fit darkwave (deadpan baritone, cold plate reverb, 112 bpm). Stress marks are used only on \"рУки\" and \"старИй\", so the sheet is close to ready to paste. Weaknesses: \"Знав, де у годиннику серце\" is clumsy, the verse structure is loose, and the grammar of \"Дістав його старИй годинник\" is shaky.",
+     "B pastes the original stanza into Verse 1 and then repeats it as a chorus. The added lines are generic, and \"Час зупинився в його руках\" is a cliché. The bridge declares a feeling and moralizes: \"Може, я теж один із них. Ще шукаю, куди мене загвинтити\", and \"загвинтити\" is awkward.",
+     "B's Style field puts \"Ukrainian\" in a long tag list and the Exclude list is thin. It suggests adding artist names (\"Sisters of Mercy, Joy Division\"), which the brief forbids. Delivery cues sit on separate bracket lines. Verse 2 \"Пил на склі... Стрілки, що знають лише минуле\" is abstract, and the lines vary a lot in length."
+    ],
+    "flaw_a": "Some lines are clumsy or ungrammatical (\"Дістав його старИй годинник\", \"Знав, де у годиннику серце\"), and the text claims a script check passed when the stress dictionary was not installed.",
+    "flaw_b": "The song is padded with abstract, cliché lines and a declared-feeling bridge (\"Може, я теж один із них\"). It recommends artist names in Style and ignores the syllable-matching and hook discipline.",
+    "cost_usd": 0.044452000000000005
+   }
+  ],
+  "cost_usd": 0.089754
+ },
+ "6": {
+  "order": {
+   "A": "with_skill",
+   "B": "baseline"
+  },
+  "scores": {
+   "with_skill": 7.0,
+   "baseline": 2.25
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 7.0,
+    "score_b": 2.5,
+    "winner": "A",
+    "reasons": [
+     "A delivers actual Ukrainian lyrics with [section] tags and a hook that returns: «Сад уже не наш» appears 3+ times per chorus, and the last chorus turns it into «Сад тепер у мені».",
+     "Concrete images carry the song: «Хвіртка тепер зелена. Ключ ще лежить у кишені», «Три яблука з її трави», and the currant sprig wrapped in a kerchief. Verse 2 adds new information (mallows cut down, a fence put up).",
+     "B gives only an instrumental prompt and no lyrics. The user wrote «Тексту немає», which asks for lyrics to be written, so B misreads the brief.",
+     "B's prompt is long and name-heavy: its variants suggest «Portishead-style, Massive Attack-style», which breaks the no-artist-names rule. It also never handles Ukrainian vocals.",
+     "A's flaws: «Сад уже не там» next to «не наш» is weak, «Яблука падають тихо, так само, як при тобі» is slightly abstract, and «У місті, де немає саду» is prosaic. The bracket cues are long, and the round-bracket «(не наш)» is acceptable. The prompt is 4 sentences and has no artist names."
+    ],
+    "flaw_a": "The chorus is somewhat static and declarative («Сад уже не наш» repeated). The English style cues in the section tags are long, and the final-chorus variant «Сад уже не там» doesn't scan cleanly.",
+    "flaw_b": "It supplies no Ukrainian lyrics or song structure at all, only an instrumental wordless prompt, and it suggests artist names (Portishead, Massive Attack).",
+    "cost_usd": 0.040749999999999995
+   },
+   {
+    "score_a": 2.0,
+    "score_b": 7.0,
+    "winner": "B",
+    "reasons": [
+     "A delivers only an English instrumental prompt and no lyrics. The brief called for a song in Ukrainian, and the user's «Тексту немає» means «there is no text yet, write it». A reads it as «make it wordless»: \"Wordless female vocal… no lyrics, no words\".",
+     "A names artists in its variants (\"Portishead-style, Massive Attack-style\"), which the expected format forbids. It also has no [section] structure and no hook.",
+     "B gives a complete song with a Prompt block and a Lyrics block. Its Prompt is 3 sentences, has no artist names, and sets a clear sound: \"slow, hypnotic downtempo groove at about 70 BPM… breathy female vocal… vinyl crackle\".",
+     "B's imagery is concrete: \"Хвіртка тепер зелена. Ключ ще лежить у кишені.\" and \"Три яблука з її трави\". The sketch of the hook and the bridge (\"загорну її в хустинку\") move the story on. Verse 2 adds new facts (cut mallows, a fence), and the bridge turns the song when the granddaughter takes a currant cutting.",
+     "B has weaknesses. The hook «Сад уже не наш» comes back 3–4 times, but \"Яблука падають тихо, Так само, як при тобі\" is a bit vague. The \"(не наш)\" echo is fine in round brackets. Delivery cues are put inside the section tags, which is acceptable, but the lyrics are not tightly rhymed. The final \"Сад тепер у мені\" is slightly declarative."
+    ],
+    "flaw_a": "It writes no lyrics at all and gives only an English instrumental prompt, so the user gets no Ukrainian song. It also names artists (Portishead, Massive Attack) and has no section structure.",
+    "flaw_b": "The lyrics are unrhymed and the hook is only moderately strong. Some lines are a bit vague or declarative («Сад тепер у мені»), and the chorus line \"Сад уже не наш\" repeats thinly across four lines.",
+    "cost_usd": 0.042038
+   }
+  ],
+  "cost_usd": 0.082788
+ },
+ "3": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 7.0,
+   "baseline": 4.25
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 4.5,
+    "score_b": 7.0,
+    "winner": "B",
+    "reasons": [
+     "B has concrete, observed detail: «вікно завішене чиїмось светром», «Вода — ковтками, місце — сантиметром», and the key's teeth printing on the palm («Зубці кладуть печатку на руці»). This is the poetry the brief asks for, with no slogans.",
+     "A is built from clichés and declared feelings: «Гудок гуде», «Мала дитина мирно ще дрімає», «Не вічне це страждання», «Що вдома двері знов їм відчиняють». Its closing «Тиша і мовчання» is a stock ending.",
+     "A's rhymes are padded with filler verbs: знає, дрімає, зітхає, виглядає, знають, чекають. Its «дрони» (line 4) arrive abruptly and clash with «мирно ще дрімає». Lines like «Вгорі гудуть, мов зграї чорні, дрони» exist only to reach the rhyme.",
+     "Both keep the Italian scheme with abba abba cdc dcd, and A's 11-syllable lines are metrically smooth. A's volta («Колеса б'ють, а люди вірять, знають, / Що ніч мине») is just generic reassurance. B's turn to the neighbour and her key in line 9 is a real shift of focus.",
+     "B's weaknesses: «метром» repeats inside «кілометром» and «сантиметром». «у кулаці» is awkward, and «Розтулить пальці тільки в кінці» is vague. Still, B reads as a living scene."
+    ],
+    "flaw_a": "Cliché and padded rhymes: declared feelings («Не вічне це страждання»), tautologies («Гудок гуде») and a forced, moralizing ending («Тиша і мовчання»), with no concrete train imagery.",
+    "flaw_b": "The rhymes are repetitive and forced: «кілометром / метром / сантиметром» are near-identical, and «у кулаці» and «Розтулить пальці тільки в кінці» are awkward and hard to decode.",
+    "cost_usd": 0.049516000000000004
+   },
+   {
+    "score_a": 7.0,
+    "score_b": 4.0,
+    "winner": "A",
+    "reasons": [
+     "A holds the Italian scheme: «вагон/светром/кілометром/перон» and «телефон/метром/сантиметром/тон» give abba abba, and the sestet runs cdc dcd («кулаці/знає/кінці/світає/руці/минає»).",
+     "A's images are concrete and not declared as feelings: «вікно завішене чиїмось светром», «Гальмуємо. Повземо метр за метром», «Вода — ковтками, місце — сантиметром», «Сусідка гріє ключ у кулаці». This is the train-interior detail the brief asks for, with no slogans.",
+     "A weakens in the sestet: «Розтулить пальці тільки в кінці» is forced for the rhyme and unclear. «Зубці кладуть печатку на руці» is decodable as the key's teeth, but «кулаці» is awkward. The volta at line 9 is soft.",
+     "B is full of clichés and declared emotion: «крізь сльози», «Старенька тулить образ і зітхає», «Не вічне це страждання», «Що вдома двері знов їм відчиняють». It also moralizes, and «вірять, знають» is forced.",
+     "B has padding and tautology: «Гудок гуде», «Вгорі гудуть… дрони», and «дзвони» that appear from nowhere. Its rhymes repeat the same -ає/-ають verb endings. The ending «Тиша і мовчання» is flat, and the closing explanation earns nothing."
+    ],
+    "flaw_a": "The sestet blurs into forced, unclear syntax («Розтулить пальці тільки в кінці», «кулаці»), and the volta is weak.",
+    "flaw_b": "Cliché-heavy, sentimental and moralizing («сльози», «образ», «Не вічне це страждання»), with filler repetition («Гудок гуде», «гудуть») and grammatical rhymes in -ає/-ають.",
+    "cost_usd": 0.042804
+   }
+  ],
+  "cost_usd": 0.09232000000000001
+ },
+ "7": {
+  "order": {
+   "A": "with_skill",
+   "B": "baseline"
+  },
+  "scores": {
+   "with_skill": 6.75,
+   "baseline": 4.0
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 6.5,
+    "score_b": 4.0,
+    "winner": "A",
+    "reasons": [
+     "A keeps every word and builds a real song shape by repeating the user's own lines: «Ми виходимо в ніч без ключів» ×4 as the hook, with «і ніхто не питає, де ти» as the returning anchor. That is the structuring the brief expects.",
+     "A's Style and Exclude are usable: «british post-punk, darkwave, deadpan baritone male vocal… 128 bpm» and «cheesy regional pop, schlager, accordion…». They would steer the sound, and both are in separate fields.",
+     "A reorders the lines: «місто дихає нам у потилицю» comes before «і ніхто не питає, де ти», and «станції» is moved to Verse 2. This changes the poem's sequence and the user's phrase «ніхто не питає… ніхто не чекає» is split up. The brief said not to change the words, so this is a real deviation. The «(без ключів)» echo is an invented ad-lib, though A admits it and says it can be removed.",
+     "B keeps the original order and wording exactly, which is faithful. But the structure is thin: the hook appears once, in a Chorus tag after both verses, so nothing returns. Verses 1 and 2 are just the lines split into pairs.",
+     "B puts instrumental cues on their own bracketed lines («[Instrumental: driving bass riff…]»), but nothing is excluded in the sheet. Exclude is only a tip in the notes. Style adds «Ukrainian», and «150 bpm» is fast for post-punk. «[End]» is bare. «gang vocals» for a single deadpan baritone is contradictory."
+    ],
+    "flaw_a": "It rearranges and duplicates the user's lines, putting «місто дихає…» before «і ніхто не питає, де ти» and adding the «(без ключів)» echo. That departs from «слова не міняй», even though the words themselves are unchanged.",
+    "flaw_b": "The song has almost no structure. The hook is a single line placed in one Chorus tag at the end, with no repetition and no developing verse 2. Exclude isn't a proper field, and the style tags contradict each other («gang vocals» against a deadpan baritone).",
+    "cost_usd": 0.039302000000000004
+   },
+   {
+    "score_a": 4.0,
+    "score_b": 7.0,
+    "winner": "B",
+    "reasons": [
+     "A splits the user's lines into 'Verse 1/2' with no repetition: 'Ми виходимо в ніч без ключів.' appears only once as 'Chorus', so there is no returning hook, and the song would be about 20 seconds long.",
+     "A's tags are mixed: '[Instrumental: ...]' and '[Build-up, full band, gang vocals]' on separate lines, plus a trailing '[End]'. Gang vocals on a single line is unsupported. This looks sloppy.",
+     "A has no separate Exclude field. It puts 'pop, EDM, autotune, female vocal' in a tip, and 'Ukrainian' in Style helps little. 'Motorcycle-beat' and 150 bpm are generic.",
+     "B builds a real structure from the existing lines: the hook 'Ми виходимо в ніч без ключів' is repeated, there is a bridge 'місто дихає нам у потилицю', and the last chorus returns. This matches the expected 'first/last line as chorus' approach.",
+     "B's Style and Exclude steer the sound well ('british post-punk, darkwave, deadpan baritone male vocal, dry close-mic, chorus electric guitar' / 'cheesy regional pop, schlager, accordion...'). Square-bracket cues fit the sections.",
+     "B reorders the user's lines. The first line appears only as the chorus, not as the opener, and it drops the 'без ключів' period. It also adds '(без ключів)', a sung echo. The user said 'слова не міняй', so this is borderline. B discloses it and offers to remove the echo."
+    ],
+    "flaw_a": "It barely uses the lyric as a song: one pass, no repeated hook, no development, so the 'chorus' is a single line and the structure is thin.",
+    "flaw_b": "It reorders the lines and adds the sung echo '(без ключів)', which strains 'слова не міняй'. The note also refers to a 'check_lyrics.py' script the user never mentioned.",
+    "cost_usd": 0.038734
+   }
+  ],
+  "cost_usd": 0.078036
+ },
+ "8": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 5.5,
+   "baseline": 5.0
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 6.0,
+    "score_b": 4.0,
+    "winner": "A",
+    "reasons": [
+     "A correctly explains that round brackets are sung as text and moves cues to square brackets: \"[Whispered]\" / \"[Half-time feel]\" per line, which fits the expected answer.",
+     "A keeps the user's wording and word order: \"Це не вИпадок, це мій вибір\". However, it keeps \"моЯ\" and does not flag it as over-marking, which the expected answer asks for.",
+     "A's fallbacks are partly nonsense: \"вИіпадок\" with a doubled vowel is a poor, confusing suggestion, and the text calls it a spelling variant of \"вИпадок\" with a doubled vowel. A also never suggests section editing or Variety=Off.",
+     "B gets the stress marks right: it drops the over-marked \"моЯ\", keeps \"дорОга\" as a homograph and keeps \"вИпадок\". It also suggests regenerating only that section.",
+     "B rewrites the user's line into \"Це мій вибір, не вИпадок\" without being asked, which breaks \"keep my words\". It also opens with a nonexistent script-run failure and refers to \"references/suno-lessons.md\", which are irrelevant noise.",
+     "B's single tag \"[Verse 1 - whispered, half-time feel]\" is a reasonable section tag, but it applies whispering and half-time to the whole verse, where the user wanted them applied per line."
+    ],
+    "flaw_a": "Keeps the over-marked \"моЯ\" without comment, and offers a bogus phonetic fix \"вИіпадок\". It does not mention section editing or Variety=Off.",
+    "flaw_b": "Rewrites the user's line (swaps the order of its halves), and refers to a script and file the user never mentioned. The reply opens by talking about a failed tool run, which is confusing.",
+    "cost_usd": 0.038236
+   },
+   {
+    "score_a": 7.0,
+    "score_b": 4.0,
+    "winner": "A",
+    "reasons": [
+     "A correctly explains that parentheses are sung and moves cues into the section tag: \"[Verse 1 - whispered, half-time feel]\".",
+     "A removes the over-marking: \"`моЯ` — надмаркування\". It keeps the homograph mark \"дорОга\" and explains why. This matches the ideal handling.",
+     "A suggests regenerating only that section (\"Перегенеруй лише цю секцію\") and offers a synonym fallback (\"Це не збіг, це мій вибір\"). It does not mention Variety=Off.",
+     "A rewrites the user's line as \"Це мій вибір, не вИпадок\". The user did not ask for that, and it changes their words. It also opens with talk about a script that never ran, which is noise.",
+     "B puts the cues in square brackets, but keeps \"моЯ дорОга\" and so leaves the over-marking in. It never says that \"моЯ\" is surplus.",
+     "B's stress advice is weak. It suggests \"вИ-па-док\" and a \"вИіпадок\" respelling that is a no-op as written, and it never suggests regenerating a section.",
+     "B puts \"[Half-time feel]\" on a single line as its own tag. It says that short tags can be sung, but it still adds them."
+    ],
+    "flaw_a": "It rewrites the user's line (swapping the word order) without being asked, and it mentions a script that was never run.",
+    "flaw_b": "It keeps the over-marked \"моЯ\", offers confused respelling tricks (\"вИіпадок\"), and gives no section-regeneration advice.",
+    "winner_note": "A is closer to the expected answer.",
+    "cost_usd": 0.037674
+   }
+  ],
+  "cost_usd": 0.07591
+ }
+}

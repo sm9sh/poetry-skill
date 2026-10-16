@@ -25,6 +25,7 @@ scripts). Audio still has to be checked by ear: see evals/README.md.
 
 import argparse
 import concurrent.futures
+import hashlib
 import importlib.util
 import json
 import pathlib
@@ -43,7 +44,8 @@ CHECK_LYRICS = REPO / "skills" / "ukrainian-poetry-to-suno" / "scripts" / "check
 SONG_SKILL = "ukrainian-poetry-to-suno"
 CONDITIONS = ("with_skill", "baseline")
 LYRICS_START = re.compile(r"^\[(Intro|Verse|Chorus|Bridge|Outro|Pre-Chorus|Hook)", re.M)
-GEN_TOOLS = ["Read", "Glob", "Grep", "Skill", "Bash(python:*)", "Bash(python3:*)"]
+PLUGIN_PARTS = (".claude-plugin", "skills", "commands", "AUTHOR_PROFILE.md")
+GEN_TOOLS = ["Read", "Glob", "Grep", "Skill", "Bash(python:*)", "Bash(python3:*)", "Bash(cd:*)", "Bash(ls:*)", "Bash(mkdir:*)"]
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     try:
@@ -127,7 +129,18 @@ def export_plugin(baseline, workdir):
     if baseline == "none":
         return None
     if baseline == "current":
-        return REPO
+        # A copy, so a run can never edit the repository it is testing.
+        target = pathlib.Path(workdir) / "plugin-current"
+        if not target.exists():
+            ignore = shutil.ignore_patterns("__pycache__", "*.pyc")
+            for part in PLUGIN_PARTS:
+                src = REPO / part
+                if src.is_dir():
+                    shutil.copytree(src, target / part, ignore=ignore)
+                elif src.exists():
+                    target.mkdir(parents=True, exist_ok=True)
+                    shutil.copy(src, target / part)
+        return target
     if baseline.startswith("git:"):
         ref = baseline[4:]
         safe_ref = re.sub(r"[^\w.-]", "_", ref)
@@ -169,7 +182,7 @@ def generate_one(ev, condition, plugin_dir, args):
         extra = ["--output-format", "stream-json", "--verbose", "--permission-mode", "acceptEdits",
                  "--allowedTools", *GEN_TOOLS]
         if plugin_dir is not None:
-            extra += ["--plugin-dir", str(plugin_dir)]
+            extra += ["--plugin-dir", str(plugin_dir), "--add-dir", str(plugin_dir)]  # let it run the skill scripts
         if args.model:
             extra += ["--model", args.model]
         if args.max_budget_usd:
@@ -302,6 +315,12 @@ Reply with JSON only, no other text:
 {{"score_a": <0-10, halves allowed>, "score_b": <0-10>, "winner": "A" | "B" | "tie", "reasons": ["<3-5 short reasons with quotes>"], "flaw_a": "<most serious flaw of A>", "flaw_b": "<most serious flaw of B>"}}"""
 
 
+def judge_id(args):
+    """Judge model + prompt version: scores from different judges are not comparable."""
+    version = hashlib.sha1(JUDGE_PROMPT.encode("utf-8")).hexdigest()[:8]
+    return f"{args.judge_model or 'default'}/{version}" + ("/both-orders" if args.both_orders else "")
+
+
 def parse_judgement(text):
     match = re.search(r"\{.*\}", text, re.S)
     if not match:
@@ -390,6 +409,9 @@ def cmd_judge(args):
             s = verdicts[str(ev["id"])]["scores"]
             print(f"  eval {ev['id']}: with_skill {s['with_skill']:g} · baseline {s['baseline']:g}")
     write_blind_verdict_md(out, evals, verdicts)
+    meta = read_json(out / "meta.json", {})
+    meta["judge"] = judge_id(args)
+    write_json(out / "meta.json", meta)
 
 
 def write_blind_verdict_md(out, evals, verdicts):
@@ -461,6 +483,10 @@ def cmd_report(args):
         prev_ws = [prev[k]["with_skill"] for k in prev if "with_skill" in prev[k]]
         if prev_ws:
             lines.append(f"Previous iteration, with skill: {sum(prev_ws) / len(prev_ws):.2f} on {len(prev_ws)} evals.")
+            prev_judge = read_json(iteration_dir(args.iteration - 1) / "meta.json", {}).get("judge")
+            if prev_judge != meta.get("judge"):
+                lines.append(f"Note: the previous iteration had a different judge ({prev_judge or 'unknown'} vs "
+                             f"{meta.get('judge', 'unknown')}), so compare wins and the pairs themselves, not absolute scores.")
 
     lines += ["", "## Triggering", ""]
     for ev in evals:
