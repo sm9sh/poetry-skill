@@ -1,5 +1,17 @@
 # Version History
 
+## v4.2.1 - 2026-10-16
+
+Tests trimmed to what they can actually verify.
+
+### Removed
+- The "challenger" / adversarial suites (`test_adversarial_challenger1.py`, `test_adversarial_challenger2.py`, `test_adversarial_final.py`, `adversarial_suno_stress_test.py`, `audit_challenger2_empirical.py`, ~2,300 lines). They mostly re-checked hand-written fixtures and repeated the validator tests; the audit script also asserted retired platform facts (Suno v4.5/v5.5, Udio).
+
+### Changed
+- Their useful checks are kept in two unittest files: `test_validators.py` (heuristic poetry checks, with false-positive cases) and `test_repo_integrity.py` (agents in the plugin manifest, and every lyrics block in the skills and success examples must pass the bracket validator and `check_lyrics.py` — this replaces the single-example CI step).
+- `tests/run_tests.py` runs the unittest modules from one list instead of inline checks.
+- `TEST_INFRA.md` rewritten: what the tests check, what they do not (quality is judged by `evals/`), how to add a test.
+
 ## v4.2.0 - 2026-10-15
 
 Leaner skills and one checklist per task.
