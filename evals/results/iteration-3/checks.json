@@ -1,0 +1,377 @@
+{
+ "1": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "syllables": [
+    10,
+    9,
+    8,
+    7,
+    12,
+    12,
+    10,
+    10,
+    8,
+    4,
+    11,
+    11,
+    10,
+    7,
+    7,
+    8,
+    12
+   ]
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    8,
+    10,
+    9,
+    9,
+    8,
+    13,
+    10,
+    5,
+    10,
+    11,
+    10,
+    11,
+    8,
+    6,
+    3,
+    6,
+    10,
+    8,
+    7
+   ]
+  }
+ },
+ "2": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "syllables": [
+    9,
+    8,
+    9,
+    9,
+    9,
+    8,
+    7,
+    7
+   ]
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    11,
+    10,
+    10,
+    10,
+    20,
+    10,
+    11,
+    9,
+    11,
+    34,
+    11,
+    10,
+    13,
+    10,
+    22,
+    11,
+    10,
+    11,
+    11,
+    21,
+    11,
+    10,
+    11,
+    10
+   ]
+  }
+ },
+ "3": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "syllables": [
+    11,
+    10,
+    10,
+    11,
+    11,
+    10,
+    10,
+    11,
+    10,
+    10,
+    11,
+    10,
+    10,
+    11
+   ]
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    9,
+    11,
+    10,
+    11,
+    10,
+    10,
+    10,
+    10,
+    10,
+    11,
+    11,
+    10,
+    10,
+    11,
+    10,
+    13
+   ]
+  }
+ },
+ "4": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "syllables": [
+    14,
+    14,
+    14,
+    14
+   ]
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    8,
+    7,
+    8,
+    8,
+    8,
+    9,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8
+   ]
+  }
+ },
+ "5": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "syllables": [
+    8,
+    8,
+    7,
+    8,
+    5,
+    8,
+    5,
+    8,
+    5,
+    8,
+    8,
+    8,
+    8,
+    5,
+    8,
+    5,
+    8,
+    5,
+    8,
+    5,
+    8,
+    6,
+    5,
+    8,
+    5,
+    5,
+    5
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    10,
+    10,
+    8,
+    10,
+    10,
+    9,
+    9,
+    8,
+    9,
+    8,
+    5,
+    5,
+    11,
+    11,
+    10,
+    9,
+    8,
+    7,
+    10,
+    9,
+    8,
+    8,
+    9,
+    8,
+    5,
+    5,
+    11,
+    11,
+    2,
+    6,
+    6,
+    9,
+    8,
+    5
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": [
+    "Verse 1 / Verse 2 syllable mismatch (criterion 8): line 4: 10 vs 7"
+   ]
+  }
+ },
+ "6": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "syllables": [
+    3,
+    3,
+    4,
+    3,
+    3,
+    4
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": [
+    "Verse 2 largely repeats Verse 1 — verses should move the story forward (criterion 5)"
+   ]
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    16,
+    31
+   ],
+   "lyrics_blocks": 0,
+   "errors": [],
+   "warnings": []
+  }
+ },
+ "7": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "syllables": [
+    11,
+    9,
+    9,
+    9,
+    11,
+    11,
+    9,
+    9,
+    9,
+    11,
+    9,
+    9,
+    9,
+    3
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    9,
+    11,
+    9,
+    11,
+    9,
+    9
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": [
+    "only one chorus — strong songs usually have 2–3 (criterion 2: the hook must return)",
+    "no lyric line repeats 3+ times — the hook/title may be too weak to stick (criterion 2)"
+   ]
+  }
+ },
+ "8": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "syllables": [
+    9,
+    9
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    9,
+    9
+   ],
+   "lyrics_blocks": 1,
+   "errors": [],
+   "warnings": []
+  }
+ },
+ "9": {
+  "with_skill": {
+   "skills": [],
+   "syllables": []
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": []
+  }
+ },
+ "10": {
+  "with_skill": {
+   "skills": [],
+   "syllables": [
+    19
+   ]
+  },
+  "baseline": {
+   "skills": [],
+   "syllables": [
+    13,
+    6
+   ]
+  }
+ }
+}

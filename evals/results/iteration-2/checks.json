@@ -3,40 +3,150 @@
   "with_skill": {
    "skills": [
     "ukrainian-poetry"
+   ],
+   "syllables": [
+    18,
+    16,
+    14,
+    8,
+    13,
+    11,
+    10
    ]
   },
   "baseline": {
-   "skills": []
+   "skills": [],
+   "syllables": [
+    7,
+    10,
+    9,
+    10,
+    10,
+    6,
+    8,
+    9,
+    14,
+    11,
+    11,
+    9,
+    11,
+    9,
+    6,
+    11,
+    5,
+    8,
+    6,
+    5,
+    7
+   ]
   }
  },
  "2": {
   "with_skill": {
    "skills": [
     "ukrainian-poetry"
+   ],
+   "syllables": [
+    4,
+    9,
+    9,
+    9,
+    9,
+    11,
+    10
    ]
   },
   "baseline": {
-   "skills": []
+   "skills": [],
+   "syllables": [
+    36,
+    10,
+    11,
+    10,
+    11,
+    3,
+    21,
+    10,
+    10,
+    10,
+    12,
+    27,
+    11,
+    11,
+    12,
+    13
+   ]
   }
  },
  "3": {
   "with_skill": {
    "skills": [
     "ukrainian-poetry"
+   ],
+   "syllables": [
+    10,
+    11,
+    11,
+    10,
+    10,
+    11,
+    11,
+    10,
+    10,
+    11,
+    9,
+    11,
+    10,
+    11
    ]
   },
   "baseline": {
-   "skills": []
+   "skills": [],
+   "syllables": [
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11,
+    11
+   ]
   }
  },
  "4": {
   "with_skill": {
    "skills": [
     "ukrainian-poetry"
+   ],
+   "syllables": [
+    14,
+    13,
+    13,
+    14
    ]
   },
   "baseline": {
-   "skills": []
+   "skills": [],
+   "syllables": [
+    19,
+    12,
+    12,
+    12,
+    13,
+    7,
+    13,
+    13,
+    13,
+    15,
+    25
+   ]
   }
  },
  "5": {
@@ -44,12 +154,67 @@
    "skills": [
     "ukrainian-poetry-to-suno"
    ],
+   "syllables": [
+    9,
+    9,
+    9,
+    9,
+    10,
+    7,
+    5,
+    5,
+    9,
+    9,
+    9,
+    9,
+    10,
+    7,
+    5,
+    5,
+    7,
+    9,
+    10,
+    7,
+    5,
+    5
+   ],
    "lyrics_blocks": 1,
    "errors": [],
    "warnings": []
   },
   "baseline": {
    "skills": [],
+   "syllables": [
+    10,
+    10,
+    8,
+    10,
+    9,
+    9,
+    9,
+    10,
+    9,
+    8,
+    7,
+    10,
+    10,
+    10,
+    10,
+    9,
+    9,
+    9,
+    9,
+    8,
+    7,
+    10,
+    7,
+    8,
+    12,
+    9,
+    8,
+    7,
+    10
+   ],
    "lyrics_blocks": 1,
    "errors": [],
    "warnings": []
@@ -60,12 +225,45 @@
    "skills": [
     "ukrainian-poetry-to-suno"
    ],
+   "syllables": [
+    7,
+    8,
+    7,
+    6,
+    5,
+    5,
+    8,
+    7,
+    5,
+    2,
+    8,
+    8,
+    7,
+    8,
+    5,
+    5,
+    8,
+    7,
+    5,
+    2,
+    12,
+    8,
+    8,
+    9,
+    5,
+    6,
+    8,
+    7,
+    5,
+    2
+   ],
    "lyrics_blocks": 1,
    "errors": [],
    "warnings": []
   },
   "baseline": {
    "skills": [],
+   "syllables": [],
    "lyrics_blocks": 0,
    "errors": [],
    "warnings": []
@@ -76,12 +274,32 @@
    "skills": [
     "ukrainian-poetry-to-suno"
    ],
+   "syllables": [
+    11,
+    9,
+    9,
+    9,
+    3,
+    11,
+    9,
+    11,
+    9,
+    9,
+    3
+   ],
    "lyrics_blocks": 1,
    "errors": [],
    "warnings": []
   },
   "baseline": {
    "skills": [],
+   "syllables": [
+    9,
+    11,
+    9,
+    11,
+    9
+   ],
    "lyrics_blocks": 1,
    "errors": [],
    "warnings": [
@@ -95,12 +313,20 @@
    "skills": [
     "ukrainian-poetry-to-suno"
    ],
+   "syllables": [
+    8,
+    7
+   ],
    "lyrics_blocks": 1,
    "errors": [],
    "warnings": []
   },
   "baseline": {
    "skills": [],
+   "syllables": [
+    9,
+    9
+   ],
    "lyrics_blocks": 1,
    "errors": [],
    "warnings": [
@@ -110,18 +336,27 @@
  },
  "9": {
   "with_skill": {
-   "skills": []
+   "skills": [],
+   "syllables": []
   },
   "baseline": {
-   "skills": []
+   "skills": [],
+   "syllables": []
   }
  },
  "10": {
   "with_skill": {
-   "skills": []
+   "skills": [],
+   "syllables": [
+    19,
+    40
+   ]
   },
   "baseline": {
-   "skills": []
+   "skills": [],
+   "syllables": [
+    32
+   ]
   }
  }
 }

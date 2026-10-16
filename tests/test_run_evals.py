@@ -60,9 +60,22 @@ class TestRunEvals(unittest.TestCase):
     def test_parse_judgement_and_mapping(self):
         v = run_evals.parse_judgement('Here: {"score_a": "7.5", "score_b": 8, "winner": "?"}')
         self.assertEqual((v["score_a"], v["winner"]), (7.5, "B"))
+        v = run_evals.parse_judgement('{"score_a": 6, "score_b": 7, "winner": "B", "reasons": ["line one\nline two"]}')
+        self.assertEqual(v["winner"], "B")
         self.assertEqual(run_evals.blind_mapping([1, 2, 3], 2), run_evals.blind_mapping([1, 2, 3], 2))
         for order in run_evals.blind_mapping(range(10), 7).values():
             self.assertEqual(sorted(order.values()), ["baseline", "with_skill"])
+
+    def test_syllable_facts_for_the_judge(self):
+        poem = "**Назва**\n\nПіп кропив — а кіт тим часом ковбасу хапає,\n\n---\n- примітка про форму"
+        self.assertEqual(run_evals.syllables_per_line(poem), [14])
+        song = f"```\n{SONG}```"
+        self.assertEqual(run_evals.syllables_per_line(song), [2, 5])
+        facts = run_evals.facts_text({"with_skill": {"syllables": [14]}, "baseline": {"errors": []}},
+                                     {"A": "baseline", "B": "with_skill"})
+        self.assertIn("B: syllables per verse line: 14", facts)
+        self.assertIn("A: check_lyrics.py errors: 0", facts)
+        self.assertEqual(run_evals.facts_text({}, {"A": "baseline", "B": "with_skill"}), "")
 
     def test_lyrics_blocks(self):
         self.assertEqual(run_evals.lyrics_blocks(f"Style\n```\ndarkwave\n```\n```text\n{SONG}```"), [SONG])

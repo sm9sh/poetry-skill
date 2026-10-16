@@ -1,0 +1,235 @@
+{
+ "1": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.025329400000000002,
+   "duration_ms": 7823,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "tools": [],
+   "cost_usd": 0.0856982,
+   "duration_ms": 12973,
+   "turns": 1,
+   "is_error": false,
+   "invoked": true
+  }
+ },
+ "2": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.0320785,
+   "duration_ms": 23349,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "tools": [],
+   "cost_usd": 0.2143562,
+   "duration_ms": 145053,
+   "turns": 1,
+   "is_error": false,
+   "invoked": true
+  }
+ },
+ "3": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.0296498,
+   "duration_ms": 12808,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "tools": [],
+   "cost_usd": 0.5744702,
+   "duration_ms": 441661,
+   "turns": 1,
+   "is_error": false,
+   "invoked": true
+  }
+ },
+ "4": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.02398,
+   "duration_ms": 7839,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry"
+   ],
+   "tools": [],
+   "cost_usd": 0.1820042,
+   "duration_ms": 102315,
+   "turns": 1,
+   "is_error": false,
+   "invoked": true
+  }
+ },
+ "5": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "tools": [
+    "Bash cd /tmp/eval-plugins-i62hm1j5/plugin-current/skills/ukrainian-poetry-to-suno && sed -n 1,80p references/poem-to-song-ada",
+    "Bash mkdir -p /tmp/claude-0/s && cd /tmp/claude-0/s && cat > lyrics.txt <<'EOF'\n[Intro - sparse, ticking clock, cold synth pa",
+    "Bash cd /tmp/claude-0/s && ls; python /tmp/eval-plugins-i62hm1j5/plugin-current/skills/ukrainian-poetry-to-suno/scripts/check",
+    "Write /tmp/claude-0/-tmp-eval-5-5x1na3yp/631a6b17-ecda-546c-9d65-a325987ca453/scratchpad/lyrics.txt",
+    "Bash python /tmp/eval-plugins-i62hm1j5/plugin-current/skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py /tmp/claude-0/-",
+    "Bash cd /tmp/claude-0/-tmp-eval-5-5x1na3yp/631a6b17-ecda-546c-9d65-a325987ca453/scratchpad && sed -i 's/^Лишилась по нім коро",
+    "Edit /tmp/claude-0/-tmp-eval-5-5x1na3yp/631a6b17-ecda-546c-9d65-a325987ca453/scratchpad/lyrics.txt",
+    "Edit /tmp/claude-0/-tmp-eval-5-5x1na3yp/631a6b17-ecda-546c-9d65-a325987ca453/scratchpad/lyrics.txt",
+    "Bash python /tmp/eval-plugins-i62hm1j5/plugin-current/skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py /tmp/claude-0/-"
+   ],
+   "cost_usd": 0.2173586,
+   "duration_ms": 67263,
+   "turns": 10,
+   "is_error": false,
+   "invoked": true
+  },
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.0387606,
+   "duration_ms": 17483,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  }
+ },
+ "6": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.030603200000000004,
+   "duration_ms": 10550,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "tools": [
+    "Grep instrumental|Instrumental|інструментал"
+   ],
+   "cost_usd": 0.09510650000000001,
+   "duration_ms": 18920,
+   "turns": 2,
+   "is_error": false,
+   "invoked": true
+  }
+ },
+ "7": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.0260308,
+   "duration_ms": 10425,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "tools": [
+    "Bash cd /tmp/claude-0/-tmp-eval-7-arrz8dj8/631a6b17-ecda-546c-9d65-a325987ca453/scratchpad && cat > lyrics.txt <<'EOF'\n[Intro",
+    "Bash python /tmp/eval-plugins-i62hm1j5/plugin-current/skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py /tmp/claude-0/-",
+    "Write /tmp/claude-0/-tmp-eval-7-arrz8dj8/631a6b17-ecda-546c-9d65-a325987ca453/scratchpad/lyrics.txt",
+    "Bash python /tmp/eval-plugins-i62hm1j5/plugin-current/skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py /tmp/claude-0/-"
+   ],
+   "cost_usd": 0.1337503,
+   "duration_ms": 41325,
+   "turns": 5,
+   "is_error": false,
+   "invoked": true
+  }
+ },
+ "8": {
+  "with_skill": {
+   "skills": [
+    "ukrainian-poetry-to-suno"
+   ],
+   "tools": [],
+   "cost_usd": 0.0796322,
+   "duration_ms": 12012,
+   "turns": 1,
+   "is_error": false,
+   "invoked": true
+  },
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.0326272,
+   "duration_ms": 15234,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  }
+ },
+ "9": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.022252599999999997,
+   "duration_ms": 3166,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.037770599999999994,
+   "duration_ms": 16595,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  }
+ },
+ "10": {
+  "baseline": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.0257412,
+   "duration_ms": 7484,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  },
+  "with_skill": {
+   "skills": [],
+   "tools": [],
+   "cost_usd": 0.0417212,
+   "duration_ms": 9960,
+   "turns": 1,
+   "is_error": false,
+   "invoked": false
+  }
+ }
+}

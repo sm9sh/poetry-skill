@@ -260,6 +260,27 @@ def check_answer(ev, text, check_lyrics, stress_dict):
     return {"lyrics_blocks": len(blocks), "errors": errors, "warnings": warnings}
 
 
+VOWELS = set("аеєиіїоуюяАЕЄИІЇОУЮЯ")
+NOT_VERSE = re.compile(r"^\s*(#|[-*>|]|\d+\.|```|\*\*[^*]+\*\*\s*$)")
+
+
+def verse_lines(text):
+    """Sung lines of the lyrics blocks, or the verse lines of a poem (no headings, lists or notes)."""
+    blocks = lyrics_blocks(text)
+    lines = "\n".join(blocks).splitlines() if blocks else text.split("\n---")[0].splitlines()
+    out = []
+    for line in lines:
+        line = re.sub(r"\[[^\]]*\]", "", line).strip()
+        if line and not NOT_VERSE.match(line) and any(c in VOWELS for c in line) and len(line) < 120:
+            out.append(line)
+    return out
+
+
+def syllables_per_line(text):
+    """Ukrainian syllables = vowels; judges miscount them, so they get the numbers."""
+    return [sum(c in VOWELS for c in line) for line in verse_lines(text)]
+
+
 def cmd_check(args):
     out = iteration_dir(args.iteration)
     runs = read_json(out / "runs.json", {})
@@ -272,9 +293,11 @@ def cmd_check(args):
             path = out / condition / f"eval-{ev['id']}.md"
             if not path.exists():
                 continue
-            result = {"skills": runs.get(str(ev["id"]), {}).get(condition, {}).get("skills")}
+            text = path.read_text(encoding="utf-8")
+            result = {"skills": runs.get(str(ev["id"]), {}).get(condition, {}).get("skills"),
+                      "syllables": syllables_per_line(text)}
             if ev["skill"] == SONG_SKILL:
-                result.update(check_answer(ev, path.read_text(encoding="utf-8"), check_lyrics, stress_dict))
+                result.update(check_answer(ev, text, check_lyrics, stress_dict))
             entry[condition] = result
         if entry:
             checks[str(ev["id"])] = entry
@@ -303,7 +326,7 @@ What a good answer looks like:
 <answer_b>
 {b}
 </answer_b>
-
+{facts}
 Judge as a demanding reader would:
 - Meaning first: every line makes literal or clearly decodable sense; no invented or archaic words, Russianisms, or stress broken for a rhyme; rhymes never bought with forced syntax.
 - Poetry: concrete images instead of declared feelings, no clichés or moralizing, living rhythm, an ending that stays.
@@ -325,7 +348,7 @@ def parse_judgement(text):
     match = re.search(r"\{.*\}", text, re.S)
     if not match:
         raise ValueError(f"no JSON in judge reply: {text[:200]!r}")
-    data = json.loads(match.group(0))
+    data = json.loads(match.group(0), strict=False)  # judges sometimes put raw newlines in strings
     data["score_a"] = float(data["score_a"])
     data["score_b"] = float(data["score_b"])
     if data.get("winner") not in ("A", "B", "tie"):
@@ -343,9 +366,24 @@ def blind_mapping(eval_ids, seed):
     return mapping
 
 
-def judge_once(ev, answers, order, args):
+def facts_text(checks, order):
+    """Programmatic facts for the judge: syllables per line and check_lyrics errors."""
+    if not checks:
+        return ""
+    lines = ["", "Computed facts (counted by a script; trust them over your own counting):"]
+    for label in ("A", "B"):
+        c = checks.get(order[label], {})
+        if c.get("syllables"):
+            lines.append(f"- {label}: syllables per verse line: {', '.join(map(str, c['syllables']))}")
+        if "errors" in c:
+            lines.append(f"- {label}: check_lyrics.py errors: {len(c['errors'])}" +
+                         (f" ({'; '.join(c['errors'][:3])})" if c["errors"] else ""))
+    return "\n".join(lines) + "\n" if len(lines) > 2 else ""
+
+
+def judge_once(ev, answers, order, args, checks=None):
     prompt = JUDGE_PROMPT.format(prompt=ev["prompt"], expected=ev["expected_output"],
-                                 a=answers[order["A"]], b=answers[order["B"]])
+                                 a=answers[order["A"]], b=answers[order["B"]], facts=facts_text(checks, order))
     extra = ["--output-format", "json"]
     if args.judge_model:
         extra += ["--model", args.judge_model]
@@ -357,7 +395,7 @@ def judge_once(ev, answers, order, args):
     return verdict
 
 
-def judge_eval(ev, answers, order, args):
+def judge_eval(ev, answers, order, args, checks=None):
     """Scores per condition; with --both-orders the pair is judged twice, swapped, and averaged."""
     orders = [order]
     if args.both_orders:
@@ -365,7 +403,7 @@ def judge_eval(ev, answers, order, args):
     scores = {c: [] for c in CONDITIONS}
     verdicts = []
     for o in orders:
-        v = judge_once(ev, answers, o, args)
+        v = judge_once(ev, answers, o, args, checks)
         scores[o["A"]].append(v["score_a"])
         scores[o["B"]].append(v["score_b"])
         verdicts.append(v)
@@ -384,6 +422,7 @@ def cmd_judge(args):
         mapping.setdefault(eid, order)
     write_json(mapping_path, mapping)
 
+    checks = read_json(out / "checks.json", {})
     verdict_path = out / "verdict.json"
     verdicts = read_json(verdict_path, {})
     todo = []
@@ -397,7 +436,8 @@ def cmd_judge(args):
         todo.append((ev, {c: p.read_text(encoding="utf-8") for c, p in answers.items()}))
     print(f"judge: {len(todo)} pairs" + (" (both orders)" if args.both_orders else ""))
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        futures = {pool.submit(judge_eval, ev, answers, mapping[str(ev["id"])], args): ev for ev, answers in todo}
+        futures = {pool.submit(judge_eval, ev, answers, mapping[str(ev["id"])], args, checks.get(str(ev["id"]))): ev
+                   for ev, answers in todo}
         for fut in concurrent.futures.as_completed(futures):
             ev = futures[fut]
             try:

@@ -236,9 +236,9 @@ def _mark(word, index):
     return low[:index] + low[index].upper() + low[index + 1:]
 
 
-def check_stress(lines, warnings, stress_dict=None, list_homographs=False):
+def check_stress(lines, warnings, stress_dict=None, list_homographs=False, errors=None):
     over, risky = [], []
-    homographs, unknown, contradicts = {}, {}, []
+    homographs, unknown, contradicts, wrong = {}, {}, [], []
     for n, line in enumerate(lines, 1):
         if SECTION_RE.match(line):
             continue
@@ -255,7 +255,7 @@ def check_stress(lines, warnings, stress_dict=None, list_homographs=False):
                 allowed = ALLOWED_INDEXES.get(low)
                 if allowed and inner[0] not in allowed:
                     expected = " / ".join(_mark(low, i) for i in sorted(allowed))
-                    contradicts.append(f"{word} (line {n}; expected: {expected})")
+                    wrong.append(f"{word} (line {n}; expected: {expected})")
                 elif not allowed and readings and inner[0] not in readings:
                     expected = " / ".join(_mark(low, i) for i in sorted(readings))
                     contradicts.append(f"{word} (line {n}; dictionary: {expected})")
@@ -277,7 +277,12 @@ def check_stress(lines, warnings, stress_dict=None, list_homographs=False):
         )
     if risky:
         warnings.append("likely mispronounced, consider marking: " + ", ".join(risky[:15]))
+    if wrong:
+        # The word lists are certain: a wrong mark makes the model sing the wrong stress.
+        (errors if errors is not None else warnings).append(
+            "stress mark in the wrong place — fix it: " + ", ".join(wrong[:15]))
     if contradicts:
+        # The dictionary may miss an attested poetic variant, so this one stays a warning.
         warnings.append("stress mark in the wrong place — check it: " + ", ".join(contradicts[:15]))
     if homographs:
         items = [f"{w} ({forms}, line {n})" for w, (n, forms) in list(homographs.items())[:12]]
@@ -444,7 +449,7 @@ def check(text, style=None, exclude=None, platform="suno", prompt=None, section=
     check_brackets(text, errors)
     check_parentheses(lines, errors)
     check_echo_spam(lines, warnings)
-    check_stress(lines, warnings, stress_dict, list_homographs)
+    check_stress(lines, warnings, stress_dict, list_homographs, errors)
     check_structure(lines, warnings, whole_song=not section)
     if not section:
         check_song_craft(lines, warnings)

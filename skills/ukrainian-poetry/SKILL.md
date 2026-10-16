@@ -145,7 +145,7 @@ Rationale and authoritative sources for every item (Pound, Eliot, Frost, Kooser,
 ## Output Format
 
 - Return **only the poem** unless the user explicitly requests commentary, scansion diagrams, alternative drafts, or rubric evaluations.
-- No note after the poem either — not about the form you chose, not an offer of a rhymed or shorter version, not about files you could not find. The poem has to stand on its own; a note explains what the reader should have felt, and the user will ask if they want a variant.
+- No note after the poem either — not about the form you chose, not an offer of a rhymed or shorter version, not about scripts you ran or did not run, not about files you could not find. When you edit the user's poem, the list of changes is about the poem, never about your tools. The poem has to stand on its own; a note explains what the reader should have felt, and the user will ask if they want a variant.
 - A title is optional; add one when it strengthens the poem (criterion 16), never a generic one.
 - When generating fixed forms (e.g. Sonnets), clearly structure stanzas according to the required architecture (`4+4+3+3` or `4+4+4+2`).
 - If a homograph is genuinely ambiguous, use the acute accent (`за́мок` / `замо́к`). Uppercase-vowel stress marks belong only in song lyrics for audio models.
