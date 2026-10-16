@@ -1,5 +1,29 @@
 # Version History
 
+## v4.2.1 - 2026-10-16
+
+Tests trimmed to what they can actually verify; an eval runner; the plugin skills load again.
+
+### Fixed
+- **In the installed plugin the skills never loaded.** `commands/ukrainian-poetry.md` and `commands/ukrainian-poetry-to-suno.md` had the skills' names and shadowed them: invoking a skill returned a two-line stub pointing to `skills/.../SKILL.md`, a path that does not resolve inside a plugin. Both commands are removed (the skills themselves are slash commands); `/poetry-skill` now routes to the skills by name. `test_repo_integrity.py` fails if a command shadows a skill again.
+- Poetry skill: "only the poem" moved to the overview with its reason; no closing note about the form or offer of variants (seen in 1 of 3 eval runs before, 0 of 3 after). Both skills: a missing `AUTHOR_PROFILE.md` is not mentioned to the user.
+
+- Song skill: «Тексту немає» means "write the lyrics", not "make it wordless" (eval 6 had returned a vocalise); a wordless track only when asked for.
+- Both skills call their scripts by full path from the skill's directory (`<skill-dir>/scripts/...`): the model had looked for `scripts/` at the repository root, failed, and told the user the check did not run. Scripts and checks are never mentioned in the answer.
+- `check_lyrics.py`: a stress mark in the wrong place on a word from the built-in lists is now an ERROR (it was a warning the model skipped); a mismatch with the dictionary stays a warning.
+
+### Added
+- Eval iterations 2 and 3 (`evals/results/`): skill wins 7/8 → 8/8, average with skill 6.47 → 6.91 (same judge, with computed facts).
+- `evals/run_evals.py`: generate (with the plugin vs no skills or a git ref, each run in an empty temp dir), check (`check_lyrics.py`, triggering, negative controls), blind judge (seeded A/B, optional both orders), report (`summary.md`, change vs the previous iteration). `--trigger invoke` measures quality, `natural` measures triggering. The judge gets syllable counts and `check_lyrics.py` errors as facts (it miscounted syllables on its own). Generation runs use a temp copy of the plugin. Tested with a fake CLI in `tests/test_run_evals.py`.
+
+### Removed
+- The "challenger" / adversarial suites (`test_adversarial_challenger1.py`, `test_adversarial_challenger2.py`, `test_adversarial_final.py`, `adversarial_suno_stress_test.py`, `audit_challenger2_empirical.py`, ~2,300 lines). They mostly re-checked hand-written fixtures and repeated the validator tests; the audit script also asserted retired platform facts (Suno v4.5/v5.5, Udio).
+
+### Changed
+- Their useful checks are kept in two unittest files: `test_validators.py` (heuristic poetry checks, with false-positive cases) and `test_repo_integrity.py` (agents in the plugin manifest, and every lyrics block in the skills and success examples must pass the bracket validator and `check_lyrics.py` — this replaces the single-example CI step).
+- `tests/run_tests.py` runs the unittest modules from one list instead of inline checks.
+- `TEST_INFRA.md` rewritten: what the tests check, what they do not (quality is judged by `evals/`), how to add a test.
+
 ## v4.2.0 - 2026-10-15
 
 Leaner skills and one checklist per task.

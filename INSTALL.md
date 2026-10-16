@@ -8,7 +8,7 @@
 
 ### 1.1. Claude Code (CLI)
 
-**Як плагін (рекомендовано)** — скіли, агенти й команди `/poetry-skill`, `/ukrainian-poetry`, `/ukrainian-poetry-to-suno` підключаються разом:
+**Як плагін (рекомендовано)** — скіли (їх можна викликати як `/ukrainian-poetry` і `/ukrainian-poetry-to-suno`), агенти й команда `/poetry-skill` підключаються разом:
 ```text
 /plugin marketplace add sm9sh/poetry-skill
 /plugin install poetry-skill@poetry-skill

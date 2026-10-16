@@ -1,12 +1,44 @@
 # Evals
 
-`tests/` checks validators and fixed fixtures. It cannot tell whether the skills make the model write **better** poems and songs. These evals can.
+`tests/` перевіряє валідатори й заготовлені фікстури. Вони не скажуть, чи пише модель зі скілами **кращі** вірші й пісні. Це перевіряють evals: реальні запити з `evals.json`, відповіді зі скілом і без нього, сліпе порівняння.
 
-How to run a round:
-1. For each prompt in `evals.json`, generate an answer **with** the skills and **without** them (or with the previous skill version from git).
-2. Shuffle the pairs and judge them blind: which poem is better? which song sheet would you paste into Suno?
-3. For song evals, actually generate in Suno v6-mini / Flow Music and listen: stress, sung instructions and rushing only show up in audio.
-4. Pass lyrics through `python skills/ukrainian-poetry-to-suno/scripts/check_lyrics.py` to catch mechanical errors.
-5. Write down what lost and why, then change the skill — prefer explaining the reason in the skill over adding another MUST.
+## Запуск
 
-Evals 9–10 are negative controls: the skills should not trigger.
+Потрібен Claude Code CLI (`claude`) з виконаним входом.
+
+```bash
+python evals/run_evals.py all --iteration 2                       # повний раунд
+python evals/run_evals.py all --iteration 2 --ids 5,6 --jobs 2    # лише evals 5 і 6
+python evals/run_evals.py all --iteration 3 --baseline git:f0a155f # порівняти з v4.2.0 (будь-який коміт чи гілка)
+python evals/run_evals.py judge --iteration 2 --both-orders --force  # переоцінити, двічі з A/B навпаки
+```
+
+Етапи можна запускати окремо: `generate`, `check`, `judge`, `report` (`all` — усі по черзі). Готові відповіді й вердикти повторно не генеруються: щоб переробити, додай `--force`. Тому раунд, що впав посередині, можна просто перезапустити.
+
+| Етап | Що робить |
+|---|---|
+| `generate` | Кожен запит проходить через `claude -p` двічі, щоразу в порожній тимчасовій теці: з плагіном із цього репозиторію (`with_skill/`) і як baseline (`baseline/`). Baseline — без скілів (`--baseline none`, типово) або плагін із git-ревізії (`git:<ref>`). |
+| `check` | Механіка: `check_lyrics.py` на кожному блоці лірики в пісенних evals. Також перевіряє, які скіли спрацювали: негативні контролі 9–10 не мають викликати жодного. |
+| `judge` | Окремий виклик `claude -p` порівнює пари наосліп. Склади в рядку й помилки `check_lyrics.py` суддя отримує з етапу `check` як факти: сам він склади рахує неправильно. Порядок A/B перемішується з фіксованим seed і зберігається в `blind-mapping.json`. З `--both-orders` кожна пара оцінюється двічі (A/B навпаки), бали усереднюються. Так зменшується перекіс на користь першої відповіді. |
+| `report` | `summary.md`: бали, переможці, помилки `check_lyrics`, тригеринг, вартість і зміна відносно попередньої ітерації. |
+
+Результати лягають у `evals/results/iteration-N/` у тому ж форматі, що й `iteration-1`. Там будуть `with_skill/`, `baseline/`, `blind-mapping.json` і `blind-verdict.md`. Скрипт додає ще `runs.json` (скіли, інструменти, вартість кожного запуску), `checks.json`, `verdict.json` і `summary.md`.
+
+### Тригеринг: `--trigger invoke` чи `natural`
+
+- `invoke` (типово) — потрібний скіл викликається явно як slash-команда (`/poetry-skill:ukrainian-poetry …`). Так вимірюється **якість** скіла, а не те, чи модель здогадалася його відкрити.
+- `natural` — запит іде як є. Так видно, як часто скіл спрацьовує сам. Опис скіла окремо налаштовується trigger-evals у `trigger/`.
+- Негативні контролі завжди йдуть `natural`.
+
+### Інші параметри
+
+`--model` / `--judge-model` — моделі для генерації й судді (типово — модель CLI). `--jobs` — паралельні запуски (типово 4). `--timeout` — секунди на запуск. `--max-budget-usd` — ліміт витрат на один запуск генерації. `--seed` — seed перемішування (типово — номер ітерації).
+
+Запуски генерації можуть читати файли, запускати `python` (скрипти скіла) і писати у свою тимчасову теку. Плагін для них — копія `skills/`, `commands/` і `.claude-plugin/` у тимчасовій теці, тож запуск не може змінити сам репозиторій. Раунд з 8 пар коштує порядку кількох доларів: точна сума — у `summary.md`.
+
+## Після раунду
+
+1. Прочитай `blind-verdict.md` і самі відповіді: суддя теж помиляється.
+2. Пісенні evals згенеруй у Suno v6-mini / Lyria 3.5 і послухай. Наголоси, проспівані вказівки й поспіх видно лише на слух.
+3. У `README.md` ітерації запиши, що програло і чому, а потім зміни скіл. Краще пояснити причину в скілі, ніж додати ще одне MUST.
+4. Наступну ітерацію порівнюй з цією: `report` сам покаже бали попередньої.

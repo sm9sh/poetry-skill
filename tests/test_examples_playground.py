@@ -172,8 +172,8 @@ class TestExamplesPlayground(unittest.TestCase):
         spec.loader.exec_module(cl)
 
         # Without a dictionary: a mark in the wrong place on a listed word is caught.
-        _, warnings = cl.check("[Verse 1]\nЦе не випАдок\n", section=True)
-        self.assertTrue(any("wrong place" in w and "вИпадок" in w for w in warnings), warnings)
+        errors, _ = cl.check("[Verse 1]\nЦе не випАдок\nна ній нОвий замОк\n", section=True)
+        self.assertTrue(any("wrong place" in e and "вИпадок" in e and "новИй" in e for e in errors), errors)
 
         class FakeDict:
             data = {

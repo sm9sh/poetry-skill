@@ -284,8 +284,8 @@ class TestRunner:
         print(f"Failed:           {Colors.RED}{self.failed_tests}{Colors.END}")
         print(f"Warnings:         {Colors.YELLOW}{self.warned_tests}{Colors.END}")
 
-        unit_status = f"{Colors.GREEN}PASSED (All Unit + Challenger 1, 2, Final & Playground Tests OK){Colors.END}" if unit_ok else f"{Colors.RED}FAILED{Colors.END}"
-        print(f"Unit & Challenge: {unit_status}")
+        unit_status = f"{Colors.GREEN}PASSED{Colors.END}" if unit_ok else f"{Colors.RED}FAILED{Colors.END}"
+        print(f"Unit tests:       {unit_status}")
 
         if self.poetry_scores:
             avg_p = sum(self.poetry_scores) / len(self.poetry_scores)
@@ -320,197 +320,36 @@ class TestRunner:
 
 
 
+    UNIT_MODULES = [
+        "test_validators",
+        "test_metatag_validator",
+        "test_suno_validator",
+        "test_examples_playground",
+        "test_repo_integrity",
+        "test_run_evals",
+    ]
+
     def run_unit_tests(self) -> bool:
-        """
-        Executes dedicated deterministic unit tests for new validator methods:
-        - check_artificial_inversions
-        - check_filler_words_and_pronouns
-        - check_cliche_rhymes
-        - evaluate_sensory_grounding
-        - RubricScorer 7-dimension deductions
-        """
+        """Runs the unittest modules: validators, scripts, examples and repo integrity."""
+        import importlib
+        import unittest
+
         print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}         EXECUTING VALIDATOR ENGINE UNIT TESTS         {Colors.END}")
+        print(f"{Colors.BOLD}{Colors.HEADER}                EXECUTING UNIT TEST SUITES             {Colors.END}")
         print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
 
         unit_passed = True
-
-        # 1. Test Artificial Inversions
-        bad_inversion_poem = "У темну ніч дорогу я шукав,\nКрасиву пісню тихо чув я,\nЛиста у темряві пишу я,\nВона мовчала довго бо,\nІ вірний шлях тоді пізнав він."
-        inversions = PoeticValidator.check_artificial_inversions(bad_inversion_poem, mode="general")
-        if len(inversions) >= 3:
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Artificial Inversion Detection ({len(inversions)} detected, iotated & non-iotated)")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Artificial Inversion Detection failed (found {len(inversions)})")
-            unit_passed = False
-
-        # Baroque exemption check
-        baroque_inversions = PoeticValidator.check_artificial_inversions(bad_inversion_poem, mode="cossack_baroque")
-        if len(baroque_inversions) == 0:
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Baroque Stylization Exemption (0 flagged in baroque)")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Baroque Stylization Exemption failed")
-            unit_passed = False
-
-        # 2. Test Filler Words & Pronouns
-        bad_filler_poem = "І ось я знов іду в цей темний сад,\nНу от і я мій день свій відшукав,\nАле ж бо той же самий листопад\nВже ось мені мій спокій повернув."
-        filler_res = PoeticValidator.check_filler_words_and_pronouns(bad_filler_poem, mode="general")
-        if filler_res["cluster_count"] >= 2 or len(filler_res["high_density_stanzas"]) >= 1:
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Filler Padding Detection ({filler_res['cluster_count']} clusters, {filler_res['total_filler_count']} tokens)")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Filler Padding Detection failed")
-            unit_passed = False
-
-        # 3. Test Cliché Rhymes
-        bad_cliche_poem = "У серці знов палає та любов,\nГаряча й чиста, наче свіжа кров.\nУ темну ніч блукає гірка доля,\nДе у степах шумить козацька воля."
-        cliche_res = PoeticValidator.check_cliche_rhymes(bad_cliche_poem)
-        if len(cliche_res) >= 2:
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Banal Cliché Rhymes Detection ({len(cliche_res)} pairs detected)")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Banal Cliché Rhymes Detection failed (found {len(cliche_res)})")
-            unit_passed = False
-
-        # 4. Test Sensory Grounding (including words with apostrophes ' and ’)
-        sensory_text = "Шорстке вапно на стінах кам'яниці, іржавий цвях і мідь,\nХолодний попіл, м’ятний напій, запах полину і срібний дзвін."
-        sensory_res = PoeticValidator.evaluate_sensory_grounding(sensory_text)
-        if sensory_res["grounding_level"] == "high" and sensory_res["total_sensory_tokens"] >= 4:
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Sensory Grounding High Level ({sensory_res['total_sensory_tokens']} tokens in {len(sensory_res['active_categories'])} categories, apostrophes handled)")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Sensory Grounding High Level failed: {sensory_res}")
-            unit_passed = False
-
-        abstract_text = "Душа моя страждає у вічності буття,\nБезмежне почуття надії та нескінченного життя."
-        abstract_res = PoeticValidator.evaluate_sensory_grounding(abstract_text)
-        if abstract_res["grounding_level"] in ("purely_abstract", "low"):
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Abstract Fluff Detection (flagged as {abstract_res['grounding_level']})")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Abstract Fluff Detection failed")
-            unit_passed = False
-
-        # 5. Test Rubric Scorer Deductions
-        flawed_poem = "І ось я знов любов шукав,\nАле гарячу бачив кров,\nДуша страждає у вічності без меж,\nІ ти збагнеш, що треба жити."
-        flawed_poetic_res = PoeticValidator.validate_poem(flawed_poem, banned_words=["душа", "кров"])
-        flawed_score = RubricScorer.score_poetry(flawed_poem, flawed_poetic_res, mode="general")
-        if not flawed_score.is_passing and flawed_score.total_score < 85.0:
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Rubric Scorer Flawed Penalty ({flawed_score.total_score}/100, deductions: {len(flawed_score.deductions)})")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Rubric Scorer Flawed Penalty failed (score: {flawed_score.total_score})")
-            unit_passed = False
-
-        # 6. Test Flow Music Compound Metatags & Capital Vowel Stress
-        compound_tag_lyrics = "[Intro - Staccato cutting telecaster riff, driving bassline]\n[Verse 1 - Intimate breathy vocal]\nЦей дивний вИпадок і чорнОзем нічний,\n(веди, дорОга)\n[Outro - Slow fade out]\n[End]"
-        meta_res = MetatagValidator.validate_lyrics_structure(compound_tag_lyrics)
-        stress_res = PoeticValidator.check_stress_notation_in_lyrics(compound_tag_lyrics)
-        if meta_res.is_valid and stress_res["stressed_count"] >= 2:
-            valid_count = meta_res.metrics.get("valid_tags_count", len(meta_res.metrics.get("tags", [])))
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Flow Music Compound Tags & Capital Stress ({valid_count} tags valid, {stress_res['stressed_count']} stress words)")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Flow Music Compound Tags & Capital Stress failed: {meta_res.errors}")
-            unit_passed = False
-
-        # Parenthetical instrumental error check
-        bad_parens_lyrics = "[Intro]\n(Staccato cutting telecaster riff, driving bassline)\n[Verse 1]\nРядки пісні..."
-        bad_meta_res = MetatagValidator.validate_lyrics_structure(bad_parens_lyrics)
-        if not bad_meta_res.is_valid and any("found in parentheses" in err for err in bad_meta_res.errors):
-            print(f"  [{Colors.GREEN}PASS{Colors.END}] Unit: Parentheses Instrumental Rejection (Voice Hallucination intercepted)")
-        else:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Unit: Parentheses Instrumental Rejection failed")
-            unit_passed = False
-
-        # 7. Execute Challenger 1 Empirical Challenge Suite
-        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}    EXECUTING CHALLENGER 1 EMPIRICAL CHALLENGE SUITE   {Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        try:
-            from test_adversarial_challenger1 import run_challenger1_tests
-            chal1_passed = run_challenger1_tests()
-            if not chal1_passed:
+        for name in self.UNIT_MODULES:
+            print(f"\n{Colors.BOLD}{Colors.CYAN}> {name}{Colors.END}")
+            try:
+                module = importlib.import_module(name)
+                suite = unittest.defaultTestLoader.loadTestsFromModule(module)
+                result = unittest.TextTestRunner(stream=sys.stdout, verbosity=1).run(suite)
+                if not result.wasSuccessful():
+                    unit_passed = False
+            except Exception as e:
+                print(f"  [{Colors.RED}FAIL{Colors.END}] {name}: {e}")
                 unit_passed = False
-        except Exception as e:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Challenger 1 suite execution error: {e}")
-            unit_passed = False
-
-        # 8. Execute Challenger 2 Adversarial Stress & Robustness Suite
-        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}    EXECUTING CHALLENGER 2 ADVERSARIAL STRESS SUITE    {Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        try:
-            from test_adversarial_challenger2 import run_challenger2_tests
-            chal2_passed = run_challenger2_tests()
-            if not chal2_passed:
-                unit_passed = False
-        except Exception as e:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Challenger 2 suite execution error: {e}")
-            unit_passed = False
-
-        # 9. Execute Challenger Final Verification Suite
-        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}      EXECUTING CHALLENGER FINAL ADVERSARIAL SUITE     {Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        try:
-            from test_adversarial_final import run_final_adversarial_suite
-            chal_fin_passed = run_final_adversarial_suite()
-            if not chal_fin_passed:
-                unit_passed = False
-        except Exception as e:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Challenger Final suite execution error: {e}")
-            unit_passed = False
-
-        # 10. Execute MetatagValidator Dedicated Unit Test Suite
-        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}      EXECUTING METATAG VALIDATOR UNIT TEST SUITE      {Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        try:
-            import test_metatag_validator
-            import unittest
-            suite = unittest.defaultTestLoader.loadTestsFromModule(test_metatag_validator)
-            runner = unittest.TextTestRunner(stream=sys.stdout, verbosity=1)
-            meta_res = runner.run(suite)
-            if not meta_res.wasSuccessful():
-                unit_passed = False
-        except Exception as e:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Metatag validator unit test execution error: {e}")
-            unit_passed = False
-
-        # 11. Execute SunoValidator Dedicated Unit Test Suite
-        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}        EXECUTING SUNO VALIDATOR UNIT TEST SUITE       {Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        try:
-            import test_suno_validator
-            suite = unittest.defaultTestLoader.loadTestsFromModule(test_suno_validator)
-            runner = unittest.TextTestRunner(stream=sys.stdout, verbosity=1)
-            suno_res = runner.run(suite)
-            if not suno_res.wasSuccessful():
-                unit_passed = False
-        except Exception as e:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Suno validator unit test execution error: {e}")
-            unit_passed = False
-
-        # 12. Execute Examples Playground Dedicated Unit Test Suite
-        print(f"\n{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}     EXECUTING EXAMPLES PLAYGROUND UNIT TEST SUITE     {Colors.END}")
-        print(f"{Colors.BOLD}{Colors.HEADER}======================================================={Colors.END}")
-        playground_passed = False
-        try:
-            from test_examples_playground import run_playground_tests
-            playground_passed = run_playground_tests()
-            if not playground_passed:
-                unit_passed = False
-        except Exception as e:
-            print(f"  [{Colors.RED}FAIL{Colors.END}] Examples playground unit test execution error: {e}")
-            unit_passed = False
-
-        # Log unit results to file for diagnostics
-        log_path = PROJECT_ROOT / "tests" / "reports" / "unit_tests.log"
-        log_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(log_path, "w", encoding="utf-8") as f:
-            f.write(f"Unit Tests Overall: {unit_passed}\n")
-            f.write(f"Challenger 1: {chal1_passed}\n")
-            f.write(f"Challenger 2: {chal2_passed}\n")
-            f.write(f"Challenger Final: {chal_fin_passed}\n")
-            f.write(f"Playground: {playground_passed}\n")
-
         return unit_passed
 
 

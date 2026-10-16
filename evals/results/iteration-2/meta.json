@@ -1,0 +1,6 @@
+{
+ "baseline": "none",
+ "model": "default",
+ "trigger": "invoke",
+ "judge": "default/5134928a/both-orders"
+}

@@ -40,4 +40,4 @@ Load the relevant `SKILL.md` for the task. The end-to-end workflow — routing, 
 
 - `skills/` is the source of truth. `.agents/skills/` is a runtime mirror — regenerate it with `python tests/sync_ecosystem.py`; don't edit it by hand.
 - Tests: `python tests/run_tests.py --all` (Windows: `py -3 tests/run_tests.py --all`).
-- Real-prompt evals for judging output quality: `evals/evals.json`.
+- Real-prompt evals for judging output quality: `evals/evals.json`; run a round (with / without skills, blind judge) with `python evals/run_evals.py all --iteration N` (`evals/README.md`).

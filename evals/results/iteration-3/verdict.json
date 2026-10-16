@@ -1,0 +1,359 @@
+{
+ "4": {
+  "order": {
+   "A": "with_skill",
+   "B": "baseline"
+  },
+  "scores": {
+   "with_skill": 6.75,
+   "baseline": 3.0
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 6.5,
+    "score_b": 3.0,
+    "winner": "A",
+    "reasons": [
+     "A holds the 14-syllable kolomyika line throughout. The long lines all have 14 syllables, though the 4+4+6 caesura is loose: «Піп кропив — а кіт тим часом ковбасу хапає».",
+     "A tells the story in order: the priest blesses, the cat steals, then plays the angel. «Кіт мурчить їй: «Христос воскрес!» — пузо вже накрито» is a funny image, but «пузо накрито» is vague.",
+     "A's rhymes are weak. «хапає/дрімає» is a grammatical rhyme, and «сердито/накрито» is forced and unclear.",
+     "B ignores the form. Its lines have 7–9 syllables, quatrains rhyme in couplets, and it is not a kolomyika at all.",
+     "B has meaning problems and filler: «Освятив її… зі столу!» repeats «столу». «Це, мабуть, святий дух, моя!» is nonsense. «Пузо — наче в тому горі» is meaningless, and «А на нього всі: «Ти що, пес?!»» is a muddled ending."
+    ],
+    "flaw_a": "Only four lines, with a forced, unclear closing rhyme («сердито/накрито») and loose caesuras, so the joke ends abruptly.",
+    "flaw_b": "It abandons the kolomyika meter (7–9 syllables) and uses filler lines and nonsense phrases («Пузо — наче в тому горі», «святий дух, моя») to get rhymes.",
+    "cost_usd": 0.03333
+   },
+   {
+    "score_a": 3.0,
+    "score_b": 7.0,
+    "winner": "B",
+    "reasons": [
+     "B holds true 14-syllable lines throughout. The caesura after 8 falls in the right place: \"Піп кропив — а кіт тим часом | ковбасу хапає\".",
+     "B's images are concrete and fit Easter: the priest sprinkles the baskets, the cat steals, then \"мов тихий ангел, на печі дрімає\". The ending, \"Христос воскрес!\" from the cat, is funny.",
+     "B's flaws: it is a single stanza, the rhymes хапає/дрімає and сердито/накрито are weak, and \"пузо вже накрито\" is murky.",
+     "A is mostly 8-syllable lines, so it is not a kolomyika at all. It misses the 14-syllable form and the 4+4+6 structure.",
+     "A's lines are nonsense or broken: \"Освятив її… зі столу!\" rhymes столу with столу. \"Це, мабуть, святий дух, моя!\" and \"Пузо — наче в тому горі\" have no clear meaning. \"Ти що, пес?!\" is a non-sequitur.",
+     "A uses filler (\"гей-гей-гей\") and a forced rhyme, \"гукне/тягне\", with awkward syntax."
+    ],
+    "flaw_a": "It ignores the kolomyika form (8-syllable lines, not 14). Many lines are incoherent, e.g. \"Пузо — наче в тому горі\" and \"Це, мабуть, святий дух, моя!\". It also repeats the rhyme word столу/столу.",
+    "flaw_b": "It is only one stanza, and the rhymes are weak (хапає/дрімає, сердито/накрито). The last line, \"пузо вже накрито\", is obscure and not clearly decodable.",
+    "cost_usd": 0.034178
+   }
+  ],
+  "cost_usd": 0.067508
+ },
+ "1": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 8.0,
+   "baseline": 4.0
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 3.0,
+    "score_b": 8.0,
+    "winner": "B",
+    "reasons": [
+     "A includes commentary after the poem and leaves a typo (\"потемнїї\"), which breaks the 'only the poem' requirement and the poem's integrity.",
+     "A explains itself: \"Не казав нічого. Не питав, / чи ти доїхав, чи є зв'язок\" and ends with \"Він, мабуть, цього й хотів\", which tells the reader what to feel and what it means. The 'видно здалеку' / 'не буде видно' idea is neat but is then spelled out.",
+     "A is prosaic and loose, with filler lines like \"Просто вийшов за двері, де\" and a 13-syllable line. The rhythm is uneven and the enjambment is awkward. The poem also never states the son's departure beyond the first line.",
+     "B is carried by physical detail: \"Батько тримає цвяхи в роті, / як тримав, коли вчив мене\", \"Вона світліша, як латка на коліні\", \"Молоток б'є тричі й затихає: / батько слухає, чи тримається\". It declares no feelings.",
+     "B's ending stays open and quietly paradoxical: he leaves untouched \"ту, що на краю городу / подається, якщо натиснути плечем\". That leaves a gap for the missing son. Minor weaknesses: the opening \"це не дятел\" is a bit cute, and the departure is only implied."
+    ],
+    "flaw_a": "Commentary is appended after the poem, and the poem has a garbled word (\"потемнїї\"). The ending explains the meaning (\"Він, мабуть, цього й хотів\") and the mid-poem lines are prosaic filler.",
+    "flaw_b": "The son's departure is never named, so the premise is only implied. The opening joke about the woodpecker is slightly mannered.",
+    "cost_usd": 0.035704
+   },
+   {
+    "score_a": 8.0,
+    "score_b": 5.0,
+    "winner": "A",
+    "reasons": [
+     "A carries emotion entirely through physical detail: \"Батько тримає цвяхи в роті, як тримав, коли вчив мене\" and \"слухає, чи тримається\" give the father's love without naming it.",
+     "A's ending stays open and quietly paradoxical: \"і не чіпає одну, / ту, що ... подається, якщо натиснути плечем\". The loose board is a gate left for the son, and the poem never says so.",
+     "B breaks the 'only the poem' requirement with an added note about a typo, and the poem itself contains the broken word \"потемнїї\". That is a non-word with a stray Latin-looking ї, which hurts meaning and trust.",
+     "B explains too much and moralizes: \"ще з осені, коли ти обіцяв\" is a reproach, and \"Він, мабуть, цього й хотів\" is a stated conclusion. The ending is closed and interpretive rather than image-based.",
+     "A has small stiff spots: \"як латка на коліні\" is a slightly pat simile, and the poem is 17 lines, just over the 8–16 limit. These are minor next to B's errors."
+    ],
+    "flaw_a": "Slightly over the length limit at 17 lines, with one pat simile (\"як латка на коліні\") and a somewhat tidy symbolic ending.",
+    "flaw_b": "The text has a garbled word, \"потемнїї\", and an appended commentary that violates 'only the poem'. It also states the moral outright (\"Він, мабуть, цього й хотів\") and leans on a reproach (\"коли ти обіцяв\").'",
+    "cost_usd": 0.035088
+   }
+  ],
+  "cost_usd": 0.070792
+ },
+ "2": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 7.0,
+   "baseline": 2.0
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 2.0,
+    "score_b": 7.0,
+    "winner": "B",
+    "reasons": [
+     "A dumps its drafts live and self-corrects mid-reply (\"Ні, і тут «недвижима» натягнуте\", \"Вибачте за плутанину\"), so the user gets five competing versions instead of one revised poem.",
+     "A's final version has weak rhymes and clichés: \"Світанок, наче птах, кружляє мимо, / а я несу надію в голові\" keeps the declared \"надія\", and \"в голові\" is forced for the rhyme. Earlier drafts have nonsense such as \"вітрів стара гра\" and \"сонце розгортає владу\".",
+     "A's own advice is not followed: it says to rhyme different parts of speech, but its final rhymes (плечима/мимо, траві/голові) are weak, and it suggests 13 syllables per line while the lines it gives run 9–13.",
+     "B gives one clean poem with concrete images (\"Стерня шурхоче під ногами\", \"Сонце лягло на потилицю\") and a closing line that stays with the reader: \"стискають ключ від дому\".",
+     "B's rhymes are heterogeneous (рукав–спитав, нікому–дому) and the clichés are gone. It does change the theme, since the poem is no longer about searching for freedom, and the first stanza has weak rhymes (ногами/перехожих do not rhyme) and an awkward \"ніхто не спитав\"."
+    ],
+    "flaw_a": "Unedited stream of drafts with self-corrections and an unclear final choice. The final poem still has the cliché \"надію\" and a rhyme forced by \"в голові\".",
+    "flaw_b": "The first stanza has no real rhyme (ногами / перехожих) and the poem drifts from the author's quest for freedom. \"Нікому / дому\" is also a rhyme on a very common word.",
+    "cost_usd": 0.039978
+   },
+   {
+    "score_a": 7.0,
+    "score_b": 2.0,
+    "winner": "A",
+    "reasons": [
+     "A replaces the cliché pairs with concrete images: \"Стерня шурхоче під ногами, а вітер смикає рукав\" and the ending \"стискають ключ від дому\" stays in the mind.",
+     "A's rhymes are heterogeneous (\"рукав — спитав\", \"нікому — дому\"), though \"спитав\" in \"куди я йду, ніхто не спитав\" is slightly clumsy and the rhyme is only approximate.",
+     "A moves away from the author's theme: it shows the freedom is not quite found and the speaker is still tied to home, so it is a reinterpretation rather than a refinement. The line \"Сонце лягло на потилицю\" is somewhat odd.",
+     "B's reply is a string of abandoned drafts with commentary like \"Ні, і тут «недвижима» натягнуте\" and \"Вибачте за плутанину\", so it reads as unfinished. The user gets no clear final text.",
+     "B's lines have forced or broken syntax: \"Розпалює надії вогні живі\", \"світанок за очима\", \"недвижима\" (a Russianism). Its final version still rhymes \"плечима — мимо\" and \"траві — голові\", and ends on the cliché \"несу надію в голові\"."
+    ],
+    "flaw_a": "It drifts from the author's theme and adds its own plot (the key to home). \"Сонце лягло на потилицю\" and \"ніхто не спитав\" are slightly awkward.",
+    "flaw_b": "It posts a chain of self-rejected drafts and apologises mid-answer, so there is no clean final poem. The drafts contain forced syntax and a Russianism (\"недвижима\"), and the final version keeps the clichés \"надію\" and \"серце\".",
+    "cost_usd": 0.03984
+   }
+  ],
+  "cost_usd": 0.079818
+ },
+ "3": {
+  "order": {
+   "A": "with_skill",
+   "B": "baseline"
+  },
+  "scores": {
+   "with_skill": 7.0,
+   "baseline": 0.5
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 7.0,
+    "score_b": 0.5,
+    "winner": "A",
+    "reasons": [
+     "A is a complete 14-line sonnet with a real octave: abba abba (склянки/мені/сні/стоянки; буханки/стіні/ні/бляшанки), and the volta at line 9 is clear ('Зупинка. Жінка наливає чай').",
+     "A's images are concrete and un-sloganed: 'Під лавками скотилися бляшанки', 'Хтось запитав: «Це Фастів?» Хтось: «Та ні»', and the ending 'А вдома чай?' — питає між ковтками' stays with the reader.",
+     "A's sestet is weak: 'чай/край' and 'куди/води' plus 'руками/ковтками' don't make a clean cde cde, and the lines are loosely iambic with 10–11 syllables (11-syllable lines alternate with 10), so the metre wavers. Some clumsy syntax: 'Ні назв, ні станцій. Сплять, немов у сні', 'лічать тільки тривалі стоянки'.",
+     "B isn't a sonnet at all: the first draft is four quatrains with 9/11/10/13-syllable lines, and the rhymes are broken or forced ('відличчя', 'не лінь', 'своє́ю / устах').",
+     "B then abandons the task mid-poem: the 'corrected' versions are 4-line fragments with nonsense words ('нерідну, ромом', 'у млі квапливій, мучній'). It ends with apologies and a question instead of a finished sonnet."
+    ],
+    "flaw_a": "The rhythm is not consistently iambic (10/11-syllable lines alternate), and the sestet rhyme scheme is loose (чай/край, куди/води, руками/ковтками).",
+    "flaw_b": "No finished sonnet: the output is drafts that break form, then fragments, with invented or garbled words ('відличчя', 'нерідну, ромом') and a closing apology.",
+    "cost_usd": 0.037646
+   },
+   {
+    "score_a": 0.5,
+    "score_b": 7.0,
+    "winner": "B",
+    "reasons": [
+     "A is not a sonnet: the first draft has 16 lines with a broken scheme, and it then abandons two further attempts with 'Вибач за хаос'. It never delivers a finished poem.",
+     "A uses invented or broken words and forced rhymes: «відличчя», «Усе, що ми забрали у відличчя», «не лінь», «ромом», «мучній».",
+     "A's structure and rhythm fail: «Старенька гріє дівчинку своє́ю» is incoherent, and the last line has 13 syllables with no meter.",
+     "B is a real 14-line sonnet with an abba abba octave («склянки/мені/сні/стоянки/буханки/стіні/ні/бляшанки»). The volta at line 9 («Зупинка. Жінка наливає чай») is clear.",
+     "B's imagery is concrete and free of slogans («Під лавками скотилися бляшанки», «Мала бере стакан двома руками»), and the ending stays with the reader: «А вдома чай?» — питає між ковтками.",
+     "B's weaknesses are a loose sestet (cdc dcd is only approximate: чай/край, куди/води/руками/ковтками) and rhythm that wobbles between 10 and 11 syllables. Lines like «Мала заснула, сперта на мені» and «Сплять, немов у сні» are clumsy."
+    ],
+    "flaw_a": "It delivers no finished sonnet: the drafts break the form, contain nonsense words and forced rhymes, and the answer ends in an apology with an offer to rewrite.",
+    "flaw_b": "The iambic meter is loose and uneven, with 10- and 11-syllable lines and some awkward syntax. The sestet rhymes only partly follow a standard Italian scheme.",
+    "cost_usd": 0.03716
+   }
+  ],
+  "cost_usd": 0.074806
+ },
+ "6": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 5.75,
+   "baseline": 4.75
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 4.0,
+    "score_b": 6.5,
+    "winner": "B",
+    "reasons": [
+     "The brief says there is no text, and the expected output is a Ukrainian song sheet with [section] tags. B delivers a lyrics field built from section tags. A gives no lyrics field. It only suggests leaving it empty or writing `[Instrumental vocalise]`.",
+     "B's prompt is a natural-language paragraph that tells the story: \"about a grandmother's garden that was sold… a memory of a place you can no longer enter\". It specifies structure, \"building gently in the middle and dissolving into pads and silence\", and a length of \"About 3 minutes\". A's prompt is a list of tags.",
+     "B's sheet uses square brackets for cues and round brackets for vocalise: \"[Verse 1 - sparse downtempo beat… breathy wordless female vocalise]\" followed by \"(о-о-о)\". That is close to paste-ready, and the verse and chorus differ in instrumentation. B also gives a fallback if Lyria sings words.",
+     "A names artists in its tips: \"Portishead and Massive Attack inspired\". The brief's criteria say no artist names. A also pushes the user to add a \"Negative prompt\" field and extra tweaks. That reads as a generic tag list and gives no song form.",
+     "B's weakness is that the vocalise lines are filler. \"(о-о-о)\" and \"(а-а-а)\" repeat with no title hook, and Verse 2 adds no new information. A has the same gap, but it skips the form entirely."
+    ],
+    "flaw_a": "No song structure or lyrics sheet at all. It is a single tag-style prompt, it names artists (Portishead, Massive Attack), and it does not use section tags.",
+    "flaw_b": "The vocalise is generic ((о-о-о), (м-м-м)). Verse 2 repeats the same syllables, so there is no hook and no new information. The round brackets may also make Lyria sing the syllables.",
+    "cost_usd": 0.039861999999999995
+   },
+   {
+    "score_a": 5.0,
+    "score_b": 5.5,
+    "winner": "B",
+    "reasons": [
+     "The brief says \"Тексту немає\" and asks for a wordless piece. B states this plainly: \"Instrumental trip-hop and ambient… Soft wordless female vocal, only airy humming and vocalise, no lyrics\". It also gives a concrete fallback: \"vocalise only, \\\"ooh\\\" and \\\"ahh\\\" syllables, no words\".",
+     "B's style prompt steers the sound well and ties it to the theme. It names a \"creaking garden gate\", \"rustling leaves\" and \"distant birds\", and says \"like remembering a grandmother's garden that has been sold\". It adds \"quiet loss, not drama\". It ends on a clear fade: \"fades out into wind and birdsong\".",
+     "B includes a negative prompt (\"lyrics, rap, spoken words, loud drums, EDM drop…\") and says to leave the lyrics field empty or use `[Instrumental vocalise]`. That is safe for a field where nothing should be sung.",
+     "A fills the lyrics field with `(о-о-о)`, `(а-а-а)` and `(м-м-м)` in round brackets. Its own note says this may make Lyria sing words and that the user may have to delete it. A sheet you can't paste as is is a real flaw. The section tags like `[Chorus - wider pads, music-box melody…]` are well built, though, and give a usable structure with contrast and a build.",
+     "B recommends \"Portishead and Massive Attack inspired\" as an optional add-on. This breaks the no-artist-names rule. Its main prompt is clean, so the penalty is limited. A names no artists. A's prompt is good: \"Slow downtempo breakbeat with a soft vinyl-crackle snare… faint music-box melody\"."
+    ],
+    "flaw_a": "The lyrics field holds `(о-о-о)`, `(а-а-а)` and `(м-м-м)` in round brackets, which means \"to be sung\". The model may then sing syllables or words, and A itself tells the user to strip them if that happens. A also adds nothing to meet the \"≤3 min song form with hook\" expectation.",
+    "flaw_b": "B suggests the optional add-on \"Portishead and Massive Attack inspired\", which uses artist names. It also gives no section structure for the lyrics field, only an empty field or `[Instrumental vocalise]`, so there is less control over how the track develops.",
+    "cost_usd": 0.04171
+   }
+  ],
+  "cost_usd": 0.08157199999999999
+ },
+ "5": {
+  "order": {
+   "A": "baseline",
+   "B": "with_skill"
+  },
+  "scores": {
+   "with_skill": 6.5,
+   "baseline": 5.25
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 5.0,
+    "score_b": 6.5,
+    "winner": "B",
+    "reasons": [
+     "B has a tight song form: a four-line chorus on the hook «Дощ у бляшанці», repeated in the final chorus, with matched 8-syllable verse lines. A's lines run 5–11 syllables, so it would be hard to sing.",
+     "A's chorus is overloaded and mixes pieces: «Я трушу її біля вуха — / Звучить, як дощ у бляшанці. … Секунди, що нікуди не підходять». Its pre-chorus repeats «Ні до чого вони не підходять», which is filler, and «Час розібрали на частини, / І ніхто не склав його знов» is a declared moral.",
+     "A's Verse 2 does add new detail: «Лупа в оці, пінцет у руці» and the workshop smell. But «Ховається пружина» in a tiger-less 'silence' metaphor and «в них ще живе його час» are cliché and sentimental.",
+     "B's Style and Exclude are sharper and more usable: the Style is 80–200 chars, with no artist names and no negations, plus Variety: Off advice. A's Style is overlong, and its note names artists (Sisters of Mercy, Joy Division). A's Exclude is generic.",
+     "B's weakness is meaning: «Дзвенять дідові хвилини» and «Тихо хОдить чийсь годинник» are slightly forced or odd. «Нікуди вже не йдуть вони» is a bent word order. It also drops the original image of the screws that fit nowhere and the shaking of the box next to the ear."
+    ],
+    "flaw_a": "Uneven line lengths (2 to 11 syllables) with a bloated, repetitive chorus and pre-chorus. The added lines are explanatory and sentimental, so the sheet is not a clean singable song, and the Style field is overlong with artist names in the advice.",
+    "flaw_b": "Some invented lines are forced or unclear («Дзвенять дідові хвилини», «Нікуди вже не йдуть вони»). It also loses the 'shake the box' and 'screws fit nowhere' images and changes the original wording.",
+    "cost_usd": 0.044078
+   },
+   {
+    "score_a": 6.5,
+    "score_b": 5.5,
+    "winner": "A",
+    "reasons": [
+     "A has a real song structure: a short repeated hook, \"Дощ у бляшанці\", appears in every chorus and contrasts with the verses. Verses are mostly 8 syllables, and Verse 2 adds a new action: \"Підношу її до вуха… Трушу — і чую\".",
+     "A's chorus line \"Дзвенять дідові хвилини\" / \"Нікуди вже не йдуть вони\" is a clear image of stopped time. But \"Тихо хОдить чийсь годинник\" is invented, and \"хОдить\" is a stress mark in a place where it isn't needed. Its \"british post-punk\" and \"lo-fi\" tags drift from the darkwave request, and the Style has no 'Ukrainian' cue. The Exclude list is sensible.",
+     "B keeps more of the user's own lines (\"Мій дід ремонтував годинники\", \"Я трушу її біля вуха — Звучить, як дощ у бляшанці\"). But the chorus is a long, uneven line set (11 syllables against 5), so it reads as prose and is hard to sing.",
+     "B puts \"Секунди, що нікуди не підходять\" in the chorus, which is odd: seconds don't 'fit'. It states feelings outright (\"Час розібрали на частини, І ніхто не склав його знов\", \"Бо в них ще живе його час\"), which is a cliché and moralizing. The title-hook is weak, and the Final Chorus is cut to two lines.",
+     "B's Style is long, with extra tags (nostalgic, haunting, minimal) and 'Ukrainian lyrics'. Its advice names artists (Sisters of Mercy, Joy Division), which breaks the 'no artist names' rule even though it sits in the notes. It also proposes a female-vocal swap and has uneven syllable counts of 9–11 per line."
+    ],
+    "flaw_a": "It invents and weakens the story: \"чийсь годинник\" ticks nearby and \"дзвенять хвилини\" is an abstract image. The Style says post-punk and lo-fi instead of keeping darkwave first.",
+    "flaw_b": "The chorus is overlong, with uneven lines of 5 to 11 syllables, and it moralizes in the added lines (\"Час розібрали на частини\", \"в них ще живе його час\"). That muddies the short, strong hook.",
+    "cost_usd": 0.04516
+   }
+  ],
+  "cost_usd": 0.089238
+ },
+ "7": {
+  "order": {
+   "A": "with_skill",
+   "B": "baseline"
+  },
+  "scores": {
+   "with_skill": 6.75,
+   "baseline": 4.75
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 7.0,
+    "score_b": 4.5,
+    "winner": "A",
+    "reasons": [
+     "A turns the five lines into a real song: the first/last line \"Ми виходимо в ніч без ключів\" returns as a chorus, and verse 2 reorders the middle lines. This is the structure the brief expects.",
+     "A's Style and Exclude steer the sound (\"british post-punk… deadpan baritone… 126 bpm\" and \"schlager, accordion, EDM drop\"). Exclude is a field the brief asks for, and B has none.",
+     "A's bracket cues are usable, e.g. \"[Bridge - whispered, drums drop out…]\". The one round-bracket \"(без ключів)\" is a sung echo, so it is a legitimate use. It is a small addition to the user's words, but A flags it.",
+     "A repeats the middle lines in verse 2 and the bridge, which makes the structure feel padded. The chorus is also the same line twice, and the final chorus ends on a 3-syllable fragment.",
+     "B puts the whole poem in four short blocks and gives the hook a single line, \"(Ми виходимо в ніч без ключів.)\". Round brackets are meant for sung backing words, so this is wrong for a lead chorus line. The song is thin and has no real return.",
+     "B's \"[Instrumental: …]\" and \"[Guitar: jangly…]\" tags are acceptable, and \"Ukrainian vocals\" in Style helps. Without Exclude, though, it steers less well. \"140 BPM\" with \"jangly\" is a vague post-punk fit."
+    ],
+    "flaw_a": "Over-repeats the middle lines across verse 2 and the bridge, and adds a \"(без ключів)\" echo to the user's words. The verse order is scrambled, so the original narrative is blurred.",
+    "flaw_b": "The chorus is a single line in round brackets, which Suno may treat as a backing vocal. There is no Exclude field, and the structure is too thin to work as a song.",
+    "scores_note": "Both keep the user's words unchanged.",
+    "cost_usd": 0.038914
+   },
+   {
+    "score_a": 5.0,
+    "score_b": 6.5,
+    "winner": "B",
+    "reasons": [
+     "A keeps the text intact and in order: lines 1–5 appear exactly once, and the last line repeats only as '(Ми виходимо в ніч без ключів.)'. But the round brackets mark it as a sung backing line, which turns the main hook into an aside rather than a chorus.",
+     "A has no Exclude field, so it misses the Style + Exclude format the brief expects. Its Style also lacks anything that keeps the Ukrainian vocal from drifting into generic output.",
+     "A's structure is thin. It has no real chorus and no return of a hook, and the words are only split into [Verse 1] and [Verse 2]. '[Instrumental: ...]' and '[Guitar: jangly...]' are written as tags. This is workable but weak.",
+     "B builds an actual song from the user's own lines. The hook 'Ми виходимо в ніч без ключів' returns as the chorus, and the verses, bridge and final chorus rearrange the middle lines. That is the repetition-based structure the brief asks for, and the closing line stays.",
+     "B reorders the user's lines. It opens Verse 1 with 'місто дихає нам у потилицю' and breaks the original sequence. It also adds '(без ключів)' as a new element. The user said 'слова не міняй', so this edge case bends the instruction, though B discloses it. Its Exclude list is mostly irrelevant (wedding brass, schlager, accordion), but the Style and delivery cues in the tags, such as 'deadpan, dry close-mic, half-spoken', would steer the sound."
+    ],
+    "flaw_a": "No Exclude block, and the chorus is just '(Ми виходимо в ніч без ключів.)' in round brackets. That makes the hook a backing vocal, and the song has no real chorus or development.",
+    "flaw_b": "It reorders the user's lines (the opening line becomes 'місто дихає…') and adds the '(без ключів)' echo, which goes against 'слова не міняй'. The long bracket descriptions in the section tags are also heavy for v6-mini.",
+    "cost_usd": 0.039082
+   }
+  ],
+  "cost_usd": 0.077996
+ },
+ "8": {
+  "order": {
+   "A": "with_skill",
+   "B": "baseline"
+  },
+  "scores": {
+   "with_skill": 7.5,
+   "baseline": 3.5
+  },
+  "winner": "with_skill",
+  "verdicts": [
+   {
+    "score_a": 7.0,
+    "score_b": 4.0,
+    "winner": "A",
+    "reasons": [
+     "A correctly explains parentheses are sung and moves cues into the section tag: \"[Verse 1 - whispered, half-time feel]\".",
+     "A keeps the capital-letter stress marking for \"вИпадок\" and \"дорОга\", and removes the over-marked \"моЯ\", as the expected answer asks.",
+     "A suggests regenerating only that section (\"Перегенерувати лише цю секцію\") and offers fallbacks like moving the word to the line end or using a synonym. It doesn't mention Variety=Off.",
+     "B claims capitals are often ignored and switches to combining acute accents (\"ви́падок\", \"моя́ доро́га\"). It also marks \"моя́\", which is over-marking.",
+     "B's fallback \"випа́док\" puts the stress on the second syllable, which is the wrong stress for the word the user wants. It also suggests a Latin-letter mix, \"ви́ пaдок\". These advice errors could damage the lyrics.",
+     "B moves \"half-time feel\" to the Style field, which is sensible. But it recommends hyphenated \"ви-па-док\" and \"[Instrumental]\" or \"[Break]\" for tempo, which would break the sung line."
+    ],
+    "flaw_a": "It says nothing about Variety=Off, and its stress advice is thin: it doesn't consider that the capital-letter mark may fail in some generations.",
+    "flaw_b": "It tells the user to drop the capital-letter stress marks and use combining accents and hyphenation. It over-marks \"моя́\", and its fallback \"випа́док\" gives the wrong stress, the very mistake the user is trying to fix.",
+    "cost_usd": 0.038124000000000005
+   },
+   {
+    "score_a": 3.0,
+    "score_b": 8.0,
+    "winner": "B",
+    "reasons": [
+     "A claims 'Великі літери ... Suno часто ігнорує або читає як акцент чи крик' and replaces the user's stress marking with combining acutes (`ви́падок`), which diverges from the expected approach of keeping вИпадок marked",
+     "A's fix `[Verse 1 – whispered]` plus moving half-time feel to Style is workable, but it invents shaky advice like `ви́ пaдок` (with a Latin 'a') and `випа́док` as a fix, which would reinforce the wrong stress",
+     "A marks `моя́ доро́га` and keeps over-marking (моя́), so it does not remove the unnecessary stress mark",
+     "B correctly explains that round brackets are sung and moves cues into `[Verse 1 - whispered, half-time feel]`, a ready-to-paste sheet",
+     "B removes `моЯ`, keeps `вИпадок` and `дорОга`, and correctly flags дорОга as a homograph; it also suggests regenerating only the section, though it doesn't mention Variety=Off"
+    ],
+    "flaw_a": "Abandons the user's capital-letter stress marking for combining accents and keeps over-marking `моя́`, with unreliable advice like 'ви-па-док' and a Latin-letter hack.",
+    "flaw_b": "Does not mention Variety=Off or the section-editing settings in detail, and the synonym/reorder suggestions change the user's words rather than fixing the pronunciation.",
+    "cost_usd": 0.037432
+   }
+  ],
+  "cost_usd": 0.07555600000000001
+ }
+}
