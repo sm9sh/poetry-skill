@@ -2,7 +2,14 @@
 
 ## v4.2.1 - 2026-10-16
 
-Tests trimmed to what they can actually verify.
+Tests trimmed to what they can actually verify; an eval runner; the plugin skills load again.
+
+### Fixed
+- **In the installed plugin the skills never loaded.** `commands/ukrainian-poetry.md` and `commands/ukrainian-poetry-to-suno.md` had the skills' names and shadowed them: invoking a skill returned a two-line stub pointing to `skills/.../SKILL.md`, a path that does not resolve inside a plugin. Both commands are removed (the skills themselves are slash commands); `/poetry-skill` now routes to the skills by name. `test_repo_integrity.py` fails if a command shadows a skill again.
+- Poetry skill: "only the poem" moved to the overview with its reason; no closing note about the form or offer of variants (seen in 1 of 3 eval runs before, 0 of 3 after). Both skills: a missing `AUTHOR_PROFILE.md` is not mentioned to the user.
+
+### Added
+- `evals/run_evals.py`: generate (with the plugin vs no skills or a git ref, each run in an empty temp dir), check (`check_lyrics.py`, triggering, negative controls), blind judge (seeded A/B, optional both orders), report (`summary.md`, change vs the previous iteration). `--trigger invoke` measures quality, `natural` measures triggering. Tested with a fake CLI in `tests/test_run_evals.py`.
 
 ### Removed
 - The "challenger" / adversarial suites (`test_adversarial_challenger1.py`, `test_adversarial_challenger2.py`, `test_adversarial_final.py`, `adversarial_suno_stress_test.py`, `audit_challenger2_empirical.py`, ~2,300 lines). They mostly re-checked hand-written fixtures and repeated the validator tests; the audit script also asserted retired platform facts (Suno v4.5/v5.5, Udio).

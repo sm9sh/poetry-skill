@@ -326,6 +326,7 @@ class TestRunner:
         "test_suno_validator",
         "test_examples_playground",
         "test_repo_integrity",
+        "test_run_evals",
     ]
 
     def run_unit_tests(self) -> bool:

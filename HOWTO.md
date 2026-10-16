@@ -25,4 +25,4 @@
 ```bash
 python3 tests/run_tests.py --all     # Windows: py -3 tests/run_tests.py --all
 ```
-Для оцінки якості самих віршів і пісень — `evals/README.md`.
+Для оцінки якості самих віршів і пісень — evals: `python evals/run_evals.py all --iteration 2` (зі скілом і без, сліпий суддя, підсумок у `summary.md`). Деталі — `evals/README.md`.

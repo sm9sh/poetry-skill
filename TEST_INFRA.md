@@ -24,9 +24,10 @@ Install the optional stress dictionary (`pip install --no-deps ukrainian-word-st
 | File | What it checks |
 |---|---|
 | `test_examples_playground.py` | `check_lyrics.py` (craft checks, modes, lessons journal, stress marks, dictionary), `scan_meter.py` on accented meter fixtures, the success / failure examples in `examples/` |
-| `test_repo_integrity.py` | Real repo files: agents in `.claude-plugin/plugin.json` exist with valid frontmatter and are listed in `openai.yaml`; every lyrics block in `skills/` and `examples/success/` passes the bracket validator and `check_lyrics.py` |
+| `test_repo_integrity.py` | Real repo files: agents in `.claude-plugin/plugin.json` exist with valid frontmatter and are listed in `openai.yaml`; no plugin command shadows a skill; every lyrics block in `skills/` and `examples/success/` passes the bracket validator and `check_lyrics.py` |
 | `test_metatag_validator.py` | Bracket rules: section and instrument tags in `[...]`, delivery cues in `[...]`, nothing but sung words in `(...)`, mismatched brackets, prose in tags |
 | `test_suno_validator.py` | Style / Exclude: length caps, metadata labels, artist names, Exclude field |
+| `test_run_evals.py` | `evals/run_evals.py` with a fake `claude`: stream parsing, blind A/B mapping, a full generate → check → judge → report round, reading iteration-1 scores |
 | `test_validators.py` | Heuristic poetry checks used by the tier suites: inversions, filler words, cliché rhymes, sensory grounding, taboo words, rubric deductions — defects caught, clean text not flagged |
 
 ## Tier suites

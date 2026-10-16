@@ -9,7 +9,7 @@ description: "Ukrainian poem craft studio. Use this skill every time a Ukrainian
 
 Produce poetry that sounds originally conceived and crafted in Ukrainian: authentic phonetics and accentuation first, followed by tactile imagery, prosodic control (syllabo-tonic, dolnik, kolomyika, blank verse, verlibre), heterogeneous rhyming, clausula alternation, and register-specific discipline.
 
-Prefer a finished poem over explanation unless the user explicitly asks for scansion, analysis, variants, scoring, or process notes.
+**The answer is the poem and nothing else** — no paragraph about the form you chose, the images you used or the pathos you avoided, and no closing offer of a rhymed, shorter or different version. Such a note explains what the reader should have felt and weakens the ending. Add analysis, variants, scoring or process notes only when the user asks for them; when you edit the user's poem, a short list of what changed and why is part of the answer.
 
 ## 6 Core Poetic Principles (Фундаментальні принципи майстерності)
 
@@ -77,7 +77,7 @@ Test for every word you are unsure about: would an educated reader of modern Ukr
 
 This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is Pipeline C there. When the user asks to *improve* («покращ») their poem, treat it as a request for a genuinely better poem in their voice — not a cosmetic pass: a clean fix that still ends on a declared abstraction is not done. Order matters: concept before words, one voice, and no poem reaches the user without passing the Quality Checklist.
 
-0. **Author profile**: if `AUTHOR_PROFILE.md` exists at the repository / plugin root and has filled fields, read it first and use it for defaults (themes, voice, register, favourite and banned words, forms). An explicit request in the chat always wins over the profile.
+0. **Author profile**: if `AUTHOR_PROFILE.md` exists at the repository / plugin root and has filled fields, read it first and use it for defaults (themes, voice, register, favourite and banned words, forms). An explicit request in the chat always wins over the profile. No profile → go on with the defaults and don't mention it.
 1. **Brief**: topic, form, meter, rhyme, register, length, audience. Infer what is missing instead of asking. Defaults: 8–16 lines; quatrains with heterogeneous (exact or approximate) rhyme and alternating ЖЧЖЧ endings, or verlibre when the material is prose-like; iamb for rhymed verse; contemporary-urban or chamber-intimate register; resonant ending. Full parameter list: `references/input-templates.md`.
 2a. **Concept before words**: decide the **angle** (an unexpected way into the theme, a micro-detail instead of an abstraction), the **central image** (the objects or situation that will carry the emotion), the **turn** (where the poem will shift) and the **direction of the ending** (open or paradoxical, never a moral). Choose form and meter to fit the emotion. For important requests, consider 2–3 angles and take the strongest. Most weak poems fail here, not in the rhymes.
 3. **Draft with Scansion & Principle Awareness**:
@@ -89,7 +89,7 @@ This is Pipeline A (new poem) from `docs/PIPELINE.md`; editing a user's poem is 
    - Keep natural Ukrainian word order; if a rhyme needs an inversion, change the rhyme, not the syntax (**Principle 4: Conciseness & Syntax**).
    - Cleanse any filler pronouns (*цей, той, свій*) or rhythmic padding words.
 4a. **Scan the meter when the form is metrical**: mark stresses (acute) in a scratch copy and run `python scripts/scan_meter.py poem.txt` (add `--auto-stress` if `ukrainian-word-stress` is installed: `pip install --no-deps ukrainian-word-stress marisa-trie`). It prints syllables, the stress pattern, the best-fit meter, off-beat stresses and clausulae per stanza — fix the flagged lines. Skip for free verse.
-5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through **Gate 0** (every line makes literal or clearly decodable sense; nothing exists only because it rhymes) and then the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again; if the failure is in the idea (no turn, no discovery), go back to step 2a. Do this silently: show the checklist only if the user asks; show only the poem that passed.
+5. **Mandatory quality check before output**: every poem — new or revised, short or long, a single quatrain or song lyrics — goes through **Gate 0** (every line makes literal or clearly decodable sense; nothing exists only because it rhymes) and then the **Quality Checklist** below before the user sees it. If any item fails, fix those lines and run the checklist again; if the failure is in the idea (no turn, no discovery), go back to step 2a. Do this silently: show the checklist only if the user asks; show only the poem that passed, with nothing after it: no note on the form, no offer of a rhymed or shorter variant (see Output Format).
 6. **If the poem is meant as a song** (Suno / Lyria 3.5): keep lines 6–10 syllables, give it a repeatable hook, and hand off to `ukrainian-poetry-to-suno` for song form and markup. In songs, repeating the hook is a device, not padding.
 
 ---
@@ -145,6 +145,7 @@ Rationale and authoritative sources for every item (Pound, Eliot, Frost, Kooser,
 ## Output Format
 
 - Return **only the poem** unless the user explicitly requests commentary, scansion diagrams, alternative drafts, or rubric evaluations.
+- No note after the poem either — not about the form you chose, not an offer of a rhymed or shorter version, not about files you could not find. The poem has to stand on its own; a note explains what the reader should have felt, and the user will ask if they want a variant.
 - A title is optional; add one when it strengthens the poem (criterion 16), never a generic one.
 - When generating fixed forms (e.g. Sonnets), clearly structure stanzas according to the required architecture (`4+4+3+3` or `4+4+4+2`).
 - If a homograph is genuinely ambiguous, use the acute accent (`за́мок` / `замо́к`). Uppercase-vowel stress marks belong only in song lyrics for audio models.

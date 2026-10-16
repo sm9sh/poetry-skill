@@ -3,7 +3,7 @@
 Repository integrity tests: they check the real skill files, not fixtures.
 
 - every agent in the plugin manifest exists, has valid frontmatter and is
-  registered in its skill's openai.yaml;
+  registered in its skill's openai.yaml; no plugin command shadows a skill;
 - every song lyrics block shown in the skills and success examples passes the
   bracket validator and check_lyrics.py without errors, so the documentation
   never teaches markup the checker would reject.
@@ -62,6 +62,16 @@ class TestAgents(unittest.TestCase):
             registry = (agents_dir / "openai.yaml").read_text(encoding="utf-8")
             for agent in agents_dir.glob("*.md"):
                 self.assertIn(agent.stem, registry, f"{agents_dir}/openai.yaml does not list {agent.stem}")
+
+
+class TestPluginCommands(unittest.TestCase):
+
+    def test_commands_do_not_shadow_skills(self):
+        # A plugin command with a skill's name replaces the skill: invoking it would load the
+        # command's text instead of SKILL.md.
+        skills = {p.parent.name for p in PROJECT_ROOT.glob("skills/*/SKILL.md")}
+        commands = {p.stem for p in (PROJECT_ROOT / "commands").glob("*.md")}
+        self.assertEqual(skills & commands, set())
 
 
 class TestDocumentedLyrics(unittest.TestCase):
