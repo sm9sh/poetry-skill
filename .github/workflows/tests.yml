@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install optional stress dictionary
+        run: pip install --no-deps ukrainian-word-stress marisa-trie
       - name: Run test suites
         run: python tests/run_tests.py --all
       - name: Lyrics checker passes on the reference example

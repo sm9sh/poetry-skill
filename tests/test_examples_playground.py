@@ -163,6 +163,47 @@ class TestExamplesPlayground(unittest.TestCase):
             f.write_text("## Слова\n- дзвониш -> дзвОниш — 2026-09-27, suno v6-mini\n<!-- - хата -> хАта -->\n", encoding="utf-8")
             self.assertEqual(cl.load_lessons(f), ["дзвОниш"])
 
+    def test_03d_stress_dictionary_checks(self):
+        """Stress marks are checked against word lists; the optional dictionary flags unknown words and homographs."""
+        import importlib.util
+        script = PROJECT_ROOT / "skills" / "ukrainian-poetry-to-suno" / "scripts" / "check_lyrics.py"
+        spec = importlib.util.spec_from_file_location("check_lyrics", script)
+        cl = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cl)
+
+        # Without a dictionary: a mark in the wrong place on a listed word is caught.
+        _, warnings = cl.check("[Verse 1]\nЦе не випАдок\n", section=True)
+        self.assertTrue(any("wrong place" in w and "вИпадок" in w for w in warnings), warnings)
+
+        class FakeDict:
+            data = {
+                "замок": ({1, 3}, True), "сльози": ({2, 4}, False), "дерево": ({1}, False),
+                "виходжу": ({1, 3}, True), "вечір": ({1}, False), "тут": (set(), False),
+            }
+            def lookup(self, word):
+                return self.data.get(word)
+
+        text = "[Verse 1]\nСтоїть замок і дерево\nі сльози до крихини\nЯ вихОджу у вечір, тут Києва нема\n"
+        _, warnings = cl.check(text, section=True, stress_dict=FakeDict())
+        joined = " | ".join(warnings)
+        self.assertIn("крихини", joined)                       # unknown word -> Gate 0 hint
+        self.assertNotIn("києва", joined.lower())              # mid-line proper noun is skipped
+        self.assertNotIn("stress marked outside", joined)      # mark on a real homograph is accepted
+        self.assertNotIn("possible homographs", joined)        # homograph list is opt-in
+        _, warnings = cl.check(text, section=True, stress_dict=FakeDict(), list_homographs=True)
+        hom = [w for w in warnings if "possible homographs" in w]
+        self.assertTrue(hom and "зАмок / замОк" in hom[0] and "сльози" not in hom[0], warnings)
+
+        real = cl.StressDict.load()
+        if real is not None:  # runs where ukrainian-word-stress is installed (CI installs it)
+            self.assertIsNone(real.lookup("крихини"))
+            readings, lexical = real.lookup("замок")
+            self.assertEqual(readings, {1, 3})
+            self.assertTrue(lexical)
+            readings, lexical = real.lookup("руки")
+            self.assertFalse(lexical, "case-only difference is not a lexical homograph")
+            self.assertFalse(real.lookup("завжди")[1], "dual norm is not a homograph")
+
     # =========================================================================
     # 4. PLATFORM PROMPT LENGTH CONSTRAINTS
     # =========================================================================
