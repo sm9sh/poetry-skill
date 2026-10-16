@@ -1,5 +1,18 @@
 # Version History
 
+## v4.2.0 - 2026-10-15
+
+Leaner skills and one checklist per task.
+
+### Added
+- `check_lyrics.py` uses the optional `ukrainian-word-stress` dictionary: flags words missing from it (invented words / typos, Gate 0), checks every stress mark against the norm, accepts marks on real homographs; `--homographs` lists homograph candidates (case-only and vocative readings filtered out). Marks on listed words are now position-checked even without the dictionary (`випАдок` → `вИпадок`). CI installs the dictionary.
+
+### Changed
+- Poetry `SKILL.md` 41 KB → 25 KB: meter, stress, rhyme, register and calque catalogs moved to `references/craft-reference.md`; a short **Craft Essentials** section stays in the skill. Request parameters moved to `references/input-templates.md`.
+- Songs: one **song checklist** (9 mandatory judgment items + 3 excellence items) replaces the separate poetry checklist (Gate 0 + 16) and the 12 world-class criteria; mechanical checks are left to `check_lyrics.py`.
+- Gate 0 rewritten from a capitals warning into a calm section; Gate 0 is now counted consistently in the checklist, `AGENTS.md`, `docs/PIPELINE.md` and agents.
+- Suno skill: genre formula table replaced by a pointer to `mood-to-style-map.md`.
+
 ## v4.1.0 - 2026-09-27
 
 Measured and improved: evals, trigger tuning, tooling, packaging.

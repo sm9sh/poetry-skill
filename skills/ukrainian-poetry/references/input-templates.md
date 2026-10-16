@@ -148,3 +148,32 @@
 Довжина: <length>
 Заборони: <заборони>
 ```
+
+---
+
+## Parameters and defaults (moved from SKILL.md)
+
+**Parameters:**
+   - `topic`: thematic core
+   - `form`: `free | sonnet | blank-verse | kolomyika | dolnik | taktovik | rondo | triolet | terza-rima | rubai | astrophic`
+   - `meter`: `free | iamb | trochee | dactyl | amphibrach | anapest | dolnik | kolomyika | accentual`
+   - `rhyme`: `none | light | exact | approximate | heterogeneous | AABB | ABAB | ABBA | chain`
+   - `clausula`: `alternating-fm (ЖЧЖЧ) | masculine (ЧЧ) | feminine (ЖЖ) | dactylic (Д) | free`
+   - `stanza_type`: `couplets | tercets | quatrains | sestets | octaves | astrophic`
+   - `register`: `contemporary-urban | chamber-intimate | philosophical-neoclassical | baroque-cossack | folk-authentic | children-playful`
+   - `mode`: `lyrical | free-verse | rhyme | blank-verse | folk | children | patriotic | greeting | humorous | reflective`
+   - `image_density`: `sparse | balanced | rich`
+   - `ending_strength`: `soft | resonant | sharp | performative`
+**Defaults when the user does not specify:**
+   ```text
+   form: free (or quatrains if rhymed)
+   length: short (8-16 lines)
+   mode: lyrical
+   meter: iamb (or free if verlibre)
+   rhyme: heterogeneous-approximate or exact
+   clausula: alternating-fm (ЖЧЖЧ)
+   register: contemporary-urban or chamber-intimate
+   image_density: balanced
+   ending_strength: resonant
+   ```
+

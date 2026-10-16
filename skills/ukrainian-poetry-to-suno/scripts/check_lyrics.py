@@ -12,14 +12,22 @@ Catches the mechanical mistakes that silently ruin a generation:
   * unbalanced brackets;
   * Style / Exclude over the limit, negations or Cyrillic in Style; tag-list or bracketed Lyria prompts.
 
+Optional stress dictionary (used automatically when installed; ~50 MB):
+  pip install --no-deps ukrainian-word-stress marisa-trie
+With it the checker also flags words missing from the dictionary (invented words or typos — Gate 0)
+and stress marks the dictionary does not allow, and accepts marks on real homographs. Add
+--homographs to list possible homographs (замок: зАмок / замОк) for review. --no-dict turns it off.
+Without the dictionary, marks are still checked against the built-in word lists (випАдок -> вИпадок).
+
 Usage:
   python check_lyrics.py lyrics.txt --style "darkwave, 120 bpm, ..." --exclude "cheesy pop, ..."
   python check_lyrics.py lyrics.txt --platform lyria --prompt "A slow cinematic ambient piece at 65 bpm..."
   python check_lyrics.py fragment.txt --section      # a single fixed section: skip whole-song checks
   python check_lyrics.py lyrics.txt --syllables      # also print syllables per sung line
+  python check_lyrics.py lyrics.txt --no-dict        # skip the stress dictionary even if installed
   cat lyrics.txt | python check_lyrics.py -
 
-Exit code 1 if there are errors (warnings alone exit 0). Standard library only.
+Exit code 1 if there are errors (warnings alone exit 0). Standard library only (the dictionary is optional).
 """
 
 import argparse
@@ -64,6 +72,12 @@ def load_lessons(path=LESSONS_FILE):
 
 LESSON_WORDS = load_lessons()
 ALLOWED_MARKED = {w.lower(): w for w in HOMOGRAPHS + ANTI_RUSSIAN + MOBILE_SHIFTS + LESSON_WORDS}
+# Allowed stress positions per word (a homograph lists both readings).
+ALLOWED_INDEXES = {}
+for _w in HOMOGRAPHS + ANTI_RUSSIAN + MOBILE_SHIFTS + LESSON_WORDS:
+    _ups = [i for i, c in enumerate(_w) if c.isupper() and c in "АЕЄИІЇОУЮЯ" and (i > 0 or not _w[1:].islower())]
+    if _ups:
+        ALLOWED_INDEXES.setdefault(_w.lower(), set()).add(_ups[-1])
 # Words an audio model is likely to mispronounce if left unmarked.
 RISKY_UNMARKED = {w.lower(): w for w in ANTI_RUSSIAN + MOBILE_SHIFTS + LESSON_WORDS}
 
@@ -163,20 +177,99 @@ def check_brackets(text, errors):
         errors.append("empty [] tag found")
 
 
-def check_stress(lines, warnings):
+class StressDict:
+    """Thin wrapper over the ukrainian-word-stress dictionary (optional dependency).
+
+    lookup(word) returns None when the word is not in the dictionary, otherwise a tuple
+    (readings, lexical): `readings` — indexes of every stressed vowel the dictionary allows
+    for this spelling; `lexical` — True when the spelling is a real homograph whose stress
+    depends on meaning (зАмок / замОк, дорОга / дорогА), not just on case or number
+    (рУки / рукИ) or on a rare vocative / dual-norm reading.
+    """
+
+    def __init__(self, trie, trie_value, parse_value):
+        self._trie, self._value, self._parse = trie, trie_value, parse_value
+
+    @classmethod
+    def load(cls):
+        try:
+            from ukrainian_word_stress.stressify_ import (
+                _load_dictionary, _trie_value, _parse_dictionary_value,
+            )
+            return cls(_load_dictionary(), _trie_value, _parse_dictionary_value)
+        except Exception:  # not installed, or the package internals changed
+            return None
+
+    def lookup(self, word):
+        values = self._value(self._trie, word.lower())
+        if values is None:
+            return None
+        records = [(frozenset(tags), tuple(a - 1 for a in accents))
+                   for tags, accents in self._parse(values[0]) if accents]
+        readings = {i for _, acc in records for i in acc}
+        return readings, self._is_lexical(records)
+
+    @staticmethod
+    def _is_lexical(records):
+        # One record with two accents = dual norm (зАвжди / завждИ): both are fine.
+        single = [(tags, acc[0]) for tags, acc in records if len(acc) == 1 and "Case=Voc" not in tags]
+        by_accent = {}
+        for tags, acc in single:
+            by_accent.setdefault(acc, []).append(tags)
+        accents = list(by_accent)
+        for i, a in enumerate(accents):
+            for b in accents[i + 1:]:
+                # identical grammar, different stress -> different words (замок, мука, плачу)
+                if any(ta == tb for ta in by_accent[a] for tb in by_accent[b]):
+                    return True
+                pos_a = {t for tags in by_accent[a] for t in tags if t.startswith("upos=")}
+                pos_b = {t for tags in by_accent[b] for t in tags if t.startswith("upos=")}
+                # different part of speech (дорога: noun / adjective)
+                if pos_a and pos_b and pos_a.isdisjoint(pos_b):
+                    return True
+        return False
+
+
+def _mark(word, index):
+    """Write a reading in the lyrics notation: uppercase stressed vowel."""
+    low = word.lower()
+    return low[:index] + low[index].upper() + low[index + 1:]
+
+
+def check_stress(lines, warnings, stress_dict=None, list_homographs=False):
     over, risky = [], []
+    homographs, unknown, contradicts = {}, {}, []
     for n, line in enumerate(lines, 1):
         if SECTION_RE.match(line):
             continue
-        for word in WORD_RE.findall(sung_text(line)):
-            inner = [c for c in word[1:] if c in UPPER_VOWELS]
+        for position, word in enumerate(WORD_RE.findall(sung_text(line))):
+            inner = [i for i, c in enumerate(word) if i > 0 and c in UPPER_VOWELS]
             has_lower = any(c.islower() for c in word)
             low = word.lower()
-            if len(inner) == 1 and has_lower:
-                if low not in ALLOWED_MARKED:
+            marked = len(inner) == 1 and has_lower
+            found = stress_dict.lookup(low) if stress_dict is not None else None
+            readings, lexical = found if found else (None, False)
+            if marked:
+                if low not in ALLOWED_MARKED and not lexical:
                     over.append(f"{word} (line {n})")
-            elif not inner and low in RISKY_UNMARKED:
+                allowed = ALLOWED_INDEXES.get(low)
+                if allowed and inner[0] not in allowed:
+                    expected = " / ".join(_mark(low, i) for i in sorted(allowed))
+                    contradicts.append(f"{word} (line {n}; expected: {expected})")
+                elif not allowed and readings and inner[0] not in readings:
+                    expected = " / ".join(_mark(low, i) for i in sorted(readings))
+                    contradicts.append(f"{word} (line {n}; dictionary: {expected})")
+                continue
+            if low in RISKY_UNMARKED:
                 risky.append(f"{word} -> {RISKY_UNMARKED[low]} (line {n})")
+            if stress_dict is None or syllables(low) < 2:
+                continue
+            if found is None:
+                proper_noun = position > 0 and word[0].isupper() and word[1:].islower()
+                if not proper_noun:
+                    unknown.setdefault(low, n)
+            elif list_homographs and lexical and low not in homographs:
+                homographs[low] = (n, " / ".join(_mark(low, i) for i in sorted(readings)))
     if over:
         warnings.append(
             "stress marked outside the 3 categories (homograph / Russian-stress trap / mobile shift) — "
@@ -184,6 +277,20 @@ def check_stress(lines, warnings):
         )
     if risky:
         warnings.append("likely mispronounced, consider marking: " + ", ".join(risky[:15]))
+    if contradicts:
+        warnings.append("stress mark in the wrong place — check it: " + ", ".join(contradicts[:15]))
+    if homographs:
+        items = [f"{w} ({forms}, line {n})" for w, (n, forms) in list(homographs.items())[:12]]
+        warnings.append(
+            "possible homographs (dictionary: stress depends on meaning) — review, and mark only "
+            "where the model could pick the wrong word: " + ", ".join(items)
+        )
+    if unknown:
+        items = [f"{w} (line {n})" for w, n in list(unknown.items())[:12]]
+        warnings.append(
+            "not in the stress dictionary — an invented word or a typo? (Gate 0; names and slang are fine): "
+            + ", ".join(items)
+        )
 
 
 def _sections(lines):
@@ -330,13 +437,14 @@ def check_lyria_prompt(prompt, warnings):
         warnings.append("Lyria prompt has no tempo — add BPM or a tempo word")
 
 
-def check(text, style=None, exclude=None, platform="suno", prompt=None, section=False):
+def check(text, style=None, exclude=None, platform="suno", prompt=None, section=False,
+          stress_dict=None, list_homographs=False):
     errors, warnings = [], []
     lines = text.splitlines()
     check_brackets(text, errors)
     check_parentheses(lines, errors)
     check_echo_spam(lines, warnings)
-    check_stress(lines, warnings)
+    check_stress(lines, warnings, stress_dict, list_homographs)
     check_structure(lines, warnings, whole_song=not section)
     if not section:
         check_song_craft(lines, warnings)
@@ -367,11 +475,16 @@ def main(argv=None):
     ap.add_argument("--prompt", help="Lyria 3.5: the natural-language prompt")
     ap.add_argument("--section", action="store_true", help="checking a single section: skip whole-song checks")
     ap.add_argument("--syllables", action="store_true", help="print syllables per sung line")
+    ap.add_argument("--no-dict", action="store_true", help="do not use the stress dictionary even if installed")
+    ap.add_argument("--homographs", action="store_true",
+                    help="with the dictionary: also list possible homographs (зАмок / замОк) to review")
     args = ap.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     text = sys.stdin.read() if args.lyrics == "-" else open(args.lyrics, encoding="utf-8").read()
-    errors, warnings = check(text, args.style, args.exclude, args.platform, args.prompt, args.section)
+    stress_dict = None if args.no_dict else StressDict.load()
+    errors, warnings = check(text, args.style, args.exclude, args.platform, args.prompt, args.section,
+                             stress_dict, args.homographs)
     if args.syllables:
         print(syllable_report(text) + "\n")
     for e in errors:
@@ -380,6 +493,9 @@ def main(argv=None):
         print(f"WARNING {w}")
     if not errors and not warnings:
         print("OK — no mechanical issues found. Still read it aloud before generating.")
+    if stress_dict is None and not args.no_dict:
+        print("NOTE: stress dictionary not installed — homograph and invented-word checks skipped.\n"
+              "      pip install --no-deps ukrainian-word-stress marisa-trie")
     return 1 if errors else 0
 
 

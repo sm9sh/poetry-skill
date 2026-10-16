@@ -113,7 +113,7 @@ The Synthesizer computes the final scorecard across the 7 dimensions defined in 
 
 ## 5. Output Contract
 
-**Gate before output:** Emit the final poem only after it passes the full Quality Checklist in `SKILL.md` (16 items; 1–12 mandatory, see `references/quality-criteria.md`). If anything fails, fix and re-check first.
+**Gate before output:** Emit the final poem only after it passes the full Quality Checklist in `SKILL.md` (Gate 0 + 16 items; Gate 0 and 1–12 mandatory, see `references/quality-criteria.md`). If anything fails, fix and re-check first.
 
 Архітектор форми та ракурсу emits the complete master delivery:
 
